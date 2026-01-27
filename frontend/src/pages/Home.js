@@ -182,10 +182,12 @@ function Home() {
               </div>
               <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-white">
                 <span className="block">Empowering Minds,</span>
-                <span className="block">Transforming Solutions</span>
+                <span className="block">Transforming Solutions,</span>
+                <span className="block">Expanding to India</span>
               </h1>
               <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed">
-                Game-changers in custom eLearning, software development, and India expansion services.
+                Game-changers in custom eLearning, software development, and <strong>India expansion services</strong>. 
+                Launch your white-label India team in 2-8 weeks.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/contact" className="bg-white text-teal-600 px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 inline-flex items-center justify-center">
