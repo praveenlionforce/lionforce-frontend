@@ -125,16 +125,15 @@ function Home() {
 
   return (
     <>
-      <Helmet>
-        <title>{seo.title || 'Lionforce - Custom eLearning & Software Development | India Expansion Services'}</title>
-        <meta name="description" content={seo.description || "Transform your business with Lionforce's eLearning, software development, and India expansion services. 13+ years, 300+ projects, 32+ countries."} />
-        <meta name="keywords" content={seo.keywords || 'eLearning, software development, AI solutions, India expansion, EOR, ODC'} />
-        {seo.ogImage && <meta property="og:image" content={seo.ogImage} />}
-        <meta property="og:title" content={seo.title || 'Lionforce Technologies'} />
-        <meta property="og:description" content={seo.description || "Transform your business with Lionforce"} />
-        <meta property="og:type" content="website" />
-        {seo.canonicalUrl && <link rel="canonical" href={seo.canonicalUrl} />}
-      </Helmet>
+      <SEO 
+        title={seo.title || 'Lionforce - Custom eLearning & Software Development | India Expansion Services'}
+        description={seo.description || "Transform your business with Lionforce's eLearning, software development, and India expansion services. 13+ years, 300+ projects, 32+ countries."}
+        keywords={seo.keywords || 'eLearning, software development, AI solutions, India expansion, EOR, ODC'}
+        ogImage={seo.ogImage}
+        ogTitle={seo.title || 'Lionforce Technologies'}
+        ogDescription={seo.description || "Transform your business with Lionforce"}
+        canonicalUrl={seo.canonicalUrl}
+      />
       
       <div className="overflow-hidden bg-white">
         {/* Hero - Split asymmetric design */}
