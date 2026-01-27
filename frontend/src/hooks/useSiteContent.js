@@ -221,6 +221,13 @@ const defaultContent = {
     ]
   },
   elearning: {
+    seo: {
+      title: 'Custom eLearning Development Services - AI-Powered Training Solutions',
+      description: 'Transform corporate training with AI-powered eLearning. Interactive courses, gamification, microlearning, and analytics. 300% higher completion rates. Get a free demo.',
+      keywords: 'eLearning development, custom training, corporate learning, AI training, gamified learning, microlearning, LMS, SCORM, interactive courses',
+      ogImage: '',
+      canonicalUrl: ''
+    },
     hero: {
       badge: 'AI-Powered Learning Solutions',
       badgeEmoji: '🎓',
