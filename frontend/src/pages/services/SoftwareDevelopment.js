@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import {
   ArrowRight, CheckCircle, Code, Rocket, Shield, Zap, RefreshCw, Users,
-  Layers, Smartphone, Database, Cloud, Lock, TrendingUp
+  Layers, Smartphone, Database, Cloud, Lock, TrendingUp, Wifi
 } from 'lucide-react';
 
 function SoftwareDevelopment() {
   const services = [
     { title: 'Comprehensive Product Development', description: 'End-to-end product development from ideation to deployment. MVP in 8-12 weeks.', icon: <Rocket className="w-6 h-6" /> },
-    { title: 'IT Consulting Services', description: 'Strategic technology guidance for complex IT challenges. Architecture, scaling, optimization.', icon: <Users className="w-6 h-6" /> },
+    { title: 'IoT & Embedded Solutions', description: 'Smart device integration, sensor networks, industrial IoT, and connected product development.', icon: <Wifi className="w-6 h-6" /> },
     { title: 'Expert Software Design & Engineering', description: 'Clean code, scalable architecture, modern frameworks. React, Node.js, Python, Java.', icon: <Code className="w-6 h-6" /> },
     { title: 'Rapid MVP Launch', description: 'Quick market validation with Minimum Viable Product. Launch in 6-10 weeks.', icon: <Zap className="w-6 h-6" /> },
     { title: 'Legacy Software Modernization', description: 'Upgrade outdated systems. Cloud migration, API modernization, UI refresh.', icon: <RefreshCw className="w-6 h-6" /> },
@@ -23,7 +23,7 @@ function SoftwareDevelopment() {
     { category: 'Frontend', techs: ['React', 'Vue.js', 'Angular', 'Next.js', 'TypeScript'] },
     { category: 'Backend', techs: ['Node.js', 'Python', 'Java', 'PHP', '.NET'] },
     { category: 'Mobile', techs: ['React Native', 'Flutter', 'Swift', 'Kotlin'] },
-    { category: 'Database', techs: ['MongoDB', 'PostgreSQL', 'MySQL', 'Redis'] },
+    { category: 'IoT', techs: ['Arduino', 'Raspberry Pi', 'MQTT', 'AWS IoT'] },
     { category: 'Cloud', techs: ['AWS', 'Azure', 'Google Cloud', 'Heroku'] },
     { category: 'DevOps', techs: ['Docker', 'Kubernetes', 'CI/CD', 'Jenkins'] }
   ];
@@ -73,7 +73,7 @@ function SoftwareDevelopment() {
                 Code Smart • Build Better • Scale Faster
               </p>
               <p className="text-xl text-white/90 mb-8 max-w-3xl leading-relaxed">
-                Got an idea? Let's turn it into a product that wows. Web apps, mobile apps, APIs - we build smart, scalable solutions tailored to YOUR workflow. <strong>MVP in 8-12 weeks.</strong> Used by startups and enterprises across 32+ countries.
+                Got an idea? Let&apos;s turn it into a product that wows. Web apps, mobile apps, <strong>IoT solutions</strong>, APIs - we build smart, scalable solutions tailored to YOUR workflow. <strong>MVP in 8-12 weeks.</strong> Used by startups and enterprises across 32+ countries.
               </p>
               
               <div className="flex flex-wrap gap-4 mb-8">
