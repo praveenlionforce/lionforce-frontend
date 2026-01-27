@@ -39,16 +39,15 @@ function Consulting() {
 
   return (
     <>
-      <Helmet>
-        <title>{seo.title || 'Consulting Services | Digital Transformation | Lionforce'}</title>
-        <meta name="description" content={seo.description || 'Strategic consulting for digital transformation, technology decisions, and business growth. 13+ years of expertise.'} />
-        <meta name="keywords" content={seo.keywords || 'business consulting, technology consulting, digital transformation, strategy'} />
-        {seo.ogImage && <meta property="og:image" content={seo.ogImage} />}
-        <meta property="og:title" content={seo.title || 'Consulting Services - Lionforce'} />
-        <meta property="og:description" content={seo.description || 'Strategic consulting for digital transformation'} />
-        <meta property="og:type" content="website" />
-        {seo.canonicalUrl && <link rel="canonical" href={seo.canonicalUrl} />}
-      </Helmet>
+      <SEO 
+        title={seo.title || 'Consulting Services | Digital Transformation | Lionforce'}
+        description={seo.description || 'Strategic consulting for digital transformation, technology decisions, and business growth. 13+ years of expertise.'}
+        keywords={seo.keywords || 'business consulting, technology consulting, digital transformation, strategy'}
+        ogImage={seo.ogImage}
+        ogTitle={seo.title || 'Consulting Services - Lionforce'}
+        ogDescription={seo.description || 'Strategic consulting for digital transformation'}
+        canonicalUrl={seo.canonicalUrl}
+      />
 
       <div className="overflow-hidden bg-white">
         {/* Hero Section */}
