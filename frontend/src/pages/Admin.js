@@ -768,6 +768,7 @@ function Admin() {
   };
 
   const updateArrayItem = (path, index, field, value) => {
+    saveScrollPosition();
     setSiteContent(prev => {
       const newContent = JSON.parse(JSON.stringify(prev));
       const keys = path.split('.');
@@ -783,6 +784,7 @@ function Admin() {
   };
 
   const addArrayItem = (path, template) => {
+    saveScrollPosition();
     setSiteContent(prev => {
       const newContent = JSON.parse(JSON.stringify(prev));
       const keys = path.split('.');
@@ -798,6 +800,7 @@ function Admin() {
   };
 
   const removeArrayItem = (path, index) => {
+    saveScrollPosition();
     setSiteContent(prev => {
       const newContent = JSON.parse(JSON.stringify(prev));
       const keys = path.split('.');
