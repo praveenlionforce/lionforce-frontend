@@ -890,9 +890,17 @@ function Admin() {
 
   // UI Components
   const TextField = ({ label, value, onChange, multiline = false, placeholder = '' }) => {
+    const inputRef = useRef(null);
+    
     const handleChange = (e) => {
-      saveScrollPosition();
-      onChange(e.target.value);
+      const scrollTop = scrollContainerRef.current?.scrollTop || 0;
+      flushSync(() => {
+        onChange(e.target.value);
+      });
+      // Restore scroll immediately after state update
+      if (scrollContainerRef.current) {
+        scrollContainerRef.current.scrollTop = scrollTop;
+      }
     };
     
     return (
@@ -900,6 +908,7 @@ function Admin() {
         <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
         {multiline ? (
           <textarea
+            ref={inputRef}
             value={value || ''}
             onChange={handleChange}
             placeholder={placeholder}
@@ -908,6 +917,7 @@ function Admin() {
           />
         ) : (
           <input
+            ref={inputRef}
             type="text"
             value={value || ''}
             onChange={handleChange}
