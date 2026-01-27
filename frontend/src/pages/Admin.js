@@ -988,8 +988,9 @@ function Admin() {
                     </div>
 
                     <Section title="Hero Section" icon={<Layout className="w-4 h-4 text-teal-600" />} sectionKey="home-hero" defaultOpen={true}>
-                      <div className="grid grid-cols-2 gap-4">
+                      <div className="grid grid-cols-3 gap-4">
                         <TextField label="Badge Text" value={siteContent.home?.hero?.badge} onChange={(v) => updateContent('home.hero.badge', v)} />
+                        <TextField label="Badge Emoji" value={siteContent.home?.hero?.badgeEmoji} onChange={(v) => updateContent('home.hero.badgeEmoji', v)} placeholder="✨" />
                         <TextField label="Button Text" value={siteContent.home?.hero?.buttonText} onChange={(v) => updateContent('home.hero.buttonText', v)} />
                       </div>
                       <div className="grid grid-cols-3 gap-4">
