@@ -315,21 +315,21 @@ function IndiaExpansion() {
                   {pkg.popular && (
                     <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                       <span className="bg-gradient-to-r from-emerald-600 to-teal-600 text-white px-4 py-1 rounded-full text-sm font-semibold">
-                        Most Popular
+                        {popularBadge}
                       </span>
                     </div>
                   )}
                   
                   <h3 className="text-2xl font-bold mb-2 text-gray-900">{pkg.name}</h3>
-                  <p className="text-gray-600 text-sm mb-4">Min {pkg.minEmployees} employees</p>
+                  <p className="text-gray-600 text-sm mb-4">{minEmployeesLabel.replace('{count}', pkg.minEmployees)}</p>
                   
                   <div className="mb-6">
                     <div className="flex items-baseline gap-2 mb-2">
                       <span className="text-4xl font-bold text-emerald-600">{pkg.price24}</span>
-                      <span className="text-gray-600">/emp/mo</span>
+                      <span className="text-gray-600">{priceSuffix}</span>
                     </div>
-                    <p className="text-sm text-emerald-600 font-semibold">24-month contract</p>
-                    <p className="text-sm text-gray-500">{pkg.price12}/month for 12-month</p>
+                    <p className="text-sm text-emerald-600 font-semibold">{label24Month}</p>
+                    <p className="text-sm text-gray-500">{label12Month.replace('{price}', pkg.price12)}</p>
                   </div>
 
                   <ul className="space-y-3 mb-8">
@@ -342,7 +342,7 @@ function IndiaExpansion() {
                   </ul>
 
                   <Link to="/contact" className={`block w-full text-center py-3 rounded-full font-semibold transition-all ${pkg.popular ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white hover:shadow-lg' : 'bg-gray-100 text-gray-900 hover:bg-gray-200'}`}>
-                    Get Started
+                    {ctaButtonText}
                   </Link>
                 </motion.div>
               ))}
@@ -350,12 +350,12 @@ function IndiaExpansion() {
 
             {/* Note about other services */}
             <div className="bg-white rounded-xl p-6 border border-emerald-200 max-w-3xl mx-auto text-center">
-              <h3 className="font-bold text-gray-900 mb-2">Need ODC or COE Setup?</h3>
+              <h3 className="font-bold text-gray-900 mb-2">{noteBoxTitle}</h3>
               <p className="text-gray-600 text-sm mb-4">
-                Our Offshore Development Center (ODC) and Center of Excellence (COE) services are customized based on your specific requirements, team size, and infrastructure needs.
+                {noteBoxDescription}
               </p>
               <Link to="/contact" className="inline-flex items-center text-emerald-600 font-semibold hover:underline">
-                Request a Custom Quote <ArrowRight className="ml-1 w-4 h-4" />
+                {noteBoxCta} <ArrowRight className="ml-1 w-4 h-4" />
               </Link>
             </div>
           </div>
