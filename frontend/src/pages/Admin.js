@@ -317,7 +317,7 @@ function Admin() {
         stats: ['13+ years experience', '300+ projects delivered', '25+ languages'],
         primaryCTA: 'Get Free Demo & Quote',
         secondaryCTA: 'Call +91 96005 36354',
-        gradient: 'from-purple-600 via-violet-600 to-indigo-600'
+        gradient: 'from-[#428697] via-[#356d7a] to-[#2d5a66]'
       },
       solutions: [
         { title: 'AI-Powered Learning Paths', description: 'Intelligent content recommendations powered by AI. Personalized learning journeys.' },
@@ -389,7 +389,7 @@ function Admin() {
         stats: ['300+ designs delivered', 'User-first approach', 'Increased conversions'],
         primaryCTA: 'Start Your Design Project',
         secondaryCTA: 'View Portfolio',
-        gradient: 'from-slate-700 via-slate-600 to-cyan-700'
+        gradient: 'from-[#6ab445] via-[#5a9e3d] to-[#4a8a35]'
       },
       services: [
         { title: 'UX Research & Strategy', description: 'User interviews, personas, journey mapping, and competitive analysis.' },
@@ -410,7 +410,7 @@ function Admin() {
         stats: ['500+ videos created', 'Award-winning team', 'Global clients'],
         primaryCTA: 'Get Creative Quote',
         secondaryCTA: 'View Showreel',
-        gradient: 'from-rose-500 via-orange-500 to-amber-600'
+        gradient: 'from-amber-600 via-amber-500 to-yellow-600'
       },
       services: [
         { title: '3D Animation', description: 'Stunning 3D visuals, product renders, and animated sequences.' },
