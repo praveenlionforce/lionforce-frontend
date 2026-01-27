@@ -62,8 +62,8 @@ Recreate the existing WordPress website (https://lionforce.net) into a new, mode
 - All logos show preview in admin panel
 
 ## Access URLs
-- **Main Site**: https://lionforce-rebuild.preview.emergentagent.com
-- **Admin CMS**: https://lionforce-rebuild.preview.emergentagent.com/admin
+- **Main Site**: https://lionforce-revamp.preview.emergentagent.com
+- **Admin CMS**: https://lionforce-revamp.preview.emergentagent.com/admin
 
 ## Admin Credentials
 ```
