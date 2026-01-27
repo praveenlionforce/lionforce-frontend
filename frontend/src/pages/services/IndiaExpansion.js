@@ -137,16 +137,15 @@ function IndiaExpansion() {
 
   return (
     <>
-      <Helmet>
-        <title>{seo.title || 'India Expansion Services - EOR, ODC, COE | Lionforce'}</title>
-        <meta name="description" content={seo.description || 'Launch your India team in 2-8 weeks. EOR, ODC, and COE services with co-branding. From $139/month. 60% cost savings.'} />
-        <meta name="keywords" content={seo.keywords || 'India expansion, EOR, employer of record, ODC, offshore development center, COE, hire in India'} />
-        {seo.ogImage && <meta property="og:image" content={seo.ogImage} />}
-        <meta property="og:title" content={seo.title || 'India Expansion - Lionforce'} />
-        <meta property="og:description" content={seo.description || 'Launch your India team in 2-8 weeks'} />
-        <meta property="og:type" content="website" />
-        {seo.canonicalUrl && <link rel="canonical" href={seo.canonicalUrl} />}
-      </Helmet>
+      <SEO 
+        title={seo.title || 'India Expansion Services - EOR, ODC, COE | Lionforce'}
+        description={seo.description || 'Launch your India team in 2-8 weeks. EOR, ODC, and COE services with co-branding. From $139/month. 60% cost savings.'}
+        keywords={seo.keywords || 'India expansion, EOR, employer of record, ODC, offshore development center, COE, hire in India'}
+        ogImage={seo.ogImage}
+        ogTitle={seo.title || 'India Expansion - Lionforce'}
+        ogDescription={seo.description || 'Launch your India team in 2-8 weeks'}
+        canonicalUrl={seo.canonicalUrl}
+      />
 
       <div className="pt-20 bg-white">
         {/* Hero */}
