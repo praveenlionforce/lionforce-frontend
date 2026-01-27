@@ -185,8 +185,7 @@ function Home() {
                 <span className="block">Transforming Solutions</span>
               </h1>
               <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed">
-                Game-changers in custom eLearning, software development, and India expansion services. 
-                <span className="block mt-2 font-semibold">From $139/month • Launch in 2-8 weeks</span>
+                Game-changers in custom eLearning, software development, and India expansion services.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/contact" className="bg-white text-teal-600 px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 inline-flex items-center justify-center">
