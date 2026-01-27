@@ -56,7 +56,7 @@ function Navbar() {
             <img 
               src="https://customer-assets.emergentagent.com/job_elegant-refresh-3/artifacts/jeiik01t_Lionforce%20new%20logo%20set-crop.png" 
               alt="Lionforce Logo" 
-              className="h-10 w-auto"
+              className="h-8 w-auto"
             />
           </Link>
 
