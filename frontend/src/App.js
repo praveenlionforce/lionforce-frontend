@@ -11,9 +11,7 @@ import UXUIDesign from '@/pages/services/UXUIDesign';
 import CreativeServices from '@/pages/services/CreativeServices';
 import DigitalMarketing from '@/pages/services/DigitalMarketing';
 import Consulting from '@/pages/services/Consulting';
-import EOR from '@/pages/services/EOR';
-import ODC from '@/pages/services/ODC';
-import COE from '@/pages/services/COE';
+import IndiaExpansion from '@/pages/services/IndiaExpansion';
 import Layout from '@/components/Layout';
 import ScrollToTop from '@/components/ScrollToTop';
 
@@ -33,9 +31,7 @@ function App() {
           <Route path="/services/creative" element={<CreativeServices />} />
           <Route path="/services/digital-marketing" element={<DigitalMarketing />} />
           <Route path="/services/consulting" element={<Consulting />} />
-          <Route path="/services/eor" element={<EOR />} />
-          <Route path="/services/odc" element={<ODC />} />
-          <Route path="/services/coe" element={<COE />} />
+          <Route path="/services/india-expansion" element={<IndiaExpansion />} />
         </Routes>
       </Layout>
     </BrowserRouter>
