@@ -1725,6 +1725,32 @@ function Admin() {
                       <TextField label="Section Subtitle" value={siteContent.indiaExpansion?.pricing?.subtitle} onChange={(v) => updateContent('indiaExpansion.pricing.subtitle', v)} />
                       <TextField label="Note for ODC/COE" value={siteContent.indiaExpansion?.pricing?.note} onChange={(v) => updateContent('indiaExpansion.pricing.note', v)} multiline />
                       
+                      {/* Pricing Labels */}
+                      <div className="mt-4 pt-4 border-t border-gray-200">
+                        <h4 className="font-semibold text-gray-900 mb-3">Pricing Labels</h4>
+                        <div className="grid grid-cols-2 gap-3">
+                          <TextField label="Price Suffix" value={siteContent.indiaExpansion?.pricing?.priceSuffix || '/emp/mo'} onChange={(v) => updateContent('indiaExpansion.pricing.priceSuffix', v)} placeholder="/emp/mo" />
+                          <TextField label="24-Month Label" value={siteContent.indiaExpansion?.pricing?.label24Month || '24-month contract'} onChange={(v) => updateContent('indiaExpansion.pricing.label24Month', v)} placeholder="24-month contract" />
+                        </div>
+                        <div className="grid grid-cols-2 gap-3">
+                          <TextField label="12-Month Label Format" value={siteContent.indiaExpansion?.pricing?.label12Month || '{price}/month for 12-month'} onChange={(v) => updateContent('indiaExpansion.pricing.label12Month', v)} placeholder="{price}/month for 12-month" />
+                          <TextField label="Popular Badge Text" value={siteContent.indiaExpansion?.pricing?.popularBadge || 'Most Popular'} onChange={(v) => updateContent('indiaExpansion.pricing.popularBadge', v)} placeholder="Most Popular" />
+                        </div>
+                        <div className="grid grid-cols-2 gap-3">
+                          <TextField label="Min Employees Label" value={siteContent.indiaExpansion?.pricing?.minEmployeesLabel || 'Min {count} employees'} onChange={(v) => updateContent('indiaExpansion.pricing.minEmployeesLabel', v)} placeholder="Min {count} employees" />
+                          <TextField label="CTA Button Text" value={siteContent.indiaExpansion?.pricing?.ctaButtonText || 'Get Started'} onChange={(v) => updateContent('indiaExpansion.pricing.ctaButtonText', v)} placeholder="Get Started" />
+                        </div>
+                      </div>
+                      
+                      {/* ODC/COE Note Box */}
+                      <div className="mt-4 pt-4 border-t border-gray-200">
+                        <h4 className="font-semibold text-gray-900 mb-3">ODC/COE Note Box</h4>
+                        <TextField label="Note Box Title" value={siteContent.indiaExpansion?.pricing?.noteBoxTitle || 'Need ODC or COE Setup?'} onChange={(v) => updateContent('indiaExpansion.pricing.noteBoxTitle', v)} />
+                        <TextField label="Note Box Description" value={siteContent.indiaExpansion?.pricing?.noteBoxDescription || 'Our Offshore Development Center (ODC) and Center of Excellence (COE) services are customized based on your specific requirements, team size, and infrastructure needs.'} onChange={(v) => updateContent('indiaExpansion.pricing.noteBoxDescription', v)} multiline />
+                        <TextField label="Note Box CTA" value={siteContent.indiaExpansion?.pricing?.noteBoxCta || 'Request a Custom Quote'} onChange={(v) => updateContent('indiaExpansion.pricing.noteBoxCta', v)} />
+                      </div>
+                      
+                      {/* Pricing Packages */}
                       <div className="mt-6 pt-4 border-t border-gray-200">
                         <h4 className="font-semibold text-gray-900 mb-4">Pricing Packages</h4>
                         <ArrayEditor
@@ -1732,34 +1758,65 @@ function Admin() {
                           path="indiaExpansion.pricing.packages"
                           template={{ name: 'New Package', price12: '$0', price24: '$0', minEmployees: '1', features: ['Feature 1'], popular: false }}
                           addLabel="Add Package"
-                          renderItem={(item, index) => (
+                          renderItem={(pkg, pkgIndex) => (
                             <div className="space-y-3">
                               <div className="grid grid-cols-2 gap-3">
-                                <TextField label="Package Name" value={item.name} onChange={(v) => updateArrayItem('indiaExpansion.pricing.packages', index, 'name', v)} />
-                                <TextField label="Min Employees" value={item.minEmployees} onChange={(v) => updateArrayItem('indiaExpansion.pricing.packages', index, 'minEmployees', v)} />
+                                <TextField label="Package Name" value={pkg.name} onChange={(v) => updateArrayItem('indiaExpansion.pricing.packages', pkgIndex, 'name', v)} />
+                                <TextField label="Min Employees" value={pkg.minEmployees} onChange={(v) => updateArrayItem('indiaExpansion.pricing.packages', pkgIndex, 'minEmployees', v)} />
                               </div>
                               <div className="grid grid-cols-2 gap-3">
-                                <TextField label="Price (12 mo)" value={item.price12} onChange={(v) => updateArrayItem('indiaExpansion.pricing.packages', index, 'price12', v)} />
-                                <TextField label="Price (24 mo)" value={item.price24} onChange={(v) => updateArrayItem('indiaExpansion.pricing.packages', index, 'price24', v)} />
+                                <TextField label="Price (12 mo)" value={pkg.price12} onChange={(v) => updateArrayItem('indiaExpansion.pricing.packages', pkgIndex, 'price12', v)} />
+                                <TextField label="Price (24 mo)" value={pkg.price24} onChange={(v) => updateArrayItem('indiaExpansion.pricing.packages', pkgIndex, 'price24', v)} />
                               </div>
                               <div className="flex items-center gap-2">
                                 <input 
                                   type="checkbox" 
-                                  checked={item.popular || false} 
-                                  onChange={(e) => updateArrayItem('indiaExpansion.pricing.packages', index, 'popular', e.target.checked)}
+                                  checked={pkg.popular || false} 
+                                  onChange={(e) => updateArrayItem('indiaExpansion.pricing.packages', pkgIndex, 'popular', e.target.checked)}
                                   className="w-4 h-4 text-teal-600 rounded"
                                 />
-                                <label className="text-sm text-gray-700">Mark as Popular</label>
+                                <label className="text-sm text-gray-700">Mark as "Most Popular"</label>
                               </div>
-                              <div>
-                                <label className="block text-sm font-medium text-gray-700 mb-1">Features (one per line)</label>
-                                <textarea
-                                  value={(item.features || []).join('\n')}
-                                  onChange={(e) => updateArrayItem('indiaExpansion.pricing.packages', index, 'features', e.target.value.split('\n').filter(f => f.trim()))}
-                                  rows={4}
-                                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-                                  placeholder="Payroll processing&#10;Statutory compliance&#10;HRMS setup"
-                                />
+                              
+                              {/* Individual Features with Add/Delete */}
+                              <div className="mt-3">
+                                <label className="block text-sm font-medium text-gray-700 mb-2">Features (add/remove individually)</label>
+                                <div className="space-y-2">
+                                  {(pkg.features || []).map((feature, featureIndex) => (
+                                    <div key={featureIndex} className="flex items-center gap-2">
+                                      <input
+                                        type="text"
+                                        value={feature}
+                                        onChange={(e) => {
+                                          const newFeatures = [...(pkg.features || [])];
+                                          newFeatures[featureIndex] = e.target.value;
+                                          updateArrayItem('indiaExpansion.pricing.packages', pkgIndex, 'features', newFeatures);
+                                        }}
+                                        className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500"
+                                        placeholder="Enter feature"
+                                      />
+                                      <button
+                                        onClick={() => {
+                                          const newFeatures = (pkg.features || []).filter((_, i) => i !== featureIndex);
+                                          updateArrayItem('indiaExpansion.pricing.packages', pkgIndex, 'features', newFeatures);
+                                        }}
+                                        className="p-2 text-red-500 hover:bg-red-50 rounded transition-colors"
+                                        title="Remove feature"
+                                      >
+                                        <Trash2 className="w-4 h-4" />
+                                      </button>
+                                    </div>
+                                  ))}
+                                  <button
+                                    onClick={() => {
+                                      const newFeatures = [...(pkg.features || []), 'New feature'];
+                                      updateArrayItem('indiaExpansion.pricing.packages', pkgIndex, 'features', newFeatures);
+                                    }}
+                                    className="flex items-center gap-2 px-3 py-2 text-teal-600 hover:bg-teal-50 rounded-lg transition-colors text-sm border border-dashed border-teal-300 w-full justify-center"
+                                  >
+                                    <Plus className="w-4 h-4" /> Add Feature
+                                  </button>
+                                </div>
                               </div>
                             </div>
                           )}
