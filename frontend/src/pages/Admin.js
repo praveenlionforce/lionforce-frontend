@@ -480,6 +480,13 @@ function Admin() {
       ]
     },
     creative: {
+      seo: {
+        title: 'Creative Services - 3D Animation, Explainer Videos & Motion Graphics',
+        description: '3D animations, explainer videos, motion graphics, and visual content that captivates. 500+ videos created.',
+        keywords: '3D animation, explainer videos, motion graphics, corporate videos, infographics, video production',
+        ogImage: '',
+        canonicalUrl: ''
+      },
       hero: {
         badge: 'Visual Storytelling',
         badgeEmoji: '🎬',
