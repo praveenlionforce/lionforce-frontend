@@ -281,11 +281,17 @@ function Admin() {
   };
 
   const pages = [
-    { id: 'home', name: 'Home Page', icon: <Home className="w-4 h-4" /> },
-    { id: 'about', name: 'About Page', icon: <Info className="w-4 h-4" /> },
-    { id: 'contact', name: 'Contact Page', icon: <Phone className="w-4 h-4" /> },
-    { id: 'indiaExpansion', name: 'India Expansion', icon: <Globe className="w-4 h-4" /> },
-    { id: 'global', name: 'Global Settings', icon: <Settings className="w-4 h-4" /> }
+    { id: 'home', name: 'Home Page', icon: <Home className="w-4 h-4" />, category: 'main' },
+    { id: 'about', name: 'About Page', icon: <Info className="w-4 h-4" />, category: 'main' },
+    { id: 'contact', name: 'Contact Page', icon: <Phone className="w-4 h-4" />, category: 'main' },
+    { id: 'elearning', name: 'eLearning', icon: <FileText className="w-4 h-4" />, category: 'services' },
+    { id: 'software', name: 'Software Dev', icon: <FileText className="w-4 h-4" />, category: 'services' },
+    { id: 'indiaExpansion', name: 'India Expansion', icon: <Globe className="w-4 h-4" />, category: 'services' },
+    { id: 'uxui', name: 'UX/UI Design', icon: <Palette className="w-4 h-4" />, category: 'services' },
+    { id: 'creative', name: 'Creative Services', icon: <Palette className="w-4 h-4" />, category: 'services' },
+    { id: 'digitalMarketing', name: 'Digital Marketing', icon: <FileText className="w-4 h-4" />, category: 'services' },
+    { id: 'consulting', name: 'Consulting', icon: <Briefcase className="w-4 h-4" />, category: 'services' },
+    { id: 'global', name: 'Global Settings', icon: <Settings className="w-4 h-4" />, category: 'settings' }
   ];
 
   const getAuthHeader = () => {
