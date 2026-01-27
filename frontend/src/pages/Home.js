@@ -81,24 +81,10 @@ function Home() {
     },
     {
       icon: <Globe className="w-12 h-12" />,
-      title: 'EOR Services',
-      description: 'Expand to India with white-label teams. Full compliance, zero entity setup.',
-      link: '/services/eor',
-      tagline: 'India Entry Made Easy'
-    },
-    {
-      icon: <Target className="w-12 h-12" />,
-      title: 'ODC Setup',
-      description: 'Your dedicated India development center. Scale from 5 to 50+ engineers.',
-      link: '/services/odc',
-      tagline: 'Build in India • Scale Fast'
-    },
-    {
-      icon: <Award className="w-12 h-12" />,
-      title: 'COE Services',
-      description: 'India Center of Excellence. Best practices, innovation, operational excellence.',
-      link: '/services/coe',
-      tagline: 'Excellence in India'
+      title: 'India Expansion',
+      description: 'Launch your white-label India team. EOR, ODC, and COE services with co-branding. Full operational support.',
+      link: '/services/india-expansion',
+      tagline: 'Expand to India • Scale Fast'
     }
   ];
 
