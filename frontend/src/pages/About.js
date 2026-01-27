@@ -115,7 +115,14 @@ function About() {
               className="text-center mb-20"
             >
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                Challenges You&apos;ll <span className="gradient-text">Conquer</span>
+                {challenges.title ? (
+                  <>
+                    {challenges.title.split(' ').slice(0, -1).join(' ')}{' '}
+                    <span className="gradient-text">{challenges.title.split(' ').slice(-1)}</span>
+                  </>
+                ) : (
+                  <>Challenges You&apos;ll <span className="gradient-text">Conquer</span></>
+                )}
               </h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
                 From dream teams to digital transformation, we make it happen.
