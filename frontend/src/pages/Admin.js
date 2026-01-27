@@ -54,7 +54,9 @@ const TextField = memo(({ label, value, onChange, multiline = false, placeholder
 TextField.displayName = 'TextField';
 
 // Memoized ImageField component
-const ImageField = memo(({ label, value, onChange, onOpenImages, apiUrl }) => {
+const ImageFieldAPI_URL = process.env.REACT_APP_BACKEND_URL;
+
+const ImageField = memo(({ label, value, onChange, onOpenImages }) => {
   const [localValue, setLocalValue] = useState(value || '');
   
   useEffect(() => {
@@ -79,16 +81,18 @@ const ImageField = memo(({ label, value, onChange, onOpenImages, apiUrl }) => {
           placeholder="Image URL or select from library"
           className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500"
         />
-        <button
-          onClick={onOpenImages}
-          className="px-3 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
-          type="button"
-        >
-          <Image className="w-4 h-4" />
-        </button>
+        {onOpenImages && (
+          <button
+            onClick={onOpenImages}
+            className="px-3 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+            type="button"
+          >
+            <Image className="w-4 h-4" />
+          </button>
+        )}
       </div>
       {localValue && (
-        <img src={localValue.startsWith('/') ? `${apiUrl}${localValue}` : localValue} alt="Preview" className="mt-2 h-20 object-cover rounded" />
+        <img src={localValue.startsWith('/') ? `${ImageFieldAPI_URL}${localValue}` : localValue} alt="Preview" className="mt-2 h-20 object-cover rounded" />
       )}
     </div>
   );
