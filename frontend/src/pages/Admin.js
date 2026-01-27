@@ -65,12 +65,21 @@ const ImageFieldAPI_URL = process.env.REACT_APP_BACKEND_URL;
 
 const ImageField = memo(({ label, value, onChange, onOpenImages }) => {
   const [localValue, setLocalValue] = useState(value || '');
+  const isFocusedRef = useRef(false);
   
+  // Only sync from props when NOT focused
   useEffect(() => {
-    setLocalValue(value || '');
+    if (!isFocusedRef.current) {
+      setLocalValue(value || '');
+    }
   }, [value]);
   
+  const handleFocus = useCallback(() => {
+    isFocusedRef.current = true;
+  }, []);
+  
   const handleBlur = useCallback(() => {
+    isFocusedRef.current = false;
     if (localValue !== value) {
       onChange(localValue);
     }
@@ -84,6 +93,7 @@ const ImageField = memo(({ label, value, onChange, onOpenImages }) => {
           type="text"
           value={localValue}
           onChange={(e) => setLocalValue(e.target.value)}
+          onFocus={handleFocus}
           onBlur={handleBlur}
           placeholder="Image URL or select from library"
           className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500"
