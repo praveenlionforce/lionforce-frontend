@@ -30,24 +30,24 @@ function FloatingCTA() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
-                className="absolute bottom-20 right-0 bg-gray-800 rounded-lg shadow-2xl p-4 w-64"
+                className="absolute bottom-20 right-0 bg-white rounded-lg shadow-2xl p-4 w-64 border border-gray-200"
               >
                 <div className="space-y-3">
                   <a
                     href="/contact"
-                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 transition-colors"
+                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-teal-50 transition-colors"
                     data-testid="floating-contact-link"
                   >
-                    <Mail className="w-5 h-5 text-yellow-500" />
-                    <span className="text-sm">Contact Us</span>
+                    <Mail className="w-5 h-5 text-teal-600" />
+                    <span className="text-sm text-gray-700">Contact Us</span>
                   </a>
                   <a
                     href="tel:+919884052675"
-                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-700 transition-colors"
+                    className="flex items-center gap-3 p-3 rounded-lg hover:bg-teal-50 transition-colors"
                     data-testid="floating-phone-link"
                   >
-                    <Phone className="w-5 h-5 text-yellow-500" />
-                    <span className="text-sm">Call Now</span>
+                    <Phone className="w-5 h-5 text-teal-600" />
+                    <span className="text-sm text-gray-700">Call Now</span>
                   </a>
                 </div>
               </motion.div>
@@ -56,7 +56,7 @@ function FloatingCTA() {
 
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="bg-gradient-to-r from-yellow-500 to-yellow-600 text-white p-4 rounded-full shadow-2xl hover:shadow-yellow-500/50 transition-all duration-300 hover:scale-110"
+            className="bg-gradient-to-r from-teal-600 to-green-600 text-white p-4 rounded-full shadow-2xl hover:shadow-teal-500/50 transition-all duration-300 hover:scale-110"
             data-testid="floating-cta-button"
           >
             {isOpen ? (
