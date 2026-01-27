@@ -304,6 +304,63 @@ async def save_site_content(data: dict, username: str = Depends(verify_admin)):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to save content: {str(e)}")
 
+# Admin - Image Upload
+@api_router.post("/admin/upload-image")
+async def upload_image(file: UploadFile = File(...), username: str = Depends(verify_admin)):
+    try:
+        # Generate unique filename
+        ext = file.filename.split('.')[-1] if '.' in file.filename else 'png'
+        filename = f"{uuid.uuid4()}.{ext}"
+        filepath = UPLOAD_DIR / filename
+        
+        # Save file
+        with open(filepath, "wb") as buffer:
+            shutil.copyfileobj(file.file, buffer)
+        
+        # Save to database
+        image_doc = {
+            "id": str(uuid.uuid4()),
+            "filename": filename,
+            "original_name": file.filename,
+            "url": f"/api/uploads/{filename}",
+            "uploaded_at": datetime.now(timezone.utc).isoformat()
+        }
+        await db.images.insert_one(image_doc)
+        
+        return {"url": f"/api/uploads/{filename}", "filename": filename, "id": image_doc["id"]}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to upload image: {str(e)}")
+
+# Admin - Get all images
+@api_router.get("/admin/images")
+async def get_images(username: str = Depends(verify_admin)):
+    images = await db.images.find({}, {"_id": 0}).to_list(1000)
+    return images
+
+# Admin - Delete image
+@api_router.delete("/admin/images/{image_id}")
+async def delete_image(image_id: str, username: str = Depends(verify_admin)):
+    try:
+        image = await db.images.find_one({"id": image_id}, {"_id": 0})
+        if image:
+            filepath = UPLOAD_DIR / image["filename"]
+            if filepath.exists():
+                filepath.unlink()
+            await db.images.delete_one({"id": image_id})
+        return {"message": "Image deleted"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to delete image: {str(e)}")
+
+# Serve uploaded files
+@api_router.get("/uploads/{filename}")
+async def serve_upload(filename: str):
+    filepath = UPLOAD_DIR / filename
+    if not filepath.exists():
+        raise HTTPException(status_code=404, detail="File not found")
+    
+    from fastapi.responses import FileResponse
+    return FileResponse(filepath)
+
 # Include the router in the main app
 app.include_router(api_router)
 
