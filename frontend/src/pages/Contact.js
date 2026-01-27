@@ -216,7 +216,7 @@ function Contact() {
                       data-testid="contact-success"
                     >
                       <CheckCircle className="w-5 h-5 text-green-600" />
-                      <p className="text-green-800 font-medium">Message sent successfully! We&apos;ll be in touch soon.</p>
+                      <p className="text-green-800 font-medium">{form.successMessage || "Message sent successfully! We'll be in touch soon."}</p>
                     </motion.div>
                   )}
 
