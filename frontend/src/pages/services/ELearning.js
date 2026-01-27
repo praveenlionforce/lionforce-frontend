@@ -38,11 +38,20 @@ function ELearning() {
 
   const solutionIcons = [Brain, BookOpen, Gamepad2, Layers, Target, Sparkles];
 
+  // SEO data from CMS
+  const seo = content?.seo || {};
+
   return (
     <>
       <Helmet>
-        <title>AI-Powered eLearning Solutions | Custom Training | Lionforce</title>
-        <meta name="description" content="Transform your training with AI-powered eLearning. Gamification, microlearning, scenario-based learning. 300% higher completion rates." />
+        <title>{seo.title || 'AI-Powered eLearning Solutions | Custom Training | Lionforce'}</title>
+        <meta name="description" content={seo.description || 'Transform your training with AI-powered eLearning. Gamification, microlearning, scenario-based learning. 300% higher completion rates.'} />
+        <meta name="keywords" content={seo.keywords || 'eLearning development, custom training, corporate learning, AI training, gamified learning'} />
+        {seo.ogImage && <meta property="og:image" content={seo.ogImage} />}
+        <meta property="og:title" content={seo.title || 'eLearning Solutions - Lionforce'} />
+        <meta property="og:description" content={seo.description || 'Transform your training with AI-powered eLearning'} />
+        <meta property="og:type" content="website" />
+        {seo.canonicalUrl && <link rel="canonical" href={seo.canonicalUrl} />}
       </Helmet>
 
       <div className="overflow-hidden bg-white">
