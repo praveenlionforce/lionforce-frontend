@@ -38,16 +38,15 @@ function About() {
 
   return (
     <>
-      <Helmet>
-        <title>{seo.title || 'About Lionforce - 13+ Years of Excellence | Custom eLearning & Software Development'}</title>
-        <meta name="description" content={seo.description || "Learn about Lionforce's 13+ year journey in delivering custom eLearning, software development, and India expansion services to 300+ clients across 32+ countries."} />
-        <meta name="keywords" content={seo.keywords || 'about Lionforce, company history, team, values, eLearning company'} />
-        {seo.ogImage && <meta property="og:image" content={seo.ogImage} />}
-        <meta property="og:title" content={seo.title || 'About Lionforce Technologies'} />
-        <meta property="og:description" content={seo.description || "Learn about Lionforce"} />
-        <meta property="og:type" content="website" />
-        {seo.canonicalUrl && <link rel="canonical" href={seo.canonicalUrl} />}
-      </Helmet>
+      <SEO 
+        title={seo.title || 'About Lionforce - 13+ Years of Excellence | Custom eLearning & Software Development'}
+        description={seo.description || "Learn about Lionforce's 13+ year journey in delivering custom eLearning, software development, and India expansion services to 300+ clients across 32+ countries."}
+        keywords={seo.keywords || 'about Lionforce, company history, team, values, eLearning company'}
+        ogImage={seo.ogImage}
+        ogTitle={seo.title || 'About Lionforce Technologies'}
+        ogDescription={seo.description || "Learn about Lionforce"}
+        canonicalUrl={seo.canonicalUrl}
+      />
       
       <div className="pt-20 bg-white overflow-hidden">
         {/* Hero Section - Full width with asymmetric design */}
