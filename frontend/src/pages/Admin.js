@@ -1729,6 +1729,35 @@ function Admin() {
                         <TextField label="Secondary CTA" value={siteContent.consulting?.hero?.secondaryCTA} onChange={(v) => updateContent('consulting.hero.secondaryCTA', v)} />
                       </div>
                       <TextField label="Gradient" value={siteContent.consulting?.hero?.gradient} onChange={(v) => updateContent('consulting.hero.gradient', v)} />
+                      
+                      <div className="mt-4 pt-4 border-t border-gray-200">
+                        <h4 className="font-semibold text-gray-700 mb-3">Hero Boxes (4 feature cards)</h4>
+                        <div className="grid grid-cols-2 gap-3">
+                          {[0, 1, 2, 3].map(i => (
+                            <div key={i} className="p-3 bg-gray-50 rounded-lg">
+                              <p className="text-xs text-gray-500 mb-2">Box {i + 1}</p>
+                              <TextField label="Label" value={siteContent.consulting?.hero?.heroBoxes?.[i]?.label || ''} onChange={(v) => {
+                                const boxes = [...(siteContent.consulting?.hero?.heroBoxes || [{}, {}, {}, {}])];
+                                boxes[i] = { ...boxes[i], label: v };
+                                updateContent('consulting.hero.heroBoxes', boxes);
+                              }} />
+                              <TextField label="Value" value={siteContent.consulting?.hero?.heroBoxes?.[i]?.value || ''} onChange={(v) => {
+                                const boxes = [...(siteContent.consulting?.hero?.heroBoxes || [{}, {}, {}, {}])];
+                                boxes[i] = { ...boxes[i], value: v };
+                                updateContent('consulting.hero.heroBoxes', boxes);
+                              }} />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <div className="mt-4 pt-4 border-t border-gray-200">
+                        <h4 className="font-semibold text-gray-700 mb-3">Highlight Stat (floating badge)</h4>
+                        <div className="grid grid-cols-2 gap-4">
+                          <TextField label="Value" value={siteContent.consulting?.hero?.highlightStat?.value || ''} onChange={(v) => updateContent('consulting.hero.highlightStat', { ...(siteContent.consulting?.hero?.highlightStat || {}), value: v })} placeholder="13+" />
+                          <TextField label="Label" value={siteContent.consulting?.hero?.highlightStat?.label || ''} onChange={(v) => updateContent('consulting.hero.highlightStat', { ...(siteContent.consulting?.hero?.highlightStat || {}), label: v })} placeholder="Years Expertise" />
+                        </div>
+                      </div>
                     </Section>
 
                     <Section title="Services" icon={<Briefcase className="w-4 h-4 text-teal-600" />} sectionKey="consulting-services">
