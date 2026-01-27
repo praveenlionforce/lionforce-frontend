@@ -43,16 +43,15 @@ function ELearning() {
 
   return (
     <>
-      <Helmet>
-        <title>{seo.title || 'AI-Powered eLearning Solutions | Custom Training | Lionforce'}</title>
-        <meta name="description" content={seo.description || 'Transform your training with AI-powered eLearning. Gamification, microlearning, scenario-based learning. 300% higher completion rates.'} />
-        <meta name="keywords" content={seo.keywords || 'eLearning development, custom training, corporate learning, AI training, gamified learning'} />
-        {seo.ogImage && <meta property="og:image" content={seo.ogImage} />}
-        <meta property="og:title" content={seo.title || 'eLearning Solutions - Lionforce'} />
-        <meta property="og:description" content={seo.description || 'Transform your training with AI-powered eLearning'} />
-        <meta property="og:type" content="website" />
-        {seo.canonicalUrl && <link rel="canonical" href={seo.canonicalUrl} />}
-      </Helmet>
+      <SEO 
+        title={seo.title || 'AI-Powered eLearning Solutions | Custom Training | Lionforce'}
+        description={seo.description || 'Transform your training with AI-powered eLearning. Gamification, microlearning, scenario-based learning. 300% higher completion rates.'}
+        keywords={seo.keywords || 'eLearning development, custom training, corporate learning, AI training, gamified learning'}
+        ogImage={seo.ogImage}
+        ogTitle={seo.title || 'eLearning Solutions - Lionforce'}
+        ogDescription={seo.description || 'Transform your training with AI-powered eLearning'}
+        canonicalUrl={seo.canonicalUrl}
+      />
 
       <div className="overflow-hidden bg-white">
         {/* Hero Section */}
