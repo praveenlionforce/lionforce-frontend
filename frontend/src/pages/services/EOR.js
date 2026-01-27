@@ -6,9 +6,10 @@ function EOR() {
   return (
     <ServiceTemplate
       title="EOR (Employer of Record)"
-      tagline="Hire Global • Stay Compliant"
-      description="Expand your team globally without the hassle. Our Employer of Record services handle all legal, HR, and payroll complexities, allowing you to hire talent anywhere in the world while staying fully compliant with local regulations."
+      tagline="Expand to India • Stay Compliant • Scale Fast"
+      description="Launch your white-label India team without setting up a legal entity. Our Employer of Record services handle all legal, HR, and payroll complexities, allowing you to hire talent in India while staying fully compliant with local regulations. From 5 to 50+ employees."
       heroImage="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1920&q=80"
+      heroGradient="from-emerald-600 via-teal-600 to-cyan-600"
       features={[
         { icon: <Globe className="w-8 h-8" />, title: 'Global Reach', description: 'Hire talent in 150+ countries without establishing local entities.' },
         { icon: <Shield className="w-8 h-8" />, title: 'Full Compliance', description: 'Stay compliant with local employment laws and regulations.' },
@@ -27,7 +28,7 @@ function EOR() {
         'Minimize legal and financial risks',
         'Professional HR support in local languages'
       ]}
-      ctaText="Hire Globally Today"
+      ctaText="Expand to India Today"
     />
   );
 }
