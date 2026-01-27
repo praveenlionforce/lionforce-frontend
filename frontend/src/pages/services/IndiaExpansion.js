@@ -300,7 +300,7 @@ function IndiaExpansion() {
                 <span className="gradient-text">{pricingTitle}</span>
               </h2>
               <p className="text-xl text-gray-600">{pricingSubtitle}</p>
-              <p className="text-sm text-gray-500 mt-2">{pricingNote} <Link to="/contact" className="text-emerald-600 font-semibold hover:underline">Contact us</Link></p>
+              <p className="text-sm text-gray-500 mt-2">{pricingNote} <Link to="/contact?service=india-expansion" className="text-emerald-600 font-semibold hover:underline">Contact us</Link></p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
