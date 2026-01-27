@@ -1109,7 +1109,10 @@ function Admin() {
                     </div>
 
                     <Section title="Hero Section" icon={<Layout className="w-4 h-4 text-teal-600" />} sectionKey="about-hero" defaultOpen={true}>
-                      <TextField label="Tagline" value={siteContent.about?.hero?.tagline} onChange={(v) => updateContent('about.hero.tagline', v)} />
+                      <div className="grid grid-cols-2 gap-4">
+                        <TextField label="Tagline" value={siteContent.about?.hero?.tagline} onChange={(v) => updateContent('about.hero.tagline', v)} />
+                        <TextField label="Tagline Emoji" value={siteContent.about?.hero?.taglineEmoji} onChange={(v) => updateContent('about.hero.taglineEmoji', v)} placeholder="📖" />
+                      </div>
                       <div className="grid grid-cols-2 gap-4">
                         <TextField label="Title Line 1" value={siteContent.about?.hero?.title1} onChange={(v) => updateContent('about.hero.title1', v)} />
                         <TextField label="Title Line 2" value={siteContent.about?.hero?.title2} onChange={(v) => updateContent('about.hero.title2', v)} />
