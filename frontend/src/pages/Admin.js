@@ -1230,6 +1230,286 @@ function Admin() {
                   </>
                 )}
 
+                {/* ELEARNING PAGE */}
+                {selectedPage === 'elearning' && (
+                  <>
+                    <div className="flex items-center justify-between mb-2">
+                      <h2 className="text-xl font-bold text-gray-900">eLearning Page</h2>
+                      <a href="/services/elearning" target="_blank" rel="noopener noreferrer" className="text-teal-600 hover:underline text-sm flex items-center gap-1"><Eye className="w-4 h-4" />Preview</a>
+                    </div>
+
+                    <Section title="Hero Section" icon={<Layout className="w-4 h-4 text-teal-600" />} sectionKey="elearning-hero" defaultOpen={true}>
+                      <div className="grid grid-cols-2 gap-4">
+                        <TextField label="Badge Text" value={siteContent.elearning?.hero?.badge} onChange={(v) => updateContent('elearning.hero.badge', v)} />
+                        <TextField label="Badge Emoji" value={siteContent.elearning?.hero?.badgeEmoji} onChange={(v) => updateContent('elearning.hero.badgeEmoji', v)} />
+                      </div>
+                      <TextField label="Title" value={siteContent.elearning?.hero?.title} onChange={(v) => updateContent('elearning.hero.title', v)} />
+                      <TextField label="Tagline" value={siteContent.elearning?.hero?.tagline} onChange={(v) => updateContent('elearning.hero.tagline', v)} />
+                      <TextField label="Subtitle" value={siteContent.elearning?.hero?.subtitle} onChange={(v) => updateContent('elearning.hero.subtitle', v)} multiline />
+                      <div className="grid grid-cols-2 gap-4">
+                        <TextField label="Primary CTA" value={siteContent.elearning?.hero?.primaryCTA} onChange={(v) => updateContent('elearning.hero.primaryCTA', v)} />
+                        <TextField label="Secondary CTA" value={siteContent.elearning?.hero?.secondaryCTA} onChange={(v) => updateContent('elearning.hero.secondaryCTA', v)} />
+                      </div>
+                      <TextField label="Gradient (Tailwind classes)" value={siteContent.elearning?.hero?.gradient} onChange={(v) => updateContent('elearning.hero.gradient', v)} placeholder="from-blue-600 via-indigo-600 to-purple-600" />
+                    </Section>
+
+                    <Section title="Solutions" icon={<Briefcase className="w-4 h-4 text-teal-600" />} sectionKey="elearning-solutions">
+                      <ArrayEditor
+                        items={siteContent.elearning?.solutions}
+                        path="elearning.solutions"
+                        template={{ title: 'New Solution', description: 'Description' }}
+                        addLabel="Add Solution"
+                        renderItem={(item, index) => (
+                          <>
+                            <TextField label="Title" value={item.title} onChange={(v) => updateArrayItem('elearning.solutions', index, 'title', v)} />
+                            <TextField label="Description" value={item.description} onChange={(v) => updateArrayItem('elearning.solutions', index, 'description', v)} multiline />
+                          </>
+                        )}
+                      />
+                    </Section>
+
+                    <Section title="Benefits" icon={<CheckCircle className="w-4 h-4 text-teal-600" />} sectionKey="elearning-benefits">
+                      <p className="text-sm text-gray-600 mb-2">Benefits (one per line):</p>
+                      <TextField label="Benefits List" value={siteContent.elearning?.benefits?.join('\n')} onChange={(v) => updateContent('elearning.benefits', v.split('\n').filter(s => s.trim()))} multiline />
+                    </Section>
+
+                    <Section title="Industries" icon={<Globe className="w-4 h-4 text-teal-600" />} sectionKey="elearning-industries">
+                      <ArrayEditor
+                        items={siteContent.elearning?.industries}
+                        path="elearning.industries"
+                        template={{ name: 'Industry', use: 'Use cases' }}
+                        addLabel="Add Industry"
+                        renderItem={(item, index) => (
+                          <div className="grid grid-cols-2 gap-3">
+                            <TextField label="Industry Name" value={item.name} onChange={(v) => updateArrayItem('elearning.industries', index, 'name', v)} />
+                            <TextField label="Use Cases" value={item.use} onChange={(v) => updateArrayItem('elearning.industries', index, 'use', v)} />
+                          </div>
+                        )}
+                      />
+                    </Section>
+                  </>
+                )}
+
+                {/* SOFTWARE DEVELOPMENT PAGE */}
+                {selectedPage === 'software' && (
+                  <>
+                    <div className="flex items-center justify-between mb-2">
+                      <h2 className="text-xl font-bold text-gray-900">Software Development Page</h2>
+                      <a href="/services/software-development" target="_blank" rel="noopener noreferrer" className="text-teal-600 hover:underline text-sm flex items-center gap-1"><Eye className="w-4 h-4" />Preview</a>
+                    </div>
+
+                    <Section title="Hero Section" icon={<Layout className="w-4 h-4 text-teal-600" />} sectionKey="software-hero" defaultOpen={true}>
+                      <div className="grid grid-cols-2 gap-4">
+                        <TextField label="Badge Text" value={siteContent.software?.hero?.badge} onChange={(v) => updateContent('software.hero.badge', v)} />
+                        <TextField label="Badge Emoji" value={siteContent.software?.hero?.badgeEmoji} onChange={(v) => updateContent('software.hero.badgeEmoji', v)} />
+                      </div>
+                      <TextField label="Title" value={siteContent.software?.hero?.title} onChange={(v) => updateContent('software.hero.title', v)} />
+                      <TextField label="Tagline" value={siteContent.software?.hero?.tagline} onChange={(v) => updateContent('software.hero.tagline', v)} />
+                      <TextField label="Subtitle" value={siteContent.software?.hero?.subtitle} onChange={(v) => updateContent('software.hero.subtitle', v)} multiline />
+                      <div className="grid grid-cols-2 gap-4">
+                        <TextField label="Primary CTA" value={siteContent.software?.hero?.primaryCTA} onChange={(v) => updateContent('software.hero.primaryCTA', v)} />
+                        <TextField label="Secondary CTA" value={siteContent.software?.hero?.secondaryCTA} onChange={(v) => updateContent('software.hero.secondaryCTA', v)} />
+                      </div>
+                      <TextField label="Gradient" value={siteContent.software?.hero?.gradient} onChange={(v) => updateContent('software.hero.gradient', v)} />
+                    </Section>
+
+                    <Section title="Services" icon={<Briefcase className="w-4 h-4 text-teal-600" />} sectionKey="software-services">
+                      <ArrayEditor
+                        items={siteContent.software?.services}
+                        path="software.services"
+                        template={{ title: 'New Service', description: 'Description' }}
+                        addLabel="Add Service"
+                        renderItem={(item, index) => (
+                          <>
+                            <TextField label="Title" value={item.title} onChange={(v) => updateArrayItem('software.services', index, 'title', v)} />
+                            <TextField label="Description" value={item.description} onChange={(v) => updateArrayItem('software.services', index, 'description', v)} multiline />
+                          </>
+                        )}
+                      />
+                    </Section>
+
+                    <Section title="Tech Stack" icon={<Type className="w-4 h-4 text-teal-600" />} sectionKey="software-tech">
+                      <ArrayEditor
+                        items={siteContent.software?.techStack}
+                        path="software.techStack"
+                        template={{ category: 'Category', techs: 'Tech1, Tech2' }}
+                        addLabel="Add Tech Category"
+                        renderItem={(item, index) => (
+                          <div className="grid grid-cols-2 gap-3">
+                            <TextField label="Category" value={item.category} onChange={(v) => updateArrayItem('software.techStack', index, 'category', v)} />
+                            <TextField label="Technologies" value={item.techs} onChange={(v) => updateArrayItem('software.techStack', index, 'techs', v)} />
+                          </div>
+                        )}
+                      />
+                    </Section>
+
+                    <Section title="Benefits" icon={<CheckCircle className="w-4 h-4 text-teal-600" />} sectionKey="software-benefits">
+                      <p className="text-sm text-gray-600 mb-2">Benefits (one per line):</p>
+                      <TextField label="Benefits List" value={siteContent.software?.benefits?.join('\n')} onChange={(v) => updateContent('software.benefits', v.split('\n').filter(s => s.trim()))} multiline />
+                    </Section>
+                  </>
+                )}
+
+                {/* UX/UI DESIGN PAGE */}
+                {selectedPage === 'uxui' && (
+                  <>
+                    <div className="flex items-center justify-between mb-2">
+                      <h2 className="text-xl font-bold text-gray-900">UX/UI Design Page</h2>
+                      <a href="/services/ux-ui-design" target="_blank" rel="noopener noreferrer" className="text-teal-600 hover:underline text-sm flex items-center gap-1"><Eye className="w-4 h-4" />Preview</a>
+                    </div>
+
+                    <Section title="Hero Section" icon={<Layout className="w-4 h-4 text-teal-600" />} sectionKey="uxui-hero" defaultOpen={true}>
+                      <div className="grid grid-cols-2 gap-4">
+                        <TextField label="Badge Text" value={siteContent.uxui?.hero?.badge} onChange={(v) => updateContent('uxui.hero.badge', v)} />
+                        <TextField label="Badge Emoji" value={siteContent.uxui?.hero?.badgeEmoji} onChange={(v) => updateContent('uxui.hero.badgeEmoji', v)} />
+                      </div>
+                      <TextField label="Title" value={siteContent.uxui?.hero?.title} onChange={(v) => updateContent('uxui.hero.title', v)} />
+                      <TextField label="Tagline" value={siteContent.uxui?.hero?.tagline} onChange={(v) => updateContent('uxui.hero.tagline', v)} />
+                      <TextField label="Subtitle" value={siteContent.uxui?.hero?.subtitle} onChange={(v) => updateContent('uxui.hero.subtitle', v)} multiline />
+                      <div className="grid grid-cols-2 gap-4">
+                        <TextField label="Primary CTA" value={siteContent.uxui?.hero?.primaryCTA} onChange={(v) => updateContent('uxui.hero.primaryCTA', v)} />
+                        <TextField label="Secondary CTA" value={siteContent.uxui?.hero?.secondaryCTA} onChange={(v) => updateContent('uxui.hero.secondaryCTA', v)} />
+                      </div>
+                      <TextField label="Gradient" value={siteContent.uxui?.hero?.gradient} onChange={(v) => updateContent('uxui.hero.gradient', v)} />
+                    </Section>
+
+                    <Section title="Services" icon={<Briefcase className="w-4 h-4 text-teal-600" />} sectionKey="uxui-services">
+                      <ArrayEditor
+                        items={siteContent.uxui?.services}
+                        path="uxui.services"
+                        template={{ title: 'New Service', description: 'Description' }}
+                        addLabel="Add Service"
+                        renderItem={(item, index) => (
+                          <>
+                            <TextField label="Title" value={item.title} onChange={(v) => updateArrayItem('uxui.services', index, 'title', v)} />
+                            <TextField label="Description" value={item.description} onChange={(v) => updateArrayItem('uxui.services', index, 'description', v)} multiline />
+                          </>
+                        )}
+                      />
+                    </Section>
+                  </>
+                )}
+
+                {/* CREATIVE SERVICES PAGE */}
+                {selectedPage === 'creative' && (
+                  <>
+                    <div className="flex items-center justify-between mb-2">
+                      <h2 className="text-xl font-bold text-gray-900">Creative Services Page</h2>
+                      <a href="/services/creative" target="_blank" rel="noopener noreferrer" className="text-teal-600 hover:underline text-sm flex items-center gap-1"><Eye className="w-4 h-4" />Preview</a>
+                    </div>
+
+                    <Section title="Hero Section" icon={<Layout className="w-4 h-4 text-teal-600" />} sectionKey="creative-hero" defaultOpen={true}>
+                      <div className="grid grid-cols-2 gap-4">
+                        <TextField label="Badge Text" value={siteContent.creative?.hero?.badge} onChange={(v) => updateContent('creative.hero.badge', v)} />
+                        <TextField label="Badge Emoji" value={siteContent.creative?.hero?.badgeEmoji} onChange={(v) => updateContent('creative.hero.badgeEmoji', v)} />
+                      </div>
+                      <TextField label="Title" value={siteContent.creative?.hero?.title} onChange={(v) => updateContent('creative.hero.title', v)} />
+                      <TextField label="Tagline" value={siteContent.creative?.hero?.tagline} onChange={(v) => updateContent('creative.hero.tagline', v)} />
+                      <TextField label="Subtitle" value={siteContent.creative?.hero?.subtitle} onChange={(v) => updateContent('creative.hero.subtitle', v)} multiline />
+                      <div className="grid grid-cols-2 gap-4">
+                        <TextField label="Primary CTA" value={siteContent.creative?.hero?.primaryCTA} onChange={(v) => updateContent('creative.hero.primaryCTA', v)} />
+                        <TextField label="Secondary CTA" value={siteContent.creative?.hero?.secondaryCTA} onChange={(v) => updateContent('creative.hero.secondaryCTA', v)} />
+                      </div>
+                      <TextField label="Gradient" value={siteContent.creative?.hero?.gradient} onChange={(v) => updateContent('creative.hero.gradient', v)} />
+                    </Section>
+
+                    <Section title="Services" icon={<Briefcase className="w-4 h-4 text-teal-600" />} sectionKey="creative-services">
+                      <ArrayEditor
+                        items={siteContent.creative?.services}
+                        path="creative.services"
+                        template={{ title: 'New Service', description: 'Description' }}
+                        addLabel="Add Service"
+                        renderItem={(item, index) => (
+                          <>
+                            <TextField label="Title" value={item.title} onChange={(v) => updateArrayItem('creative.services', index, 'title', v)} />
+                            <TextField label="Description" value={item.description} onChange={(v) => updateArrayItem('creative.services', index, 'description', v)} multiline />
+                          </>
+                        )}
+                      />
+                    </Section>
+                  </>
+                )}
+
+                {/* DIGITAL MARKETING PAGE */}
+                {selectedPage === 'digitalMarketing' && (
+                  <>
+                    <div className="flex items-center justify-between mb-2">
+                      <h2 className="text-xl font-bold text-gray-900">Digital Marketing Page</h2>
+                      <a href="/services/digital-marketing" target="_blank" rel="noopener noreferrer" className="text-teal-600 hover:underline text-sm flex items-center gap-1"><Eye className="w-4 h-4" />Preview</a>
+                    </div>
+
+                    <Section title="Hero Section" icon={<Layout className="w-4 h-4 text-teal-600" />} sectionKey="marketing-hero" defaultOpen={true}>
+                      <div className="grid grid-cols-2 gap-4">
+                        <TextField label="Badge Text" value={siteContent.digitalMarketing?.hero?.badge} onChange={(v) => updateContent('digitalMarketing.hero.badge', v)} />
+                        <TextField label="Badge Emoji" value={siteContent.digitalMarketing?.hero?.badgeEmoji} onChange={(v) => updateContent('digitalMarketing.hero.badgeEmoji', v)} />
+                      </div>
+                      <TextField label="Title" value={siteContent.digitalMarketing?.hero?.title} onChange={(v) => updateContent('digitalMarketing.hero.title', v)} />
+                      <TextField label="Tagline" value={siteContent.digitalMarketing?.hero?.tagline} onChange={(v) => updateContent('digitalMarketing.hero.tagline', v)} />
+                      <TextField label="Subtitle" value={siteContent.digitalMarketing?.hero?.subtitle} onChange={(v) => updateContent('digitalMarketing.hero.subtitle', v)} multiline />
+                      <div className="grid grid-cols-2 gap-4">
+                        <TextField label="Primary CTA" value={siteContent.digitalMarketing?.hero?.primaryCTA} onChange={(v) => updateContent('digitalMarketing.hero.primaryCTA', v)} />
+                        <TextField label="Secondary CTA" value={siteContent.digitalMarketing?.hero?.secondaryCTA} onChange={(v) => updateContent('digitalMarketing.hero.secondaryCTA', v)} />
+                      </div>
+                      <TextField label="Gradient" value={siteContent.digitalMarketing?.hero?.gradient} onChange={(v) => updateContent('digitalMarketing.hero.gradient', v)} />
+                    </Section>
+
+                    <Section title="Services" icon={<Briefcase className="w-4 h-4 text-teal-600" />} sectionKey="marketing-services">
+                      <ArrayEditor
+                        items={siteContent.digitalMarketing?.services}
+                        path="digitalMarketing.services"
+                        template={{ title: 'New Service', description: 'Description' }}
+                        addLabel="Add Service"
+                        renderItem={(item, index) => (
+                          <>
+                            <TextField label="Title" value={item.title} onChange={(v) => updateArrayItem('digitalMarketing.services', index, 'title', v)} />
+                            <TextField label="Description" value={item.description} onChange={(v) => updateArrayItem('digitalMarketing.services', index, 'description', v)} multiline />
+                          </>
+                        )}
+                      />
+                    </Section>
+                  </>
+                )}
+
+                {/* CONSULTING PAGE */}
+                {selectedPage === 'consulting' && (
+                  <>
+                    <div className="flex items-center justify-between mb-2">
+                      <h2 className="text-xl font-bold text-gray-900">Consulting Page</h2>
+                      <a href="/services/consulting" target="_blank" rel="noopener noreferrer" className="text-teal-600 hover:underline text-sm flex items-center gap-1"><Eye className="w-4 h-4" />Preview</a>
+                    </div>
+
+                    <Section title="Hero Section" icon={<Layout className="w-4 h-4 text-teal-600" />} sectionKey="consulting-hero" defaultOpen={true}>
+                      <div className="grid grid-cols-2 gap-4">
+                        <TextField label="Badge Text" value={siteContent.consulting?.hero?.badge} onChange={(v) => updateContent('consulting.hero.badge', v)} />
+                        <TextField label="Badge Emoji" value={siteContent.consulting?.hero?.badgeEmoji} onChange={(v) => updateContent('consulting.hero.badgeEmoji', v)} />
+                      </div>
+                      <TextField label="Title" value={siteContent.consulting?.hero?.title} onChange={(v) => updateContent('consulting.hero.title', v)} />
+                      <TextField label="Tagline" value={siteContent.consulting?.hero?.tagline} onChange={(v) => updateContent('consulting.hero.tagline', v)} />
+                      <TextField label="Subtitle" value={siteContent.consulting?.hero?.subtitle} onChange={(v) => updateContent('consulting.hero.subtitle', v)} multiline />
+                      <div className="grid grid-cols-2 gap-4">
+                        <TextField label="Primary CTA" value={siteContent.consulting?.hero?.primaryCTA} onChange={(v) => updateContent('consulting.hero.primaryCTA', v)} />
+                        <TextField label="Secondary CTA" value={siteContent.consulting?.hero?.secondaryCTA} onChange={(v) => updateContent('consulting.hero.secondaryCTA', v)} />
+                      </div>
+                      <TextField label="Gradient" value={siteContent.consulting?.hero?.gradient} onChange={(v) => updateContent('consulting.hero.gradient', v)} />
+                    </Section>
+
+                    <Section title="Services" icon={<Briefcase className="w-4 h-4 text-teal-600" />} sectionKey="consulting-services">
+                      <ArrayEditor
+                        items={siteContent.consulting?.services}
+                        path="consulting.services"
+                        template={{ title: 'New Service', description: 'Description' }}
+                        addLabel="Add Service"
+                        renderItem={(item, index) => (
+                          <>
+                            <TextField label="Title" value={item.title} onChange={(v) => updateArrayItem('consulting.services', index, 'title', v)} />
+                            <TextField label="Description" value={item.description} onChange={(v) => updateArrayItem('consulting.services', index, 'description', v)} multiline />
+                          </>
+                        )}
+                      />
+                    </Section>
+                  </>
+                )}
+
                 {/* GLOBAL SETTINGS */}
                 {selectedPage === 'global' && (
                   <>
