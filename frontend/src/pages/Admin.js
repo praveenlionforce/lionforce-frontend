@@ -389,7 +389,7 @@ function Admin() {
         stats: ['300+ designs delivered', 'User-first approach', 'Increased conversions'],
         primaryCTA: 'Start Your Design Project',
         secondaryCTA: 'View Portfolio',
-        gradient: 'from-teal-700 via-cyan-600 to-teal-500'
+        gradient: 'from-blue-600 via-indigo-600 to-blue-700'
       },
       services: [
         { title: 'UX Research & Strategy', description: 'User interviews, personas, journey mapping, and competitive analysis.' },
@@ -410,7 +410,7 @@ function Admin() {
         stats: ['500+ videos created', 'Award-winning team', 'Global clients'],
         primaryCTA: 'Get Creative Quote',
         secondaryCTA: 'View Showreel',
-        gradient: 'from-cyan-600 via-teal-600 to-emerald-600'
+        gradient: 'from-amber-500 via-yellow-500 to-orange-500'
       },
       services: [
         { title: '3D Animation', description: 'Stunning 3D visuals, product renders, and animated sequences.' },
