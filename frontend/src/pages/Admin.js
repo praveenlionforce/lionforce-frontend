@@ -1539,6 +1539,16 @@ function Admin() {
                       <a href="/services/elearning" target="_blank" rel="noopener noreferrer" className="text-teal-600 hover:underline text-sm flex items-center gap-1"><Eye className="w-4 h-4" />Preview</a>
                     </div>
 
+                    <Section title="SEO Settings" icon={<Globe className="w-4 h-4 text-teal-600" />} sectionKey="elearning-seo" defaultOpen={false}>
+                      <TextField label="Page Title" value={siteContent.elearning?.seo?.title} onChange={(v) => updateContent('elearning.seo.title', v)} />
+                      <TextField label="Meta Description" value={siteContent.elearning?.seo?.description} onChange={(v) => updateContent('elearning.seo.description', v)} multiline />
+                      <TextField label="Keywords (comma separated)" value={siteContent.elearning?.seo?.keywords} onChange={(v) => updateContent('elearning.seo.keywords', v)} multiline />
+                      <div className="grid grid-cols-2 gap-4">
+                        <ImageField label="OG Image" value={siteContent.elearning?.seo?.ogImage} onChange={(v) => updateContent('elearning.seo.ogImage', v)} />
+                        <TextField label="Canonical URL" value={siteContent.elearning?.seo?.canonicalUrl} onChange={(v) => updateContent('elearning.seo.canonicalUrl', v)} />
+                      </div>
+                    </Section>
+
                     <Section title="Hero Section" icon={<Layout className="w-4 h-4 text-teal-600" />} sectionKey="elearning-hero" defaultOpen={true}>
                       <div className="grid grid-cols-2 gap-4">
                         <TextField label="Badge Text" value={siteContent.elearning?.hero?.badge} onChange={(v) => updateContent('elearning.hero.badge', v)} />
