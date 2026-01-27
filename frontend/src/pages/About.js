@@ -210,25 +210,21 @@ function About() {
               
               <div className="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-12">
                 <div className="lg:col-span-2">
-                  <p className="text-teal-600 font-semibold text-sm uppercase tracking-widest mb-6">From Our CEO</p>
+                  <p className="text-teal-600 font-semibold text-sm uppercase tracking-widest mb-6">{ceo.sectionTitle || 'From Our CEO'}</p>
                   <p className="text-3xl md:text-4xl font-light text-gray-800 leading-relaxed mb-8">
-                    &ldquo;The success of any project is rooted in the strength of its people. At Lionforce, 
-                    we prioritize building a team of exceptional professionals who share our vision and values.&rdquo;
+                    &ldquo;{ceo.quote || 'The success of any project is rooted in the strength of its people. At Lionforce, we prioritize building a team of exceptional professionals who share our vision and values.'}&rdquo;
                   </p>
                   <p className="text-lg text-gray-600 leading-relaxed mb-8">
-                    Our deliberate growth strategy allows us to handpick the right talent, fostering a 
-                    vibrant culture and maintaining low attrition rates. Talented developers, skilled QAs, 
-                    and innovative designers-all supported by proven processes-are the cornerstones of 
-                    the outstanding results we deliver.
+                    {ceo.message || 'Our deliberate growth strategy allows us to handpick the right talent, fostering a vibrant culture and maintaining low attrition rates. Talented developers, skilled QAs, and innovative designers - all supported by proven processes - are the cornerstones of the outstanding results we deliver.'}
                   </p>
                   <p className="text-xl font-semibold text-teal-600 mb-6">
-                    Together, we&apos;re not just creating solutions; we&apos;re building lasting partnerships.
+                    {ceo.closing || "Together, we're not just creating solutions; we're building lasting partnerships."}
                   </p>
                   <div className="flex items-center gap-4">
                     <div className="w-1 h-12 bg-gradient-to-b from-teal-500 to-green-500 rounded-full"></div>
                     <div>
-                      <p className="font-bold text-xl text-gray-900">Praveen Kamalan</p>
-                      <p className="text-gray-500">Founder & CEO</p>
+                      <p className="font-bold text-xl text-gray-900">{ceo.name || 'Praveen Kamalan'}</p>
+                      <p className="text-gray-500">{ceo.role || 'Founder & CEO'}</p>
                     </div>
                   </div>
                 </div>
