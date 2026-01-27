@@ -555,6 +555,8 @@ const defaultContent = {
     formSubmissionEmail: 'praveen@lionforce.net',
     location: 'Chennai, India',
     foundedYear: '2012',
+    headerLogo: 'https://customer-assets.emergentagent.com/job_elegant-refresh-3/artifacts/jeiik01t_Lionforce%20new%20logo%20set-crop.png',
+    footerLogo: 'https://customer-assets.emergentagent.com/job_modern-lionforce/artifacts/tpwlbe6e_footerlogo.png',
     socialLinks: {
       linkedin: '',
       twitter: '',
