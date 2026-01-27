@@ -25,6 +25,29 @@ function Admin() {
   const [editingBlock, setEditingBlock] = useState(null);
   const [newBlock, setNewBlock] = useState(null);
 
+  const getAuthHeader = () => {
+    const auth = localStorage.getItem('adminAuth');
+    return { 'Authorization': `Basic ${auth}` };
+  };
+
+  const fetchDashboardData = async (authToken) => {
+    const headers = { 'Authorization': `Basic ${authToken}` };
+    
+    try {
+      const [subResponse, newsResponse, contentResponse] = await Promise.all([
+        fetch(`${API_URL}/api/admin/submissions`, { headers }),
+        fetch(`${API_URL}/api/admin/subscribers`, { headers }),
+        fetch(`${API_URL}/api/admin/content`, { headers })
+      ]);
+      
+      if (subResponse.ok) setSubmissions(await subResponse.json());
+      if (newsResponse.ok) setSubscribers(await newsResponse.json());
+      if (contentResponse.ok) setContentBlocks(await contentResponse.json());
+    } catch (err) {
+      console.error('Failed to fetch data:', err);
+    }
+  };
+
   // Check if already authenticated
   useEffect(() => {
     const auth = localStorage.getItem('adminAuth');
@@ -32,12 +55,8 @@ function Admin() {
       setIsAuthenticated(true);
       fetchDashboardData(auth);
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const getAuthHeader = () => {
-    const auth = localStorage.getItem('adminAuth');
-    return { 'Authorization': `Basic ${auth}` };
-  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -72,24 +91,6 @@ function Admin() {
     setSubmissions([]);
     setSubscribers([]);
     setContentBlocks([]);
-  };
-
-  const fetchDashboardData = async (auth) => {
-    const headers = { 'Authorization': `Basic ${auth}` };
-    
-    try {
-      const [subResponse, newsResponse, contentResponse] = await Promise.all([
-        fetch(`${API_URL}/api/admin/submissions`, { headers }),
-        fetch(`${API_URL}/api/admin/subscribers`, { headers }),
-        fetch(`${API_URL}/api/admin/content`, { headers })
-      ]);
-      
-      if (subResponse.ok) setSubmissions(await subResponse.json());
-      if (newsResponse.ok) setSubscribers(await newsResponse.json());
-      if (contentResponse.ok) setContentBlocks(await contentResponse.json());
-    } catch (err) {
-      console.error('Failed to fetch data:', err);
-    }
   };
 
   const handleCreateBlock = async () => {
