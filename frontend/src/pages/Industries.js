@@ -39,7 +39,7 @@ function Industries() {
 
   return (
     <div className="pt-20">
-      <section className="py-20 bg-gradient-to-br from-gray-900 via-gray-800 to-black" data-testid="industries-hero">
+      <section className="py-20 bg-gradient-to-br from-teal-50 via-white to-gray-50" data-testid="industries-hero">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -49,7 +49,7 @@ function Industries() {
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
               <span className="gradient-text">Industry Expertise</span>
             </h1>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Deep tech expertise and domain knowledge with a business-oriented approach 
               to development resulting in effective digital solutions
             </p>
@@ -63,14 +63,14 @@ function Industries() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700 hover:border-yellow-500 transition-all duration-300"
+                className="bg-white backdrop-blur-sm p-8 rounded-2xl border border-gray-200 hover:border-teal-500 transition-all duration-300"
                 data-testid={`industry-${index}`}
               >
-                <div className="text-yellow-500 mb-4">{industry.icon}</div>
-                <h3 className="text-2xl font-bold mb-4 text-white">{industry.title}</h3>
-                <p className="text-gray-400 mb-6">{industry.description}</p>
+                <div className="text-teal-600 mb-4">{industry.icon}</div>
+                <h3 className="text-2xl font-bold mb-4 text-gray-900">{industry.title}</h3>
+                <p className="text-gray-600 mb-6">{industry.description}</p>
                 <div className="space-y-2">
-                  <p className="text-sm font-semibold text-yellow-500">Key Solutions:</p>
+                  <p className="text-sm font-semibold text-teal-600">Key Solutions:</p>
                   <div className="flex flex-wrap gap-2">
                     {industry.benefits.map((benefit, idx) => (
                       <span
@@ -88,7 +88,7 @@ function Industries() {
         </div>
       </section>
 
-      <section className="py-20 bg-gradient-to-r from-yellow-500 to-yellow-600" data-testid="industries-cta">
+      <section className="py-20 bg-gradient-to-r from-teal-600 to-green-600" data-testid="industries-cta">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
             Ready to Transform Your Industry?
@@ -98,7 +98,7 @@ function Industries() {
           </p>
           <Link
             to="/contact"
-            className="inline-flex items-center bg-gray-900 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-800 transition-all duration-300 hover:scale-105"
+            className="inline-flex items-center bg-gray-900 text-gray-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-800 transition-all duration-300 hover:scale-105"
             data-testid="industries-cta-button"
           >
             Schedule a Consultation
