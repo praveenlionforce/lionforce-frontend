@@ -1816,6 +1816,16 @@ function Admin() {
                       <a href="/services/creative" target="_blank" rel="noopener noreferrer" className="text-teal-600 hover:underline text-sm flex items-center gap-1"><Eye className="w-4 h-4" />Preview</a>
                     </div>
 
+                    <Section title="SEO Settings" icon={<Globe className="w-4 h-4 text-teal-600" />} sectionKey="creative-seo" defaultOpen={false}>
+                      <TextField label="Page Title" value={siteContent.creative?.seo?.title} onChange={(v) => updateContent('creative.seo.title', v)} />
+                      <TextField label="Meta Description" value={siteContent.creative?.seo?.description} onChange={(v) => updateContent('creative.seo.description', v)} multiline />
+                      <TextField label="Keywords (comma separated)" value={siteContent.creative?.seo?.keywords} onChange={(v) => updateContent('creative.seo.keywords', v)} multiline />
+                      <div className="grid grid-cols-2 gap-4">
+                        <ImageField label="OG Image" value={siteContent.creative?.seo?.ogImage} onChange={(v) => updateContent('creative.seo.ogImage', v)} />
+                        <TextField label="Canonical URL" value={siteContent.creative?.seo?.canonicalUrl} onChange={(v) => updateContent('creative.seo.canonicalUrl', v)} />
+                      </div>
+                    </Section>
+
                     <Section title="Hero Section" icon={<Layout className="w-4 h-4 text-teal-600" />} sectionKey="creative-hero" defaultOpen={true}>
                       <div className="grid grid-cols-2 gap-4">
                         <TextField label="Badge Text" value={siteContent.creative?.hero?.badge} onChange={(v) => updateContent('creative.hero.badge', v)} />
