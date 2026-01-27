@@ -169,18 +169,17 @@ function Home() {
               <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-white">
                 <span className="block">Innovate. Scale.</span>
                 <span className="block">Transform Globally.</span>
-                <span className="block text-yellow-300">Powered by India.</span>
               </h1>
               <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed">
-                Custom eLearning that sticks. Software that scales. <strong>India teams</strong> you can trust.
-                From concept to launch — we build what others can't, and do it faster.
+                Custom eLearning that sticks. Software that scales. Teams you can trust.
+                From concept to launch — we build what others can&apos;t, and do it faster.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link to="/contact" className="bg-white text-teal-600 px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 inline-flex items-center justify-center">
                   Get Started Now
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Link>
-                <Link to="/services/eor" className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-teal-600 transition-all duration-300 inline-flex items-center justify-center backdrop-blur-sm">
+                <Link to="/services/india-expansion" className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-teal-600 transition-all duration-300 inline-flex items-center justify-center backdrop-blur-sm">
                   Expand to India
                 </Link>
               </div>
