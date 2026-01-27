@@ -118,8 +118,8 @@ Recreate the existing WordPress website (https://lionforce.net) into a new, mode
 - **Styling**: TailwindCSS with custom CSS variables
 
 ## Access URLs
-- **Main Site**: https://modern-lionforce.preview.emergentagent.com
-- **Admin Panel**: https://modern-lionforce.preview.emergentagent.com/admin
+- **Main Site**: https://lionforce-redesign.preview.emergentagent.com
+- **Admin Panel**: https://lionforce-redesign.preview.emergentagent.com/admin
 
 ## Admin Panel Credentials
 ```
