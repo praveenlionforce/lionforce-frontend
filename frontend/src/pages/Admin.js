@@ -445,6 +445,13 @@ function Admin() {
       ]
     },
     uxui: {
+      seo: {
+        title: 'UX/UI Design Services - User-Centered Design That Converts',
+        description: 'Professional UX/UI design services. User research, wireframing, prototyping, and beautiful interfaces that convert.',
+        keywords: 'UX design, UI design, user experience, user interface, wireframing, prototyping, design systems, Figma',
+        ogImage: '',
+        canonicalUrl: ''
+      },
       hero: {
         badge: 'Design That Converts',
         badgeEmoji: '🎨',
