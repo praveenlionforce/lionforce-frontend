@@ -33,7 +33,7 @@ function CreativeServices() {
 
       <div className="overflow-hidden bg-white">
         {/* Hero Section */}
-        <section className={`relative min-h-screen pt-20 bg-gradient-to-br ${hero.gradient || 'from-orange-500 via-amber-500 to-yellow-500'}`}>
+        <section className={`relative min-h-screen pt-20 bg-gradient-to-br ${hero.gradient || 'from-rose-400 via-pink-500 to-rose-600'}`}>
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-20 right-10 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
             <div className="absolute bottom-20 left-10 w-80 h-80 bg-yellow-300/20 rounded-full blur-3xl"></div>
