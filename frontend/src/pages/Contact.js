@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, ArrowRight, CheckCircle, MessageSquare } from 'lucide-react';
+import { Helmet } from 'react-helmet';
 import axios from 'axios';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
@@ -39,241 +40,308 @@ function Contact() {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
+  const services = [
+    'Custom eLearning',
+    'Software Development',
+    'UX/UI Design',
+    'Creative Services',
+    'Digital Marketing',
+    'Consulting',
+    'India Expansion (EOR/ODC/COE)'
+  ];
+
   return (
-    <div className="pt-20 bg-white">
-      {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-teal-50 via-white to-green-50" data-testid="contact-hero">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="text-center mb-16"
-          >
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              <span className="gradient-text">Get in Touch</span>
-            </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Let's discuss how we can help transform your business with our innovative solutions
-            </p>
-          </motion.div>
+    <>
+      <Helmet>
+        <title>Contact Us | Lionforce - Let&apos;s Build Something Amazing</title>
+        <meta name="description" content="Get in touch with Lionforce. We'd love to hear about your project and discuss how we can help transform your business." />
+      </Helmet>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-            {/* Contact Info */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              <h2 className="text-3xl font-bold mb-8 text-gray-900">Contact Information</h2>
-              
-              <div className="space-y-6">
-                <div className="flex items-start space-x-4" data-testid="contact-phone">
-                  <div className="bg-gradient-to-br from-teal-600 to-green-600 p-3 rounded-lg">
-                    <Phone className="w-6 h-6 text-gray-900" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">Phone</h3>
-                    <a href="tel:+919600536354" className="text-gray-600 hover:text-teal-600 transition-colors">
-                      +91 96005 36354
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4" data-testid="contact-email">
-                  <div className="bg-gradient-to-br from-teal-600 to-green-600 p-3 rounded-lg">
-                    <Mail className="w-6 h-6 text-gray-900" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">Email</h3>
-                    <a href="mailto:info@lionforce.net" className="text-gray-600 hover:text-teal-600 transition-colors">
-                      info@lionforce.net
-                    </a>
-                  </div>
-                </div>
-
-                <div className="flex items-start space-x-4" data-testid="contact-location">
-                  <div className="bg-gradient-to-br from-teal-600 to-green-600 p-3 rounded-lg">
-                    <MapPin className="w-6 h-6 text-gray-900" />
-                  </div>
-                  <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">Location</h3>
-                    <p className="text-gray-600">Chennai, India</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-12 p-8 bg-white border border-gray-200 shadow-lg backdrop-blur-sm rounded-2xl border border-gray-300">
-                <h3 className="text-2xl font-bold mb-4 text-gray-900">Why Choose Lionforce?</h3>
-                <ul className="space-y-3 text-gray-600">
-                  <li className="flex items-center">
-                    <span className="text-teal-600 mr-2">✓</span>
-                    10+ years of industry experience
-                  </li>
-                  <li className="flex items-center">
-                    <span className="text-teal-600 mr-2">✓</span>
-                    300+ successful projects delivered
-                  </li>
-                  <li className="flex items-center">
-                    <span className="text-teal-600 mr-2">✓</span>
-                    Serving clients in 32+ countries
-                  </li>
-                  <li className="flex items-center">
-                    <span className="text-teal-600 mr-2">✓</span>
-                    100% certified talent pool
-                  </li>
-                </ul>
-              </div>
-            </motion.div>
-
-            {/* Contact Form */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.4 }}
-              className="bg-white border border-gray-200 shadow-lg backdrop-blur-sm p-8 rounded-2xl border border-gray-300"
-            >
-              <h2 className="text-3xl font-bold mb-8 text-gray-900">Send Us a Message</h2>
-              
-              {success && (
-                <div className="mb-6 p-4 bg-green-500/20 border border-green-500 rounded-lg text-green-400" data-testid="success-message">
-                  Thank you! Your message has been sent successfully. We'll get back to you soon.
-                </div>
-              )}
-
-              {error && (
-                <div className="mb-6 p-4 bg-red-500/20 border border-red-500 rounded-lg text-red-400" data-testid="error-message">
-                  {error}
-                </div>
-              )}
-
-              <form onSubmit={handleSubmit} className="space-y-6" data-testid="contact-form">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Your Name *
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:border-teal-500 transition-colors"
-                    placeholder="John Doe"
-                    data-testid="contact-name-input"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Your Email *
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:border-teal-500 transition-colors"
-                    placeholder="john@example.com"
-                    data-testid="contact-email-input"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Service Interested In
-                  </label>
-                  <select
-                    name="service"
-                    value={formData.service}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:border-teal-500 transition-colors"
-                    data-testid="contact-service-select"
-                  >
-                    <option value="">Select a service</option>
-                    <option value="elearning">Custom eLearning</option>
-                    <option value="software">Software Development</option>
-                    <option value="uxui">UX/UI Design</option>
-                    <option value="creative">Creative Services</option>
-                    <option value="marketing">Digital Marketing</option>
-                    <option value="consulting">Consulting</option>
-                    <option value="eor">EOR Services</option>
-                    <option value="odc">ODC Setup</option>
-                    <option value="coe">COE Services</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Subject
-                  </label>
-                  <input
-                    type="text"
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:border-teal-500 transition-colors"
-                    placeholder="How can we help?"
-                    data-testid="contact-subject-input"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Message
-                  </label>
-                  <textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    rows={5}
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg text-gray-900 focus:outline-none focus:border-teal-500 transition-colors resize-none"
-                    placeholder="Tell us about your project..."
-                    data-testid="contact-message-textarea"
-                  ></textarea>
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={loading}
-                  className="w-full bg-gradient-to-r from-teal-600 to-green-600 text-gray-900 px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl hover:shadow-teal-500/50 transition-all duration-300 hover:scale-105 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
-                  data-testid="contact-submit-button"
-                >
-                  {loading ? (
-                    'Sending...'
-                  ) : (
-                    <>
-                      Send Message
-                      <Send className="ml-2 w-5 h-5" />
-                    </>
-                  )}
-                </button>
-              </form>
-            </motion.div>
+      <div className="pt-20 bg-white overflow-hidden">
+        {/* Hero Section - Split design */}
+        <section className="relative min-h-[60vh] flex items-center" data-testid="contact-hero">
+          {/* Background */}
+          <div className="absolute inset-0 bg-gradient-to-br from-teal-600 via-teal-500 to-green-500"></div>
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute inset-0" style={{backgroundImage: 'radial-gradient(circle at 20% 50%, white 1px, transparent 1px)', backgroundSize: '40px 40px'}}></div>
           </div>
-        </div>
-      </section>
+          
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+              >
+                <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
+                  Let&apos;s Build<br />
+                  <span className="text-white/80">Something Amazing</span>
+                </h1>
+                <p className="text-xl text-white/90 mb-8 max-w-lg">
+                  Have a project in mind? We&apos;d love to hear about it. 
+                  Drop us a message and let&apos;s start the conversation.
+                </p>
+                
+                {/* Quick contact options */}
+                <div className="space-y-4">
+                  <a href="tel:+919600536354" className="flex items-center gap-4 text-white hover:translate-x-2 transition-transform group" data-testid="contact-phone">
+                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
+                      <Phone className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-white/70 text-sm">Call us directly</p>
+                      <p className="font-semibold">+91 96005 36354</p>
+                    </div>
+                  </a>
+                  
+                  <a href="mailto:hello@lionforce.net" className="flex items-center gap-4 text-white hover:translate-x-2 transition-transform group" data-testid="contact-email">
+                    <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
+                      <Mail className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <p className="text-white/70 text-sm">Email us</p>
+                      <p className="font-semibold">hello@lionforce.net</p>
+                    </div>
+                  </a>
+                </div>
+              </motion.div>
 
-      {/* CTA Section */}
-      <section className="py-16 bg-gradient-to-r from-teal-600 to-green-600" data-testid="contact-cta">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Prefer to talk directly?
-          </h2>
-          <p className="text-lg text-gray-800 mb-6">
-            Call us today and speak with one of our experts
-          </p>
-          <a
-            href="tel:+919600536354"
-            className="inline-flex items-center bg-gray-50 text-gray-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-800 transition-all duration-300 hover:scale-105"
-            data-testid="contact-cta-call"
-          >
-            <Phone className="mr-2 w-5 h-5" />
-            +91 96005 36354
-          </a>
-        </div>
-      </section>
-    </div>
+              {/* Stats cards */}
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="hidden lg:grid grid-cols-2 gap-4"
+              >
+                <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
+                  <div className="text-4xl font-bold text-white mb-2">24h</div>
+                  <p className="text-white/80">Response Time</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
+                  <div className="text-4xl font-bold text-white mb-2">300+</div>
+                  <p className="text-white/80">Happy Clients</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
+                  <div className="text-4xl font-bold text-white mb-2">32+</div>
+                  <p className="text-white/80">Countries</p>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
+                  <div className="text-4xl font-bold text-white mb-2">13+</div>
+                  <p className="text-white/80">Years Experience</p>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Form Section */}
+        <section className="py-24 relative">
+          {/* Background decoration */}
+          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-teal-100/50 to-green-100/50 rounded-full blur-3xl"></div>
+          
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
+              {/* Left side info */}
+              <div className="lg:col-span-2">
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                >
+                  <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
+                    Ready to Start?
+                  </h2>
+                  <p className="text-lg text-gray-600 mb-8">
+                    Fill out the form and our team will get back to you within 24 hours. 
+                    Or reach out directly—we&apos;re always happy to chat.
+                  </p>
+
+                  {/* What to expect */}
+                  <div className="space-y-4 mb-8">
+                    <h3 className="font-semibold text-gray-900">What happens next?</h3>
+                    {[
+                      'We review your requirements',
+                      'Schedule a discovery call',
+                      'Provide a tailored proposal',
+                      'Start building together'
+                    ].map((step, index) => (
+                      <div key={index} className="flex items-center gap-3">
+                        <div className="w-8 h-8 bg-teal-100 rounded-full flex items-center justify-center text-teal-600 font-semibold text-sm">
+                          {index + 1}
+                        </div>
+                        <span className="text-gray-600">{step}</span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Office locations */}
+                  <div className="p-6 bg-gradient-to-br from-gray-50 to-white rounded-2xl border border-gray-100">
+                    <div className="flex items-start gap-4">
+                      <MapPin className="w-6 h-6 text-teal-600 flex-shrink-0 mt-1" />
+                      <div>
+                        <h3 className="font-semibold text-gray-900 mb-2">Our Office</h3>
+                        <p className="text-gray-600 text-sm">
+                          Lionforce Technologies Pvt Ltd<br />
+                          Chennai, India<br />
+                          Serving clients globally
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Form */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="lg:col-span-3"
+              >
+                <div className="bg-white p-8 md:p-10 rounded-3xl shadow-xl border border-gray-100">
+                  {success && (
+                    <motion.div
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="mb-6 p-4 bg-green-50 border border-green-200 rounded-xl flex items-center gap-3"
+                      data-testid="contact-success"
+                    >
+                      <CheckCircle className="w-5 h-5 text-green-600" />
+                      <p className="text-green-800 font-medium">Message sent successfully! We&apos;ll be in touch soon.</p>
+                    </motion.div>
+                  )}
+
+                  {error && (
+                    <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-xl">
+                      <p className="text-red-800">{error}</p>
+                    </div>
+                  )}
+
+                  <form onSubmit={handleSubmit} className="space-y-6" data-testid="contact-form">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Your Name *</label>
+                        <input
+                          type="text"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          required
+                          placeholder="John Doe"
+                          className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all bg-gray-50 focus:bg-white"
+                          data-testid="contact-name"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                        <input
+                          type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          required
+                          placeholder="john@company.com"
+                          className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all bg-gray-50 focus:bg-white"
+                          data-testid="contact-email-input"
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Service Interested In</label>
+                      <select
+                        name="service"
+                        value={formData.service}
+                        onChange={handleChange}
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all bg-gray-50 focus:bg-white"
+                        data-testid="contact-service"
+                      >
+                        <option value="">Select a service</option>
+                        {services.map((service, index) => (
+                          <option key={index} value={service}>{service}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                      <input
+                        type="text"
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleChange}
+                        placeholder="How can we help?"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all bg-gray-50 focus:bg-white"
+                        data-testid="contact-subject"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">Your Message *</label>
+                      <textarea
+                        name="message"
+                        value={formData.message}
+                        onChange={handleChange}
+                        required
+                        rows={5}
+                        placeholder="Tell us about your project, goals, timeline..."
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all resize-none bg-gray-50 focus:bg-white"
+                        data-testid="contact-message"
+                      />
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={loading}
+                      className="w-full bg-gradient-to-r from-teal-600 to-green-600 text-white py-4 px-8 rounded-xl font-bold text-lg hover:shadow-lg transition-all duration-300 disabled:opacity-50 flex items-center justify-center gap-2 group"
+                      data-testid="contact-submit"
+                    >
+                      {loading ? (
+                        <>
+                          <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></div>
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          Send Message
+                          <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                        </>
+                      )}
+                    </button>
+                  </form>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Quick Links */}
+        <section className="py-16 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-2xl font-bold text-gray-900">Explore Our Services</h2>
+            </div>
+            <div className="flex flex-wrap justify-center gap-4">
+              {services.slice(0, 6).map((service, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 10 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.05 }}
+                  whileHover={{ scale: 1.05 }}
+                >
+                  <div className="px-6 py-3 bg-white rounded-full border border-gray-200 hover:border-teal-500 hover:shadow-md transition-all cursor-pointer">
+                    <span className="text-gray-700 font-medium">{service}</span>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+      </div>
+    </>
   );
 }
 
