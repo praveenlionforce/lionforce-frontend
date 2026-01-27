@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, ArrowRight, CheckCircle } from 'lucide-react';
 import SEO from '../components/SEO';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 import axios from 'axios';
 import { useSiteContent } from '../hooks/useSiteContent';
 
@@ -11,6 +11,7 @@ const API = `${BACKEND_URL}/api`;
 
 function Contact() {
   const { content, global } = useSiteContent('contact');
+  const [searchParams] = useSearchParams();
   
   const [formData, setFormData] = useState({
     name: '',
@@ -39,6 +40,39 @@ function Contact() {
     'Consulting',
     'India Expansion (EOR/ODC/COE)'
   ];
+
+  // Pre-select service based on URL query parameter
+  useEffect(() => {
+    const serviceParam = searchParams.get('service');
+    if (serviceParam) {
+      // Map URL params to service names
+      const serviceMap = {
+        'elearning': 'Custom eLearning',
+        'software': 'Software Development',
+        'ux-ui': 'UX/UI Design',
+        'creative': 'Creative Services',
+        'digital-marketing': 'Digital Marketing',
+        'consulting': 'Consulting',
+        'india-expansion': 'India Expansion (EOR/ODC/COE)',
+        'eor': 'India Expansion (EOR/ODC/COE)',
+        'odc': 'India Expansion (EOR/ODC/COE)',
+        'coe': 'India Expansion (EOR/ODC/COE)'
+      };
+      
+      const mappedService = serviceMap[serviceParam.toLowerCase()];
+      if (mappedService) {
+        setFormData(prev => ({ ...prev, service: mappedService }));
+      } else {
+        // Try to find a partial match in services list
+        const found = services.find(s => 
+          s.toLowerCase().includes(serviceParam.toLowerCase())
+        );
+        if (found) {
+          setFormData(prev => ({ ...prev, service: found }));
+        }
+      }
+    }
+  }, [searchParams, services]);
 
   // Service links for the "Explore Our Services" section
   const serviceLinks = content?.serviceLinks || [
