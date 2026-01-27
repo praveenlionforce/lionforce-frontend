@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet';
 import {
   Lock, LogOut, FileText, Plus, Trash2, Edit, Save, X,
   Settings, LayoutDashboard, MessageSquare, Newspaper,
-  Home, Info, Phone, Globe, BookOpen, Code, Image, Type,
-  ChevronDown, ChevronRight, Eye, GripVertical
+  Home, Info, Phone, Globe, Image, Upload, Eye,
+  ChevronDown, ChevronRight, Briefcase, GripVertical,
+  Palette, Type, Layout, FormInput, Users, Mail
 } from 'lucide-react';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
@@ -23,10 +24,13 @@ function Admin() {
   const [submissions, setSubmissions] = useState([]);
   const [subscribers, setSubscribers] = useState([]);
   const [siteContent, setSiteContent] = useState({});
+  const [images, setImages] = useState([]);
   const [selectedPage, setSelectedPage] = useState('home');
   const [expandedSections, setExpandedSections] = useState({});
+  const [uploading, setUploading] = useState(false);
+  const fileInputRef = useRef(null);
 
-  // Default site content structure
+  // Comprehensive default content structure
   const defaultContent = {
     home: {
       hero: {
@@ -35,23 +39,66 @@ function Admin() {
         title2: 'Scale.',
         title3: 'Transform.',
         subtitle: 'Custom eLearning that sticks. Software that scales. From concept to launch - we build what others can\'t.',
-        stats: { years: '13+', projects: '300+', countries: '32+' }
+        buttonText: 'Get Started',
+        buttonLink: '/contact',
+        secondaryButtonText: 'Our Story',
+        secondaryButtonLink: '/about',
+        backgroundImage: ''
+      },
+      stats: {
+        years: '13+',
+        yearsLabel: 'Years',
+        projects: '300+',
+        projectsLabel: 'Projects',
+        countries: '32+',
+        countriesLabel: 'Countries'
       },
       services: {
         title: 'What We Build',
-        subtitle: 'From learning experiences to software solutions - we craft digital products that make a difference.'
+        subtitle: 'From learning experiences to software solutions - we craft digital products that make a difference.',
+        items: [
+          { title: 'AI-Powered eLearning', description: 'Interactive, AI-enhanced learning that transforms engagement.', link: '/services/elearning', color: 'indigo' },
+          { title: 'Software & AI', description: 'Smart, AI-driven solutions from web apps to IoT integrations.', link: '/services/software-development', color: 'teal' },
+          { title: 'India Expansion', description: 'EOR, ODC, COE services - build your India team in weeks.', link: '/services/india-expansion', color: 'emerald' }
+        ]
       },
       whyUs: {
         title: 'Why Teams Choose Us',
         subtitle: 'We don\'t just deliver projects - we build partnerships that last.',
         items: [
-          { number: '01', title: '100% Certified Talent', desc: 'Experience the difference of working with professionals who are meticulously vetted.' },
-          { number: '02', title: 'Team Scalability', desc: 'Effortlessly adjust your development team to align with your evolving roadmap.' },
-          { number: '03', title: 'Save up to 40%', desc: 'Accelerate your project launch with premium quality at smart pricing.' },
-          { number: '04', title: 'Kick off in 5 Days', desc: 'Ditch the lengthy hiring hassles and launch your team quickly.' },
-          { number: '05', title: 'All Tech Under One Roof', desc: 'Our skilled team excels across major tech platforms.' },
-          { number: '06', title: 'Lionforce Excellence', desc: 'Quality and high standards are in our DNA.' }
+          { number: '01', title: '100% Certified Talent', desc: 'Experience the difference of working with professionals who are meticulously vetted and ready to exceed your expectations.' },
+          { number: '02', title: 'Team Scalability', desc: 'Effortlessly adjust your development team to align with your evolving roadmap. Stay agile and adaptable.' },
+          { number: '03', title: 'Save up to 40%', desc: 'Accelerate your project launch with premium quality at smart pricing. No delays, just results.' },
+          { number: '04', title: 'Kick off in 5 Days', desc: 'Ditch the lengthy hiring hassles and launch your team quickly. Start your project without the wait.' },
+          { number: '05', title: 'All Tech Under One Roof', desc: 'Our skilled team excels across major tech platforms, ready to tackle any challenge you throw our way.' },
+          { number: '06', title: 'Lionforce Excellence', desc: 'Quality and high standards are in our DNA. We maximize ROI and ensure every project exceeds expectations.' }
         ]
+      },
+      testimonials: {
+        title: 'Client Stories',
+        items: [
+          { quote: 'They bring great subject matter expertise in LXD and willingness to always walk that extra mile.', author: 'Head of Academy', company: 'Leading Pharmaceutical, India' },
+          { quote: 'Praveen showed high professionalism and adaptability; his team met the deadlines strictly.', author: 'CEO', company: 'Language Training, Spain' },
+          { quote: 'I\'ve come to favour Lionforce over all offshore suppliers. The work is turned around quickly.', author: 'General Manager', company: 'EdTech Company, Australia' }
+        ]
+      },
+      clients: {
+        title: 'Trusted by industry leaders',
+        logos: []
+      },
+      indiaExpansionCTA: {
+        badge: 'India Expansion',
+        title: 'Build Your India Team in Weeks, Not Months',
+        subtitle: 'EOR, ODC, COE services with full operational support. Co-branding available. Save 60% while accessing world-class talent.',
+        buttonText: 'Explore India Services',
+        buttonLink: '/services/india-expansion'
+      },
+      finalCTA: {
+        title: 'Ready to Build Something Amazing?',
+        subtitle: 'Let\'s turn your vision into reality. Start with a free consultation.',
+        buttonText: 'Start Your Project',
+        buttonLink: '/contact',
+        phone: '+91 96005 36354'
       }
     },
     about: {
@@ -59,36 +106,177 @@ function Admin() {
         tagline: 'Our Story',
         title1: 'Fueling Success',
         title2: 'Through Innovation',
-        subtitle: 'Since 2012, we\'ve been transforming how businesses learn, build, and grow.'
+        subtitle: 'Since 2012, we\'ve been transforming how businesses learn, build, and grow. Not just another tech company - we\'re your partners in making the impossible possible.',
+        backgroundImage: ''
+      },
+      stats: {
+        years: '13+',
+        projects: '300+',
+        countries: '32+'
+      },
+      story: {
+        paragraph1: 'Founded by industry experts and design enthusiasts, Lionforce stands at the forefront of custom eLearning and software development.',
+        paragraph2: 'We unite developers, designers, and visionaries to deliver exceptional experiences - whether for learners or software users. Every interaction is beautifully crafted and engaging.'
+      },
+      challenges: {
+        title: 'Challenges You\'ll Conquer',
+        items: [
+          { title: 'Build Your Dream Team', description: 'We quickly assemble dynamic teams of vetted specialists to accelerate your product journey.' },
+          { title: 'Ignite Digital Transformation', description: 'Unlock new possibilities by embracing cutting-edge technology with innovative solutions.' },
+          { title: 'End-to-End Solutions', description: 'Experience full-cycle innovation from first prototype to final deployment and ongoing support.' }
+        ]
+      },
+      values: {
+        title: 'What We Believe In',
+        subtitle: 'Our values aren\'t just words on a wall - they guide every decision we make.',
+        items: ['Partnership', 'Transparency', 'Flexibility', 'Sincerity', 'Support']
       },
       ceo: {
-        title: 'From Our CEO',
-        quote: 'The success of any project is rooted in the strength of its people.',
-        message: 'Our deliberate growth strategy allows us to handpick the right talent, fostering a vibrant culture.',
+        sectionTitle: 'From Our CEO',
+        quote: 'The success of any project is rooted in the strength of its people. At Lionforce, we prioritize building a team of exceptional professionals who share our vision and values.',
+        message: 'Our deliberate growth strategy allows us to handpick the right talent, fostering a vibrant culture and maintaining low attrition rates. Talented developers, skilled QAs, and innovative designers - all supported by proven processes - are the cornerstones of the outstanding results we deliver.',
+        closing: 'Together, we\'re not just creating solutions; we\'re building lasting partnerships.',
         name: 'Praveen Kamalan',
-        role: 'Founder & CEO'
+        role: 'Founder & CEO',
+        image: ''
       },
-      mission: 'Empower organizations worldwide with innovative learning and software solutions that drive measurable outcomes.',
-      vision: 'Be the global leader in AI-powered eLearning and software - and the trusted partner for businesses expanding to India.'
+      mission: {
+        title: 'Our Mission',
+        text: 'Empower organizations worldwide with innovative learning and software solutions that drive measurable outcomes.'
+      },
+      vision: {
+        title: 'Our Vision',
+        text: 'Be the global leader in AI-powered eLearning and software - and the trusted partner for businesses expanding to India.'
+      },
+      impactStats: {
+        title: 'Based Globally, Serving the World',
+        subtitle: 'Our impact in numbers',
+        items: [
+          { number: '13+', label: 'Years of Excellence' },
+          { number: '300+', label: 'Projects Delivered' },
+          { number: '32+', label: 'Countries Served' },
+          { number: '500K+', label: 'People Impacted' }
+        ]
+      }
     },
     contact: {
       hero: {
         title1: 'Let\'s Build',
         title2: 'Something Amazing',
-        subtitle: 'Have a project in mind? We\'d love to hear about it.',
-        phone: '+91 96005 36354',
-        email: 'hello@lionforce.net'
+        subtitle: 'Have a project in mind? We\'d love to hear about it. Drop us a message and let\'s start the conversation.',
+        backgroundImage: ''
       },
+      info: {
+        phone: '+91 96005 36354',
+        email: 'hello@lionforce.net',
+        address: 'Lionforce Technologies Pvt Ltd\nChennai, India\nServing clients globally'
+      },
+      stats: [
+        { value: '24h', label: 'Response Time' },
+        { value: '300+', label: 'Happy Clients' },
+        { value: '32+', label: 'Countries' },
+        { value: '13+', label: 'Years Experience' }
+      ],
       form: {
         title: 'Ready to Start?',
-        subtitle: 'Fill out the form and our team will get back to you within 24 hours.'
+        subtitle: 'Fill out the form and our team will get back to you within 24 hours.',
+        nameLabel: 'Your Name',
+        namePlaceholder: 'John Doe',
+        emailLabel: 'Email Address',
+        emailPlaceholder: 'john@company.com',
+        serviceLabel: 'Service Interested In',
+        subjectLabel: 'Subject',
+        subjectPlaceholder: 'How can we help?',
+        messageLabel: 'Your Message',
+        messagePlaceholder: 'Tell us about your project, goals, timeline...',
+        submitText: 'Send Message',
+        successMessage: 'Message sent successfully! We\'ll be in touch soon.',
+        services: [
+          'Custom eLearning',
+          'Software Development',
+          'UX/UI Design',
+          'Creative Services',
+          'Digital Marketing',
+          'Consulting',
+          'India Expansion (EOR/ODC/COE)'
+        ]
+      },
+      steps: {
+        title: 'What happens next?',
+        items: [
+          'We review your requirements',
+          'Schedule a discovery call',
+          'Provide a tailored proposal',
+          'Start building together'
+        ]
+      }
+    },
+    indiaExpansion: {
+      hero: {
+        badge: 'Your Complete India Expansion Partner',
+        title1: 'Expand to India',
+        title2: 'With Confidence',
+        tagline: 'EOR - ODC - COE - All-in-One Solution',
+        subtitle: 'Launch your India operations in 2-8 weeks. Co-branding available. Easy exits - no lock-in. From hiring teams to setting up development centers and innovation hubs - we handle everything. Save 60% on costs while accessing world-class talent.',
+        badges: ['Launch in 2-8 weeks', '60% cost savings', 'Co-branding available', 'Easy Exits - No Lock-in'],
+        buttonText: 'Get Free Consultation',
+        phone: '+91 96005 36354'
+      },
+      services: [
+        {
+          id: 'eor',
+          title: 'EOR - Employer of Record',
+          tagline: 'Hire & Manage Teams',
+          description: 'Launch your India team without setting up a legal entity. We handle payroll, compliance, HR, and all operational aspects.',
+          benefits: ['No legal entity needed in India', 'Full statutory compliance', 'Payroll & benefits administration', 'Co-branding available', 'Launch in 2-8 weeks', 'Easy exits - no lock-in']
+        },
+        {
+          id: 'odc',
+          title: 'ODC - Offshore Development Center',
+          tagline: 'Dedicated Tech Teams',
+          description: 'Your own development center in India with dedicated engineers, infrastructure, and complete operational support.',
+          benefits: ['Dedicated development team', 'Full infrastructure setup', 'Complete operational control', 'Scale from 5 to 50+ engineers', 'Cost-effective expansion', 'Flexible exit options']
+        },
+        {
+          id: 'coe',
+          title: 'COE - Center of Excellence',
+          tagline: 'Innovation Hubs',
+          description: 'Establish specialized teams focused on best practices, innovation, and driving operational excellence in India.',
+          benefits: ['Specialized expertise centers', 'Best practices implementation', 'Innovation & R&D teams', 'Knowledge transfer programs', 'Strategic capability building', 'Easy transition support']
+        }
+      ],
+      comparison: {
+        title: 'Why Lionforce?',
+        features: [
+          { feature: 'Easy Exits - No Lock-in', lionforce: true, competitors: false },
+          { feature: 'Co-branding Available', lionforce: true, competitors: false },
+          { feature: 'Vendor Management', lionforce: true, competitors: false },
+          { feature: 'Real Estate / Office Setup', lionforce: true, competitors: false },
+          { feature: 'Dedicated Admin Executive', lionforce: true, competitors: false }
+        ]
+      },
+      pricing: {
+        title: 'EOR Pricing Packages',
+        subtitle: 'Transparent pricing for Employer of Record services. No hidden fees.',
+        note: 'For ODC & COE pricing, please contact us for a customized quote.'
       }
     },
     global: {
+      companyName: 'Lionforce Technologies Pvt Ltd',
       phone: '+91 96005 36354',
       email: 'hello@lionforce.net',
-      company: 'Lionforce Technologies Pvt Ltd',
-      location: 'Chennai, India'
+      location: 'Chennai, India',
+      foundedYear: '2012',
+      socialLinks: {
+        linkedin: '',
+        twitter: '',
+        facebook: ''
+      },
+      footer: {
+        tagline: 'Technologies Private Limited',
+        description: 'Game-changers in custom eLearning and software development.',
+        copyright: '2024 Lionforce. All rights reserved.'
+      }
     }
   };
 
@@ -96,6 +284,7 @@ function Admin() {
     { id: 'home', name: 'Home Page', icon: <Home className="w-4 h-4" /> },
     { id: 'about', name: 'About Page', icon: <Info className="w-4 h-4" /> },
     { id: 'contact', name: 'Contact Page', icon: <Phone className="w-4 h-4" /> },
+    { id: 'indiaExpansion', name: 'India Expansion', icon: <Globe className="w-4 h-4" /> },
     { id: 'global', name: 'Global Settings', icon: <Settings className="w-4 h-4" /> }
   ];
 
@@ -108,24 +297,40 @@ function Admin() {
     const headers = { 'Authorization': `Basic ${authToken}` };
     
     try {
-      const [subResponse, newsResponse, contentResponse] = await Promise.all([
+      const [subResponse, newsResponse, contentResponse, imagesResponse] = await Promise.all([
         fetch(`${API_URL}/api/admin/submissions`, { headers }),
         fetch(`${API_URL}/api/admin/subscribers`, { headers }),
-        fetch(`${API_URL}/api/admin/site-content`, { headers })
+        fetch(`${API_URL}/api/admin/site-content`, { headers }),
+        fetch(`${API_URL}/api/admin/images`, { headers })
       ]);
       
       if (subResponse.ok) setSubmissions(await subResponse.json());
       if (newsResponse.ok) setSubscribers(await newsResponse.json());
       if (contentResponse.ok) {
         const content = await contentResponse.json();
-        setSiteContent(content.content || defaultContent);
+        // Deep merge with defaults
+        setSiteContent(deepMerge(defaultContent, content.content || {}));
       } else {
         setSiteContent(defaultContent);
       }
+      if (imagesResponse.ok) setImages(await imagesResponse.json());
     } catch (err) {
       console.error('Failed to fetch data:', err);
       setSiteContent(defaultContent);
     }
+  };
+
+  // Deep merge helper
+  const deepMerge = (target, source) => {
+    const result = { ...target };
+    for (const key in source) {
+      if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
+        result[key] = deepMerge(target[key] || {}, source[key]);
+      } else {
+        result[key] = source[key];
+      }
+    }
+    return result;
   };
 
   useEffect(() => {
@@ -165,34 +370,64 @@ function Admin() {
   const handleLogout = () => {
     localStorage.removeItem('adminAuth');
     setIsAuthenticated(false);
-    setSubmissions([]);
-    setSubscribers([]);
-    setSiteContent({});
   };
 
-  const handleContentChange = (page, section, field, value) => {
-    setSiteContent(prev => ({
-      ...prev,
-      [page]: {
-        ...prev[page],
-        [section]: typeof prev[page]?.[section] === 'object' && !Array.isArray(prev[page]?.[section])
-          ? { ...prev[page][section], [field]: value }
-          : value
-      }
-    }));
-  };
-
-  const handleNestedChange = (page, section, index, field, value) => {
+  const updateContent = (path, value) => {
     setSiteContent(prev => {
-      const items = [...(prev[page]?.[section]?.items || [])];
-      items[index] = { ...items[index], [field]: value };
-      return {
-        ...prev,
-        [page]: {
-          ...prev[page],
-          [section]: { ...prev[page][section], items }
-        }
-      };
+      const keys = path.split('.');
+      const newContent = JSON.parse(JSON.stringify(prev));
+      let current = newContent;
+      for (let i = 0; i < keys.length - 1; i++) {
+        if (!current[keys[i]]) current[keys[i]] = {};
+        current = current[keys[i]];
+      }
+      current[keys[keys.length - 1]] = value;
+      return newContent;
+    });
+  };
+
+  const updateArrayItem = (path, index, field, value) => {
+    setSiteContent(prev => {
+      const newContent = JSON.parse(JSON.stringify(prev));
+      const keys = path.split('.');
+      let current = newContent;
+      for (const key of keys) {
+        current = current[key];
+      }
+      if (Array.isArray(current) && current[index]) {
+        current[index][field] = value;
+      }
+      return newContent;
+    });
+  };
+
+  const addArrayItem = (path, template) => {
+    setSiteContent(prev => {
+      const newContent = JSON.parse(JSON.stringify(prev));
+      const keys = path.split('.');
+      let current = newContent;
+      for (const key of keys) {
+        current = current[key];
+      }
+      if (Array.isArray(current)) {
+        current.push(template);
+      }
+      return newContent;
+    });
+  };
+
+  const removeArrayItem = (path, index) => {
+    setSiteContent(prev => {
+      const newContent = JSON.parse(JSON.stringify(prev));
+      const keys = path.split('.');
+      let current = newContent;
+      for (const key of keys) {
+        current = current[key];
+      }
+      if (Array.isArray(current)) {
+        current.splice(index, 1);
+      }
+      return newContent;
     });
   };
 
@@ -201,10 +436,7 @@ function Admin() {
     try {
       const response = await fetch(`${API_URL}/api/admin/site-content`, {
         method: 'POST',
-        headers: {
-          ...getAuthHeader(),
-          'Content-Type': 'application/json'
-        },
+        headers: { ...getAuthHeader(), 'Content-Type': 'application/json' },
         body: JSON.stringify({ content: siteContent })
       });
       
@@ -219,45 +451,135 @@ function Admin() {
     }
   };
 
+  const handleImageUpload = async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    setUploading(true);
+    const formData = new FormData();
+    formData.append('file', file);
+    
+    try {
+      const response = await fetch(`${API_URL}/api/admin/upload-image`, {
+        method: 'POST',
+        headers: getAuthHeader(),
+        body: formData
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        setImages(prev => [...prev, { ...data, original_name: file.name, uploaded_at: new Date().toISOString() }]);
+      }
+    } catch (err) {
+      console.error('Upload failed:', err);
+    }
+    setUploading(false);
+  };
+
+  const deleteImage = async (imageId) => {
+    if (!window.confirm('Delete this image?')) return;
+    
+    try {
+      await fetch(`${API_URL}/api/admin/images/${imageId}`, {
+        method: 'DELETE',
+        headers: getAuthHeader()
+      });
+      setImages(prev => prev.filter(img => img.id !== imageId));
+    } catch (err) {
+      console.error('Delete failed:', err);
+    }
+  };
+
   const toggleSection = (section) => {
     setExpandedSections(prev => ({ ...prev, [section]: !prev[section] }));
   };
 
-  const renderTextField = (label, value, onChange, multiline = false) => (
-    <div className="mb-4">
+  // UI Components
+  const TextField = ({ label, value, onChange, multiline = false, placeholder = '' }) => (
+    <div className="mb-3">
       <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
       {multiline ? (
         <textarea
           value={value || ''}
           onChange={(e) => onChange(e.target.value)}
+          placeholder={placeholder}
           rows={3}
-          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none"
         />
       ) : (
         <input
           type="text"
           value={value || ''}
           onChange={(e) => onChange(e.target.value)}
+          placeholder={placeholder}
           className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent"
         />
       )}
     </div>
   );
 
-  const renderSection = (title, children, sectionKey) => (
-    <div className="bg-white rounded-xl border border-gray-200 mb-4 overflow-hidden">
-      <button
-        onClick={() => toggleSection(sectionKey)}
-        className="w-full px-4 py-3 flex items-center justify-between bg-gray-50 hover:bg-gray-100 transition-colors"
-      >
-        <span className="font-semibold text-gray-900">{title}</span>
-        {expandedSections[sectionKey] ? <ChevronDown className="w-5 h-5" /> : <ChevronRight className="w-5 h-5" />}
-      </button>
-      {expandedSections[sectionKey] && (
-        <div className="p-4 border-t border-gray-200">
-          {children}
-        </div>
+  const ImageField = ({ label, value, onChange }) => (
+    <div className="mb-3">
+      <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+      <div className="flex gap-2">
+        <input
+          type="text"
+          value={value || ''}
+          onChange={(e) => onChange(e.target.value)}
+          placeholder="Image URL or select from library"
+          className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500"
+        />
+        <button
+          onClick={() => { setActiveTab('images'); }}
+          className="px-3 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+        >
+          <Image className="w-4 h-4" />
+        </button>
+      </div>
+      {value && (
+        <img src={value.startsWith('/') ? `${API_URL}${value}` : value} alt="Preview" className="mt-2 h-20 object-cover rounded" />
       )}
+    </div>
+  );
+
+  const Section = ({ title, icon, children, sectionKey, defaultOpen = false }) => {
+    const isOpen = expandedSections[sectionKey] ?? defaultOpen;
+    return (
+      <div className="bg-white rounded-xl border border-gray-200 mb-4 overflow-hidden shadow-sm">
+        <button
+          onClick={() => toggleSection(sectionKey)}
+          className="w-full px-4 py-3 flex items-center justify-between bg-gradient-to-r from-gray-50 to-white hover:from-gray-100 hover:to-gray-50 transition-colors"
+        >
+          <div className="flex items-center gap-2">
+            {icon}
+            <span className="font-semibold text-gray-900">{title}</span>
+          </div>
+          {isOpen ? <ChevronDown className="w-5 h-5 text-gray-500" /> : <ChevronRight className="w-5 h-5 text-gray-500" />}
+        </button>
+        {isOpen && <div className="p-4 border-t border-gray-200 bg-gray-50/50">{children}</div>}
+      </div>
+    );
+  };
+
+  const ArrayEditor = ({ items, path, template, renderItem, addLabel = 'Add Item' }) => (
+    <div className="space-y-3">
+      {items?.map((item, index) => (
+        <div key={index} className="p-4 bg-white rounded-lg border border-gray-200 relative group">
+          <button
+            onClick={() => removeArrayItem(path, index)}
+            className="absolute top-2 right-2 p-1 text-red-500 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50 rounded"
+          >
+            <Trash2 className="w-4 h-4" />
+          </button>
+          {renderItem(item, index)}
+        </div>
+      ))}
+      <button
+        onClick={() => addArrayItem(path, template)}
+        className="flex items-center gap-2 px-4 py-2 text-teal-600 hover:bg-teal-50 rounded-lg transition-colors w-full justify-center border border-dashed border-teal-300"
+      >
+        <Plus className="w-4 h-4" /> {addLabel}
+      </button>
     </div>
   );
 
@@ -265,391 +587,555 @@ function Admin() {
   if (!isAuthenticated) {
     return (
       <>
-        <Helmet><title>Admin Login | Lionforce</title></Helmet>
+        <Helmet><title>Admin Login | Lionforce CMS</title></Helmet>
         <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-600 to-green-600 px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md"
-          >
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
             <div className="text-center mb-8">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-teal-500 to-green-500 rounded-full mb-4">
                 <Lock className="w-8 h-8 text-white" />
               </div>
-              <h1 className="text-2xl font-bold text-gray-900">Admin Login</h1>
-              <p className="text-gray-600 text-sm mt-2">Enter your credentials to access the dashboard</p>
+              <h1 className="text-2xl font-bold text-gray-900">Lionforce CMS</h1>
+              <p className="text-gray-600 text-sm mt-2">Content Management System</p>
             </div>
             
             <form onSubmit={handleLogin} className="space-y-4">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Username</label>
-                <input
-                  type="text"
-                  value={username}
-                  onChange={(e) => setUsername(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500"
-                  placeholder="Enter username"
-                  required
-                  data-testid="admin-username"
-                />
+                <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} className="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="admin" required />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Password</label>
-                <input
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500"
-                  placeholder="Enter password"
-                  required
-                  data-testid="admin-password"
-                />
+                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="w-full px-4 py-3 border border-gray-300 rounded-lg" placeholder="••••••••" required />
               </div>
-              
-              {error && (
-                <div className="bg-red-50 text-red-600 px-4 py-2 rounded-lg text-sm">{error}</div>
-              )}
-              
-              <button
-                type="submit"
-                disabled={loading}
-                className="w-full bg-gradient-to-r from-teal-600 to-green-600 text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all disabled:opacity-50"
-                data-testid="admin-login-btn"
-              >
+              {error && <div className="bg-red-50 text-red-600 px-4 py-2 rounded-lg text-sm">{error}</div>}
+              <button type="submit" disabled={loading} className="w-full bg-gradient-to-r from-teal-600 to-green-600 text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all disabled:opacity-50">
                 {loading ? 'Signing in...' : 'Sign In'}
               </button>
             </form>
-            
-            <p className="text-center text-gray-500 text-xs mt-6">
-              Default: admin / lionforce2024
-            </p>
+            <p className="text-center text-gray-400 text-xs mt-6">Default: admin / lionforce2024</p>
           </motion.div>
         </div>
       </>
     );
   }
 
-  // Admin Dashboard
   return (
     <>
-      <Helmet><title>Admin Dashboard | Lionforce</title></Helmet>
+      <Helmet><title>Lionforce CMS - Admin Dashboard</title></Helmet>
       <div className="min-h-screen bg-gray-100">
         {/* Header */}
         <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
-          <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+          <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 bg-gradient-to-br from-teal-500 to-green-500 rounded-lg flex items-center justify-center">
-                <Settings className="w-5 h-5 text-white" />
+                <Layout className="w-5 h-5 text-white" />
               </div>
               <div>
                 <h1 className="font-bold text-gray-900">Lionforce CMS</h1>
-                <p className="text-xs text-gray-500">Content Management System</p>
+                <p className="text-xs text-gray-500">Full Content Management</p>
               </div>
             </div>
             <div className="flex items-center gap-4">
               {saveStatus && (
-                <span className={`text-sm font-medium ${saveStatus === 'saved' ? 'text-green-600' : saveStatus === 'error' ? 'text-red-600' : 'text-gray-600'}`}>
-                  {saveStatus === 'saving' ? 'Saving...' : saveStatus === 'saved' ? 'Saved!' : 'Error saving'}
+                <span className={`text-sm font-medium px-3 py-1 rounded-full ${saveStatus === 'saved' ? 'bg-green-100 text-green-600' : saveStatus === 'error' ? 'bg-red-100 text-red-600' : 'bg-gray-100 text-gray-600'}`}>
+                  {saveStatus === 'saving' ? 'Saving...' : saveStatus === 'saved' ? '✓ Saved!' : 'Error'}
                 </span>
               )}
-              <button
-                onClick={handleLogout}
-                className="flex items-center gap-2 text-gray-600 hover:text-red-600 transition-colors"
-                data-testid="admin-logout-btn"
-              >
+              <a href="/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 text-teal-600 hover:underline text-sm">
+                <Eye className="w-4 h-4" /> View Site
+              </a>
+              <button onClick={handleLogout} className="flex items-center gap-2 text-gray-600 hover:text-red-600 transition-colors">
                 <LogOut className="w-5 h-5" />
-                <span className="hidden sm:inline">Logout</span>
               </button>
             </div>
           </div>
         </header>
 
-        <div className="max-w-7xl mx-auto px-4 py-8">
+        <div className="max-w-7xl mx-auto px-4 py-6">
           {/* Tabs */}
-          <div className="flex gap-2 mb-8 overflow-x-auto pb-2">
+          <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
             {[
               { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
               { id: 'pages', label: 'Edit Pages', icon: FileText },
-              { id: 'submissions', label: 'Contact Forms', icon: MessageSquare },
-              { id: 'subscribers', label: 'Newsletter', icon: Newspaper }
+              { id: 'images', label: 'Images', icon: Image },
+              { id: 'forms', label: 'Form Settings', icon: FormInput },
+              { id: 'submissions', label: 'Submissions', icon: MessageSquare },
+              { id: 'subscribers', label: 'Subscribers', icon: Newspaper }
             ].map(tab => (
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition-all ${
-                  activeTab === tab.id
-                    ? 'bg-teal-600 text-white shadow-lg'
-                    : 'bg-white text-gray-600 hover:bg-gray-50'
-                }`}
-                data-testid={`admin-tab-${tab.id}`}
+                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition-all ${activeTab === tab.id ? 'bg-teal-600 text-white shadow-lg' : 'bg-white text-gray-600 hover:bg-gray-50'}`}
               >
-                <tab.icon className="w-4 h-4" />
-                {tab.label}
+                <tab.icon className="w-4 h-4" />{tab.label}
               </button>
             ))}
           </div>
 
-          {/* Dashboard Tab */}
+          {/* Dashboard */}
           {activeTab === 'dashboard' && (
             <div className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                      <MessageSquare className="w-6 h-6 text-blue-600" />
-                    </div>
-                    <div>
-                      <p className="text-gray-500 text-sm">Contact Forms</p>
-                      <p className="text-3xl font-bold text-gray-900">{submissions.length}</p>
-                    </div>
-                  </div>
-                </div>
-                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                      <Newspaper className="w-6 h-6 text-green-600" />
-                    </div>
-                    <div>
-                      <p className="text-gray-500 text-sm">Newsletter Subscribers</p>
-                      <p className="text-3xl font-bold text-gray-900">{subscribers.length}</p>
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[
+                  { label: 'Contact Forms', value: submissions.length, icon: MessageSquare, color: 'blue' },
+                  { label: 'Subscribers', value: subscribers.length, icon: Newspaper, color: 'green' },
+                  { label: 'Images', value: images.length, icon: Image, color: 'purple' },
+                  { label: 'Pages', value: pages.length, icon: FileText, color: 'orange' }
+                ].map((stat, i) => (
+                  <div key={i} className="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+                    <div className="flex items-center gap-3">
+                      <div className={`w-10 h-10 bg-${stat.color}-100 rounded-lg flex items-center justify-center`}>
+                        <stat.icon className={`w-5 h-5 text-${stat.color}-600`} />
+                      </div>
+                      <div>
+                        <p className="text-2xl font-bold text-gray-900">{stat.value}</p>
+                        <p className="text-xs text-gray-500">{stat.label}</p>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                      <FileText className="w-6 h-6 text-purple-600" />
-                    </div>
-                    <div>
-                      <p className="text-gray-500 text-sm">Pages</p>
-                      <p className="text-3xl font-bold text-gray-900">{pages.length}</p>
-                    </div>
-                  </div>
-                </div>
+                ))}
               </div>
-
+              
               <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                <h2 className="font-bold text-gray-900 mb-4">Quick Actions</h2>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                  <button
-                    onClick={() => { setActiveTab('pages'); setSelectedPage('home'); }}
-                    className="p-4 rounded-lg border border-gray-200 hover:border-teal-500 hover:bg-teal-50 transition-all text-left"
-                  >
-                    <Home className="w-6 h-6 text-teal-600 mb-2" />
-                    <p className="font-medium text-gray-900">Edit Home</p>
-                    <p className="text-xs text-gray-500">Hero, Services, Why Us</p>
-                  </button>
-                  <button
-                    onClick={() => { setActiveTab('pages'); setSelectedPage('about'); }}
-                    className="p-4 rounded-lg border border-gray-200 hover:border-teal-500 hover:bg-teal-50 transition-all text-left"
-                  >
-                    <Info className="w-6 h-6 text-teal-600 mb-2" />
-                    <p className="font-medium text-gray-900">Edit About</p>
-                    <p className="text-xs text-gray-500">Story, CEO Message</p>
-                  </button>
-                  <button
-                    onClick={() => { setActiveTab('pages'); setSelectedPage('contact'); }}
-                    className="p-4 rounded-lg border border-gray-200 hover:border-teal-500 hover:bg-teal-50 transition-all text-left"
-                  >
-                    <Phone className="w-6 h-6 text-teal-600 mb-2" />
-                    <p className="font-medium text-gray-900">Edit Contact</p>
-                    <p className="text-xs text-gray-500">Form, Contact Info</p>
-                  </button>
-                  <button
-                    onClick={() => { setActiveTab('pages'); setSelectedPage('global'); }}
-                    className="p-4 rounded-lg border border-gray-200 hover:border-teal-500 hover:bg-teal-50 transition-all text-left"
-                  >
-                    <Settings className="w-6 h-6 text-teal-600 mb-2" />
-                    <p className="font-medium text-gray-900">Global Settings</p>
-                    <p className="text-xs text-gray-500">Phone, Email, Address</p>
-                  </button>
+                <h2 className="font-bold text-gray-900 mb-4">Quick Edit</h2>
+                <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
+                  {pages.map(page => (
+                    <button key={page.id} onClick={() => { setActiveTab('pages'); setSelectedPage(page.id); }} className="p-4 rounded-lg border border-gray-200 hover:border-teal-500 hover:bg-teal-50 transition-all text-left">
+                      <div className="text-teal-600 mb-2">{page.icon}</div>
+                      <p className="font-medium text-gray-900 text-sm">{page.name}</p>
+                    </button>
+                  ))}
                 </div>
               </div>
             </div>
           )}
 
-          {/* Edit Pages Tab */}
+          {/* Edit Pages */}
           {activeTab === 'pages' && (
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-              {/* Page Selector Sidebar */}
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
               <div className="lg:col-span-1">
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sticky top-24">
-                  <h3 className="font-semibold text-gray-900 mb-4">Select Page</h3>
-                  <div className="space-y-2">
+                <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sticky top-20">
+                  <h3 className="font-semibold text-gray-900 mb-3 text-sm">Pages</h3>
+                  <div className="space-y-1">
                     {pages.map(page => (
-                      <button
-                        key={page.id}
-                        onClick={() => setSelectedPage(page.id)}
-                        className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-left transition-all ${
-                          selectedPage === page.id
-                            ? 'bg-teal-600 text-white'
-                            : 'hover:bg-gray-100 text-gray-700'
-                        }`}
-                      >
-                        {page.icon}
-                        <span className="font-medium">{page.name}</span>
+                      <button key={page.id} onClick={() => setSelectedPage(page.id)} className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-left text-sm transition-all ${selectedPage === page.id ? 'bg-teal-600 text-white' : 'hover:bg-gray-100 text-gray-700'}`}>
+                        {page.icon}<span>{page.name}</span>
                       </button>
                     ))}
                   </div>
-                  
-                  <div className="mt-6 pt-4 border-t border-gray-200">
-                    <button
-                      onClick={saveContent}
-                      disabled={saveStatus === 'saving'}
-                      className="w-full bg-gradient-to-r from-teal-600 to-green-600 text-white py-3 rounded-lg font-semibold hover:shadow-lg transition-all disabled:opacity-50 flex items-center justify-center gap-2"
-                    >
-                      <Save className="w-4 h-4" />
-                      {saveStatus === 'saving' ? 'Saving...' : 'Save Changes'}
-                    </button>
-                  </div>
+                  <button onClick={saveContent} disabled={saveStatus === 'saving'} className="w-full mt-4 bg-gradient-to-r from-teal-600 to-green-600 text-white py-2.5 rounded-lg font-semibold text-sm hover:shadow-lg transition-all disabled:opacity-50 flex items-center justify-center gap-2">
+                    <Save className="w-4 h-4" />{saveStatus === 'saving' ? 'Saving...' : 'Save All'}
+                  </button>
                 </div>
               </div>
 
-              {/* Content Editor */}
-              <div className="lg:col-span-3">
-                {/* Home Page Editor */}
+              <div className="lg:col-span-4 space-y-4">
+                {/* HOME PAGE */}
                 {selectedPage === 'home' && (
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between mb-6">
-                      <h2 className="text-2xl font-bold text-gray-900">Edit Home Page</h2>
-                      <a href="/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-teal-600 hover:underline">
-                        <Eye className="w-4 h-4" /> Preview
-                      </a>
+                  <>
+                    <div className="flex items-center justify-between mb-2">
+                      <h2 className="text-xl font-bold text-gray-900">Home Page</h2>
+                      <a href="/" target="_blank" rel="noopener noreferrer" className="text-teal-600 hover:underline text-sm flex items-center gap-1"><Eye className="w-4 h-4" />Preview</a>
                     </div>
 
-                    {renderSection('Hero Section', (
-                      <>
-                        {renderTextField('Badge Text', siteContent.home?.hero?.badge, (v) => handleContentChange('home', 'hero', 'badge', v))}
-                        {renderTextField('Title Line 1', siteContent.home?.hero?.title1, (v) => handleContentChange('home', 'hero', 'title1', v))}
-                        {renderTextField('Title Line 2', siteContent.home?.hero?.title2, (v) => handleContentChange('home', 'hero', 'title2', v))}
-                        {renderTextField('Title Line 3 (Gradient)', siteContent.home?.hero?.title3, (v) => handleContentChange('home', 'hero', 'title3', v))}
-                        {renderTextField('Subtitle', siteContent.home?.hero?.subtitle, (v) => handleContentChange('home', 'hero', 'subtitle', v), true)}
-                        <div className="grid grid-cols-3 gap-4">
-                          {renderTextField('Years Stat', siteContent.home?.hero?.stats?.years, (v) => handleContentChange('home', 'hero', 'stats', {...siteContent.home?.hero?.stats, years: v}))}
-                          {renderTextField('Projects Stat', siteContent.home?.hero?.stats?.projects, (v) => handleContentChange('home', 'hero', 'stats', {...siteContent.home?.hero?.stats, projects: v}))}
-                          {renderTextField('Countries Stat', siteContent.home?.hero?.stats?.countries, (v) => handleContentChange('home', 'hero', 'stats', {...siteContent.home?.hero?.stats, countries: v}))}
+                    <Section title="Hero Section" icon={<Layout className="w-4 h-4 text-teal-600" />} sectionKey="home-hero" defaultOpen={true}>
+                      <div className="grid grid-cols-2 gap-4">
+                        <TextField label="Badge Text" value={siteContent.home?.hero?.badge} onChange={(v) => updateContent('home.hero.badge', v)} />
+                        <TextField label="Button Text" value={siteContent.home?.hero?.buttonText} onChange={(v) => updateContent('home.hero.buttonText', v)} />
+                      </div>
+                      <div className="grid grid-cols-3 gap-4">
+                        <TextField label="Title Line 1" value={siteContent.home?.hero?.title1} onChange={(v) => updateContent('home.hero.title1', v)} />
+                        <TextField label="Title Line 2" value={siteContent.home?.hero?.title2} onChange={(v) => updateContent('home.hero.title2', v)} />
+                        <TextField label="Title Line 3 (Gradient)" value={siteContent.home?.hero?.title3} onChange={(v) => updateContent('home.hero.title3', v)} />
+                      </div>
+                      <TextField label="Subtitle" value={siteContent.home?.hero?.subtitle} onChange={(v) => updateContent('home.hero.subtitle', v)} multiline />
+                      <ImageField label="Background Image (optional)" value={siteContent.home?.hero?.backgroundImage} onChange={(v) => updateContent('home.hero.backgroundImage', v)} />
+                    </Section>
+
+                    <Section title="Stats" icon={<Type className="w-4 h-4 text-teal-600" />} sectionKey="home-stats">
+                      <div className="grid grid-cols-3 gap-4">
+                        <div>
+                          <TextField label="Years Number" value={siteContent.home?.stats?.years} onChange={(v) => updateContent('home.stats.years', v)} />
+                          <TextField label="Years Label" value={siteContent.home?.stats?.yearsLabel} onChange={(v) => updateContent('home.stats.yearsLabel', v)} />
                         </div>
-                      </>
-                    ), 'home-hero')}
+                        <div>
+                          <TextField label="Projects Number" value={siteContent.home?.stats?.projects} onChange={(v) => updateContent('home.stats.projects', v)} />
+                          <TextField label="Projects Label" value={siteContent.home?.stats?.projectsLabel} onChange={(v) => updateContent('home.stats.projectsLabel', v)} />
+                        </div>
+                        <div>
+                          <TextField label="Countries Number" value={siteContent.home?.stats?.countries} onChange={(v) => updateContent('home.stats.countries', v)} />
+                          <TextField label="Countries Label" value={siteContent.home?.stats?.countriesLabel} onChange={(v) => updateContent('home.stats.countriesLabel', v)} />
+                        </div>
+                      </div>
+                    </Section>
 
-                    {renderSection('Services Section', (
-                      <>
-                        {renderTextField('Section Title', siteContent.home?.services?.title, (v) => handleContentChange('home', 'services', 'title', v))}
-                        {renderTextField('Section Subtitle', siteContent.home?.services?.subtitle, (v) => handleContentChange('home', 'services', 'subtitle', v), true)}
-                      </>
-                    ), 'home-services')}
-
-                    {renderSection('Why Teams Choose Us', (
-                      <>
-                        {renderTextField('Section Title', siteContent.home?.whyUs?.title, (v) => handleContentChange('home', 'whyUs', 'title', v))}
-                        {renderTextField('Section Subtitle', siteContent.home?.whyUs?.subtitle, (v) => handleContentChange('home', 'whyUs', 'subtitle', v), true)}
-                        <div className="mt-4 space-y-4">
-                          <p className="font-medium text-gray-700">Items:</p>
-                          {(siteContent.home?.whyUs?.items || []).map((item, index) => (
-                            <div key={index} className="p-4 bg-gray-50 rounded-lg">
-                              <div className="grid grid-cols-2 gap-4">
-                                {renderTextField(`Item ${index + 1} Number`, item.number, (v) => handleNestedChange('home', 'whyUs', index, 'number', v))}
-                                {renderTextField(`Item ${index + 1} Title`, item.title, (v) => handleNestedChange('home', 'whyUs', index, 'title', v))}
-                              </div>
-                              {renderTextField(`Item ${index + 1} Description`, item.desc, (v) => handleNestedChange('home', 'whyUs', index, 'desc', v), true)}
+                    <Section title="Services Section" icon={<Briefcase className="w-4 h-4 text-teal-600" />} sectionKey="home-services">
+                      <TextField label="Section Title" value={siteContent.home?.services?.title} onChange={(v) => updateContent('home.services.title', v)} />
+                      <TextField label="Section Subtitle" value={siteContent.home?.services?.subtitle} onChange={(v) => updateContent('home.services.subtitle', v)} multiline />
+                      <p className="text-sm font-medium text-gray-700 mt-4 mb-2">Featured Services:</p>
+                      <ArrayEditor
+                        items={siteContent.home?.services?.items}
+                        path="home.services.items"
+                        template={{ title: 'New Service', description: 'Description here', link: '/services/', color: 'teal' }}
+                        addLabel="Add Service"
+                        renderItem={(item, index) => (
+                          <div className="grid grid-cols-2 gap-3">
+                            <TextField label="Title" value={item.title} onChange={(v) => updateArrayItem('home.services.items', index, 'title', v)} />
+                            <TextField label="Link" value={item.link} onChange={(v) => updateArrayItem('home.services.items', index, 'link', v)} />
+                            <div className="col-span-2">
+                              <TextField label="Description" value={item.description} onChange={(v) => updateArrayItem('home.services.items', index, 'description', v)} />
                             </div>
-                          ))}
-                        </div>
-                      </>
-                    ), 'home-whyus')}
-                  </div>
+                          </div>
+                        )}
+                      />
+                    </Section>
+
+                    <Section title="Why Teams Choose Us" icon={<Users className="w-4 h-4 text-teal-600" />} sectionKey="home-whyus">
+                      <TextField label="Section Title" value={siteContent.home?.whyUs?.title} onChange={(v) => updateContent('home.whyUs.title', v)} />
+                      <TextField label="Section Subtitle" value={siteContent.home?.whyUs?.subtitle} onChange={(v) => updateContent('home.whyUs.subtitle', v)} multiline />
+                      <p className="text-sm font-medium text-gray-700 mt-4 mb-2">Items:</p>
+                      <ArrayEditor
+                        items={siteContent.home?.whyUs?.items}
+                        path="home.whyUs.items"
+                        template={{ number: '07', title: 'New Item', desc: 'Description' }}
+                        addLabel="Add Item"
+                        renderItem={(item, index) => (
+                          <div className="grid grid-cols-4 gap-3">
+                            <TextField label="Number" value={item.number} onChange={(v) => updateArrayItem('home.whyUs.items', index, 'number', v)} />
+                            <div className="col-span-3">
+                              <TextField label="Title" value={item.title} onChange={(v) => updateArrayItem('home.whyUs.items', index, 'title', v)} />
+                            </div>
+                            <div className="col-span-4">
+                              <TextField label="Description" value={item.desc} onChange={(v) => updateArrayItem('home.whyUs.items', index, 'desc', v)} multiline />
+                            </div>
+                          </div>
+                        )}
+                      />
+                    </Section>
+
+                    <Section title="Testimonials" icon={<MessageSquare className="w-4 h-4 text-teal-600" />} sectionKey="home-testimonials">
+                      <TextField label="Section Title" value={siteContent.home?.testimonials?.title} onChange={(v) => updateContent('home.testimonials.title', v)} />
+                      <ArrayEditor
+                        items={siteContent.home?.testimonials?.items}
+                        path="home.testimonials.items"
+                        template={{ quote: 'Customer quote here', author: 'Author Name', company: 'Company' }}
+                        addLabel="Add Testimonial"
+                        renderItem={(item, index) => (
+                          <>
+                            <TextField label="Quote" value={item.quote} onChange={(v) => updateArrayItem('home.testimonials.items', index, 'quote', v)} multiline />
+                            <div className="grid grid-cols-2 gap-3">
+                              <TextField label="Author" value={item.author} onChange={(v) => updateArrayItem('home.testimonials.items', index, 'author', v)} />
+                              <TextField label="Company" value={item.company} onChange={(v) => updateArrayItem('home.testimonials.items', index, 'company', v)} />
+                            </div>
+                          </>
+                        )}
+                      />
+                    </Section>
+
+                    <Section title="India Expansion CTA" icon={<Globe className="w-4 h-4 text-teal-600" />} sectionKey="home-india">
+                      <TextField label="Badge" value={siteContent.home?.indiaExpansionCTA?.badge} onChange={(v) => updateContent('home.indiaExpansionCTA.badge', v)} />
+                      <TextField label="Title" value={siteContent.home?.indiaExpansionCTA?.title} onChange={(v) => updateContent('home.indiaExpansionCTA.title', v)} />
+                      <TextField label="Subtitle" value={siteContent.home?.indiaExpansionCTA?.subtitle} onChange={(v) => updateContent('home.indiaExpansionCTA.subtitle', v)} multiline />
+                      <TextField label="Button Text" value={siteContent.home?.indiaExpansionCTA?.buttonText} onChange={(v) => updateContent('home.indiaExpansionCTA.buttonText', v)} />
+                    </Section>
+
+                    <Section title="Final CTA" icon={<Phone className="w-4 h-4 text-teal-600" />} sectionKey="home-cta">
+                      <TextField label="Title" value={siteContent.home?.finalCTA?.title} onChange={(v) => updateContent('home.finalCTA.title', v)} />
+                      <TextField label="Subtitle" value={siteContent.home?.finalCTA?.subtitle} onChange={(v) => updateContent('home.finalCTA.subtitle', v)} multiline />
+                      <div className="grid grid-cols-2 gap-4">
+                        <TextField label="Button Text" value={siteContent.home?.finalCTA?.buttonText} onChange={(v) => updateContent('home.finalCTA.buttonText', v)} />
+                        <TextField label="Phone Number" value={siteContent.home?.finalCTA?.phone} onChange={(v) => updateContent('home.finalCTA.phone', v)} />
+                      </div>
+                    </Section>
+                  </>
                 )}
 
-                {/* About Page Editor */}
+                {/* ABOUT PAGE */}
                 {selectedPage === 'about' && (
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between mb-6">
-                      <h2 className="text-2xl font-bold text-gray-900">Edit About Page</h2>
-                      <a href="/about" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-teal-600 hover:underline">
-                        <Eye className="w-4 h-4" /> Preview
-                      </a>
+                  <>
+                    <div className="flex items-center justify-between mb-2">
+                      <h2 className="text-xl font-bold text-gray-900">About Page</h2>
+                      <a href="/about" target="_blank" rel="noopener noreferrer" className="text-teal-600 hover:underline text-sm flex items-center gap-1"><Eye className="w-4 h-4" />Preview</a>
                     </div>
 
-                    {renderSection('Hero Section', (
-                      <>
-                        {renderTextField('Tagline', siteContent.about?.hero?.tagline, (v) => handleContentChange('about', 'hero', 'tagline', v))}
-                        {renderTextField('Title Line 1', siteContent.about?.hero?.title1, (v) => handleContentChange('about', 'hero', 'title1', v))}
-                        {renderTextField('Title Line 2', siteContent.about?.hero?.title2, (v) => handleContentChange('about', 'hero', 'title2', v))}
-                        {renderTextField('Subtitle', siteContent.about?.hero?.subtitle, (v) => handleContentChange('about', 'hero', 'subtitle', v), true)}
-                      </>
-                    ), 'about-hero')}
+                    <Section title="Hero Section" icon={<Layout className="w-4 h-4 text-teal-600" />} sectionKey="about-hero" defaultOpen={true}>
+                      <TextField label="Tagline" value={siteContent.about?.hero?.tagline} onChange={(v) => updateContent('about.hero.tagline', v)} />
+                      <div className="grid grid-cols-2 gap-4">
+                        <TextField label="Title Line 1" value={siteContent.about?.hero?.title1} onChange={(v) => updateContent('about.hero.title1', v)} />
+                        <TextField label="Title Line 2" value={siteContent.about?.hero?.title2} onChange={(v) => updateContent('about.hero.title2', v)} />
+                      </div>
+                      <TextField label="Subtitle" value={siteContent.about?.hero?.subtitle} onChange={(v) => updateContent('about.hero.subtitle', v)} multiline />
+                    </Section>
 
-                    {renderSection('CEO Message', (
-                      <>
-                        {renderTextField('Section Title', siteContent.about?.ceo?.title, (v) => handleContentChange('about', 'ceo', 'title', v))}
-                        {renderTextField('Main Quote', siteContent.about?.ceo?.quote, (v) => handleContentChange('about', 'ceo', 'quote', v), true)}
-                        {renderTextField('Message', siteContent.about?.ceo?.message, (v) => handleContentChange('about', 'ceo', 'message', v), true)}
-                        {renderTextField('CEO Name', siteContent.about?.ceo?.name, (v) => handleContentChange('about', 'ceo', 'name', v))}
-                        {renderTextField('CEO Role', siteContent.about?.ceo?.role, (v) => handleContentChange('about', 'ceo', 'role', v))}
-                      </>
-                    ), 'about-ceo')}
+                    <Section title="Our Story" icon={<FileText className="w-4 h-4 text-teal-600" />} sectionKey="about-story">
+                      <TextField label="Paragraph 1" value={siteContent.about?.story?.paragraph1} onChange={(v) => updateContent('about.story.paragraph1', v)} multiline />
+                      <TextField label="Paragraph 2" value={siteContent.about?.story?.paragraph2} onChange={(v) => updateContent('about.story.paragraph2', v)} multiline />
+                    </Section>
 
-                    {renderSection('Mission & Vision', (
-                      <>
-                        {renderTextField('Mission Statement', siteContent.about?.mission, (v) => setSiteContent(prev => ({...prev, about: {...prev.about, mission: v}})), true)}
-                        {renderTextField('Vision Statement', siteContent.about?.vision, (v) => setSiteContent(prev => ({...prev, about: {...prev.about, vision: v}})), true)}
-                      </>
-                    ), 'about-mission')}
-                  </div>
+                    <Section title="Challenges Section" icon={<Briefcase className="w-4 h-4 text-teal-600" />} sectionKey="about-challenges">
+                      <TextField label="Section Title" value={siteContent.about?.challenges?.title} onChange={(v) => updateContent('about.challenges.title', v)} />
+                      <ArrayEditor
+                        items={siteContent.about?.challenges?.items}
+                        path="about.challenges.items"
+                        template={{ title: 'New Challenge', description: 'Description' }}
+                        addLabel="Add Challenge"
+                        renderItem={(item, index) => (
+                          <>
+                            <TextField label="Title" value={item.title} onChange={(v) => updateArrayItem('about.challenges.items', index, 'title', v)} />
+                            <TextField label="Description" value={item.description} onChange={(v) => updateArrayItem('about.challenges.items', index, 'description', v)} multiline />
+                          </>
+                        )}
+                      />
+                    </Section>
+
+                    <Section title="Values" icon={<Users className="w-4 h-4 text-teal-600" />} sectionKey="about-values">
+                      <TextField label="Section Title" value={siteContent.about?.values?.title} onChange={(v) => updateContent('about.values.title', v)} />
+                      <TextField label="Section Subtitle" value={siteContent.about?.values?.subtitle} onChange={(v) => updateContent('about.values.subtitle', v)} multiline />
+                      <p className="text-sm text-gray-600 mb-2">Values (comma-separated):</p>
+                      <TextField label="Values List" value={siteContent.about?.values?.items?.join(', ')} onChange={(v) => updateContent('about.values.items', v.split(',').map(s => s.trim()))} />
+                    </Section>
+
+                    <Section title="CEO Message" icon={<MessageSquare className="w-4 h-4 text-teal-600" />} sectionKey="about-ceo">
+                      <TextField label="Section Title" value={siteContent.about?.ceo?.sectionTitle} onChange={(v) => updateContent('about.ceo.sectionTitle', v)} />
+                      <TextField label="Main Quote" value={siteContent.about?.ceo?.quote} onChange={(v) => updateContent('about.ceo.quote', v)} multiline />
+                      <TextField label="Message" value={siteContent.about?.ceo?.message} onChange={(v) => updateContent('about.ceo.message', v)} multiline />
+                      <TextField label="Closing Statement" value={siteContent.about?.ceo?.closing} onChange={(v) => updateContent('about.ceo.closing', v)} />
+                      <div className="grid grid-cols-2 gap-4">
+                        <TextField label="CEO Name" value={siteContent.about?.ceo?.name} onChange={(v) => updateContent('about.ceo.name', v)} />
+                        <TextField label="CEO Role" value={siteContent.about?.ceo?.role} onChange={(v) => updateContent('about.ceo.role', v)} />
+                      </div>
+                      <ImageField label="CEO Photo" value={siteContent.about?.ceo?.image} onChange={(v) => updateContent('about.ceo.image', v)} />
+                    </Section>
+
+                    <Section title="Mission & Vision" icon={<Eye className="w-4 h-4 text-teal-600" />} sectionKey="about-mission">
+                      <TextField label="Mission Title" value={siteContent.about?.mission?.title} onChange={(v) => updateContent('about.mission.title', v)} />
+                      <TextField label="Mission Text" value={siteContent.about?.mission?.text} onChange={(v) => updateContent('about.mission.text', v)} multiline />
+                      <TextField label="Vision Title" value={siteContent.about?.vision?.title} onChange={(v) => updateContent('about.vision.title', v)} />
+                      <TextField label="Vision Text" value={siteContent.about?.vision?.text} onChange={(v) => updateContent('about.vision.text', v)} multiline />
+                    </Section>
+
+                    <Section title="Impact Stats" icon={<Type className="w-4 h-4 text-teal-600" />} sectionKey="about-impact">
+                      <TextField label="Section Title" value={siteContent.about?.impactStats?.title} onChange={(v) => updateContent('about.impactStats.title', v)} />
+                      <TextField label="Section Subtitle" value={siteContent.about?.impactStats?.subtitle} onChange={(v) => updateContent('about.impactStats.subtitle', v)} />
+                      <ArrayEditor
+                        items={siteContent.about?.impactStats?.items}
+                        path="about.impactStats.items"
+                        template={{ number: '100+', label: 'Label' }}
+                        addLabel="Add Stat"
+                        renderItem={(item, index) => (
+                          <div className="grid grid-cols-2 gap-3">
+                            <TextField label="Number" value={item.number} onChange={(v) => updateArrayItem('about.impactStats.items', index, 'number', v)} />
+                            <TextField label="Label" value={item.label} onChange={(v) => updateArrayItem('about.impactStats.items', index, 'label', v)} />
+                          </div>
+                        )}
+                      />
+                    </Section>
+                  </>
                 )}
 
-                {/* Contact Page Editor */}
+                {/* CONTACT PAGE */}
                 {selectedPage === 'contact' && (
-                  <div className="space-y-4">
-                    <div className="flex items-center justify-between mb-6">
-                      <h2 className="text-2xl font-bold text-gray-900">Edit Contact Page</h2>
-                      <a href="/contact" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-teal-600 hover:underline">
-                        <Eye className="w-4 h-4" /> Preview
-                      </a>
+                  <>
+                    <div className="flex items-center justify-between mb-2">
+                      <h2 className="text-xl font-bold text-gray-900">Contact Page</h2>
+                      <a href="/contact" target="_blank" rel="noopener noreferrer" className="text-teal-600 hover:underline text-sm flex items-center gap-1"><Eye className="w-4 h-4" />Preview</a>
                     </div>
 
-                    {renderSection('Hero Section', (
-                      <>
-                        {renderTextField('Title Line 1', siteContent.contact?.hero?.title1, (v) => handleContentChange('contact', 'hero', 'title1', v))}
-                        {renderTextField('Title Line 2', siteContent.contact?.hero?.title2, (v) => handleContentChange('contact', 'hero', 'title2', v))}
-                        {renderTextField('Subtitle', siteContent.contact?.hero?.subtitle, (v) => handleContentChange('contact', 'hero', 'subtitle', v), true)}
-                        {renderTextField('Phone Number', siteContent.contact?.hero?.phone, (v) => handleContentChange('contact', 'hero', 'phone', v))}
-                        {renderTextField('Email Address', siteContent.contact?.hero?.email, (v) => handleContentChange('contact', 'hero', 'email', v))}
-                      </>
-                    ), 'contact-hero')}
+                    <Section title="Hero Section" icon={<Layout className="w-4 h-4 text-teal-600" />} sectionKey="contact-hero" defaultOpen={true}>
+                      <div className="grid grid-cols-2 gap-4">
+                        <TextField label="Title Line 1" value={siteContent.contact?.hero?.title1} onChange={(v) => updateContent('contact.hero.title1', v)} />
+                        <TextField label="Title Line 2" value={siteContent.contact?.hero?.title2} onChange={(v) => updateContent('contact.hero.title2', v)} />
+                      </div>
+                      <TextField label="Subtitle" value={siteContent.contact?.hero?.subtitle} onChange={(v) => updateContent('contact.hero.subtitle', v)} multiline />
+                    </Section>
 
-                    {renderSection('Form Section', (
-                      <>
-                        {renderTextField('Form Title', siteContent.contact?.form?.title, (v) => handleContentChange('contact', 'form', 'title', v))}
-                        {renderTextField('Form Subtitle', siteContent.contact?.form?.subtitle, (v) => handleContentChange('contact', 'form', 'subtitle', v), true)}
-                      </>
-                    ), 'contact-form')}
-                  </div>
+                    <Section title="Contact Information" icon={<Phone className="w-4 h-4 text-teal-600" />} sectionKey="contact-info">
+                      <div className="grid grid-cols-2 gap-4">
+                        <TextField label="Phone Number" value={siteContent.contact?.info?.phone} onChange={(v) => updateContent('contact.info.phone', v)} />
+                        <TextField label="Email Address" value={siteContent.contact?.info?.email} onChange={(v) => updateContent('contact.info.email', v)} />
+                      </div>
+                      <TextField label="Address" value={siteContent.contact?.info?.address} onChange={(v) => updateContent('contact.info.address', v)} multiline />
+                    </Section>
+
+                    <Section title="Stats Boxes" icon={<Type className="w-4 h-4 text-teal-600" />} sectionKey="contact-stats">
+                      <ArrayEditor
+                        items={siteContent.contact?.stats}
+                        path="contact.stats"
+                        template={{ value: '100+', label: 'Label' }}
+                        addLabel="Add Stat"
+                        renderItem={(item, index) => (
+                          <div className="grid grid-cols-2 gap-3">
+                            <TextField label="Value" value={item.value} onChange={(v) => updateArrayItem('contact.stats', index, 'value', v)} />
+                            <TextField label="Label" value={item.label} onChange={(v) => updateArrayItem('contact.stats', index, 'label', v)} />
+                          </div>
+                        )}
+                      />
+                    </Section>
+
+                    <Section title="Form Steps" icon={<FormInput className="w-4 h-4 text-teal-600" />} sectionKey="contact-steps">
+                      <TextField label="Steps Title" value={siteContent.contact?.steps?.title} onChange={(v) => updateContent('contact.steps.title', v)} />
+                      <p className="text-sm text-gray-600 mb-2">Steps (one per line):</p>
+                      <TextField label="Steps" value={siteContent.contact?.steps?.items?.join('\n')} onChange={(v) => updateContent('contact.steps.items', v.split('\n').filter(s => s.trim()))} multiline />
+                    </Section>
+                  </>
                 )}
 
-                {/* Global Settings Editor */}
-                {selectedPage === 'global' && (
-                  <div className="space-y-4">
-                    <h2 className="text-2xl font-bold text-gray-900 mb-6">Global Settings</h2>
+                {/* INDIA EXPANSION PAGE */}
+                {selectedPage === 'indiaExpansion' && (
+                  <>
+                    <div className="flex items-center justify-between mb-2">
+                      <h2 className="text-xl font-bold text-gray-900">India Expansion Page</h2>
+                      <a href="/services/india-expansion" target="_blank" rel="noopener noreferrer" className="text-teal-600 hover:underline text-sm flex items-center gap-1"><Eye className="w-4 h-4" />Preview</a>
+                    </div>
 
-                    {renderSection('Company Information', (
-                      <>
-                        {renderTextField('Company Name', siteContent.global?.company, (v) => handleContentChange('global', 'company', null, v))}
-                        {renderTextField('Phone Number', siteContent.global?.phone, (v) => handleContentChange('global', 'phone', null, v))}
-                        {renderTextField('Email Address', siteContent.global?.email, (v) => handleContentChange('global', 'email', null, v))}
-                        {renderTextField('Location', siteContent.global?.location, (v) => handleContentChange('global', 'location', null, v))}
-                      </>
-                    ), 'global-info')}
+                    <Section title="Hero Section" icon={<Layout className="w-4 h-4 text-teal-600" />} sectionKey="india-hero" defaultOpen={true}>
+                      <TextField label="Badge" value={siteContent.indiaExpansion?.hero?.badge} onChange={(v) => updateContent('indiaExpansion.hero.badge', v)} />
+                      <div className="grid grid-cols-2 gap-4">
+                        <TextField label="Title Line 1" value={siteContent.indiaExpansion?.hero?.title1} onChange={(v) => updateContent('indiaExpansion.hero.title1', v)} />
+                        <TextField label="Title Line 2" value={siteContent.indiaExpansion?.hero?.title2} onChange={(v) => updateContent('indiaExpansion.hero.title2', v)} />
+                      </div>
+                      <TextField label="Tagline" value={siteContent.indiaExpansion?.hero?.tagline} onChange={(v) => updateContent('indiaExpansion.hero.tagline', v)} />
+                      <TextField label="Subtitle" value={siteContent.indiaExpansion?.hero?.subtitle} onChange={(v) => updateContent('indiaExpansion.hero.subtitle', v)} multiline />
+                      <TextField label="Button Text" value={siteContent.indiaExpansion?.hero?.buttonText} onChange={(v) => updateContent('indiaExpansion.hero.buttonText', v)} />
+                      <TextField label="Phone Number" value={siteContent.indiaExpansion?.hero?.phone} onChange={(v) => updateContent('indiaExpansion.hero.phone', v)} />
+                    </Section>
+
+                    <Section title="Services (EOR/ODC/COE)" icon={<Briefcase className="w-4 h-4 text-teal-600" />} sectionKey="india-services">
+                      <ArrayEditor
+                        items={siteContent.indiaExpansion?.services}
+                        path="indiaExpansion.services"
+                        template={{ id: 'new', title: 'New Service', tagline: 'Tagline', description: 'Description', benefits: [] }}
+                        addLabel="Add Service"
+                        renderItem={(item, index) => (
+                          <>
+                            <div className="grid grid-cols-2 gap-3">
+                              <TextField label="Title" value={item.title} onChange={(v) => updateArrayItem('indiaExpansion.services', index, 'title', v)} />
+                              <TextField label="Tagline" value={item.tagline} onChange={(v) => updateArrayItem('indiaExpansion.services', index, 'tagline', v)} />
+                            </div>
+                            <TextField label="Description" value={item.description} onChange={(v) => updateArrayItem('indiaExpansion.services', index, 'description', v)} multiline />
+                            <TextField label="Benefits (comma-separated)" value={item.benefits?.join(', ')} onChange={(v) => updateArrayItem('indiaExpansion.services', index, 'benefits', v.split(',').map(s => s.trim()))} multiline />
+                          </>
+                        )}
+                      />
+                    </Section>
+
+                    <Section title="Pricing Section" icon={<Type className="w-4 h-4 text-teal-600" />} sectionKey="india-pricing">
+                      <TextField label="Section Title" value={siteContent.indiaExpansion?.pricing?.title} onChange={(v) => updateContent('indiaExpansion.pricing.title', v)} />
+                      <TextField label="Section Subtitle" value={siteContent.indiaExpansion?.pricing?.subtitle} onChange={(v) => updateContent('indiaExpansion.pricing.subtitle', v)} />
+                      <TextField label="Note for ODC/COE" value={siteContent.indiaExpansion?.pricing?.note} onChange={(v) => updateContent('indiaExpansion.pricing.note', v)} multiline />
+                    </Section>
+                  </>
+                )}
+
+                {/* GLOBAL SETTINGS */}
+                {selectedPage === 'global' && (
+                  <>
+                    <h2 className="text-xl font-bold text-gray-900 mb-4">Global Settings</h2>
+
+                    <Section title="Company Information" icon={<Settings className="w-4 h-4 text-teal-600" />} sectionKey="global-company" defaultOpen={true}>
+                      <TextField label="Company Name" value={siteContent.global?.companyName} onChange={(v) => updateContent('global.companyName', v)} />
+                      <div className="grid grid-cols-2 gap-4">
+                        <TextField label="Phone Number" value={siteContent.global?.phone} onChange={(v) => updateContent('global.phone', v)} />
+                        <TextField label="Email Address" value={siteContent.global?.email} onChange={(v) => updateContent('global.email', v)} />
+                      </div>
+                      <div className="grid grid-cols-2 gap-4">
+                        <TextField label="Location" value={siteContent.global?.location} onChange={(v) => updateContent('global.location', v)} />
+                        <TextField label="Founded Year" value={siteContent.global?.foundedYear} onChange={(v) => updateContent('global.foundedYear', v)} />
+                      </div>
+                    </Section>
+
+                    <Section title="Social Links" icon={<Globe className="w-4 h-4 text-teal-600" />} sectionKey="global-social">
+                      <TextField label="LinkedIn URL" value={siteContent.global?.socialLinks?.linkedin} onChange={(v) => updateContent('global.socialLinks.linkedin', v)} />
+                      <TextField label="Twitter URL" value={siteContent.global?.socialLinks?.twitter} onChange={(v) => updateContent('global.socialLinks.twitter', v)} />
+                      <TextField label="Facebook URL" value={siteContent.global?.socialLinks?.facebook} onChange={(v) => updateContent('global.socialLinks.facebook', v)} />
+                    </Section>
+
+                    <Section title="Footer" icon={<Layout className="w-4 h-4 text-teal-600" />} sectionKey="global-footer">
+                      <TextField label="Tagline" value={siteContent.global?.footer?.tagline} onChange={(v) => updateContent('global.footer.tagline', v)} />
+                      <TextField label="Description" value={siteContent.global?.footer?.description} onChange={(v) => updateContent('global.footer.description', v)} multiline />
+                      <TextField label="Copyright Text" value={siteContent.global?.footer?.copyright} onChange={(v) => updateContent('global.footer.copyright', v)} />
+                    </Section>
+                  </>
+                )}
+              </div>
+            </div>
+          )}
+
+          {/* Images Tab */}
+          {activeTab === 'images' && (
+            <div className="space-y-6">
+              <div className="flex items-center justify-between">
+                <h2 className="text-xl font-bold text-gray-900">Image Library</h2>
+                <div>
+                  <input type="file" ref={fileInputRef} onChange={handleImageUpload} accept="image/*" className="hidden" />
+                  <button onClick={() => fileInputRef.current?.click()} disabled={uploading} className="flex items-center gap-2 bg-teal-600 text-white px-4 py-2 rounded-lg hover:bg-teal-700 disabled:opacity-50">
+                    <Upload className="w-4 h-4" />{uploading ? 'Uploading...' : 'Upload Image'}
+                  </button>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                {images.map(img => (
+                  <div key={img.id} className="relative group bg-white rounded-lg border border-gray-200 overflow-hidden">
+                    <img src={img.url?.startsWith('/') ? `${API_URL}${img.url}` : img.url} alt={img.original_name} className="w-full h-32 object-cover" />
+                    <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-2">
+                      <button onClick={() => { navigator.clipboard.writeText(img.url); }} className="p-2 bg-white rounded-full hover:bg-gray-100" title="Copy URL">
+                        <FileText className="w-4 h-4" />
+                      </button>
+                      <button onClick={() => deleteImage(img.id)} className="p-2 bg-red-500 text-white rounded-full hover:bg-red-600" title="Delete">
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
+                    <div className="p-2">
+                      <p className="text-xs text-gray-600 truncate">{img.original_name}</p>
+                    </div>
+                  </div>
+                ))}
+                {images.length === 0 && (
+                  <div className="col-span-full text-center py-12 text-gray-500">
+                    No images uploaded yet. Click "Upload Image" to add images.
                   </div>
                 )}
               </div>
             </div>
           )}
 
-          {/* Contact Forms Tab */}
+          {/* Form Settings Tab */}
+          {activeTab === 'forms' && (
+            <div className="space-y-6">
+              <h2 className="text-xl font-bold text-gray-900">Contact Form Settings</h2>
+              
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <h3 className="font-semibold text-gray-900 mb-4">Form Labels & Placeholders</h3>
+                <div className="grid grid-cols-2 gap-4">
+                  <TextField label="Name Field Label" value={siteContent.contact?.form?.nameLabel} onChange={(v) => updateContent('contact.form.nameLabel', v)} />
+                  <TextField label="Name Placeholder" value={siteContent.contact?.form?.namePlaceholder} onChange={(v) => updateContent('contact.form.namePlaceholder', v)} />
+                  <TextField label="Email Field Label" value={siteContent.contact?.form?.emailLabel} onChange={(v) => updateContent('contact.form.emailLabel', v)} />
+                  <TextField label="Email Placeholder" value={siteContent.contact?.form?.emailPlaceholder} onChange={(v) => updateContent('contact.form.emailPlaceholder', v)} />
+                  <TextField label="Service Field Label" value={siteContent.contact?.form?.serviceLabel} onChange={(v) => updateContent('contact.form.serviceLabel', v)} />
+                  <TextField label="Subject Field Label" value={siteContent.contact?.form?.subjectLabel} onChange={(v) => updateContent('contact.form.subjectLabel', v)} />
+                  <TextField label="Message Field Label" value={siteContent.contact?.form?.messageLabel} onChange={(v) => updateContent('contact.form.messageLabel', v)} />
+                  <TextField label="Submit Button Text" value={siteContent.contact?.form?.submitText} onChange={(v) => updateContent('contact.form.submitText', v)} />
+                </div>
+                <TextField label="Success Message" value={siteContent.contact?.form?.successMessage} onChange={(v) => updateContent('contact.form.successMessage', v)} multiline />
+              </div>
+
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <h3 className="font-semibold text-gray-900 mb-4">Service Options (Dropdown)</h3>
+                <p className="text-sm text-gray-600 mb-2">One service per line:</p>
+                <TextField label="Services List" value={siteContent.contact?.form?.services?.join('\n')} onChange={(v) => updateContent('contact.form.services', v.split('\n').filter(s => s.trim()))} multiline />
+              </div>
+
+              <button onClick={saveContent} className="bg-gradient-to-r from-teal-600 to-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg flex items-center gap-2">
+                <Save className="w-4 h-4" /> Save Form Settings
+              </button>
+            </div>
+          )}
+
+          {/* Submissions Tab */}
           {activeTab === 'submissions' && (
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-              <div className="p-4 border-b border-gray-200">
+              <div className="p-4 border-b border-gray-200 flex items-center justify-between">
                 <h2 className="font-bold text-gray-900">Contact Form Submissions ({submissions.length})</h2>
               </div>
               <div className="overflow-x-auto">
@@ -666,23 +1152,21 @@ function Admin() {
                   <tbody className="divide-y divide-gray-200">
                     {submissions.map((sub, idx) => (
                       <tr key={idx} className="hover:bg-gray-50">
-                        <td className="px-4 py-3 text-sm text-gray-900 font-medium">{sub.name}</td>
+                        <td className="px-4 py-3 text-sm font-medium text-gray-900">{sub.name}</td>
                         <td className="px-4 py-3 text-sm text-gray-600">{sub.email}</td>
                         <td className="px-4 py-3 text-sm text-gray-600">{sub.service || '-'}</td>
                         <td className="px-4 py-3 text-sm text-gray-600 max-w-xs truncate">{sub.message || '-'}</td>
                         <td className="px-4 py-3 text-sm text-gray-500">{new Date(sub.timestamp).toLocaleDateString()}</td>
                       </tr>
                     ))}
-                    {submissions.length === 0 && (
-                      <tr><td colSpan="5" className="px-4 py-8 text-center text-gray-500">No submissions yet</td></tr>
-                    )}
+                    {submissions.length === 0 && <tr><td colSpan="5" className="px-4 py-8 text-center text-gray-500">No submissions yet</td></tr>}
                   </tbody>
                 </table>
               </div>
             </div>
           )}
 
-          {/* Newsletter Tab */}
+          {/* Subscribers Tab */}
           {activeTab === 'subscribers' && (
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
               <div className="p-4 border-b border-gray-200">
@@ -703,9 +1187,7 @@ function Admin() {
                         <td className="px-4 py-3 text-sm text-gray-500">{new Date(sub.timestamp).toLocaleDateString()}</td>
                       </tr>
                     ))}
-                    {subscribers.length === 0 && (
-                      <tr><td colSpan="2" className="px-4 py-8 text-center text-gray-500">No subscribers yet</td></tr>
-                    )}
+                    {subscribers.length === 0 && <tr><td colSpan="2" className="px-4 py-8 text-center text-gray-500">No subscribers yet</td></tr>}
                   </tbody>
                 </table>
               </div>
