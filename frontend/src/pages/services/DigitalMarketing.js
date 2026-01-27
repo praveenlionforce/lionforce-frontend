@@ -39,16 +39,15 @@ function DigitalMarketing() {
 
   return (
     <>
-      <Helmet>
-        <title>{seo.title || 'Digital Marketing Services | SEO, Social Media, PPC | Lionforce'}</title>
-        <meta name="description" content={seo.description || 'Data-driven marketing strategies that increase visibility, engagement, and conversions. SEO, social media, PPC, email marketing.'} />
-        <meta name="keywords" content={seo.keywords || 'digital marketing, SEO, PPC, social media marketing, content marketing, email marketing'} />
-        {seo.ogImage && <meta property="og:image" content={seo.ogImage} />}
-        <meta property="og:title" content={seo.title || 'Digital Marketing - Lionforce'} />
-        <meta property="og:description" content={seo.description || 'Data-driven marketing strategies'} />
-        <meta property="og:type" content="website" />
-        {seo.canonicalUrl && <link rel="canonical" href={seo.canonicalUrl} />}
-      </Helmet>
+      <SEO 
+        title={seo.title || 'Digital Marketing Services | SEO, Social Media, PPC | Lionforce'}
+        description={seo.description || 'Data-driven marketing strategies that increase visibility, engagement, and conversions. SEO, social media, PPC, email marketing.'}
+        keywords={seo.keywords || 'digital marketing, SEO, PPC, social media marketing, content marketing, email marketing'}
+        ogImage={seo.ogImage}
+        ogTitle={seo.title || 'Digital Marketing - Lionforce'}
+        ogDescription={seo.description || 'Data-driven marketing strategies'}
+        canonicalUrl={seo.canonicalUrl}
+      />
 
       <div className="overflow-hidden bg-white">
         {/* Hero Section */}
