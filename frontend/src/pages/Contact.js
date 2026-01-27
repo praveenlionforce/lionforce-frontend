@@ -40,6 +40,17 @@ function Contact() {
     'India Expansion (EOR/ODC/COE)'
   ];
 
+  // Service links for the "Explore Our Services" section
+  const serviceLinks = content?.serviceLinks || [
+    { name: 'eLearning', link: '/services/elearning' },
+    { name: 'Software & AI', link: '/services/software-development' },
+    { name: 'UX/UI Design', link: '/services/ux-ui-design' },
+    { name: 'Creative Services', link: '/services/creative' },
+    { name: 'Digital Marketing', link: '/services/digital-marketing' },
+    { name: 'Consulting', link: '/services/consulting' },
+    { name: 'Expand to India', link: '/services/india-expansion' }
+  ];
+
   const stepsItems = steps.items || [
     'We review your requirements',
     'Schedule a discovery call',
