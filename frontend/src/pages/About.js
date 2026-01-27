@@ -57,7 +57,7 @@ function About() {
               accelerate progress, and ignite operational excellence!
             </p>
             <p className="text-lg text-gray-700 leading-relaxed">
-              With over a decade of experience and 100+ successful projects across 32+ countries, 
+              With over 13 years of experience and 100+ successful projects across 32+ countries, 
               we've established ourselves as a trusted partner for businesses seeking transformation 
               through technology and learning.
             </p>
