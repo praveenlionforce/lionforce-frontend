@@ -169,9 +169,9 @@ function CreativeServices() {
                     transition={{ delay: index * 0.1 }}
                     className="group relative"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-orange-500/20 to-amber-500/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <div className="relative p-8 bg-white rounded-2xl border border-gray-200 hover:border-orange-300 transition-all hover:shadow-xl h-full">
-                      <div className="w-14 h-14 bg-gradient-to-br from-orange-500 to-amber-500 rounded-xl flex items-center justify-center text-white mb-6">
+                    <div className="absolute inset-0 bg-gradient-to-br from-rose-400/20 to-pink-500/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div className="relative p-8 bg-white rounded-2xl border border-gray-200 hover:border-rose-300 transition-all hover:shadow-xl h-full">
+                      <div className="w-14 h-14 bg-gradient-to-br from-rose-400 to-pink-500 rounded-xl flex items-center justify-center text-white mb-6">
                         <Icon className="w-7 h-7" />
                       </div>
                       <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
