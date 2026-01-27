@@ -42,7 +42,7 @@ function FloatingCTA() {
                     <span className="text-sm text-gray-700">Contact Us</span>
                   </a>
                   <a
-                    href="tel:+919884052675"
+                    href="tel:+919600536354"
                     className="flex items-center gap-3 p-3 rounded-lg hover:bg-teal-50 transition-colors"
                     data-testid="floating-phone-link"
                   >

@@ -54,7 +54,7 @@ function ServiceTemplate({
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Link>
                 <a
-                  href="tel:+919884052675"
+                  href="tel:+919600536354"
                   className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-gray-900 transition-all duration-300 inline-flex items-center justify-center"
                 >
                   Call +91 98840 52675
@@ -183,7 +183,7 @@ function ServiceTemplate({
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
               <a
-                href="tel:+919884052675"
+                href="tel:+919600536354"
                 className="inline-flex items-center bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-teal-600 transition-all duration-300"
               >
                 Call Now

@@ -90,8 +90,8 @@ function Footer() {
             <ul className="space-y-3">
               <li className="flex items-start space-x-2">
                 <Phone className="w-5 h-5 text-teal-400 flex-shrink-0" />
-                <a href="tel:+919884052675" className="text-gray-400 hover:text-teal-400 text-sm transition-colors" data-testid="footer-phone">
-                  +91 (0) 98840 52675
+                <a href="tel:+919600536354" className="text-gray-400 hover:text-teal-400 text-sm transition-colors" data-testid="footer-phone">
+                  +91 96005 36354
                 </a>
               </li>
               <li className="flex items-start space-x-2">

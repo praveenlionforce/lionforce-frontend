@@ -73,8 +73,8 @@ function Contact() {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-1">Phone</h3>
-                    <a href="tel:+919884052675" className="text-gray-600 hover:text-teal-600 transition-colors">
-                      +91 (0) 98840 52675
+                    <a href="tel:+919600536354" className="text-gray-600 hover:text-teal-600 transition-colors">
+                      +91 96005 36354
                     </a>
                   </div>
                 </div>
@@ -264,12 +264,12 @@ function Contact() {
             Call us today and speak with one of our experts
           </p>
           <a
-            href="tel:+919884052675"
+            href="tel:+919600536354"
             className="inline-flex items-center bg-gray-50 text-gray-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-800 transition-all duration-300 hover:scale-105"
             data-testid="contact-cta-call"
           >
             <Phone className="mr-2 w-5 h-5" />
-            +91 (0) 98840 52675
+            +91 96005 36354
           </a>
         </div>
       </section>
