@@ -57,7 +57,7 @@ function Home() {
     {
       icon: <Globe className="w-8 h-8" />,
       title: 'India Expansion',
-      description: 'EOR, ODC, COE—your India team.',
+      description: 'EOR, ODC, COE-your India team.',
       link: '/services/india-expansion',
       color: 'from-emerald-500 to-green-600'
     }
@@ -128,7 +128,7 @@ function Home() {
                 
                 <p className="text-xl text-gray-600 leading-relaxed mb-10 max-w-lg">
                   Custom eLearning that sticks. Software that scales. 
-                  From concept to launch—we build what others can&apos;t.
+                  From concept to launch-we build what others can&apos;t.
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4 mb-12">
@@ -253,7 +253,7 @@ function Home() {
                 What We <span className="gradient-text">Build</span>
               </h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                From learning experiences to software solutions—we craft digital products that make a difference.
+                From learning experiences to software solutions-we craft digital products that make a difference.
               </p>
             </motion.div>
 
@@ -321,7 +321,7 @@ function Home() {
                       <Globe className="w-10 h-10 mb-4" />
                       <h3 className="text-2xl font-bold mb-3">India Expansion</h3>
                       <p className="text-white/80 text-sm mb-4">
-                        EOR, ODC, COE services—build your India team in weeks.
+                        EOR, ODC, COE services-build your India team in weeks.
                       </p>
                       <div className="inline-flex items-center gap-2 text-white text-sm font-semibold group-hover:gap-3 transition-all">
                         Learn More <ArrowRight className="w-4 h-4" />
@@ -366,7 +366,7 @@ function Home() {
             >
               <h2 className="text-4xl md:text-5xl font-bold mb-6">Why Teams Choose Us</h2>
               <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                We don&apos;t just deliver projects—we build partnerships that last.
+                We don&apos;t just deliver projects-we build partnerships that last.
               </p>
             </motion.div>
 

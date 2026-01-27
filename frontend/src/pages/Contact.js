@@ -153,7 +153,7 @@ function Contact() {
                   </h2>
                   <p className="text-lg text-gray-600 mb-8">
                     Fill out the form and our team will get back to you within 24 hours. 
-                    Or reach out directly—we&apos;re always happy to chat.
+                    Or reach out directly-we&apos;re always happy to chat.
                   </p>
 
                   {/* What to expect */}

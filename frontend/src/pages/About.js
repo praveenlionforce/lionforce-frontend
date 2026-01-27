@@ -35,7 +35,7 @@ function About() {
                 </h1>
                 <p className="text-xl text-gray-600 leading-relaxed mb-8">
                   Since 2012, we&apos;ve been transforming how businesses learn, build, and grow. 
-                  Not just another tech company—we&apos;re your partners in making the impossible possible.
+                  Not just another tech company-we&apos;re your partners in making the impossible possible.
                 </p>
                 <div className="flex items-center gap-8">
                   <div>
@@ -70,7 +70,7 @@ function About() {
                       custom eLearning and software development.
                     </p>
                     <p className="text-gray-600 leading-relaxed">
-                      We unite developers, designers, and visionaries to deliver exceptional experiences—whether 
+                      We unite developers, designers, and visionaries to deliver exceptional experiences-whether 
                       for learners or software users. Every interaction is beautifully crafted and engaging.
                     </p>
                   </div>
@@ -131,7 +131,7 @@ function About() {
                   <h3 className="text-3xl font-bold mb-4 text-gray-900">Ignite Digital Transformation</h3>
                   <p className="text-gray-600 text-lg leading-relaxed">
                     Unlock new possibilities and elevate your business by embracing cutting-edge technology. 
-                    We craft innovative solutions tailored to your unique needs—no cookie-cutter approaches here.
+                    We craft innovative solutions tailored to your unique needs-no cookie-cutter approaches here.
                   </p>
                 </div>
                 <div className="lg:w-1/2">
@@ -152,7 +152,7 @@ function About() {
                   <h3 className="text-3xl font-bold mb-4 text-gray-900">End-to-End Solutions</h3>
                   <p className="text-gray-600 text-lg leading-relaxed">
                     Experience full-cycle innovation with comprehensive eLearning and software engineering. 
-                    From first prototype to final deployment, scaling, and ongoing support—we&apos;ve got you covered.
+                    From first prototype to final deployment, scaling, and ongoing support-we&apos;ve got you covered.
                   </p>
                 </div>
                 <div className="lg:w-1/2">
@@ -176,7 +176,7 @@ function About() {
             >
               <h2 className="text-4xl md:text-5xl font-bold mb-6">What We Believe In</h2>
               <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                Our values aren&apos;t just words on a wall—they guide every decision we make.
+                Our values aren&apos;t just words on a wall-they guide every decision we make.
               </p>
             </motion.div>
 
@@ -229,7 +229,7 @@ function About() {
                   <p className="text-lg text-gray-600 leading-relaxed mb-8">
                     Our deliberate growth strategy allows us to handpick the right talent, fostering a 
                     vibrant culture and maintaining low attrition rates. Talented developers, skilled QAs, 
-                    and innovative designers—all supported by proven processes—are the cornerstones of 
+                    and innovative designers-all supported by proven processes-are the cornerstones of 
                     the outstanding results we deliver.
                   </p>
                   <p className="text-xl font-semibold text-teal-600 mb-6">
@@ -269,7 +269,7 @@ function About() {
                     <Award className="w-10 h-10 text-green-600 mb-4" />
                     <h3 className="text-xl font-bold mb-2 text-gray-900">Our Vision</h3>
                     <p className="text-gray-600">
-                      Be the global leader in AI-powered eLearning and software—and the trusted partner 
+                      Be the global leader in AI-powered eLearning and software-and the trusted partner 
                       for businesses expanding to India.
                     </p>
                   </motion.div>

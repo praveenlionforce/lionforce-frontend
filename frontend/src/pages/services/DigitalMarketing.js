@@ -7,7 +7,7 @@ function DigitalMarketing() {
     <ServiceTemplate
       title="Digital Marketing Services"
       tagline="Get Seen • Buzz Loud • Grow On • Click Spark"
-      description="Marketing that speaks, sells, and scales. Let's make your brand impossible to ignore. We create magnetic campaigns powered by smart content, bold design, and data-backed targeting. Whether you're building awareness, generating leads, or launching something new—we help you grow with clarity and confidence."
+      description="Marketing that speaks, sells, and scales. Let's make your brand impossible to ignore. We create magnetic campaigns powered by smart content, bold design, and data-backed targeting. Whether you're building awareness, generating leads, or launching something new-we help you grow with clarity and confidence."
       heroGradient="from-rose-500 via-pink-500 to-fuchsia-600"
       features={[
         { icon: <TrendingUp className="w-8 h-8" />, title: 'Growth Marketing', description: 'Data-driven strategies that accelerate business growth.' },
