@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import { 
   ArrowRight, CheckCircle, Globe, Users, Shield, Building, Award, Target,
   FileText, Clock, DollarSign, TrendingUp, Zap, X, Briefcase, Code, Lightbulb

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { Helmet } from 'react-helmet';
+import { Helmet } from 'react-helmet-async';
 import {
   Lock, LogOut, FileText, Plus, Trash2, Edit, Save, X,
   Settings, LayoutDashboard, MessageSquare, Newspaper,
