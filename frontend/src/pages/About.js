@@ -272,18 +272,13 @@ function About() {
               className="text-center mb-16"
             >
               <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-                Based Globally, Serving the World
+                {impactStats.title || 'Based Globally, Serving the World'}
               </h2>
-              <p className="text-white/80 text-lg">Our impact in numbers</p>
+              <p className="text-white/80 text-lg">{impactStats.subtitle || 'Our impact in numbers'}</p>
             </motion.div>
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-              {[
-                { number: '13+', label: 'Years of Excellence' },
-                { number: '300+', label: 'Projects Delivered' },
-                { number: '32+', label: 'Countries Served' },
-                { number: '500K+', label: 'People Impacted' }
-              ].map((stat, index) => (
+              {impactItems.map((stat, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
