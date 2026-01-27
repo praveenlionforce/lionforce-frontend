@@ -520,6 +520,27 @@ const defaultContent = {
       ]
     }
   },
+  industries: {
+    seo: {
+      title: 'Industries We Serve | Lionforce - Pharma, EdTech, Banking & More',
+      description: 'Lionforce serves diverse industries including Pharmaceuticals, Healthcare, Education, Banking, Retail, and Manufacturing with custom eLearning and software solutions.',
+      keywords: 'pharmaceuticals training, healthcare eLearning, education technology, banking compliance, retail training, manufacturing safety',
+      ogImage: '',
+      canonicalUrl: ''
+    },
+    hero: {
+      title: 'Industries We Serve',
+      subtitle: 'Transforming businesses across sectors with tailored learning and technology solutions.'
+    },
+    industries: [
+      { name: 'Pharmaceuticals & Healthcare', description: 'Compliance training, medical education, patient engagement solutions, and healthcare workforce development.', stats: '100+ healthcare projects' },
+      { name: 'Education & EdTech', description: 'K-12 solutions, higher education platforms, corporate training, and skill development programs.', stats: '500K+ learners impacted' },
+      { name: 'Banking & Finance', description: 'Regulatory compliance, customer onboarding, employee training, and financial literacy programs.', stats: 'Regulatory compliant' },
+      { name: 'Retail & FMCG', description: 'Sales training, product knowledge, customer service excellence, and brand engagement.', stats: 'Global retail reach' },
+      { name: 'Manufacturing & Industrial', description: 'Safety training, operational excellence, IoT integration, and workforce upskilling.', stats: 'IoT-enabled solutions' },
+      { name: 'Travel & Hospitality', description: 'Customer experience, booking systems, staff training, and digital transformation.', stats: 'Global hospitality' }
+    ]
+  },
   global: {
     companyName: 'Lionforce Technologies Pvt Ltd',
     phone: '+91 96005 36354',
