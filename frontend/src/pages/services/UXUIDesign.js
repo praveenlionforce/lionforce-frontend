@@ -33,10 +33,10 @@ function UXUIDesign() {
 
       <div className="overflow-hidden bg-white">
         {/* Hero Section */}
-        <section className={`relative min-h-screen pt-20 bg-gradient-to-br ${hero.gradient || 'from-slate-700 via-slate-600 to-cyan-700'}`}>
+        <section className={`relative min-h-screen pt-20 bg-gradient-to-br ${hero.gradient || 'from-[#6ab445] via-[#5a9e3d] to-[#4a8a35]'}`}>
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-20 right-10 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
-            <div className="absolute bottom-20 left-10 w-80 h-80 bg-cyan-300/20 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 left-10 w-80 h-80 bg-green-300/20 rounded-full blur-3xl"></div>
           </div>
 
           <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-24">
@@ -74,7 +74,7 @@ function UXUIDesign() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link
                     to="/contact"
-                    className="group inline-flex items-center justify-center gap-2 bg-white text-slate-700 px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                    className="group inline-flex items-center justify-center gap-2 bg-white text-[#5a9e3d] px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105"
                     data-testid="uxui-cta-primary"
                   >
                     {hero.primaryCTA || 'Start Your Design Project'}
@@ -126,7 +126,7 @@ function UXUIDesign() {
                   className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-gradient-to-br from-slate-600 to-cyan-600 rounded-full flex items-center justify-center text-white">
+                    <div className="w-12 h-12 bg-gradient-to-br from-[#6ab445] to-[#5a9e3d] rounded-full flex items-center justify-center text-white">
                       <Sparkles className="w-6 h-6" />
                     </div>
                     <div>
@@ -150,7 +150,7 @@ function UXUIDesign() {
               className="text-center mb-16"
             >
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                Design <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-600 to-cyan-600">Services</span>
+                Design <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6ab445] to-[#5a9e3d]">Services</span>
               </h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
                 From research to implementation - we create designs that convert and delight.
@@ -169,9 +169,9 @@ function UXUIDesign() {
                     transition={{ delay: index * 0.1 }}
                     className="group relative"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-slate-500/20 to-cyan-500/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <div className="relative p-8 bg-white rounded-2xl border border-gray-200 hover:border-slate-400 transition-all hover:shadow-xl h-full">
-                      <div className="w-14 h-14 bg-gradient-to-br from-slate-600 to-cyan-600 rounded-xl flex items-center justify-center text-white mb-6">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#6ab445]/20 to-green-500/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div className="relative p-8 bg-white rounded-2xl border border-gray-200 hover:border-[#6ab445]/50 transition-all hover:shadow-xl h-full">
+                      <div className="w-14 h-14 bg-gradient-to-br from-[#6ab445] to-[#5a9e3d] rounded-xl flex items-center justify-center text-white mb-6">
                         <Icon className="w-7 h-7" />
                       </div>
                       <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
@@ -185,7 +185,7 @@ function UXUIDesign() {
         </section>
 
         {/* Process Section */}
-        <section className="py-24 bg-gradient-to-br from-gray-50 to-slate-100">
+        <section className="py-24 bg-gradient-to-br from-gray-50 to-green-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <motion.div
               initial={{ opacity: 0 }}
@@ -194,7 +194,7 @@ function UXUIDesign() {
               className="text-center mb-16"
             >
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                Our Design <span className="text-transparent bg-clip-text bg-gradient-to-r from-slate-600 to-cyan-600">Process</span>
+                Our Design <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#6ab445] to-[#5a9e3d]">Process</span>
               </h2>
             </motion.div>
 
@@ -213,7 +213,7 @@ function UXUIDesign() {
                   transition={{ delay: index * 0.1 }}
                   className="text-center"
                 >
-                  <div className="w-16 h-16 bg-gradient-to-br from-slate-600 to-cyan-600 rounded-full flex items-center justify-center text-white text-xl font-bold mx-auto mb-4">
+                  <div className="w-16 h-16 bg-gradient-to-br from-[#6ab445] to-[#5a9e3d] rounded-full flex items-center justify-center text-white text-xl font-bold mx-auto mb-4">
                     {item.step}
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
@@ -225,7 +225,7 @@ function UXUIDesign() {
         </section>
 
         {/* CTA Section */}
-        <section className={`py-24 bg-gradient-to-r ${hero.gradient || 'from-slate-700 via-slate-600 to-cyan-700'} relative overflow-hidden`}>
+        <section className={`py-24 bg-gradient-to-r ${hero.gradient || 'from-[#6ab445] via-[#5a9e3d] to-[#4a8a35]'} relative overflow-hidden`}>
           <div className="absolute inset-0 opacity-10">
             <div className="absolute inset-0" style={{backgroundImage: 'radial-gradient(circle at 30% 50%, white 2px, transparent 2px)', backgroundSize: '60px 60px'}}></div>
           </div>
@@ -245,7 +245,7 @@ function UXUIDesign() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center justify-center gap-2 bg-white text-slate-700 px-10 py-5 rounded-full font-bold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 group"
+                  className="inline-flex items-center justify-center gap-2 bg-white text-[#5a9e3d] px-10 py-5 rounded-full font-bold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 group"
                 >
                   Start Your Design Project
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
