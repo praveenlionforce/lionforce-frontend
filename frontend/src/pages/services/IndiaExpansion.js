@@ -420,7 +420,7 @@ function IndiaExpansion() {
               Join global companies building their India presence. Complete support from day one.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/contact" className="inline-flex items-center bg-white text-emerald-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 hover:scale-105">
+              <Link to="/contact?service=india-expansion" className="inline-flex items-center bg-white text-emerald-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 hover:scale-105">
                 Schedule Free Consultation
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
