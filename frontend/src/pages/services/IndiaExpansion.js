@@ -276,10 +276,10 @@ function IndiaExpansion() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                <span className="gradient-text">EOR Pricing Packages</span>
+                <span className="gradient-text">{pricingTitle}</span>
               </h2>
-              <p className="text-xl text-gray-600">Transparent pricing for Employer of Record services. No hidden fees.</p>
-              <p className="text-sm text-gray-500 mt-2">For ODC & COE pricing, please <Link to="/contact" className="text-emerald-600 font-semibold hover:underline">contact us</Link> for a customized quote.</p>
+              <p className="text-xl text-gray-600">{pricingSubtitle}</p>
+              <p className="text-sm text-gray-500 mt-2">{pricingNote} <Link to="/contact" className="text-emerald-600 font-semibold hover:underline">Contact us</Link></p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
