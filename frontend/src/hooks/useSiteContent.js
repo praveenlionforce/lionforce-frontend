@@ -286,7 +286,7 @@ const defaultContent = {
       stats: ['500+ videos created', 'Award-winning team', 'Global clients'],
       primaryCTA: 'Get Creative Quote',
       secondaryCTA: 'View Showreel',
-      gradient: 'from-orange-500 via-amber-500 to-yellow-500'
+      gradient: 'from-rose-400 via-pink-500 to-rose-600'
     },
     services: [
       { title: '3D Animation', description: 'Stunning 3D visuals, product renders, and animated sequences.' },
