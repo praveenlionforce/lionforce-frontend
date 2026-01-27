@@ -56,28 +56,27 @@ function About() {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                <p className="text-teal-600 font-semibold text-sm uppercase tracking-widest mb-6">Our Story</p>
+                <p className="text-teal-600 font-semibold text-sm uppercase tracking-widest mb-6">{hero.tagline || 'Our Story'}</p>
                 <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold mb-8 leading-tight">
-                  Fueling Success
-                  <span className="block gradient-text">Through Innovation</span>
+                  {hero.title1 || 'Fueling Success'}
+                  <span className="block gradient-text">{hero.title2 || 'Through Innovation'}</span>
                 </h1>
                 <p className="text-xl text-gray-600 leading-relaxed mb-8">
-                  Since 2012, we&apos;ve been transforming how businesses learn, build, and grow. 
-                  Not just another tech company-we&apos;re your partners in making the impossible possible.
+                  {hero.subtitle || "Since 2012, we've been transforming how businesses learn, build, and grow. Not just another tech company - we're your partners in making the impossible possible."}
                 </p>
                 <div className="flex items-center gap-8">
                   <div>
-                    <div className="text-4xl font-bold gradient-text">13+</div>
+                    <div className="text-4xl font-bold gradient-text">{content?.stats?.years || '13+'}</div>
                     <div className="text-gray-500 text-sm">Years</div>
                   </div>
                   <div className="w-px h-12 bg-gray-300"></div>
                   <div>
-                    <div className="text-4xl font-bold gradient-text">300+</div>
+                    <div className="text-4xl font-bold gradient-text">{content?.stats?.projects || '300+'}</div>
                     <div className="text-gray-500 text-sm">Projects</div>
                   </div>
                   <div className="w-px h-12 bg-gray-300"></div>
                   <div>
-                    <div className="text-4xl font-bold gradient-text">32+</div>
+                    <div className="text-4xl font-bold gradient-text">{content?.stats?.countries || '32+'}</div>
                     <div className="text-gray-500 text-sm">Countries</div>
                   </div>
                 </div>
