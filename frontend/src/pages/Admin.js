@@ -747,12 +747,16 @@ function Admin() {
 
   // Restore scroll position after render using useLayoutEffect for synchronous update
   useLayoutEffect(() => {
-    if (scrollContainerRef.current && scrollPositionRef.current > 0) {
+    const container = scrollContainerRef.current;
+    if (container && scrollPositionRef.current > 0) {
       const scrollTo = scrollPositionRef.current;
+      // Use double RAF to ensure DOM is fully painted
       requestAnimationFrame(() => {
-        if (scrollContainerRef.current) {
-          scrollContainerRef.current.scrollTop = scrollTo;
-        }
+        requestAnimationFrame(() => {
+          if (container) {
+            container.scrollTop = scrollTo;
+          }
+        });
       });
     }
   }, [siteContent]);
