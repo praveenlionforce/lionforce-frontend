@@ -39,16 +39,15 @@ function CreativeServices() {
 
   return (
     <>
-      <Helmet>
-        <title>{seo.title || 'Creative Services | 3D Animation, Video Production | Lionforce'}</title>
-        <meta name="description" content={seo.description || '3D animations, explainer videos, motion graphics, and visual content that makes your brand unforgettable.'} />
-        <meta name="keywords" content={seo.keywords || '3D animation, explainer videos, motion graphics, corporate videos, video production'} />
-        {seo.ogImage && <meta property="og:image" content={seo.ogImage} />}
-        <meta property="og:title" content={seo.title || 'Creative Services - Lionforce'} />
-        <meta property="og:description" content={seo.description || '3D animations and video production'} />
-        <meta property="og:type" content="website" />
-        {seo.canonicalUrl && <link rel="canonical" href={seo.canonicalUrl} />}
-      </Helmet>
+      <SEO 
+        title={seo.title || 'Creative Services | 3D Animation, Video Production | Lionforce'}
+        description={seo.description || '3D animations, explainer videos, motion graphics, and visual content that makes your brand unforgettable.'}
+        keywords={seo.keywords || '3D animation, explainer videos, motion graphics, corporate videos, video production'}
+        ogImage={seo.ogImage}
+        ogTitle={seo.title || 'Creative Services - Lionforce'}
+        ogDescription={seo.description || '3D animations and video production'}
+        canonicalUrl={seo.canonicalUrl}
+      />
 
       <div className="overflow-hidden bg-white">
         {/* Hero Section */}
