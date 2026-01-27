@@ -39,16 +39,15 @@ function UXUIDesign() {
 
   return (
     <>
-      <Helmet>
-        <title>{seo.title || 'UX/UI Design Services | User-Centered Design | Lionforce'}</title>
-        <meta name="description" content={seo.description || 'Beautiful, intuitive interfaces that drive engagement and conversions. User research, UI design, prototyping, and design systems.'} />
-        <meta name="keywords" content={seo.keywords || 'UX design, UI design, user experience, user interface, wireframing, prototyping'} />
-        {seo.ogImage && <meta property="og:image" content={seo.ogImage} />}
-        <meta property="og:title" content={seo.title || 'UX/UI Design - Lionforce'} />
-        <meta property="og:description" content={seo.description || 'Beautiful, intuitive interfaces'} />
-        <meta property="og:type" content="website" />
-        {seo.canonicalUrl && <link rel="canonical" href={seo.canonicalUrl} />}
-      </Helmet>
+      <SEO 
+        title={seo.title || 'UX/UI Design Services | User-Centered Design | Lionforce'}
+        description={seo.description || 'Beautiful, intuitive interfaces that drive engagement and conversions. User research, UI design, prototyping, and design systems.'}
+        keywords={seo.keywords || 'UX design, UI design, user experience, user interface, wireframing, prototyping'}
+        ogImage={seo.ogImage}
+        ogTitle={seo.title || 'UX/UI Design - Lionforce'}
+        ogDescription={seo.description || 'Beautiful, intuitive interfaces'}
+        canonicalUrl={seo.canonicalUrl}
+      />
 
       <div className="overflow-hidden bg-white">
         {/* Hero Section */}
