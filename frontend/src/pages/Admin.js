@@ -860,11 +860,33 @@ function Admin() {
               
               <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
                 <h2 className="font-bold text-gray-900 mb-4">Quick Edit</h2>
-                <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
-                  {pages.map(page => (
-                    <button key={page.id} onClick={() => { setActiveTab('pages'); setSelectedPage(page.id); }} className="p-4 rounded-lg border border-gray-200 hover:border-teal-500 hover:bg-teal-50 transition-all text-left">
-                      <div className="text-teal-600 mb-2">{page.icon}</div>
-                      <p className="font-medium text-gray-900 text-sm">{page.name}</p>
+                
+                <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Main Pages</h4>
+                <div className="grid grid-cols-3 gap-2 mb-4">
+                  {pages.filter(p => p.category === 'main').map(page => (
+                    <button key={page.id} onClick={() => { setActiveTab('pages'); setSelectedPage(page.id); }} className="p-3 rounded-lg border border-gray-200 hover:border-teal-500 hover:bg-teal-50 transition-all text-left">
+                      <div className="text-teal-600 mb-1">{page.icon}</div>
+                      <p className="font-medium text-gray-900 text-xs">{page.name}</p>
+                    </button>
+                  ))}
+                </div>
+                
+                <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Service Pages</h4>
+                <div className="grid grid-cols-3 md:grid-cols-4 gap-2 mb-4">
+                  {pages.filter(p => p.category === 'services').map(page => (
+                    <button key={page.id} onClick={() => { setActiveTab('pages'); setSelectedPage(page.id); }} className="p-3 rounded-lg border border-gray-200 hover:border-teal-500 hover:bg-teal-50 transition-all text-left">
+                      <div className="text-teal-600 mb-1">{page.icon}</div>
+                      <p className="font-medium text-gray-900 text-xs">{page.name}</p>
+                    </button>
+                  ))}
+                </div>
+                
+                <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Settings</h4>
+                <div className="grid grid-cols-3 gap-2">
+                  {pages.filter(p => p.category === 'settings').map(page => (
+                    <button key={page.id} onClick={() => { setActiveTab('pages'); setSelectedPage(page.id); }} className="p-3 rounded-lg border border-gray-200 hover:border-teal-500 hover:bg-teal-50 transition-all text-left">
+                      <div className="text-teal-600 mb-1">{page.icon}</div>
+                      <p className="font-medium text-gray-900 text-xs">{page.name}</p>
                     </button>
                   ))}
                 </div>
