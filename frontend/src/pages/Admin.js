@@ -317,7 +317,7 @@ function Admin() {
         stats: ['13+ years experience', '300+ projects delivered', '25+ languages'],
         primaryCTA: 'Get Free Demo & Quote',
         secondaryCTA: 'Call +91 96005 36354',
-        gradient: 'from-blue-600 via-indigo-600 to-purple-600'
+        gradient: 'from-purple-600 via-violet-600 to-indigo-600'
       },
       solutions: [
         { title: 'AI-Powered Learning Paths', description: 'Intelligent content recommendations powered by AI. Personalized learning journeys.' },
