@@ -40,21 +40,23 @@ Recreate the existing WordPress website (https://lionforce.net) into a new, mode
 #### ✅ Completed Features
 
 **1. Home Page**
-- New captivating hero text: "Innovate. Scale. Transform Globally. Powered by India."
+- Hero text: "Innovate. Scale. Transform Globally." (removed "Powered by India" as company is global)
 - Updated subtext with clear value proposition
 - Rotating service category banner
 - Updated stats (300+ projects)
 - Client logos section
 - Testimonials section
-- Benefits section
-- Final CTA section
+- "Expand to India" button links to India Expansion page
 
-**2. About Page**
-- Modern, captivating intro copy
-- Core values section
-- CEO message section
-- Mission & Vision
-- Stats display
+**2. About Page** (Fully rewritten with original website content)
+- New hero: "We Believe in Fueling Success with Creativity & Innovation"
+- Full company story from founding in 2013
+- "Challenges You'll Conquer With Us!" section with 3 cards
+- Values section with 5 core values: Partnership, Transparency, Flexibility, Sincerity, Support
+- CEO Message from Praveen Kamalan (as per original website)
+- Mission & Vision cards
+- Stats section: "Based Globally, Serving the World" - 13+ Years, 300+ Projects, 32+ Countries, 500K+ People Impacted
+- Modern CTA: "Discover the Power of Expertise"
 
 **3. India Expansion Page** (`/services/india-expansion`)
 - Consolidated EOR, ODC, COE services into one page
@@ -65,25 +67,30 @@ Recreate the existing WordPress website (https://lionforce.net) into a new, mode
 - Comparison table showing Lionforce advantages
 - Final CTA
 
-**4. Service Landing Pages**
-All service pages now have consistent gradient hero banners:
-- eLearning (full detailed page)
-- Software Development (full detailed page)
-- UX/UI Design (template-based)
-- Creative Services (template-based)
-- Digital Marketing (template-based)
-- Consulting (template-based)
+**4. Software Development Page**
+- Added **IoT & Embedded Solutions** service prominently
+- Hero mentions "IoT solutions" alongside web apps, mobile apps
+- Services include: Smart device integration, sensor networks, industrial IoT
+- Tech stack includes IoT category: Arduino, Raspberry Pi, MQTT, AWS IoT
 
-**5. Navigation**
+**5. Service Landing Pages** (All with UNIQUE color themes)
+- eLearning - Indigo/Purple gradient
+- Software Development - Teal/Cyan gradient  
+- UX/UI Design - Violet/Purple gradient
+- **Creative Services - Orange/Amber/Yellow gradient** (NEW)
+- **Digital Marketing - Rose/Pink/Fuchsia gradient** (NEW)
+- **Consulting - Slate/Zinc (dark gray) gradient** (NEW)
+
+**6. Navigation**
 - Updated dropdown: "EXPAND TO INDIA" category
 - Clean service naming: "India Team Setup (EOR • ODC • COE)"
 
-**6. Footer**
-- Updated with new logo (`footerlogo.png`)
+**7. Footer**
+- Updated with new logo (`footerlogo.png`) - smaller size (h-10)
 - Correct phone number (+91 96005 36354)
 - Company info and links
 
-**7. Admin Dashboard** (`/admin`)
+**8. Admin Dashboard** (`/admin`)
 - Login system with basic auth (admin / lionforce2024)
 - Dashboard with statistics overview
 - Contact form submissions viewer
