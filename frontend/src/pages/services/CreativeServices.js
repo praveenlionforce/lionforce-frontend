@@ -21,6 +21,16 @@ function CreativeServices() {
   
   const hero = content?.hero || {};
   const services = content?.services || [];
+  
+  // Hero boxes with defaults
+  const heroBoxes = hero.heroBoxes || [
+    { label: '3D Animation', value: 'Stunning' },
+    { label: 'Explainers', value: 'Engaging' },
+    { label: 'Motion', value: 'Dynamic' },
+    { label: 'Infographics', value: 'Visual' }
+  ];
+  
+  const highlightStat = hero.highlightStat || { value: '500+', label: 'Videos Created' };
 
   const serviceIcons = [Clapperboard, Video, Sparkles, Play, Presentation, BarChart3];
 
