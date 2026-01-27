@@ -120,11 +120,20 @@ function Home() {
     }
   ];
 
+  // SEO data from CMS
+  const seo = content?.seo || {};
+
   return (
     <>
       <Helmet>
-        <title>Lionforce - Custom eLearning & Software Development | India Expansion Services</title>
-        <meta name="description" content="Transform your business with Lionforce's eLearning, software development, and India expansion services. 13+ years, 300+ projects, 32+ countries." />
+        <title>{seo.title || 'Lionforce - Custom eLearning & Software Development | India Expansion Services'}</title>
+        <meta name="description" content={seo.description || "Transform your business with Lionforce's eLearning, software development, and India expansion services. 13+ years, 300+ projects, 32+ countries."} />
+        <meta name="keywords" content={seo.keywords || 'eLearning, software development, AI solutions, India expansion, EOR, ODC'} />
+        {seo.ogImage && <meta property="og:image" content={seo.ogImage} />}
+        <meta property="og:title" content={seo.title || 'Lionforce Technologies'} />
+        <meta property="og:description" content={seo.description || "Transform your business with Lionforce"} />
+        <meta property="og:type" content="website" />
+        {seo.canonicalUrl && <link rel="canonical" href={seo.canonicalUrl} />}
       </Helmet>
       
       <div className="overflow-hidden bg-white">
