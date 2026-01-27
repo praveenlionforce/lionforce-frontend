@@ -461,6 +461,13 @@ const defaultContent = {
     ]
   },
   indiaExpansion: {
+    seo: {
+      title: 'Expand to India - EOR, ODC & COE Services | Easy India Entry',
+      description: 'Expand your business to India with our EOR (Employer of Record), ODC (Offshore Development Center), and COE (Center of Excellence) services. Easy exits, no entity required.',
+      keywords: 'India expansion, EOR India, employer of record, ODC, offshore development center, COE, center of excellence, hire in India, India market entry',
+      ogImage: '',
+      canonicalUrl: ''
+    },
     pricing: {
       title: 'EOR Pricing Packages',
       subtitle: 'Transparent pricing for Employer of Record services. No hidden fees.',
