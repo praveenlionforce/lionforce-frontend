@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet';
+import SEO from './SEO';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 
 function ServiceTemplate({ 
@@ -17,10 +17,10 @@ function ServiceTemplate({
 }) {
   return (
     <>
-      <Helmet>
-        <title>{title} | Lionforce</title>
-        <meta name="description" content={description} />
-      </Helmet>
+      <SEO 
+        title={`${title} | Lionforce`}
+        description={description}
+      />
       
       <div className="pt-20 bg-white">
         {/* Hero Section - Consistent gradient style */}
