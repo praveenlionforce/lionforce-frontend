@@ -8,7 +8,7 @@ function CreativeServices() {
       title="Design & Creative Services"
       tagline="Lights • Camera • Creativity"
       description="Where Creativity Meets Innovation! From stunning 3D animations to sharp explainers and pitch-perfect presentations, our creative team helps you inform, impress, and inspire. We turn complex ideas into clear, captivating visual stories."
-      heroImage="https://images.unsplash.com/photo-1621111848501-8d3634f82336?auto=format&fit=crop&w=1920&q=80"
+      heroGradient="from-orange-500 via-amber-500 to-yellow-500"
       features={[
         { icon: <Video className="w-8 h-8" />, title: '3D Animation', description: 'Stunning 3D animations that bring your ideas to life.' },
         { icon: <Film className="w-8 h-8" />, title: 'Explainer Videos', description: 'Clear, engaging videos that simplify complex concepts.' },

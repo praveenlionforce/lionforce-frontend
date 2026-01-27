@@ -8,7 +8,7 @@ function DigitalMarketing() {
       title="Digital Marketing Services"
       tagline="Get Seen • Buzz Loud • Grow On • Click Spark"
       description="Marketing that speaks, sells, and scales. Let's make your brand impossible to ignore. We create magnetic campaigns powered by smart content, bold design, and data-backed targeting. Whether you're building awareness, generating leads, or launching something new—we help you grow with clarity and confidence."
-      heroImage="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1920&q=80"
+      heroGradient="from-rose-500 via-pink-500 to-fuchsia-600"
       features={[
         { icon: <TrendingUp className="w-8 h-8" />, title: 'Growth Marketing', description: 'Data-driven strategies that accelerate business growth.' },
         { icon: <Target className="w-8 h-8" />, title: 'Targeted Campaigns', description: 'Precision targeting to reach your ideal audience.' },

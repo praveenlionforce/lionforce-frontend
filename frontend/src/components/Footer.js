@@ -12,7 +12,7 @@ function Footer() {
             <img 
               src="https://customer-assets.emergentagent.com/job_modern-lionforce/artifacts/tpwlbe6e_footerlogo.png" 
               alt="Lionforce Technologies Private Limited" 
-              className="h-14 w-auto mb-4"
+              className="h-10 w-auto mb-4"
             />
             <p className="text-gray-400 text-sm mb-4">
               Empowering Minds, Transforming Solutions. Your partner in innovative eLearning and software development.

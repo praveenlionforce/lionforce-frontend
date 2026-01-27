@@ -8,7 +8,7 @@ function Consulting() {
       title="Consulting Services"
       tagline="Expert Wisdom • Real Results"
       description="Where Expertise Fuels Transformation! Our consulting services provide strategic guidance, technical expertise, and actionable insights to help you navigate complex challenges, optimize operations, and achieve sustainable growth."
-      heroImage="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1920&q=80"
+      heroGradient="from-slate-700 via-slate-600 to-zinc-700"
       features={[
         { icon: <Lightbulb className="w-8 h-8" />, title: 'Strategic Planning', description: 'Develop comprehensive strategies aligned with your business goals.' },
         { icon: <Target className="w-8 h-8" />, title: 'Digital Transformation', description: 'Navigate digital transformation with confidence and clarity.' },
