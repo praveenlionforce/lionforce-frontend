@@ -64,7 +64,7 @@ function About() {
                 accelerate progress, and ignite operational excellence!
               </p>
               <p className="text-lg text-gray-700 leading-relaxed">
-                With over 13 years of experience and 100+ successful projects across 32+ countries, 
+                With over 13 years of experience and 300+ successful projects across 32+ countries, 
                 we've established ourselves as a trusted partner for businesses seeking transformation 
                 through technology and learning.
               </p>
@@ -181,7 +181,7 @@ function About() {
                 <div className="text-gray-600">Years Experience</div>
               </div>
               <div className="text-center p-6 bg-gradient-to-br from-green-50 to-white rounded-xl border border-green-200">
-                <div className="text-5xl font-bold gradient-text mb-2">100+</div>
+                <div className="text-5xl font-bold gradient-text mb-2">300+</div>
                 <div className="text-gray-600">Projects Delivered</div>
               </div>
               <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-white rounded-xl border border-blue-200">

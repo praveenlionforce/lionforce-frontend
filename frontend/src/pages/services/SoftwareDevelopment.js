@@ -83,7 +83,7 @@ function SoftwareDevelopment() {
                 </div>
                 <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30">
                   <CheckCircle className="w-5 h-5 text-white" />
-                  <span className="text-white font-semibold">100+ apps built</span>
+                  <span className="text-white font-semibold">300+ apps built</span>
                 </div>
                 <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30">
                   <CheckCircle className="w-5 h-5 text-white" />
@@ -254,7 +254,7 @@ function SoftwareDevelopment() {
               Ready to Build Something Amazing?
             </h2>
             <p className="text-xl text-white/90 mb-8">
-              Let's turn your idea into reality. 100+ successful projects. 13+ years experience.
+              Let's turn your idea into reality. 300+ successful projects. 13+ years experience.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link to="/contact" className="inline-flex items-center bg-white text-teal-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 hover:scale-105">

@@ -240,7 +240,7 @@ function Home() {
                 animate={statsVisible ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.5, delay: 0.2 }}
               >
-                <div className="text-5xl font-bold gradient-text mb-2">100+</div>
+                <div className="text-5xl font-bold gradient-text mb-2">300+</div>
                 <div className="text-gray-600 text-lg">Projects Delivered</div>
               </motion.div>
               <motion.div

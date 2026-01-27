@@ -111,7 +111,7 @@ function Contact() {
                   </li>
                   <li className="flex items-center">
                     <span className="text-teal-600 mr-2">✓</span>
-                    100+ successful projects delivered
+                    300+ successful projects delivered
                   </li>
                   <li className="flex items-center">
                     <span className="text-teal-600 mr-2">✓</span>

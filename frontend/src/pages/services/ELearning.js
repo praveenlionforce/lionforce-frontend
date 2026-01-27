@@ -52,7 +52,7 @@ function ELearning() {
     <>
       <Helmet>
         <title>Custom eLearning Solutions - Interactive Training That Converts | Lionforce</title>
-        <meta name="description" content="Transform training with custom eLearning. Gamification, microlearning, scenarios. 300% higher engagement. 13+ years experience. 100+ projects delivered." />
+        <meta name="description" content="Transform training with custom eLearning. Gamification, microlearning, scenarios. 300% higher engagement. 13+ years experience. 300+ projects delivered." />
       </Helmet>
 
       <div className="pt-20 bg-white">
@@ -85,7 +85,7 @@ function ELearning() {
                 </div>
                 <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30">
                   <CheckCircle className="w-5 h-5 text-white" />
-                  <span className="text-white font-semibold">100+ projects delivered</span>
+                  <span className="text-white font-semibold">300+ projects delivered</span>
                 </div>
                 <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30">
                   <CheckCircle className="w-5 h-5 text-white" />
