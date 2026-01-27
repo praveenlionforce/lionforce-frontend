@@ -922,27 +922,36 @@ function Admin() {
     );
   };
 
-  const ArrayEditor = ({ items, path, template, renderItem, addLabel = 'Add Item' }) => (
-    <div className="space-y-3">
-      {items?.map((item, index) => (
-        <div key={index} className="p-4 bg-white rounded-lg border border-gray-200 relative group">
-          <button
-            onClick={() => removeArrayItem(path, index)}
-            className="absolute top-2 right-2 p-1 text-red-500 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50 rounded"
-          >
-            <Trash2 className="w-4 h-4" />
-          </button>
-          {renderItem(item, index)}
-        </div>
-      ))}
-      <button
-        onClick={() => addArrayItem(path, template)}
-        className="flex items-center gap-2 px-4 py-2 text-teal-600 hover:bg-teal-50 rounded-lg transition-colors w-full justify-center border border-dashed border-teal-300"
-      >
-        <Plus className="w-4 h-4" /> {addLabel}
-      </button>
-    </div>
-  );
+  const ArrayEditor = ({ items, path, template, renderItem, addLabel = 'Add Item', maxItems = null }) => {
+    const canAdd = maxItems === null || (items?.length || 0) < maxItems;
+    
+    return (
+      <div className="space-y-3">
+        {items?.map((item, index) => (
+          <div key={index} className="p-4 bg-white rounded-lg border border-gray-200 relative group">
+            <button
+              onClick={() => removeArrayItem(path, index)}
+              className="absolute top-2 right-2 p-1 text-red-500 opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-50 rounded"
+            >
+              <Trash2 className="w-4 h-4" />
+            </button>
+            {renderItem(item, index)}
+          </div>
+        ))}
+        <button
+          onClick={() => canAdd && addArrayItem(path, template)}
+          disabled={!canAdd}
+          className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors w-full justify-center border border-dashed ${
+            canAdd 
+              ? 'text-teal-600 hover:bg-teal-50 border-teal-300' 
+              : 'text-gray-400 bg-gray-50 border-gray-200 cursor-not-allowed'
+          }`}
+        >
+          <Plus className="w-4 h-4" /> {addLabel}
+        </button>
+      </div>
+    );
+  };
 
   // Login Screen
   if (!isAuthenticated) {
