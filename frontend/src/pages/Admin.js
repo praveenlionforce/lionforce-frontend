@@ -467,6 +467,7 @@ function Admin() {
       companyName: 'Lionforce Technologies Pvt Ltd',
       phone: '+91 96005 36354',
       email: 'hello@lionforce.net',
+      formSubmissionEmail: 'praveen@lionforce.net',
       location: 'Chennai, India',
       foundedYear: '2012',
       socialLinks: {
