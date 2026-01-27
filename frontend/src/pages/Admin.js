@@ -947,71 +947,7 @@ function Admin() {
     setExpandedSections(prev => ({ ...prev, [section]: !prev[section] }));
   };
 
-  // UI Components
-  const TextField = ({ label, value, onChange, multiline = false, placeholder = '' }) => {
-    const inputRef = useRef(null);
-    
-    const handleChange = (e) => {
-      const scrollTop = scrollContainerRef.current?.scrollTop || 0;
-      flushSync(() => {
-        onChange(e.target.value);
-      });
-      // Restore scroll immediately after state update
-      if (scrollContainerRef.current) {
-        scrollContainerRef.current.scrollTop = scrollTop;
-      }
-    };
-    
-    return (
-      <div className="mb-3">
-        <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
-        {multiline ? (
-          <textarea
-            ref={inputRef}
-            value={value || ''}
-            onChange={handleChange}
-            placeholder={placeholder}
-            rows={3}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none"
-          />
-        ) : (
-          <input
-            ref={inputRef}
-            type="text"
-            value={value || ''}
-            onChange={handleChange}
-            placeholder={placeholder}
-            className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-          />
-        )}
-      </div>
-    );
-  };
-
-  const ImageField = ({ label, value, onChange }) => (
-    <div className="mb-3">
-      <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
-      <div className="flex gap-2">
-        <input
-          type="text"
-          value={value || ''}
-          onChange={(e) => onChange(e.target.value)}
-          placeholder="Image URL or select from library"
-          className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500"
-        />
-        <button
-          onClick={() => { setActiveTab('images'); }}
-          className="px-3 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
-        >
-          <Image className="w-4 h-4" />
-        </button>
-      </div>
-      {value && (
-        <img src={value.startsWith('/') ? `${API_URL}${value}` : value} alt="Preview" className="mt-2 h-20 object-cover rounded" />
-      )}
-    </div>
-  );
-
+  // Section component for collapsible sections
   const Section = ({ title, icon, children, sectionKey, defaultOpen = false }) => {
     const isOpen = expandedSections[sectionKey] ?? defaultOpen;
     return (
