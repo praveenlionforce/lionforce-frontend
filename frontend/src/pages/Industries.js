@@ -203,24 +203,48 @@ function Industries() {
                 viewport={{ once: true }}
                 className="relative"
               >
-                {/* Decorative cards */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-gradient-to-br from-blue-500 to-cyan-500 p-6 rounded-2xl text-white">
+                {/* Decorative cards - Clean grid layout */}
+                <div className="grid grid-cols-2 gap-6">
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.1 }}
+                    className="bg-gradient-to-br from-blue-500 to-cyan-500 p-6 rounded-2xl text-white shadow-lg"
+                  >
                     <div className="text-4xl font-bold mb-2">100+</div>
                     <p className="text-white/80">Pharma Projects</p>
-                  </div>
-                  <div className="bg-gradient-to-br from-purple-500 to-indigo-500 p-6 rounded-2xl text-white mt-8">
+                  </motion.div>
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.2 }}
+                    className="bg-gradient-to-br from-purple-500 to-indigo-500 p-6 rounded-2xl text-white shadow-lg"
+                  >
                     <div className="text-4xl font-bold mb-2">500K+</div>
                     <p className="text-white/80">Learners Trained</p>
-                  </div>
-                  <div className="bg-gradient-to-br from-emerald-500 to-teal-500 p-6 rounded-2xl text-white -mt-4">
+                  </motion.div>
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 }}
+                    className="bg-gradient-to-br from-emerald-500 to-teal-500 p-6 rounded-2xl text-white shadow-lg"
+                  >
                     <div className="text-4xl font-bold mb-2">32+</div>
                     <p className="text-white/80">Countries Served</p>
-                  </div>
-                  <div className="bg-gradient-to-br from-orange-500 to-amber-500 p-6 rounded-2xl text-white mt-4">
+                  </motion.div>
+                  <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.4 }}
+                    className="bg-gradient-to-br from-orange-500 to-amber-500 p-6 rounded-2xl text-white shadow-lg"
+                  >
                     <div className="text-4xl font-bold mb-2">13+</div>
                     <p className="text-white/80">Years Experience</p>
-                  </div>
+                  </motion.div>
                 </div>
               </motion.div>
             </div>
