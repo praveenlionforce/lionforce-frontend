@@ -67,7 +67,8 @@ function IndiaExpansion() {
         'Full statutory compliance',
         'Payroll & benefits administration',
         'Co-branding available',
-        'Launch in 2-8 weeks'
+        'Launch in 2-8 weeks',
+        'Easy exits - no lock-in'
       ]
     },
     {
@@ -81,7 +82,8 @@ function IndiaExpansion() {
         'Full infrastructure setup',
         'Complete operational control',
         'Scale from 5 to 50+ engineers',
-        'Cost-effective expansion'
+        'Cost-effective expansion',
+        'Flexible exit options'
       ]
     },
     {
@@ -95,12 +97,14 @@ function IndiaExpansion() {
         'Best practices implementation',
         'Innovation & R&D teams',
         'Knowledge transfer programs',
-        'Strategic capability building'
+        'Strategic capability building',
+        'Easy transition support'
       ]
     }
   ];
 
   const comparison = [
+    { feature: 'Easy Exits - No Lock-in', lionforce: true, competitors: false },
     { feature: 'Co-branding Available', lionforce: true, competitors: false },
     { feature: 'Vendor Management', lionforce: true, competitors: false },
     { feature: 'Real Estate / Office Setup', lionforce: true, competitors: false },
