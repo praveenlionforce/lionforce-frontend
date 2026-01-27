@@ -116,6 +116,13 @@ function Admin() {
       }
     },
     about: {
+      seo: {
+        title: 'About Lionforce Technologies - Our Story & Mission',
+        description: 'Learn about Lionforce Technologies - 13+ years of transforming businesses through custom eLearning, software development, and creative services.',
+        keywords: 'about Lionforce, company history, team, values, mission, eLearning company, software development company',
+        ogImage: '',
+        canonicalUrl: ''
+      },
       hero: {
         tagline: 'Our Story',
         title1: 'Fueling Success',
