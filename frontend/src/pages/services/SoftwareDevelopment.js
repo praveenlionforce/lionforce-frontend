@@ -38,11 +38,20 @@ function SoftwareDevelopment() {
 
   const serviceIcons = [Brain, Code, Cpu, Globe, Smartphone, RefreshCw];
 
+  // SEO data from CMS
+  const seo = content?.seo || {};
+
   return (
     <>
       <Helmet>
-        <title>Software & AI Development | Custom Apps & ML Solutions | Lionforce</title>
-        <meta name="description" content="Custom software development, AI/ML solutions, web and mobile apps, IoT. MVP in 8-12 weeks. Save 50% on development costs." />
+        <title>{seo.title || 'Software & AI Development | Custom Apps & ML Solutions | Lionforce'}</title>
+        <meta name="description" content={seo.description || 'Custom software development, AI/ML solutions, web and mobile apps, IoT. MVP in 8-12 weeks. Save 50% on development costs.'} />
+        <meta name="keywords" content={seo.keywords || 'software development, AI solutions, machine learning, web apps, mobile apps, IoT'} />
+        {seo.ogImage && <meta property="og:image" content={seo.ogImage} />}
+        <meta property="og:title" content={seo.title || 'Software Development - Lionforce'} />
+        <meta property="og:description" content={seo.description || 'Custom software development and AI solutions'} />
+        <meta property="og:type" content="website" />
+        {seo.canonicalUrl && <link rel="canonical" href={seo.canonicalUrl} />}
       </Helmet>
 
       <div className="overflow-hidden bg-white">
