@@ -748,7 +748,12 @@ function Admin() {
   // Restore scroll position after render using useLayoutEffect for synchronous update
   useLayoutEffect(() => {
     if (scrollContainerRef.current && scrollPositionRef.current > 0) {
-      scrollContainerRef.current.scrollTop = scrollPositionRef.current;
+      const scrollTo = scrollPositionRef.current;
+      requestAnimationFrame(() => {
+        if (scrollContainerRef.current) {
+          scrollContainerRef.current.scrollTop = scrollTo;
+        }
+      });
     }
   }, [siteContent]);
 
