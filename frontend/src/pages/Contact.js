@@ -94,16 +94,15 @@ function Contact() {
 
   return (
     <>
-      <Helmet>
-        <title>{seo.title || "Contact Us | Lionforce - Let's Build Something Amazing"}</title>
-        <meta name="description" content={seo.description || "Get in touch with Lionforce. We'd love to hear about your project and discuss how we can help transform your business."} />
-        <meta name="keywords" content={seo.keywords || 'contact Lionforce, get quote, free consultation'} />
-        {seo.ogImage && <meta property="og:image" content={seo.ogImage} />}
-        <meta property="og:title" content={seo.title || 'Contact Lionforce'} />
-        <meta property="og:description" content={seo.description || "Get in touch with Lionforce"} />
-        <meta property="og:type" content="website" />
-        {seo.canonicalUrl && <link rel="canonical" href={seo.canonicalUrl} />}
-      </Helmet>
+      <SEO 
+        title={seo.title || "Contact Us | Lionforce - Let's Build Something Amazing"}
+        description={seo.description || "Get in touch with Lionforce. We'd love to hear about your project and discuss how we can help transform your business."}
+        keywords={seo.keywords || 'contact Lionforce, get quote, free consultation'}
+        ogImage={seo.ogImage}
+        ogTitle={seo.title || 'Contact Lionforce'}
+        ogDescription={seo.description || "Get in touch with Lionforce"}
+        canonicalUrl={seo.canonicalUrl}
+      />
 
       <div className="pt-20 bg-white overflow-hidden">
         {/* Hero Section - Split design */}
