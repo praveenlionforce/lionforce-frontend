@@ -1277,6 +1277,28 @@ function Admin() {
                       />
                     </Section>
 
+                    <Section title="Client Logos" icon={<Award className="w-4 h-4 text-teal-600" />} sectionKey="home-clients">
+                      <TextField label="Section Title" value={siteContent.home?.clients?.title} onChange={(v) => updateContent('home.clients.title', v)} />
+                      <p className="text-sm font-medium text-gray-700 mt-4 mb-2">Client Logos:</p>
+                      <ArrayEditor
+                        items={siteContent.home?.clients?.logos}
+                        path="home.clients.logos"
+                        template={{ name: 'Client Name', logo: '' }}
+                        addLabel="Add Client Logo"
+                        renderItem={(item, index) => (
+                          <div className="space-y-3">
+                            <TextField label="Client Name" value={item.name} onChange={(v) => updateArrayItem('home.clients.logos', index, 'name', v)} />
+                            <ImageField label="Logo Image" value={item.logo} onChange={(v) => updateArrayItem('home.clients.logos', index, 'logo', v)} />
+                            {item.logo && (
+                              <div className="bg-gray-100 p-3 rounded-lg flex items-center justify-center">
+                                <img src={item.logo} alt={item.name} className="h-12 object-contain" />
+                              </div>
+                            )}
+                          </div>
+                        )}
+                      />
+                    </Section>
+
                     <Section title="India Expansion CTA" icon={<Globe className="w-4 h-4 text-teal-600" />} sectionKey="home-india">
                       <TextField label="Badge" value={siteContent.home?.indiaExpansionCTA?.badge} onChange={(v) => updateContent('home.indiaExpansionCTA.badge', v)} />
                       <TextField label="Title" value={siteContent.home?.indiaExpansionCTA?.title} onChange={(v) => updateContent('home.indiaExpansionCTA.title', v)} />
