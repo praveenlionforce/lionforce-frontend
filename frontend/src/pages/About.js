@@ -58,15 +58,16 @@ function About() {
               transition={{ delay: 0.2 }}
               className="max-w-4xl mx-auto text-center"
             >
-              <p className="text-lg text-gray-700 leading-relaxed mb-8">
-                At Lionforce, we're not just innovators; we're game-changers in custom eLearning and 
-                software development, delivering tailored solutions that turbocharge engagement, 
-                accelerate progress, and ignite operational excellence!
+              <p className="text-xl text-gray-700 leading-relaxed mb-8 font-medium">
+                We don't just build — we transform. Whether it's immersive eLearning, scalable software, 
+                or helping global companies set up high-performing teams in India, 
+                <span className="text-teal-600 font-bold"> Lionforce delivers results that move the needle.</span>
               </p>
-              <p className="text-lg text-gray-700 leading-relaxed">
-                With over 13 years of experience and 300+ successful projects across 32+ countries, 
-                we've established ourselves as a trusted partner for businesses seeking transformation 
-                through technology and learning.
+              <p className="text-lg text-gray-600 leading-relaxed">
+                With <strong className="text-gray-900">13+ years</strong> of proven expertise and 
+                <strong className="text-gray-900"> 300+ successful projects</strong> across 
+                <strong className="text-gray-900"> 32+ countries</strong>, we've earned our reputation 
+                as the partner of choice for businesses ready to innovate, scale, and lead.
               </p>
             </motion.div>
           </div>

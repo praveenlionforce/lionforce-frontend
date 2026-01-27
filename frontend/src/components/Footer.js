@@ -10,9 +10,9 @@ function Footer() {
           {/* Company Info */}
           <div>
             <img 
-              src="https://customer-assets.emergentagent.com/job_elegant-refresh-3/artifacts/rhbezkic_Lionforce2025logo%20color-full.png" 
-              alt="Lionforce - Technologies Private Limited" 
-              className="h-12 w-auto mb-4"
+              src="https://customer-assets.emergentagent.com/job_modern-lionforce/artifacts/tpwlbe6e_footerlogo.png" 
+              alt="Lionforce Technologies Private Limited" 
+              className="h-14 w-auto mb-4"
             />
             <p className="text-gray-400 text-sm mb-4">
               Empowering Minds, Transforming Solutions. Your partner in innovative eLearning and software development.

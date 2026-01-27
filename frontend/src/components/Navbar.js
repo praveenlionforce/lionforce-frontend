@@ -31,9 +31,9 @@ function Navbar() {
       ]
     },
     {
-      category: 'India Expansion Services',
+      category: 'Expand to India',
       items: [
-        { name: 'India Team Setup (EOR/ODC/COE)', path: '/services/india-expansion' }
+        { name: 'India Team Setup (EOR • ODC • COE)', path: '/services/india-expansion' }
       ]
     }
   ];
