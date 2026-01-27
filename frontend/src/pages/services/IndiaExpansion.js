@@ -151,15 +151,15 @@ function IndiaExpansion() {
               <div className="flex flex-wrap gap-4 mb-8">
                 <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30">
                   <CheckCircle className="w-5 h-5 text-white" />
-                  <span className="text-white font-semibold">From $139/employee/month</span>
-                </div>
-                <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30">
-                  <CheckCircle className="w-5 h-5 text-white" />
                   <span className="text-white font-semibold">Launch in 2-8 weeks</span>
                 </div>
                 <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30">
                   <CheckCircle className="w-5 h-5 text-white" />
                   <span className="text-white font-semibold">60% cost savings</span>
+                </div>
+                <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30">
+                  <CheckCircle className="w-5 h-5 text-white" />
+                  <span className="text-white font-semibold">Co-branding available</span>
                 </div>
               </div>
 
@@ -259,9 +259,10 @@ function IndiaExpansion() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                <span className="gradient-text">Transparent Pricing</span>
+                <span className="gradient-text">EOR Pricing Packages</span>
               </h2>
-              <p className="text-xl text-gray-600">All-inclusive packages. No hidden fees.</p>
+              <p className="text-xl text-gray-600">Transparent pricing for Employer of Record services. No hidden fees.</p>
+              <p className="text-sm text-gray-500 mt-2">For ODC & COE pricing, please <Link to="/contact" className="text-emerald-600 font-semibold hover:underline">contact us</Link> for a customized quote.</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
@@ -307,6 +308,17 @@ function IndiaExpansion() {
                   </Link>
                 </motion.div>
               ))}
+            </div>
+
+            {/* Note about other services */}
+            <div className="bg-white rounded-xl p-6 border border-emerald-200 max-w-3xl mx-auto text-center">
+              <h3 className="font-bold text-gray-900 mb-2">Need ODC or COE Setup?</h3>
+              <p className="text-gray-600 text-sm mb-4">
+                Our Offshore Development Center (ODC) and Center of Excellence (COE) services are customized based on your specific requirements, team size, and infrastructure needs.
+              </p>
+              <Link to="/contact" className="inline-flex items-center text-emerald-600 font-semibold hover:underline">
+                Request a Custom Quote <ArrowRight className="ml-1 w-4 h-4" />
+              </Link>
             </div>
           </div>
         </section>
