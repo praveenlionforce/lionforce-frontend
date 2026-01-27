@@ -148,10 +148,11 @@ function Admin() {
       },
       challenges: {
         title: 'Challenges You\'ll Conquer',
+        subtitle: 'From dream teams to digital transformation, we make it happen.',
         items: [
-          { title: 'Build Your Dream Team', description: 'We quickly assemble dynamic teams of vetted specialists to accelerate your product journey.' },
-          { title: 'Ignite Digital Transformation', description: 'Unlock new possibilities by embracing cutting-edge technology with innovative solutions.' },
-          { title: 'End-to-End Solutions', description: 'Experience full-cycle innovation from first prototype to final deployment and ongoing support.' }
+          { title: 'Build Your Dream Team', description: 'We quickly assemble dynamic teams of vetted specialists to accelerate your product journey.', image: '' },
+          { title: 'Ignite Digital Transformation', description: 'Unlock new possibilities by embracing cutting-edge technology with innovative solutions.', image: '' },
+          { title: 'End-to-End Solutions', description: 'Experience full-cycle innovation from first prototype to final deployment and ongoing support.', image: '' }
         ]
       },
       values: {
