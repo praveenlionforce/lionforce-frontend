@@ -17,10 +17,10 @@ Recreate the existing WordPress website (https://lionforce.net) into a new, mode
 **Admin Panel at `/admin` with credentials: admin/lionforce2024**
 
 **Main Pages (Editable):**
-- Home Page - Hero, Stats, Services, Why Us, Testimonials, CTAs, SEO
+- Home Page - Hero, Stats, Services, Why Us, Testimonials, **Client Logos**, CTAs, SEO
 - About Page - Hero, Story, Challenges, Values, CEO Message, Mission/Vision, SEO
 - Contact Page - Hero, Info, Stats, Form settings, Service Links, SEO
-- **Industries Page** - Hero, Industries List, SEO (NEW)
+- Industries Page - Hero, Industries List, SEO
 
 **Service Pages (All Editable with SEO):**
 - eLearning - Hero, Solutions, Benefits, Industries, SEO
@@ -32,12 +32,14 @@ Recreate the existing WordPress website (https://lionforce.net) into a new, mode
 - Consulting - Hero, Services, SEO
 
 **Global Settings:**
+- **Site Logos** (Header Logo, Footer Logo) - NEW
 - Company info (name, phone, email, location, founded year)
 - Social links (LinkedIn, Twitter, Facebook)
 - Footer content
 - Form submission email
 
 **Additional Features:**
+- **Client Logos Manager** - Add, edit, delete client logos with preview - NEW
 - Image Library with upload/delete
 - Form Settings customization
 - Contact submissions viewer with Forward to Email
@@ -48,10 +50,16 @@ Recreate the existing WordPress website (https://lionforce.net) into a new, mode
 - Updated default page title to "Lionforce Technologies"
 
 ### ✅ COMPLETED: SEO Implementation
-- Added SEO editor sections to ALL pages in Admin panel
-- Fields: Page Title, Meta Description, Keywords, OG Image, Canonical URL
-- Upgraded from react-helmet to react-helmet-async for better reliability
-- Added HelmetProvider to App.js
+- Created custom SEO component (`/app/frontend/src/components/SEO.js`) for reliable meta tag updates
+- SEO fields editable for ALL pages: Title, Description, Keywords, OG Image, Canonical URL
+- Properly renders: title, meta description, meta keywords, og:title, og:description, og:image
+- Replaced react-helmet-async with custom DOM-based solution for better reliability
+
+### ✅ COMPLETED: Editable Logos
+- Header logo editable in Global Settings
+- Footer logo editable in Global Settings
+- Client logos on home page fully editable (add/edit/delete)
+- All logos show preview in admin panel
 
 ## Access URLs
 - **Main Site**: https://lionforce-rebuild.preview.emergentagent.com
@@ -72,23 +80,29 @@ Password: lionforce2024
 │   └── uploads/               # Image storage
 ├── frontend/src/
 │   ├── App.js                 # With HelmetProvider
+│   ├── components/
+│   │   ├── SEO.js             # Custom SEO component (NEW)
+│   │   ├── Navbar.js          # Uses CMS header logo
+│   │   ├── Footer.js          # Uses CMS footer logo
+│   │   └── Layout.js
 │   ├── hooks/
-│   │   └── useSiteContent.js  # CMS content hook with all page defaults
-│   ├── pages/
-│   │   ├── Admin.js           # Full CMS with Industries page
-│   │   ├── Home.js            # CMS-connected
-│   │   ├── About.js           # CMS-connected
-│   │   ├── Contact.js         # CMS-connected
-│   │   ├── Industries.js      # CMS-connected (NEW)
-│   │   └── services/
-│   │       ├── ELearning.js
-│   │       ├── SoftwareDevelopment.js
-│   │       ├── IndiaExpansion.js
-│   │       ├── UXUIDesign.js
-│   │       ├── CreativeServices.js
-│   │       ├── DigitalMarketing.js
-│   │       └── Consulting.js
-└── test_reports/
+│   │   └── useSiteContent.js  # CMS content hook with all defaults
+│   └── pages/
+│       ├── Admin.js           # Full CMS with logos, client logos, SEO
+│       ├── Home.js            # Uses CMS client logos
+│       ├── About.js           
+│       ├── Contact.js         
+│       ├── Industries.js      
+│       └── services/
+│           ├── ELearning.js
+│           ├── SoftwareDevelopment.js
+│           ├── IndiaExpansion.js
+│           ├── UXUIDesign.js
+│           ├── CreativeServices.js
+│           ├── DigitalMarketing.js
+│           └── Consulting.js
+└── memory/
+    └── PRD.md
 ```
 
 ## Prioritized Backlog
@@ -99,6 +113,8 @@ Password: lionforce2024
 - ~~SEO editors for all pages~~ ✅
 - ~~Industries page in Admin~~ ✅
 - ~~Remove Emergent branding~~ ✅
+- ~~Header/Footer logo editable~~ ✅
+- ~~Client logos editable~~ ✅
 
 ### P1 (Important) - Ready for User
 - Deployment assistance to cPanel
@@ -115,7 +131,8 @@ Password: lionforce2024
 - Case studies page
 
 ## Key Technical Notes
-- **Frontend**: React 18, React Router, TailwindCSS, Framer Motion, react-helmet-async
+- **Frontend**: React 18, React Router, TailwindCSS, Framer Motion
 - **Backend**: FastAPI (Python), MongoDB
-- **SEO**: Using react-helmet-async with HelmetProvider wrapper
+- **SEO**: Custom SEO component using direct DOM manipulation (more reliable than react-helmet)
 - All pages use `useSiteContent` hook for CMS data with fallback defaults
+- Logos and client logos use ImageField component with preview
