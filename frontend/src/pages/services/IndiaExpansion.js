@@ -63,6 +63,19 @@ function IndiaExpansion() {
   const pricingTitle = content?.pricing?.title || 'EOR Pricing Packages';
   const pricingSubtitle = content?.pricing?.subtitle || 'Transparent pricing for Employer of Record services. No hidden fees.';
   const pricingNote = content?.pricing?.note || 'For ODC & COE pricing, please contact us for a customized quote.';
+  
+  // Pricing labels from CMS
+  const priceSuffix = content?.pricing?.priceSuffix || '/emp/mo';
+  const label24Month = content?.pricing?.label24Month || '24-month contract';
+  const label12Month = content?.pricing?.label12Month || '{price}/month for 12-month';
+  const popularBadge = content?.pricing?.popularBadge || 'Most Popular';
+  const minEmployeesLabel = content?.pricing?.minEmployeesLabel || 'Min {count} employees';
+  const ctaButtonText = content?.pricing?.ctaButtonText || 'Get Started';
+  
+  // ODC/COE Note box from CMS
+  const noteBoxTitle = content?.pricing?.noteBoxTitle || 'Need ODC or COE Setup?';
+  const noteBoxDescription = content?.pricing?.noteBoxDescription || 'Our Offshore Development Center (ODC) and Center of Excellence (COE) services are customized based on your specific requirements, team size, and infrastructure needs.';
+  const noteBoxCta = content?.pricing?.noteBoxCta || 'Request a Custom Quote';
 
   const services = [
     {
