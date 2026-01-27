@@ -269,8 +269,8 @@ function About() {
                     <Award className="w-10 h-10 text-green-600 mb-4" />
                     <h3 className="text-xl font-bold mb-2 text-gray-900">Our Vision</h3>
                     <p className="text-gray-600">
-                      Be the global leader in custom eLearning and software, recognized for excellence 
-                      and lasting impact.
+                      Be the global leader in AI-powered eLearning and software—and the trusted partner 
+                      for businesses expanding to India.
                     </p>
                   </motion.div>
                 </div>
