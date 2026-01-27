@@ -6,64 +6,48 @@ import {
   Pill, GraduationCap, Building2, ShoppingCart, Factory, Plane,
   ArrowRight, CheckCircle
 } from 'lucide-react';
+import { useSiteContent } from '../hooks/useSiteContent';
 
 function Industries() {
-  const industries = [
-    {
-      icon: <Pill className="w-10 h-10" />,
-      name: 'Pharmaceuticals & Healthcare',
-      description: 'Compliance training, medical education, patient engagement solutions, and healthcare workforce development.',
-      color: 'from-blue-500 to-cyan-500',
-      clients: ['Cipla', 'Sun Pharma', 'Glenmark', 'Mankind'],
-      stats: '100+ healthcare projects'
-    },
-    {
-      icon: <GraduationCap className="w-10 h-10" />,
-      name: 'Education & EdTech',
-      description: 'K-12 solutions, higher education platforms, corporate training, and skill development programs.',
-      color: 'from-purple-500 to-indigo-500',
-      clients: ['Universities', 'EdTech Startups', 'Training Institutes'],
-      stats: '500K+ learners impacted'
-    },
-    {
-      icon: <Building2 className="w-10 h-10" />,
-      name: 'Banking & Finance',
-      description: 'Regulatory compliance, customer onboarding, employee training, and financial literacy programs.',
-      color: 'from-emerald-500 to-teal-500',
-      clients: ['Axis Bank', 'Financial Services'],
-      stats: 'Regulatory compliant'
-    },
-    {
-      icon: <ShoppingCart className="w-10 h-10" />,
-      name: 'Retail & FMCG',
-      description: 'Sales training, product knowledge, customer service excellence, and brand engagement.',
-      color: 'from-orange-500 to-amber-500',
-      clients: ['Coca-Cola', 'FMCG Leaders'],
-      stats: 'Global retail reach'
-    },
-    {
-      icon: <Factory className="w-10 h-10" />,
-      name: 'Manufacturing & Industrial',
-      description: 'Safety training, operational excellence, IoT integration, and workforce upskilling.',
-      color: 'from-slate-500 to-zinc-600',
-      clients: ['Industrial Leaders', 'Manufacturing Giants'],
-      stats: 'IoT-enabled solutions'
-    },
-    {
-      icon: <Plane className="w-10 h-10" />,
-      name: 'Travel & Hospitality',
-      description: 'Customer experience, booking systems, staff training, and digital transformation.',
-      color: 'from-rose-500 to-pink-500',
-      clients: ['Hotels', 'Travel Agencies'],
-      stats: 'Global hospitality'
-    }
+  const { content, global } = useSiteContent('industries');
+  const seo = content?.seo || {};
+  const hero = content?.hero || {};
+  
+  // Default industry icons and colors (not editable via CMS)
+  const industryMeta = {
+    'Pharmaceuticals & Healthcare': { icon: <Pill className="w-10 h-10" />, color: 'from-blue-500 to-cyan-500' },
+    'Education & EdTech': { icon: <GraduationCap className="w-10 h-10" />, color: 'from-purple-500 to-indigo-500' },
+    'Banking & Finance': { icon: <Building2 className="w-10 h-10" />, color: 'from-emerald-500 to-teal-500' },
+    'Retail & FMCG': { icon: <ShoppingCart className="w-10 h-10" />, color: 'from-orange-500 to-amber-500' },
+    'Manufacturing & Industrial': { icon: <Factory className="w-10 h-10" />, color: 'from-slate-500 to-zinc-600' },
+    'Travel & Hospitality': { icon: <Plane className="w-10 h-10" />, color: 'from-rose-500 to-pink-500' }
+  };
+  
+  const defaultIndustries = [
+    { name: 'Pharmaceuticals & Healthcare', description: 'Compliance training, medical education, patient engagement solutions, and healthcare workforce development.', stats: '100+ healthcare projects' },
+    { name: 'Education & EdTech', description: 'K-12 solutions, higher education platforms, corporate training, and skill development programs.', stats: '500K+ learners impacted' },
+    { name: 'Banking & Finance', description: 'Regulatory compliance, customer onboarding, employee training, and financial literacy programs.', stats: 'Regulatory compliant' },
+    { name: 'Retail & FMCG', description: 'Sales training, product knowledge, customer service excellence, and brand engagement.', stats: 'Global retail reach' },
+    { name: 'Manufacturing & Industrial', description: 'Safety training, operational excellence, IoT integration, and workforce upskilling.', stats: 'IoT-enabled solutions' },
+    { name: 'Travel & Hospitality', description: 'Customer experience, booking systems, staff training, and digital transformation.', stats: 'Global hospitality' }
   ];
+  
+  const industries = (content?.industries || defaultIndustries).map(ind => ({
+    ...ind,
+    icon: industryMeta[ind.name]?.icon || <Building2 className="w-10 h-10" />,
+    color: industryMeta[ind.name]?.color || 'from-gray-500 to-gray-600'
+  }));
 
   return (
     <>
       <Helmet>
-        <title>Industries We Serve | Lionforce - Pharma, EdTech, Banking & More</title>
-        <meta name="description" content="Lionforce serves diverse industries including Pharmaceuticals, Healthcare, Education, Banking, Retail, and Manufacturing with custom eLearning and software solutions." />
+        <title>{seo.title || 'Industries We Serve | Lionforce - Pharma, EdTech, Banking & More'}</title>
+        <meta name="description" content={seo.description || 'Lionforce serves diverse industries including Pharmaceuticals, Healthcare, Education, Banking, Retail, and Manufacturing with custom eLearning and software solutions.'} />
+        <meta name="keywords" content={seo.keywords || 'pharmaceuticals training, healthcare eLearning, education technology, banking compliance'} />
+        {seo.ogImage && <meta property="og:image" content={seo.ogImage} />}
+        <meta property="og:title" content={seo.title || 'Industries We Serve - Lionforce'} />
+        <meta property="og:description" content={seo.description || 'Transforming businesses across sectors'} />
+        {seo.canonicalUrl && <link rel="canonical" href={seo.canonicalUrl} />}
       </Helmet>
 
       <div className="pt-20 bg-white overflow-hidden">
