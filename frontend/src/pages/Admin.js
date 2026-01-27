@@ -515,6 +515,13 @@ function Admin() {
       ]
     },
     digitalMarketing: {
+      seo: {
+        title: 'Digital Marketing Services - SEO, PPC, Social Media & Growth',
+        description: 'Data-driven digital marketing with 500% average ROI. SEO, PPC, social media, email marketing, and analytics.',
+        keywords: 'digital marketing, SEO, PPC, social media marketing, content marketing, email marketing, Google Ads',
+        ogImage: '',
+        canonicalUrl: ''
+      },
       hero: {
         badge: 'Growth Marketing',
         badgeEmoji: '📈',
