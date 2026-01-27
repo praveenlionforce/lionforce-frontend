@@ -339,6 +339,59 @@ const defaultContent = {
       { title: 'Change Management', description: 'Guide teams through digital adoption and transformation.' }
     ]
   },
+  indiaExpansion: {
+    pricing: {
+      title: 'EOR Pricing Packages',
+      subtitle: 'Transparent pricing for Employer of Record services. No hidden fees.',
+      note: 'For ODC & COE pricing, please contact us for a customized quote.',
+      packages: [
+        {
+          name: 'Core Setup & Compliance',
+          price12: '$149',
+          price24: '$139',
+          minEmployees: '5',
+          features: [
+            'Payroll processing',
+            'Statutory compliance',
+            'HRMS setup',
+            'Bank account & balance sheet management',
+            'Co-branding option available',
+            'Medical insurance coordination'
+          ],
+          popular: false
+        },
+        {
+          name: 'Managed Operations',
+          price12: '$199',
+          price24: '$189',
+          minEmployees: '10',
+          features: [
+            'Everything in Core Setup',
+            'Vendor management',
+            'OPEX/CAPEX management',
+            'Invoice approvals',
+            'Admin operations'
+          ],
+          popular: true
+        },
+        {
+          name: 'Fully Managed / Scale',
+          price12: '$249',
+          price24: '$229',
+          minEmployees: '20',
+          features: [
+            'Everything in Managed Operations',
+            'Optional real estate/office setup',
+            'Hiring coordination',
+            'Asset lifecycle management',
+            'Operations reporting',
+            'Dedicated admin executive'
+          ],
+          popular: false
+        }
+      ]
+    }
+  },
   global: {
     companyName: 'Lionforce Technologies Pvt Ltd',
     phone: '+91 96005 36354',
