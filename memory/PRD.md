@@ -120,7 +120,13 @@ Recreate the existing WordPress website (https://lionforce.net) into a new, mode
 ## Access URLs
 - **Main Site**: https://modern-lionforce.preview.emergentagent.com
 - **Admin Panel**: https://modern-lionforce.preview.emergentagent.com/admin
-- **Admin Credentials**: admin / lionforce2024
+
+## Admin Panel Credentials
+```
+Username: admin
+Password: lionforce2024
+```
+**Note:** Please change these credentials before deploying to production.
 
 ## Prioritized Backlog
 
