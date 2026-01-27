@@ -1001,6 +1001,47 @@ function Admin() {
                       </div>
                       <TextField label="Subtitle" value={siteContent.home?.hero?.subtitle} onChange={(v) => updateContent('home.hero.subtitle', v)} multiline />
                       <ImageField label="Background Image (optional)" value={siteContent.home?.hero?.backgroundImage} onChange={(v) => updateContent('home.hero.backgroundImage', v)} />
+                      
+                      <div className="mt-4 pt-4 border-t border-gray-200">
+                        <h4 className="font-semibold text-gray-700 mb-3">Hero Service Cards (4 boxes)</h4>
+                        <div className="space-y-4">
+                          {[0, 1, 2, 3].map(i => (
+                            <div key={i} className="p-4 bg-gray-50 rounded-lg">
+                              <p className="text-sm font-medium text-gray-600 mb-2">Card {i + 1}</p>
+                              <div className="grid grid-cols-2 gap-3">
+                                <TextField label="Title" value={siteContent.home?.hero?.heroBoxes?.[i]?.title || ''} onChange={(v) => {
+                                  const boxes = [...(siteContent.home?.hero?.heroBoxes || [{}, {}, {}, {}])];
+                                  boxes[i] = { ...boxes[i], title: v };
+                                  updateContent('home.hero.heroBoxes', boxes);
+                                }} />
+                                <TextField label="Link" value={siteContent.home?.hero?.heroBoxes?.[i]?.link || ''} onChange={(v) => {
+                                  const boxes = [...(siteContent.home?.hero?.heroBoxes || [{}, {}, {}, {}])];
+                                  boxes[i] = { ...boxes[i], link: v };
+                                  updateContent('home.hero.heroBoxes', boxes);
+                                }} placeholder="/services/..." />
+                              </div>
+                              <TextField label="Description" value={siteContent.home?.hero?.heroBoxes?.[i]?.description || ''} onChange={(v) => {
+                                const boxes = [...(siteContent.home?.hero?.heroBoxes || [{}, {}, {}, {}])];
+                                boxes[i] = { ...boxes[i], description: v };
+                                updateContent('home.hero.heroBoxes', boxes);
+                              }} />
+                              <TextField label="Color (Tailwind gradient)" value={siteContent.home?.hero?.heroBoxes?.[i]?.color || ''} onChange={(v) => {
+                                const boxes = [...(siteContent.home?.hero?.heroBoxes || [{}, {}, {}, {}])];
+                                boxes[i] = { ...boxes[i], color: v };
+                                updateContent('home.hero.heroBoxes', boxes);
+                              }} placeholder="from-teal-500 to-cyan-600" />
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      <div className="mt-4 pt-4 border-t border-gray-200">
+                        <h4 className="font-semibold text-gray-700 mb-3">Highlight Stat (floating badge)</h4>
+                        <div className="grid grid-cols-2 gap-4">
+                          <TextField label="Value" value={siteContent.home?.hero?.highlightStat?.value || ''} onChange={(v) => updateContent('home.hero.highlightStat', { ...(siteContent.home?.hero?.highlightStat || {}), value: v })} placeholder="500K+" />
+                          <TextField label="Label" value={siteContent.home?.hero?.highlightStat?.label || ''} onChange={(v) => updateContent('home.hero.highlightStat', { ...(siteContent.home?.hero?.highlightStat || {}), label: v })} placeholder="People Impacted" />
+                        </div>
+                      </div>
                     </Section>
 
                     <Section title="Stats" icon={<Type className="w-4 h-4 text-teal-600" />} sectionKey="home-stats">
