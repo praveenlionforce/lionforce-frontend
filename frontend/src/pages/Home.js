@@ -271,9 +271,9 @@ function Home() {
                     <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
                     <div className="relative z-10">
                       <BookOpen className="w-10 h-10 mb-4" />
-                      <h3 className="text-2xl font-bold mb-3">Custom eLearning</h3>
+                      <h3 className="text-2xl font-bold mb-3">AI-Powered eLearning</h3>
                       <p className="text-white/80 text-sm mb-4">
-                        Interactive, scenario-based learning that transforms engagement.
+                        Interactive, AI-enhanced learning that transforms engagement and retention.
                       </p>
                       <div className="inline-flex items-center gap-2 text-white text-sm font-semibold group-hover:gap-3 transition-all">
                         Learn More <ArrowRight className="w-4 h-4" />
@@ -295,9 +295,9 @@ function Home() {
                     <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
                     <div className="relative z-10">
                       <Code className="w-10 h-10 mb-4" />
-                      <h3 className="text-2xl font-bold mb-3">Software & IoT</h3>
+                      <h3 className="text-2xl font-bold mb-3">Software & AI</h3>
                       <p className="text-white/80 text-sm mb-4">
-                        Smart, scalable solutions from web apps to IoT integrations.
+                        Smart, AI-driven solutions from web apps to IoT integrations.
                       </p>
                       <div className="inline-flex items-center gap-2 text-white text-sm font-semibold group-hover:gap-3 transition-all">
                         Learn More <ArrowRight className="w-4 h-4" />
