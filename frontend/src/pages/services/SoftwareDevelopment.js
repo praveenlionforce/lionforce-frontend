@@ -4,38 +4,38 @@ import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 import {
   ArrowRight, CheckCircle, Code, Rocket, Shield, Zap, RefreshCw, Users,
-  Layers, Smartphone, Database, Cloud, Lock, TrendingUp, Wifi
+  Layers, Smartphone, Database, Cloud, Lock, TrendingUp, Wifi, Cpu
 } from 'lucide-react';
 
 function SoftwareDevelopment() {
   const services = [
+    { title: 'AI & Machine Learning', description: 'Custom AI solutions, ML models, intelligent automation, and predictive analytics for smarter business decisions.', icon: <Cpu className="w-6 h-6" /> },
     { title: 'Comprehensive Product Development', description: 'End-to-end product development from ideation to deployment. MVP in 8-12 weeks.', icon: <Rocket className="w-6 h-6" /> },
     { title: 'IoT & Embedded Solutions', description: 'Smart device integration, sensor networks, industrial IoT, and connected product development.', icon: <Wifi className="w-6 h-6" /> },
     { title: 'Expert Software Design & Engineering', description: 'Clean code, scalable architecture, modern frameworks. React, Node.js, Python, Java.', icon: <Code className="w-6 h-6" /> },
     { title: 'Rapid MVP Launch', description: 'Quick market validation with Minimum Viable Product. Launch in 6-10 weeks.', icon: <Zap className="w-6 h-6" /> },
     { title: 'Legacy Software Modernization', description: 'Upgrade outdated systems. Cloud migration, API modernization, UI refresh.', icon: <RefreshCw className="w-6 h-6" /> },
     { title: 'Web Applications', description: 'Dynamic, responsive web apps. React, Vue, Angular. Progressive Web Apps (PWA).', icon: <Layers className="w-6 h-6" /> },
-    { title: 'Mobile Apps', description: 'Native iOS/Android and React Native cross-platform apps. App Store optimization.', icon: <Smartphone className="w-6 h-6" /> },
-    { title: 'API Development', description: 'RESTful APIs, GraphQL, microservices. Third-party integrations.', icon: <Database className="w-6 h-6" /> }
+    { title: 'Mobile Apps', description: 'Native iOS/Android and React Native cross-platform apps. App Store optimization.', icon: <Smartphone className="w-6 h-6" /> }
   ];
 
   const techStack = [
-    { category: 'Frontend', techs: ['React', 'Vue.js', 'Angular', 'Next.js', 'TypeScript'] },
-    { category: 'Backend', techs: ['Node.js', 'Python', 'Java', 'PHP', '.NET'] },
+    { category: 'AI/ML', techs: ['TensorFlow', 'PyTorch', 'OpenAI', 'LangChain'] },
+    { category: 'Frontend', techs: ['React', 'Vue.js', 'Angular', 'Next.js'] },
+    { category: 'Backend', techs: ['Node.js', 'Python', 'Java', '.NET'] },
     { category: 'Mobile', techs: ['React Native', 'Flutter', 'Swift', 'Kotlin'] },
-    { category: 'IoT', techs: ['Arduino', 'Raspberry Pi', 'MQTT', 'AWS IoT'] },
     { category: 'Cloud', techs: ['AWS', 'Azure', 'Google Cloud', 'Heroku'] },
-    { category: 'DevOps', techs: ['Docker', 'Kubernetes', 'CI/CD', 'Jenkins'] }
+    { category: 'IoT', techs: ['Arduino', 'Raspberry Pi', 'MQTT', 'AWS IoT'] }
   ];
 
   const benefits = [
+    'AI-powered development for smarter solutions',
     '40% faster time-to-market with agile methodology',
     'Save 50% on development costs vs in-house teams',
     'Scalable solutions that grow with your business',
     'Security-first approach with penetration testing',
     'Post-launch support and continuous updates',
     'Dedicated project manager for your project',
-    'Transparent weekly progress reports',
     'Code ownership and complete documentation'
   ];
 
