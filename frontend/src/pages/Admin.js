@@ -745,12 +745,12 @@ function Admin() {
     }
   };
 
-  // Restore scroll position after render
-  useEffect(() => {
+  // Restore scroll position after render using useLayoutEffect for synchronous update
+  useLayoutEffect(() => {
     if (scrollContainerRef.current && scrollPositionRef.current > 0) {
       scrollContainerRef.current.scrollTop = scrollPositionRef.current;
     }
-  });
+  }, [siteContent]);
 
   const updateContent = (path, value) => {
     saveScrollPosition();
