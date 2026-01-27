@@ -494,7 +494,14 @@ function Admin() {
         stats: ['13+ years expertise', 'Cross-industry experience', 'Proven frameworks'],
         primaryCTA: 'Book Consultation',
         secondaryCTA: 'Learn More',
-        gradient: 'from-slate-600 via-gray-600 to-zinc-600'
+        gradient: 'from-slate-600 via-gray-600 to-zinc-600',
+        heroBoxes: [
+          { label: 'Strategy', value: 'Expert' },
+          { label: 'Technology', value: 'Modern' },
+          { label: 'Process', value: 'Optimized' },
+          { label: 'Growth', value: 'Sustainable' }
+        ],
+        highlightStat: { value: '13+', label: 'Years Expertise' }
       },
       services: [
         { title: 'Digital Transformation', description: 'Roadmap for modernizing your business with technology.' },
