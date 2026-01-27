@@ -196,20 +196,20 @@ function Home() {
         </section>
 
         {/* Stats */}
-        <section id="stats-section" className="py-20 bg-white border-y border-gray-200">
+        <section id="stats-section" className="py-20 bg-gradient-to-r from-teal-600 to-green-600">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-              <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={statsVisible ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 0.5 }}>
-                <div className="text-5xl font-bold gradient-text mb-2">13+</div>
-                <div className="text-gray-600 text-lg">Years of Experience</div>
+              <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={statsVisible ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 0.5 }} className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                <div className="text-5xl font-bold text-white mb-2">13+</div>
+                <div className="text-white/90 text-lg">Years of Experience</div>
               </motion.div>
-              <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={statsVisible ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 0.5, delay: 0.2 }}>
-                <div className="text-5xl font-bold gradient-text mb-2">100+</div>
-                <div className="text-gray-600 text-lg">Projects Delivered</div>
+              <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={statsVisible ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 0.5, delay: 0.2 }} className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                <div className="text-5xl font-bold text-white mb-2">100+</div>
+                <div className="text-white/90 text-lg">Projects Delivered</div>
               </motion.div>
-              <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={statsVisible ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 0.5, delay: 0.4 }}>
-                <div className="text-5xl font-bold gradient-text mb-2">32+</div>
-                <div className="text-gray-600 text-lg">Countries Served</div>
+              <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={statsVisible ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 0.5, delay: 0.4 }} className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
+                <div className="text-5xl font-bold text-white mb-2">32+</div>
+                <div className="text-white/90 text-lg">Countries Served</div>
               </motion.div>
             </div>
           </div>
