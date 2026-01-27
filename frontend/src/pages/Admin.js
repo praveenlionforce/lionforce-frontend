@@ -551,7 +551,7 @@ function Admin() {
                 ))}
                 {contentBlocks.length === 0 && (
                   <div className="bg-white p-8 rounded-xl shadow-sm border border-gray-200 text-center text-gray-500">
-                    No content blocks yet. Click "Add Block" to create one.
+                    No content blocks yet. Click &quot;Add Block&quot; to create one.
                   </div>
                 )}
               </div>
