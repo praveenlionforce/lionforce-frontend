@@ -341,7 +341,7 @@ function IndiaExpansion() {
                     ))}
                   </ul>
 
-                  <Link to="/contact" className={`block w-full text-center py-3 rounded-full font-semibold transition-all ${pkg.popular ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white hover:shadow-lg' : 'bg-gray-100 text-gray-900 hover:bg-gray-200'}`}>
+                  <Link to="/contact?service=india-expansion" className={`block w-full text-center py-3 rounded-full font-semibold transition-all ${pkg.popular ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white hover:shadow-lg' : 'bg-gray-100 text-gray-900 hover:bg-gray-200'}`}>
                     {ctaButtonText}
                   </Link>
                 </motion.div>
