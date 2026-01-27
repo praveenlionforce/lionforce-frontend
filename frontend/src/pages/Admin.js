@@ -1272,6 +1272,47 @@ function Admin() {
                       <TextField label="Section Title" value={siteContent.indiaExpansion?.pricing?.title} onChange={(v) => updateContent('indiaExpansion.pricing.title', v)} />
                       <TextField label="Section Subtitle" value={siteContent.indiaExpansion?.pricing?.subtitle} onChange={(v) => updateContent('indiaExpansion.pricing.subtitle', v)} />
                       <TextField label="Note for ODC/COE" value={siteContent.indiaExpansion?.pricing?.note} onChange={(v) => updateContent('indiaExpansion.pricing.note', v)} multiline />
+                      
+                      <div className="mt-6 pt-4 border-t border-gray-200">
+                        <h4 className="font-semibold text-gray-900 mb-4">Pricing Packages</h4>
+                        <ArrayEditor
+                          items={siteContent.indiaExpansion?.pricing?.packages}
+                          path="indiaExpansion.pricing.packages"
+                          template={{ name: 'New Package', price12: '$0', price24: '$0', minEmployees: '1', features: ['Feature 1'], popular: false }}
+                          addLabel="Add Package"
+                          renderItem={(item, index) => (
+                            <div className="space-y-3">
+                              <div className="grid grid-cols-2 gap-3">
+                                <TextField label="Package Name" value={item.name} onChange={(v) => updateArrayItem('indiaExpansion.pricing.packages', index, 'name', v)} />
+                                <TextField label="Min Employees" value={item.minEmployees} onChange={(v) => updateArrayItem('indiaExpansion.pricing.packages', index, 'minEmployees', v)} />
+                              </div>
+                              <div className="grid grid-cols-2 gap-3">
+                                <TextField label="Price (12 mo)" value={item.price12} onChange={(v) => updateArrayItem('indiaExpansion.pricing.packages', index, 'price12', v)} />
+                                <TextField label="Price (24 mo)" value={item.price24} onChange={(v) => updateArrayItem('indiaExpansion.pricing.packages', index, 'price24', v)} />
+                              </div>
+                              <div className="flex items-center gap-2">
+                                <input 
+                                  type="checkbox" 
+                                  checked={item.popular || false} 
+                                  onChange={(e) => updateArrayItem('indiaExpansion.pricing.packages', index, 'popular', e.target.checked)}
+                                  className="w-4 h-4 text-teal-600 rounded"
+                                />
+                                <label className="text-sm text-gray-700">Mark as Popular</label>
+                              </div>
+                              <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-1">Features (one per line)</label>
+                                <textarea
+                                  value={(item.features || []).join('\n')}
+                                  onChange={(e) => updateArrayItem('indiaExpansion.pricing.packages', index, 'features', e.target.value.split('\n').filter(f => f.trim()))}
+                                  rows={4}
+                                  className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                                  placeholder="Payroll processing&#10;Statutory compliance&#10;HRMS setup"
+                                />
+                              </div>
+                            </div>
+                          )}
+                        />
+                      </div>
                     </Section>
                   </>
                 )}
