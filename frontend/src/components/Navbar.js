@@ -31,11 +31,9 @@ function Navbar() {
       ]
     },
     {
-      category: 'Global Workforce Solutions',
+      category: 'India Expansion Services',
       items: [
-        { name: 'EOR (Employer of Record)', path: '/services/eor' },
-        { name: 'ODC (Offshore Development)', path: '/services/odc' },
-        { name: 'COE (Center of Excellence)', path: '/services/coe' },
+        { name: 'India Team Setup (EOR/ODC/COE)', path: '/services/india-expansion' }
       ]
     }
   ];
