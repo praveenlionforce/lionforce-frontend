@@ -6,11 +6,14 @@ import {
   ArrowRight, CheckCircle, Globe, Users, Shield, Building, Award, Target,
   FileText, Clock, DollarSign, TrendingUp, Zap, X, Briefcase, Code, Lightbulb
 } from 'lucide-react';
+import { useSiteContent } from '../../hooks/useSiteContent';
 
 function IndiaExpansion() {
+  const { content, global } = useSiteContent('indiaExpansion');
   const [activeTab, setActiveTab] = useState('eor');
 
-  const packages = [
+  // Default packages - will be overridden by CMS if available
+  const defaultPackages = [
     {
       name: 'Core Setup & Compliance',
       price12: '$149',
