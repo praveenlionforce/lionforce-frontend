@@ -1713,6 +1713,9 @@ function Admin() {
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
               <div className="p-4 border-b border-gray-200 flex items-center justify-between">
                 <h2 className="font-bold text-gray-900">Contact Form Submissions ({submissions.length})</h2>
+                <div className="text-sm text-gray-500">
+                  Forward to: <span className="font-medium text-gray-700">{siteContent?.global?.formSubmissionEmail || 'praveen@lionforce.net'}</span>
+                </div>
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full">
@@ -1723,6 +1726,7 @@ function Admin() {
                       <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Service</th>
                       <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Message</th>
                       <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Date</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Actions</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-gray-200">
@@ -1731,11 +1735,21 @@ function Admin() {
                         <td className="px-4 py-3 text-sm font-medium text-gray-900">{sub.name}</td>
                         <td className="px-4 py-3 text-sm text-gray-600">{sub.email}</td>
                         <td className="px-4 py-3 text-sm text-gray-600">{sub.service || '-'}</td>
-                        <td className="px-4 py-3 text-sm text-gray-600 max-w-xs truncate">{sub.message || '-'}</td>
+                        <td className="px-4 py-3 text-sm text-gray-600 max-w-xs truncate" title={sub.message}>{sub.message || '-'}</td>
                         <td className="px-4 py-3 text-sm text-gray-500">{new Date(sub.timestamp).toLocaleDateString()}</td>
+                        <td className="px-4 py-3">
+                          <a
+                            href={`mailto:${siteContent?.global?.formSubmissionEmail || 'praveen@lionforce.net'}?subject=Fwd: Contact Form - ${sub.name}&body=${encodeURIComponent(`--- Forwarded Contact Form Submission ---\n\nName: ${sub.name}\nEmail: ${sub.email}\nService: ${sub.service || 'Not specified'}\nDate: ${new Date(sub.timestamp).toLocaleString()}\n\nMessage:\n${sub.message || 'No message'}\n\n--- Reply to: ${sub.email} ---`)}`}
+                            className="inline-flex items-center gap-1 px-3 py-1.5 bg-teal-50 text-teal-700 rounded-lg hover:bg-teal-100 transition-colors text-sm font-medium"
+                            title="Forward to email"
+                          >
+                            <Mail className="w-4 h-4" />
+                            Forward
+                          </a>
+                        </td>
                       </tr>
                     ))}
-                    {submissions.length === 0 && <tr><td colSpan="5" className="px-4 py-8 text-center text-gray-500">No submissions yet</td></tr>}
+                    {submissions.length === 0 && <tr><td colSpan="6" className="px-4 py-8 text-center text-gray-500">No submissions yet</td></tr>}
                   </tbody>
                 </table>
               </div>
