@@ -343,7 +343,7 @@ function Contact() {
               <h2 className="text-2xl font-bold text-gray-900">Explore Our Services</h2>
             </div>
             <div className="flex flex-wrap justify-center gap-4">
-              {services.slice(0, 6).map((service, index) => (
+              {serviceLinks.map((service, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 10 }}
@@ -352,9 +352,13 @@ function Contact() {
                   transition={{ delay: index * 0.05 }}
                   whileHover={{ scale: 1.05 }}
                 >
-                  <div className="px-6 py-3 bg-white rounded-full border border-gray-200 hover:border-teal-500 hover:shadow-md transition-all cursor-pointer">
-                    <span className="text-gray-700 font-medium">{service}</span>
-                  </div>
+                  <Link 
+                    to={service.link}
+                    className="px-6 py-3 bg-white rounded-full border border-gray-200 hover:border-teal-500 hover:shadow-md transition-all cursor-pointer inline-block"
+                    data-testid={`service-link-${index}`}
+                  >
+                    <span className="text-gray-700 font-medium">{service.name}</span>
+                  </Link>
                 </motion.div>
               ))}
             </div>
