@@ -899,15 +899,34 @@ function Admin() {
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
               <div className="lg:col-span-1">
                 <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4 sticky top-20">
-                  <h3 className="font-semibold text-gray-900 mb-3 text-sm">Pages</h3>
-                  <div className="space-y-1">
-                    {pages.map(page => (
+                  <h3 className="font-semibold text-gray-900 mb-3 text-sm">Main Pages</h3>
+                  <div className="space-y-1 mb-4">
+                    {pages.filter(p => p.category === 'main').map(page => (
                       <button key={page.id} onClick={() => setSelectedPage(page.id)} className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-left text-sm transition-all ${selectedPage === page.id ? 'bg-teal-600 text-white' : 'hover:bg-gray-100 text-gray-700'}`}>
                         {page.icon}<span>{page.name}</span>
                       </button>
                     ))}
                   </div>
-                  <button onClick={saveContent} disabled={saveStatus === 'saving'} className="w-full mt-4 bg-gradient-to-r from-teal-600 to-green-600 text-white py-2.5 rounded-lg font-semibold text-sm hover:shadow-lg transition-all disabled:opacity-50 flex items-center justify-center gap-2">
+                  
+                  <h3 className="font-semibold text-gray-900 mb-3 text-sm">Service Pages</h3>
+                  <div className="space-y-1 mb-4">
+                    {pages.filter(p => p.category === 'services').map(page => (
+                      <button key={page.id} onClick={() => setSelectedPage(page.id)} className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-left text-sm transition-all ${selectedPage === page.id ? 'bg-teal-600 text-white' : 'hover:bg-gray-100 text-gray-700'}`}>
+                        {page.icon}<span>{page.name}</span>
+                      </button>
+                    ))}
+                  </div>
+                  
+                  <h3 className="font-semibold text-gray-900 mb-3 text-sm">Settings</h3>
+                  <div className="space-y-1 mb-4">
+                    {pages.filter(p => p.category === 'settings').map(page => (
+                      <button key={page.id} onClick={() => setSelectedPage(page.id)} className={`w-full flex items-center gap-2 px-3 py-2 rounded-lg text-left text-sm transition-all ${selectedPage === page.id ? 'bg-teal-600 text-white' : 'hover:bg-gray-100 text-gray-700'}`}>
+                        {page.icon}<span>{page.name}</span>
+                      </button>
+                    ))}
+                  </div>
+                  
+                  <button onClick={saveContent} disabled={saveStatus === 'saving'} className="w-full bg-gradient-to-r from-teal-600 to-green-600 text-white py-2.5 rounded-lg font-semibold text-sm hover:shadow-lg transition-all disabled:opacity-50 flex items-center justify-center gap-2">
                     <Save className="w-4 h-4" />{saveStatus === 'saving' ? 'Saving...' : 'Save All'}
                   </button>
                 </div>
