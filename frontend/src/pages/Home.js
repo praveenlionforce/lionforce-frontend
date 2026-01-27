@@ -282,20 +282,16 @@ function Home() {
               <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
               <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
               
-              {/* Scrolling container */}
-              <div className="flex animate-marquee hover:pause-animation">
-                {/* First set of logos */}
-                {clients.map((client, index) => (
-                  <div key={`logo-1-${index}`} className="flex-shrink-0 mx-8 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300">
-                    <img src={client.logo} alt={client.name} className="h-12 w-auto object-contain min-w-[100px]" />
-                  </div>
-                ))}
-                {/* Duplicate set for seamless loop */}
-                {clients.map((client, index) => (
-                  <div key={`logo-2-${index}`} className="flex-shrink-0 mx-8 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300">
-                    <img src={client.logo} alt={client.name} className="h-12 w-auto object-contain min-w-[100px]" />
-                  </div>
-                ))}
+              {/* Scrolling container - infinite seamless loop */}
+              <div className="flex overflow-hidden">
+                <div className="flex animate-marquee-scroll">
+                  {/* Triple the logos for smoother infinite effect */}
+                  {[...clients, ...clients, ...clients].map((client, index) => (
+                    <div key={`logo-${index}`} className="flex-shrink-0 mx-8 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300">
+                      <img src={client.logo} alt={client.name} className="h-12 w-auto object-contain min-w-[100px]" />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </section>
