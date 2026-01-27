@@ -58,6 +58,12 @@ function IndiaExpansion() {
     }
   ];
 
+  // Use CMS packages if available, otherwise use defaults
+  const packages = content?.pricing?.packages || defaultPackages;
+  const pricingTitle = content?.pricing?.title || 'EOR Pricing Packages';
+  const pricingSubtitle = content?.pricing?.subtitle || 'Transparent pricing for Employer of Record services. No hidden fees.';
+  const pricingNote = content?.pricing?.note || 'For ODC & COE pricing, please contact us for a customized quote.';
+
   const services = [
     {
       id: 'eor',
