@@ -1465,6 +1465,47 @@ function Admin() {
                   </>
                 )}
 
+                {/* INDUSTRIES PAGE */}
+                {selectedPage === 'industries' && (
+                  <>
+                    <div className="flex items-center justify-between mb-2">
+                      <h2 className="text-xl font-bold text-gray-900">Industries Page</h2>
+                      <a href="/industries" target="_blank" rel="noopener noreferrer" className="text-teal-600 hover:underline text-sm flex items-center gap-1"><Eye className="w-4 h-4" />Preview</a>
+                    </div>
+
+                    <Section title="SEO Settings" icon={<Globe className="w-4 h-4 text-teal-600" />} sectionKey="industries-seo" defaultOpen={false}>
+                      <TextField label="Page Title" value={siteContent.industries?.seo?.title} onChange={(v) => updateContent('industries.seo.title', v)} />
+                      <TextField label="Meta Description" value={siteContent.industries?.seo?.description} onChange={(v) => updateContent('industries.seo.description', v)} multiline />
+                      <TextField label="Keywords (comma separated)" value={siteContent.industries?.seo?.keywords} onChange={(v) => updateContent('industries.seo.keywords', v)} multiline />
+                      <div className="grid grid-cols-2 gap-4">
+                        <ImageField label="OG Image" value={siteContent.industries?.seo?.ogImage} onChange={(v) => updateContent('industries.seo.ogImage', v)} />
+                        <TextField label="Canonical URL" value={siteContent.industries?.seo?.canonicalUrl} onChange={(v) => updateContent('industries.seo.canonicalUrl', v)} />
+                      </div>
+                    </Section>
+
+                    <Section title="Hero Section" icon={<Layout className="w-4 h-4 text-teal-600" />} sectionKey="industries-hero" defaultOpen={true}>
+                      <TextField label="Title" value={siteContent.industries?.hero?.title} onChange={(v) => updateContent('industries.hero.title', v)} />
+                      <TextField label="Subtitle" value={siteContent.industries?.hero?.subtitle} onChange={(v) => updateContent('industries.hero.subtitle', v)} multiline />
+                    </Section>
+
+                    <Section title="Industries List" icon={<Briefcase className="w-4 h-4 text-teal-600" />} sectionKey="industries-list">
+                      <ArrayEditor
+                        items={siteContent.industries?.industries}
+                        path="industries.industries"
+                        template={{ name: 'New Industry', description: 'Description', stats: 'Key stat' }}
+                        addLabel="Add Industry"
+                        renderItem={(item, index) => (
+                          <>
+                            <TextField label="Industry Name" value={item.name} onChange={(v) => updateArrayItem('industries.industries', index, 'name', v)} />
+                            <TextField label="Description" value={item.description} onChange={(v) => updateArrayItem('industries.industries', index, 'description', v)} multiline />
+                            <TextField label="Key Stat" value={item.stats} onChange={(v) => updateArrayItem('industries.industries', index, 'stats', v)} />
+                          </>
+                        )}
+                      />
+                    </Section>
+                  </>
+                )}
+
                 {/* INDIA EXPANSION PAGE */}
                 {selectedPage === 'indiaExpansion' && (
                   <>
