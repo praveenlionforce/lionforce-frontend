@@ -305,16 +305,24 @@ function Home() {
                 Why <span className="gradient-text">Choose Lionforce?</span>
               </h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-              {benefits.map((benefit, index) => (
-                <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center p-6">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-teal-500 to-green-500 rounded-full text-white mb-4">
-                    {benefit.icon}
-                  </div>
-                  <h3 className="text-xl font-bold mb-2 text-gray-900">{benefit.title}</h3>
-                  <p className="text-gray-600">{benefit.description}</p>
-                </motion.div>
-              ))}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {benefits.map((benefit, index) => {
+                const colors = [
+                  'from-teal-500 to-teal-600',
+                  'from-green-500 to-green-600', 
+                  'from-blue-500 to-blue-600',
+                  'from-indigo-500 to-indigo-600'
+                ];
+                return (
+                  <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-gradient-to-br from-gray-50 to-white p-6 rounded-xl border border-gray-200 hover:shadow-lg transition-shadow">
+                    <div className={`inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br ${colors[index]} rounded-full text-white mb-4`}>
+                      {benefit.icon}
+                    </div>
+                    <h3 className="text-lg font-bold mb-2 text-gray-900">{benefit.title}</h3>
+                    <p className="text-gray-600 text-sm">{benefit.description}</p>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </section>
