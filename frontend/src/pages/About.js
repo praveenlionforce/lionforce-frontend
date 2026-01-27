@@ -131,68 +131,28 @@ function About() {
 
             {/* Flowing cards with alternating layout */}
             <div className="space-y-16">
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="flex flex-col lg:flex-row items-center gap-12"
-              >
-                <div className="lg:w-1/2">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-teal-500 to-green-500 rounded-2xl text-white text-2xl font-bold mb-6">01</div>
-                  <h3 className="text-3xl font-bold mb-4 text-gray-900">Build Your Dream Team</h3>
-                  <p className="text-gray-600 text-lg leading-relaxed">
-                    We quickly assemble dynamic teams of vetted specialists to accelerate your product journey, 
-                    providing complete visibility and flexibility at every turn. Your success is our blueprint.
-                  </p>
-                </div>
-                <div className="lg:w-1/2">
-                  <div className="h-64 bg-gradient-to-br from-teal-100 to-green-100 rounded-3xl flex items-center justify-center">
-                    <div className="text-6xl">👥</div>
+              {challengeItems.map((challenge, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className={`flex flex-col ${idx % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-12`}
+                >
+                  <div className="lg:w-1/2">
+                    <div className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${idx % 2 === 1 ? 'from-green-500 to-teal-500' : 'from-teal-500 to-green-500'} rounded-2xl text-white text-2xl font-bold mb-6`}>0{idx + 1}</div>
+                    <h3 className="text-3xl font-bold mb-4 text-gray-900">{challenge.title}</h3>
+                    <p className="text-gray-600 text-lg leading-relaxed">
+                      {challenge.description}
+                    </p>
                   </div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="flex flex-col lg:flex-row-reverse items-center gap-12"
-              >
-                <div className="lg:w-1/2">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-500 to-teal-500 rounded-2xl text-white text-2xl font-bold mb-6">02</div>
-                  <h3 className="text-3xl font-bold mb-4 text-gray-900">Ignite Digital Transformation</h3>
-                  <p className="text-gray-600 text-lg leading-relaxed">
-                    Unlock new possibilities and elevate your business by embracing cutting-edge technology. 
-                    We craft innovative solutions tailored to your unique needs-no cookie-cutter approaches here.
-                  </p>
-                </div>
-                <div className="lg:w-1/2">
-                  <div className="h-64 bg-gradient-to-br from-green-100 to-teal-100 rounded-3xl flex items-center justify-center">
-                    <div className="text-6xl">🚀</div>
+                  <div className="lg:w-1/2">
+                    <div className={`h-64 bg-gradient-to-br ${idx % 2 === 1 ? 'from-green-100 to-teal-100' : 'from-teal-100 to-green-100'} rounded-3xl flex items-center justify-center`}>
+                      <div className="text-6xl">{idx === 0 ? '👥' : idx === 1 ? '🚀' : '⚡'}</div>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="flex flex-col lg:flex-row items-center gap-12"
-              >
-                <div className="lg:w-1/2">
-                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-teal-500 to-green-500 rounded-2xl text-white text-2xl font-bold mb-6">03</div>
-                  <h3 className="text-3xl font-bold mb-4 text-gray-900">End-to-End Solutions</h3>
-                  <p className="text-gray-600 text-lg leading-relaxed">
-                    Experience full-cycle innovation with comprehensive eLearning and software engineering. 
-                    From first prototype to final deployment, scaling, and ongoing support-we&apos;ve got you covered.
-                  </p>
-                </div>
-                <div className="lg:w-1/2">
-                  <div className="h-64 bg-gradient-to-br from-teal-100 to-green-100 rounded-3xl flex items-center justify-center">
-                    <div className="text-6xl">⚡</div>
-                  </div>
-                </div>
-              </motion.div>
+                </motion.div>
+              ))}
             </div>
           </div>
         </section>
