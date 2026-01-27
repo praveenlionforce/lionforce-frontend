@@ -366,7 +366,14 @@ function Admin() {
         stats: ['13+ years experience', '300+ apps built', '40% faster delivery'],
         primaryCTA: 'Start Your Project',
         secondaryCTA: 'Call +91 96005 36354',
-        gradient: 'from-teal-600 via-cyan-600 to-blue-600'
+        gradient: 'from-teal-600 via-cyan-600 to-blue-600',
+        heroBoxes: [
+          { label: 'AI Solutions', value: 'Smart' },
+          { label: 'Web & Mobile', value: 'Full Stack' },
+          { label: 'IoT', value: 'Connected' },
+          { label: 'Cloud', value: 'Scalable' }
+        ],
+        highlightStat: { value: '300+', label: 'Apps Built' }
       },
       services: [
         { title: 'AI & Machine Learning', description: 'Custom AI solutions, ML models, intelligent automation, and predictive analytics.' },
