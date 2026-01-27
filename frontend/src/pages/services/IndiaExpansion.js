@@ -104,7 +104,7 @@ function IndiaExpansion() {
   ];
 
   const comparison = [
-    { feature: 'Easy Exits - No Lock-in', lionforce: true, competitors: false },
+    { feature: 'Easy Exits', lionforce: true, competitors: false },
     { feature: 'Co-branding Available', lionforce: true, competitors: false },
     { feature: 'Vendor Management', lionforce: true, competitors: false },
     { feature: 'Real Estate / Office Setup', lionforce: true, competitors: false },
