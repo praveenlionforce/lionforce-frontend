@@ -1,7 +1,5 @@
-import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
-import { flushSync } from 'react-dom';
+import React, { useState, useEffect, useRef, useCallback, memo } from 'react';
 import { motion } from 'framer-motion';
-import { Helmet } from 'react-helmet-async';
 import {
   Lock, LogOut, FileText, Plus, Trash2, Edit, Save, X,
   Settings, LayoutDashboard, MessageSquare, Newspaper,
@@ -9,6 +7,93 @@ import {
   ChevronDown, ChevronRight, Briefcase, GripVertical,
   Palette, Type, Layout, FormInput, Users, Mail, CheckCircle, Link2, Award
 } from 'lucide-react';
+
+// Memoized TextField component - manages local state and only updates parent on blur
+const TextField = memo(({ label, value, onChange, multiline = false, placeholder = '' }) => {
+  const [localValue, setLocalValue] = useState(value || '');
+  const inputRef = useRef(null);
+  
+  // Sync local value when prop value changes from external source
+  useEffect(() => {
+    setLocalValue(value || '');
+  }, [value]);
+  
+  const handleBlur = useCallback(() => {
+    if (localValue !== value) {
+      onChange(localValue);
+    }
+  }, [localValue, value, onChange]);
+  
+  return (
+    <div className="mb-3">
+      <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+      {multiline ? (
+        <textarea
+          ref={inputRef}
+          value={localValue}
+          onChange={(e) => setLocalValue(e.target.value)}
+          onBlur={handleBlur}
+          placeholder={placeholder}
+          rows={3}
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent resize-none"
+        />
+      ) : (
+        <input
+          ref={inputRef}
+          type="text"
+          value={localValue}
+          onChange={(e) => setLocalValue(e.target.value)}
+          onBlur={handleBlur}
+          placeholder={placeholder}
+          className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+        />
+      )}
+    </div>
+  );
+});
+TextField.displayName = 'TextField';
+
+// Memoized ImageField component
+const ImageField = memo(({ label, value, onChange, onOpenImages, apiUrl }) => {
+  const [localValue, setLocalValue] = useState(value || '');
+  
+  useEffect(() => {
+    setLocalValue(value || '');
+  }, [value]);
+  
+  const handleBlur = useCallback(() => {
+    if (localValue !== value) {
+      onChange(localValue);
+    }
+  }, [localValue, value, onChange]);
+  
+  return (
+    <div className="mb-3">
+      <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
+      <div className="flex gap-2">
+        <input
+          type="text"
+          value={localValue}
+          onChange={(e) => setLocalValue(e.target.value)}
+          onBlur={handleBlur}
+          placeholder="Image URL or select from library"
+          className="flex-1 px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500"
+        />
+        <button
+          onClick={onOpenImages}
+          className="px-3 py-2 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+          type="button"
+        >
+          <Image className="w-4 h-4" />
+        </button>
+      </div>
+      {localValue && (
+        <img src={localValue.startsWith('/') ? `${apiUrl}${localValue}` : localValue} alt="Preview" className="mt-2 h-20 object-cover rounded" />
+      )}
+    </div>
+  );
+});
+ImageField.displayName = 'ImageField';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
 
