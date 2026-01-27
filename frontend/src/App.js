@@ -1,6 +1,5 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { HelmetProvider } from 'react-helmet-async';
 import '@/App.css';
 import Home from '@/pages/Home';
 import About from '@/pages/About';
@@ -19,9 +18,8 @@ import ScrollToTop from '@/components/ScrollToTop';
 
 function App() {
   return (
-    <HelmetProvider>
-      <BrowserRouter>
-        <ScrollToTop />
+    <BrowserRouter>
+      <ScrollToTop />
       <Routes>
         {/* Admin route without Layout */}
         <Route path="/admin" element={<Admin />} />
@@ -46,7 +44,6 @@ function App() {
         } />
       </Routes>
     </BrowserRouter>
-    </HelmetProvider>
   );
 }
 
