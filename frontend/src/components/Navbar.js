@@ -56,7 +56,7 @@ function Navbar() {
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3" data-testid="navbar-logo">
             <img 
-              src="https://customer-assets.emergentagent.com/job_elegant-refresh-3/artifacts/jeiik01t_Lionforce%20new%20logo%20set-crop.png" 
+              src={headerLogo} 
               alt="Lionforce Logo" 
               className="h-8 w-auto"
             />
