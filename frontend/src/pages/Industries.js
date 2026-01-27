@@ -66,12 +66,11 @@ function Industries() {
             >
               <p className="text-teal-400 font-semibold text-sm uppercase tracking-widest mb-4">Industries</p>
               <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-                Expertise Across
+                {hero.title || 'Expertise Across'}
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-green-400">Every Sector</span>
               </h1>
               <p className="text-xl text-gray-300 mb-8">
-                From pharma giants to EdTech startups, we&apos;ve delivered 300+ projects across industries. 
-                Our domain expertise means solutions that actually work for your business.
+                {hero.subtitle || "From pharma giants to EdTech startups, we've delivered 300+ projects across industries. Our domain expertise means solutions that actually work for your business."}
               </p>
               <div className="flex flex-wrap gap-4">
                 <div className="flex items-center gap-2 text-white/80">
