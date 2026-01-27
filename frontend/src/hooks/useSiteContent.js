@@ -426,6 +426,13 @@ const defaultContent = {
     ]
   },
   consulting: {
+    seo: {
+      title: 'Business & Technology Consulting - Digital Transformation Experts',
+      description: 'Strategic consulting for digital transformation, technology decisions, and business growth. 13+ years expertise across industries.',
+      keywords: 'business consulting, technology consulting, digital transformation, strategy, process optimization, change management',
+      ogImage: '',
+      canonicalUrl: ''
+    },
     hero: {
       badge: 'Expert Guidance',
       badgeEmoji: '💼',
