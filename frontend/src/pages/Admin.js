@@ -324,7 +324,14 @@ function Admin() {
         stats: ['13+ years experience', '300+ projects delivered', '25+ languages'],
         primaryCTA: 'Get Free Demo & Quote',
         secondaryCTA: 'Call +91 96005 36354',
-        gradient: 'from-[#428697] via-[#356d7a] to-[#2d5a66]'
+        gradient: 'from-[#428697] via-[#356d7a] to-[#2d5a66]',
+        heroBoxes: [
+          { label: 'AI-Powered', value: 'Learning' },
+          { label: 'Gamified', value: '3x Engagement' },
+          { label: 'Microlearning', value: '5-min Modules' },
+          { label: 'Analytics', value: 'Real-time' }
+        ],
+        highlightStat: { value: '500K+', label: 'Learners Trained' }
       },
       solutions: [
         { title: 'AI-Powered Learning Paths', description: 'Intelligent content recommendations powered by AI. Personalized learning journeys.' },
