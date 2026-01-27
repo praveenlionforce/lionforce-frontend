@@ -28,7 +28,7 @@ function COE() {
         'Competitive advantage through innovation',
         'Measurable ROI and business impact'
       ]}
-      ctaText="Build Your COE"
+      ctaText="Build Your India COE"
     />
   );
 }
