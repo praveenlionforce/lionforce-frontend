@@ -166,35 +166,32 @@ function About() {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">What We Believe In</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">{values.title || 'What We Believe In'}</h2>
               <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                Our values aren&apos;t just words on a wall-they guide every decision we make.
+                {values.subtitle || "Our values aren't just words on a wall - they guide every decision we make."}
               </p>
             </motion.div>
 
             <div className="flex flex-wrap justify-center gap-4">
-              {[
-                { title: 'Partnership', desc: 'Building lasting relationships based on trust' },
-                { title: 'Transparency', desc: 'Complete visibility at every step' },
-                { title: 'Flexibility', desc: 'Adapting as your needs evolve' },
-                { title: 'Sincerity', desc: 'Clear communication, no jargon' },
-                { title: 'Support', desc: 'Nurturing talent continuously' }
-              ].map((value, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: index * 0.1 }}
-                  whileHover={{ scale: 1.05 }}
-                  className="group relative"
-                >
-                  <div className="absolute inset-0 bg-gradient-to-r from-teal-500 to-green-500 rounded-full blur opacity-50 group-hover:opacity-100 transition-opacity"></div>
-                  <div className="relative bg-gray-800 px-8 py-4 rounded-full border border-gray-700 hover:border-teal-500 transition-colors cursor-default">
-                    <span className="font-semibold text-lg">{value.title}</span>
-                  </div>
-                </motion.div>
-              ))}
+              {valueItems.map((value, index) => {
+                const valueTitle = typeof value === 'string' ? value : value.title;
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    whileHover={{ scale: 1.05 }}
+                    className="group relative"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-r from-teal-500 to-green-500 rounded-full blur opacity-50 group-hover:opacity-100 transition-opacity"></div>
+                    <div className="relative bg-gray-800 px-8 py-4 rounded-full border border-gray-700 hover:border-teal-500 transition-colors cursor-default">
+                      <span className="font-semibold text-lg">{valueTitle}</span>
+                    </div>
+                  </motion.div>
+                );
+              })}
             </div>
           </div>
         </section>
