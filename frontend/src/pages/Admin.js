@@ -1382,16 +1382,33 @@ function Admin() {
 
                     <Section title="Challenges Section" icon={<Briefcase className="w-4 h-4 text-teal-600" />} sectionKey="about-challenges">
                       <TextField label="Section Title" value={siteContent.about?.challenges?.title} onChange={(v) => updateContent('about.challenges.title', v)} />
+                      <TextField label="Section Subtitle" value={siteContent.about?.challenges?.subtitle} onChange={(v) => updateContent('about.challenges.subtitle', v)} multiline />
+                      <div className="flex items-center justify-between mt-4 mb-2">
+                        <p className="text-sm font-medium text-gray-700">Challenge Items (with images):</p>
+                        <span className="text-xs px-2 py-1 rounded-full bg-teal-100 text-teal-600">
+                          {siteContent.about?.challenges?.items?.length || 0} items
+                        </span>
+                      </div>
+                      <p className="text-xs text-gray-500 mb-3">Each challenge can have an optional image. Leave image empty to show default emoji.</p>
                       <ArrayEditor
                         items={siteContent.about?.challenges?.items}
                         path="about.challenges.items"
-                        template={{ title: 'New Challenge', description: 'Description' }}
+                        template={{ title: 'New Challenge', description: 'Description', image: '' }}
                         addLabel="Add Challenge"
                         renderItem={(item, index) => (
-                          <>
-                            <TextField label="Title" value={item.title} onChange={(v) => updateArrayItem('about.challenges.items', index, 'title', v)} />
+                          <div className="space-y-3">
+                            <div className="flex items-center gap-2">
+                              <span className="text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded">#{index + 1}</span>
+                              <TextField label="Title" value={item.title} onChange={(v) => updateArrayItem('about.challenges.items', index, 'title', v)} />
+                            </div>
                             <TextField label="Description" value={item.description} onChange={(v) => updateArrayItem('about.challenges.items', index, 'description', v)} multiline />
-                          </>
+                            <ImageField label="Challenge Image (optional)" value={item.image} onChange={(v) => updateArrayItem('about.challenges.items', index, 'image', v)} />
+                            {item.image && (
+                              <div className="bg-gray-100 p-3 rounded-lg">
+                                <img src={item.image} alt={item.title} className="h-32 w-full object-cover rounded-lg" />
+                              </div>
+                            )}
+                          </div>
                         )}
                       />
                     </Section>
