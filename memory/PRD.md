@@ -75,8 +75,8 @@ All pages use the `useSiteContent` hook to:
 - **CMS Hook**: `/app/frontend/src/hooks/useSiteContent.js`
 
 ## Access URLs
-- **Main Site**: https://brandupgrade-1.preview.emergentagent.com
-- **Admin CMS**: https://brandupgrade-1.preview.emergentagent.com/admin
+- **Main Site**: https://lionforce-rebuild.preview.emergentagent.com
+- **Admin CMS**: https://lionforce-rebuild.preview.emergentagent.com/admin
 
 ## Admin Credentials
 ```
