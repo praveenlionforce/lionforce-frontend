@@ -165,22 +165,16 @@ function Contact() {
                   viewport={{ once: true }}
                 >
                   <h2 className="text-3xl md:text-4xl font-bold mb-6 text-gray-900">
-                    Ready to Start?
+                    {form.title || 'Ready to Start?'}
                   </h2>
                   <p className="text-lg text-gray-600 mb-8">
-                    Fill out the form and our team will get back to you within 24 hours. 
-                    Or reach out directly-we&apos;re always happy to chat.
+                    {form.subtitle || "Fill out the form and our team will get back to you within 24 hours. Or reach out directly - we're always happy to chat."}
                   </p>
 
                   {/* What to expect */}
                   <div className="space-y-4 mb-8">
-                    <h3 className="font-semibold text-gray-900">What happens next?</h3>
-                    {[
-                      'We review your requirements',
-                      'Schedule a discovery call',
-                      'Provide a tailored proposal',
-                      'Start building together'
-                    ].map((step, index) => (
+                    <h3 className="font-semibold text-gray-900">{steps.title || 'What happens next?'}</h3>
+                    {stepsItems.map((step, index) => (
                       <div key={index} className="flex items-center gap-3">
                         <div className="w-8 h-8 bg-teal-100 rounded-full flex items-center justify-center text-teal-600 font-semibold text-sm">
                           {index + 1}
@@ -196,10 +190,8 @@ function Contact() {
                       <MapPin className="w-6 h-6 text-teal-600 flex-shrink-0 mt-1" />
                       <div>
                         <h3 className="font-semibold text-gray-900 mb-2">Our Office</h3>
-                        <p className="text-gray-600 text-sm">
-                          Lionforce Technologies Pvt Ltd<br />
-                          Chennai, India<br />
-                          Serving clients globally
+                        <p className="text-gray-600 text-sm whitespace-pre-line">
+                          {info.address || 'Lionforce Technologies Pvt Ltd\nChennai, India\nServing clients globally'}
                         </p>
                       </div>
                     </div>
