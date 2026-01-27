@@ -2154,6 +2154,27 @@ function Admin() {
                   <>
                     <h2 className="text-xl font-bold text-gray-900 mb-4">Global Settings</h2>
 
+                    <Section title="Site Logos" icon={<Image className="w-4 h-4 text-teal-600" />} sectionKey="global-logos" defaultOpen={true}>
+                      <div className="grid grid-cols-2 gap-6">
+                        <div>
+                          <ImageField label="Header Logo" value={siteContent.global?.headerLogo} onChange={(v) => updateContent('global.headerLogo', v)} />
+                          {siteContent.global?.headerLogo && (
+                            <div className="bg-gray-100 p-3 rounded-lg mt-2 flex items-center justify-center">
+                              <img src={siteContent.global?.headerLogo} alt="Header Logo Preview" className="h-10 object-contain" />
+                            </div>
+                          )}
+                        </div>
+                        <div>
+                          <ImageField label="Footer Logo" value={siteContent.global?.footerLogo} onChange={(v) => updateContent('global.footerLogo', v)} />
+                          {siteContent.global?.footerLogo && (
+                            <div className="bg-gray-800 p-3 rounded-lg mt-2 flex items-center justify-center">
+                              <img src={siteContent.global?.footerLogo} alt="Footer Logo Preview" className="h-10 object-contain" />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    </Section>
+
                     <Section title="Company Information" icon={<Settings className="w-4 h-4 text-teal-600" />} sectionKey="global-company" defaultOpen={true}>
                       <TextField label="Company Name" value={siteContent.global?.companyName} onChange={(v) => updateContent('global.companyName', v)} />
                       <div className="grid grid-cols-2 gap-4">
