@@ -410,7 +410,14 @@ function Admin() {
         stats: ['300+ designs delivered', 'User-first approach', 'Increased conversions'],
         primaryCTA: 'Start Your Design Project',
         secondaryCTA: 'View Portfolio',
-        gradient: 'from-[#6ab445] via-[#5a9e3d] to-[#4a8a35]'
+        gradient: 'from-[#6ab445] via-[#5a9e3d] to-[#4a8a35]',
+        heroBoxes: [
+          { label: 'UX Research', value: 'User-First' },
+          { label: 'UI Design', value: 'Beautiful' },
+          { label: 'Prototyping', value: 'Interactive' },
+          { label: 'Design Systems', value: 'Scalable' }
+        ],
+        highlightStat: { value: '300+', label: 'Projects Delivered' }
       },
       services: [
         { title: 'UX Research & Strategy', description: 'User interviews, personas, journey mapping, and competitive analysis.' },
