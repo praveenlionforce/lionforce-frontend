@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Target, Award, ArrowRight, Quote } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import SEO from '../components/SEO';
 import { useSiteContent } from '../hooks/useSiteContent';
 
 function About() {

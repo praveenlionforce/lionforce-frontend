@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Helmet } from 'react-helmet-async';
+import SEO from '../components/SEO';
 import { 
   Pill, GraduationCap, Building2, ShoppingCart, Factory, Plane,
   ArrowRight, CheckCircle
