@@ -1,33 +1,274 @@
 import React from 'react';
-import ServiceTemplate from '@/components/ServiceTemplate';
-import { Palette, MousePointer, Eye, Layers, Smartphone, TrendingUp } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet';
+import {
+  ArrowRight,
+  Palette,
+  Eye,
+  Layers,
+  MousePointer,
+  PenTool,
+  Users,
+  CheckCircle,
+  Phone,
+  Sparkles
+} from 'lucide-react';
+import { useSiteContent } from '../../hooks/useSiteContent';
 
 function UXUIDesign() {
+  const { content, global } = useSiteContent('uxui');
+  
+  const hero = content?.hero || {};
+  const services = content?.services || [];
+
+  const serviceIcons = [Eye, Palette, MousePointer, Layers, PenTool, Users];
+
   return (
-    <ServiceTemplate
-      title="UX/UI Design Services"
-      tagline="Feel Flow • Tap Happy • Think Simple • User First"
-      description="Designs That Feel Effortless. We blend design thinking with human empathy to craft intuitive, elegant, and conversion-boosting user journeys. Every button, swipe, and screen is intentional-built to make your users feel at home and keep coming back."
-      heroImage="https://images.unsplash.com/photo-1587440871875-191322ee64b0?auto=format&fit=crop&w=1920&q=80"
-      heroGradient="from-purple-600 via-pink-600 to-rose-600"
-      features={[
-        { icon: <Palette className="w-8 h-8" />, title: 'Visual Design', description: 'Beautiful, modern interfaces that reflect your brand identity.' },
-        { icon: <MousePointer className="w-8 h-8" />, title: 'User Experience', description: 'Intuitive workflows that delight and convert users.' },
-        { icon: <Eye className="w-8 h-8" />, title: 'User Research', description: 'Data-driven insights to inform design decisions.' },
-        { icon: <Layers className="w-8 h-8" />, title: 'Prototyping', description: 'Interactive prototypes for testing and validation.' },
-        { icon: <Smartphone className="w-8 h-8" />, title: 'Responsive Design', description: 'Seamless experience across all devices and screen sizes.' },
-        { icon: <TrendingUp className="w-8 h-8" />, title: 'Conversion Optimization', description: 'Design patterns that drive engagement and conversions.' }
-      ]}
-      benefits={[
-        'Human-centered design approach',
-        'Increased user engagement and satisfaction',
-        'Higher conversion rates and ROI',
-        'Consistent brand experience across touchpoints',
-        'Reduced development costs through early validation',
-        'Accessible designs that work for everyone'
-      ]}
-      ctaText="Elevate Your Design"
-    />
+    <>
+      <Helmet>
+        <title>UX/UI Design Services | User-Centered Design | Lionforce</title>
+        <meta name="description" content="Beautiful, intuitive interfaces that drive engagement and conversions. User research, UI design, prototyping, and design systems." />
+      </Helmet>
+
+      <div className="overflow-hidden bg-white">
+        {/* Hero Section */}
+        <section className={`relative min-h-screen pt-20 bg-gradient-to-br ${hero.gradient || 'from-violet-600 via-purple-600 to-fuchsia-600'}`}>
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-20 right-10 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 left-10 w-80 h-80 bg-purple-300/20 rounded-full blur-3xl"></div>
+          </div>
+
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-24">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
+              <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full mb-8 border border-white/30">
+                  <span className="text-xl">{hero.badgeEmoji || '🎨'}</span>
+                  <span className="text-sm font-medium text-white">{hero.badge || 'Design That Converts'}</span>
+                </div>
+
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6" data-testid="uxui-title">
+                  {hero.title || 'UX/UI Design That Users Love'}
+                </h1>
+
+                <p className="text-lg text-white/80 font-medium mb-4 tracking-wide">
+                  {hero.tagline || 'Design Smart • Convert Better • Delight Always'}
+                </p>
+
+                <p className="text-xl text-white/90 leading-relaxed mb-8 max-w-lg">
+                  {hero.subtitle || 'Beautiful, intuitive interfaces that drive engagement and conversions. User-centered design backed by research.'}
+                </p>
+
+                <div className="flex flex-wrap gap-3 mb-10">
+                  {(hero.stats || ['300+ designs delivered', 'User-first approach', 'Increased conversions']).map((stat, i) => (
+                    <span key={i} className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white text-sm border border-white/20">
+                      {stat}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Link
+                    to="/contact"
+                    className="group inline-flex items-center justify-center gap-2 bg-white text-purple-600 px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                    data-testid="uxui-cta-primary"
+                  >
+                    {hero.primaryCTA || 'Start Your Design Project'}
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                  <a
+                    href={`tel:${(global?.phone || '+91 96005 36354').replace(/\s+/g, '')}`}
+                    className="inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-full font-bold text-lg border border-white/30 hover:bg-white/20 transition-all duration-300"
+                  >
+                    <Phone className="w-5 h-5" />
+                    Call {global?.phone || '+91 96005 36354'}
+                  </a>
+                </div>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="relative hidden lg:block"
+              >
+                <div className="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20 shadow-2xl">
+                  <div className="grid grid-cols-2 gap-4">
+                    {[
+                      { icon: Eye, label: 'UX Research', value: 'User-First' },
+                      { icon: Palette, label: 'UI Design', value: 'Beautiful' },
+                      { icon: Layers, label: 'Prototyping', value: 'Interactive' },
+                      { icon: PenTool, label: 'Design Systems', value: 'Scalable' }
+                    ].map((item, i) => (
+                      <motion.div
+                        key={i}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.4 + i * 0.1 }}
+                        className="bg-white/10 p-4 rounded-xl text-center"
+                      >
+                        <item.icon className="w-8 h-8 text-white mx-auto mb-2" />
+                        <p className="text-white/70 text-xs">{item.label}</p>
+                        <p className="text-white font-bold text-sm">{item.value}</p>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.8 }}
+                  className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-12 h-12 bg-gradient-to-br from-violet-500 to-purple-500 rounded-full flex items-center justify-center text-white">
+                      <Sparkles className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <div className="font-bold text-gray-900">300+</div>
+                      <div className="text-sm text-gray-500">Projects Delivered</div>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            </div>
+          </div>
+
+          <div className="absolute bottom-0 left-0 right-0">
+            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0V120Z" fill="white"/>
+            </svg>
+          </div>
+        </section>
+
+        {/* Services Section */}
+        <section className="py-24 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                Design <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-purple-600">Services</span>
+              </h2>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                From research to implementation - we create designs that convert and delight.
+              </p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {services.map((service, index) => {
+                const Icon = serviceIcons[index % serviceIcons.length];
+                return (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className="group relative"
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-br from-violet-500/20 to-purple-500/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div className="relative p-8 bg-white rounded-2xl border border-gray-200 hover:border-purple-300 transition-all hover:shadow-xl h-full">
+                      <div className="w-14 h-14 bg-gradient-to-br from-violet-500 to-purple-600 rounded-xl flex items-center justify-center text-white mb-6">
+                        <Icon className="w-7 h-7" />
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
+                      <p className="text-gray-600">{service.description}</p>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* Process Section */}
+        <section className="py-24 bg-gradient-to-br from-gray-50 to-purple-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                Our Design <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-purple-600">Process</span>
+              </h2>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+              {[
+                { step: '01', title: 'Discover', desc: 'Research users, understand goals, identify pain points' },
+                { step: '02', title: 'Define', desc: 'Create personas, map journeys, set design principles' },
+                { step: '03', title: 'Design', desc: 'Wireframes, prototypes, visual design, iterations' },
+                { step: '04', title: 'Deliver', desc: 'Handoff, documentation, support, and continuous improvement' }
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 }}
+                  className="text-center"
+                >
+                  <div className="w-16 h-16 bg-gradient-to-br from-violet-500 to-purple-600 rounded-full flex items-center justify-center text-white text-xl font-bold mx-auto mb-4">
+                    {item.step}
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">{item.title}</h3>
+                  <p className="text-gray-600 text-sm">{item.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA Section */}
+        <section className={`py-24 bg-gradient-to-r ${hero.gradient || 'from-violet-600 via-purple-600 to-fuchsia-600'} relative overflow-hidden`}>
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute inset-0" style={{backgroundImage: 'radial-gradient(circle at 30% 50%, white 2px, transparent 2px)', backgroundSize: '60px 60px'}}></div>
+          </div>
+
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                Ready to Create Something Beautiful?
+              </h2>
+              <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
+                Let's design experiences that your users will love. Start with a free consultation.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center justify-center gap-2 bg-white text-purple-600 px-10 py-5 rounded-full font-bold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 group"
+                >
+                  Start Your Design Project
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+                <a
+                  href={`tel:${(global?.phone || '+91 96005 36354').replace(/\s+/g, '')}`}
+                  className="inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm text-white px-10 py-5 rounded-full font-bold text-lg border border-white/30 hover:bg-white/20 transition-all duration-300"
+                >
+                  <Phone className="w-5 h-5" />
+                  Call {global?.phone || '+91 96005 36354'}
+                </a>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+      </div>
+    </>
   );
 }
 
