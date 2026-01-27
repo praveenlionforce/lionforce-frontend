@@ -1322,6 +1322,22 @@ function Admin() {
                       <p className="text-sm text-gray-600 mb-2">Steps (one per line):</p>
                       <TextField label="Steps" value={siteContent.contact?.steps?.items?.join('\n')} onChange={(v) => updateContent('contact.steps.items', v.split('\n').filter(s => s.trim()))} multiline />
                     </Section>
+
+                    <Section title="Service Links (Explore Our Services)" icon={<Link2 className="w-4 h-4 text-teal-600" />} sectionKey="contact-service-links">
+                      <p className="text-sm text-gray-500 mb-4">These buttons appear at the bottom of the Contact page and link to service pages.</p>
+                      <ArrayEditor
+                        items={siteContent.contact?.serviceLinks}
+                        path="contact.serviceLinks"
+                        template={{ name: 'New Service', link: '/services/' }}
+                        addLabel="Add Service Link"
+                        renderItem={(item, index) => (
+                          <div className="grid grid-cols-2 gap-3">
+                            <TextField label="Button Name" value={item.name} onChange={(v) => updateArrayItem('contact.serviceLinks', index, 'name', v)} />
+                            <TextField label="Link URL" value={item.link} onChange={(v) => updateArrayItem('contact.serviceLinks', index, 'link', v)} placeholder="/services/..." />
+                          </div>
+                        )}
+                      />
+                    </Section>
                   </>
                 )}
 
