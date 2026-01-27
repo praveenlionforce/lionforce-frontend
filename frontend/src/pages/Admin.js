@@ -6,7 +6,7 @@ import {
   Settings, LayoutDashboard, MessageSquare, Newspaper,
   Home, Info, Phone, Globe, Image, Upload, Eye,
   ChevronDown, ChevronRight, Briefcase, GripVertical,
-  Palette, Type, Layout, FormInput, Users, Mail
+  Palette, Type, Layout, FormInput, Users, Mail, CheckCircle
 } from 'lucide-react';
 
 const API_URL = process.env.REACT_APP_BACKEND_URL;
