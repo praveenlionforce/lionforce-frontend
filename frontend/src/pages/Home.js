@@ -331,8 +331,8 @@ function Home() {
                 </Link>
               </motion.div>
 
-              {/* Other service cards */}
-              {services.slice(2, 6).map((service, index) => (
+              {/* Other service cards - excluding India Expansion (already featured above) */}
+              {services.slice(2, 5).map((service, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
