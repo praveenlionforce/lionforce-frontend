@@ -284,6 +284,15 @@ async def get_admin_subscribers(username: str = Depends(verify_admin)):
             sub['timestamp'] = datetime.fromisoformat(sub['timestamp'])
     return sorted(subscribers, key=lambda x: x.get('timestamp', datetime.min), reverse=True)
 
+# Public - Site Content (no auth required for reading)
+@api_router.get("/site-content")
+async def get_public_site_content():
+    """Public endpoint for frontend pages to fetch site content"""
+    content = await db.site_content.find_one({"type": "main"}, {"_id": 0})
+    if content:
+        return content
+    return {"type": "main", "content": {}}
+
 # Admin - Site Content Management
 @api_router.get("/admin/site-content")
 async def get_site_content(username: str = Depends(verify_admin)):
