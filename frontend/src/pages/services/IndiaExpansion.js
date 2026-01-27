@@ -202,7 +202,7 @@ function IndiaExpansion() {
               </div>
 
               <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/contact" className="bg-white text-emerald-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 hover:scale-105 inline-flex items-center justify-center shadow-2xl">
+                <Link to="/contact?service=india-expansion" className="bg-white text-emerald-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 hover:scale-105 inline-flex items-center justify-center shadow-2xl">
                   Get Free Consultation
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Link>
