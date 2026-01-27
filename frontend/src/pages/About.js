@@ -137,48 +137,68 @@ function About() {
               </p>
             </motion.div>
 
-            {/* Modern card layout */}
-            <div className="grid md:grid-cols-3 gap-8">
-              {challengeItems.map((challenge, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="group relative"
-                >
-                  <div className={`relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 h-full overflow-hidden`}>
-                    {/* Background gradient accent */}
-                    <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${idx === 0 ? 'from-teal-500/10 to-green-500/10' : idx === 1 ? 'from-green-500/10 to-emerald-500/10' : 'from-emerald-500/10 to-teal-500/10'} rounded-full blur-2xl transform translate-x-10 -translate-y-10 group-hover:scale-150 transition-transform duration-500`}></div>
-                    
-                    {/* Number badge */}
-                    <div className={`inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br ${idx === 0 ? 'from-teal-500 to-green-500' : idx === 1 ? 'from-green-500 to-emerald-500' : 'from-emerald-500 to-teal-500'} rounded-2xl text-white text-xl font-bold mb-6 shadow-lg`}>
-                      0{idx + 1}
+            {/* Creative Staggered Layout */}
+            <div className="relative">
+              {/* Connecting line */}
+              <div className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-teal-500 via-green-500 to-emerald-500 opacity-20"></div>
+              
+              <div className="space-y-12 lg:space-y-0">
+                {challengeItems.map((challenge, idx) => (
+                  <motion.div
+                    key={idx}
+                    initial={{ opacity: 0, x: idx % 2 === 0 ? -50 : 50 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, delay: idx * 0.2 }}
+                    className={`relative lg:w-[45%] ${idx % 2 === 0 ? 'lg:mr-auto' : 'lg:ml-auto'} ${idx > 0 ? 'lg:-mt-16' : ''}`}
+                  >
+                    {/* Connector dot */}
+                    <div className={`hidden lg:block absolute top-1/2 ${idx % 2 === 0 ? '-right-[calc(5%+8px)]' : '-left-[calc(5%+8px)]'} w-4 h-4 rounded-full bg-gradient-to-br from-teal-500 to-green-500 shadow-lg shadow-teal-500/30 transform -translate-y-1/2`}>
+                      <div className="absolute inset-1 bg-white rounded-full"></div>
                     </div>
                     
-                    {/* Image or Icon */}
-                    {challenge.image ? (
-                      <div className="mb-6 rounded-2xl overflow-hidden h-40">
-                        <img src={challenge.image} alt={challenge.title} className="w-full h-full object-cover" />
+                    {/* Card */}
+                    <div className="group relative bg-white rounded-[2rem] overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500">
+                      {/* Top gradient bar */}
+                      <div className={`h-2 bg-gradient-to-r ${idx === 0 ? 'from-teal-500 via-cyan-500 to-green-500' : idx === 1 ? 'from-green-500 via-emerald-500 to-teal-500' : 'from-emerald-500 via-green-500 to-cyan-500'}`}></div>
+                      
+                      <div className="p-8 lg:p-10">
+                        <div className="flex items-start gap-6">
+                          {/* Large number with icon */}
+                          <div className="flex-shrink-0">
+                            <div className={`relative w-20 h-20 rounded-2xl bg-gradient-to-br ${idx === 0 ? 'from-teal-500 to-cyan-500' : idx === 1 ? 'from-green-500 to-emerald-500' : 'from-emerald-500 to-teal-500'} p-[2px]`}>
+                              <div className="w-full h-full bg-white rounded-2xl flex items-center justify-center">
+                                {challenge.image ? (
+                                  <img src={challenge.image} alt="" className="w-full h-full object-cover rounded-2xl" />
+                                ) : (
+                                  <span className="text-4xl">{idx === 0 ? '👥' : idx === 1 ? '🚀' : '⚡'}</span>
+                                )}
+                              </div>
+                              {/* Floating number */}
+                              <div className={`absolute -top-3 -right-3 w-8 h-8 rounded-full bg-gradient-to-br ${idx === 0 ? 'from-teal-500 to-cyan-500' : idx === 1 ? 'from-green-500 to-emerald-500' : 'from-emerald-500 to-teal-500'} flex items-center justify-center text-white font-bold text-sm shadow-lg`}>
+                                {idx + 1}
+                              </div>
+                            </div>
+                          </div>
+                          
+                          {/* Content */}
+                          <div className="flex-1 min-w-0">
+                            <h3 className="text-2xl lg:text-3xl font-bold text-gray-900 mb-3 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-teal-600 group-hover:to-green-600 transition-all duration-300">
+                              {challenge.title}
+                            </h3>
+                            <p className="text-gray-600 text-lg leading-relaxed">
+                              {challenge.description}
+                            </p>
+                          </div>
+                        </div>
+                        
+                        {/* Decorative corner */}
+                        <div className={`absolute bottom-0 right-0 w-32 h-32 bg-gradient-to-tl ${idx === 0 ? 'from-teal-50' : idx === 1 ? 'from-green-50' : 'from-emerald-50'} to-transparent rounded-tl-[4rem] opacity-0 group-hover:opacity-100 transition-opacity duration-500`}></div>
                       </div>
-                    ) : (
-                      <div className={`mb-6 w-16 h-16 rounded-2xl bg-gradient-to-br ${idx === 0 ? 'from-teal-100 to-green-100' : idx === 1 ? 'from-green-100 to-emerald-100' : 'from-emerald-100 to-teal-100'} flex items-center justify-center`}>
-                        <span className="text-3xl">{idx === 0 ? '👥' : idx === 1 ? '🚀' : '⚡'}</span>
-                      </div>
-                    )}
-                    
-                    {/* Content */}
-                    <h3 className="text-2xl font-bold mb-3 text-gray-900 group-hover:text-teal-600 transition-colors">{challenge.title}</h3>
-                    <p className="text-gray-600 leading-relaxed">
-                      {challenge.description}
-                    </p>
-                    
-                    {/* Bottom accent line */}
-                    <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${idx === 0 ? 'from-teal-500 to-green-500' : idx === 1 ? 'from-green-500 to-emerald-500' : 'from-emerald-500 to-teal-500'} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left`}></div>
-                  </div>
-                </motion.div>
-              ))}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
           </div>
         </section>
