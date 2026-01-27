@@ -274,7 +274,7 @@ function Home() {
         {/* Clients Marquee */}
         <section className="py-12 bg-white border-y border-gray-100">
           <div className="max-w-7xl mx-auto px-4 mb-6">
-            <p className="text-center text-sm font-medium text-gray-500 uppercase tracking-wider">Trusted by industry leaders</p>
+            <p className="text-center text-sm font-medium text-gray-500 uppercase tracking-wider">{content?.clients?.title || 'Trusted by industry leaders'}</p>
           </div>
           <div className="flex items-center justify-center flex-wrap gap-12 px-8 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500">
             {clients.map((client, index) => (
