@@ -21,15 +21,15 @@ function Home() {
   const services = [
     {
       icon: <BookOpen className="w-8 h-8" />,
-      title: 'Custom eLearning',
-      description: 'Interactive, scenario-based learning that clicks.',
+      title: 'AI-Powered eLearning',
+      description: 'Interactive, AI-enhanced learning that clicks.',
       link: '/services/elearning',
       color: 'from-indigo-500 to-purple-600'
     },
     {
       icon: <Code className="w-8 h-8" />,
-      title: 'Software & IoT',
-      description: 'Smart, scalable solutions for your growth.',
+      title: 'Software & AI',
+      description: 'Smart, AI-driven solutions for growth.',
       link: '/services/software-development',
       color: 'from-teal-500 to-cyan-600'
     },
