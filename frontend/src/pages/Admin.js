@@ -261,6 +261,162 @@ function Admin() {
         note: 'For ODC & COE pricing, please contact us for a customized quote.'
       }
     },
+    elearning: {
+      hero: {
+        badge: 'AI-Powered Learning Solutions',
+        badgeEmoji: '🎓',
+        title: 'AI-Powered eLearning Your Teams Will Love',
+        tagline: 'Think Forward • Learn Alive • Engage Always',
+        subtitle: 'Stop boring training. Start interactive, AI-enhanced, gamified learning that actually works. 300% higher completion rates.',
+        stats: ['13+ years experience', '300+ projects delivered', '25+ languages'],
+        primaryCTA: 'Get Free Demo & Quote',
+        secondaryCTA: 'Call +91 96005 36354',
+        gradient: 'from-blue-600 via-indigo-600 to-purple-600'
+      },
+      solutions: [
+        { title: 'AI-Powered Learning Paths', description: 'Intelligent content recommendations powered by AI. Personalized learning journeys.' },
+        { title: 'Customised eLearning', description: 'Personalized content that fits your unique organizational needs.' },
+        { title: 'Gamified Learning', description: 'Drive engagement through game mechanics, badges, leaderboards. 3x higher completion rates.' },
+        { title: 'Microlearning', description: 'Bite-sized learning modules (3-7 minutes) for quick, effective knowledge transfer.' },
+        { title: 'Scenario-based Learning', description: 'Real-world scenarios for practical skill development.' },
+        { title: 'AI Content Generation', description: 'Leverage AI to create assessments, quizzes, and supplementary content faster.' }
+      ],
+      benefits: [
+        'AI-powered personalization for each learner',
+        'Boost completion rates by 300% with gamification',
+        'Reduce training time by 50% with microlearning',
+        'Save 60% vs traditional training methods',
+        'Measure learning effectiveness with built-in analytics',
+        'Scale training across global teams instantly'
+      ],
+      industries: [
+        { name: 'Pharmaceuticals', use: 'GMP training, product knowledge, sales enablement' },
+        { name: 'Healthcare', use: 'Medical protocols, patient safety, compliance' },
+        { name: 'Manufacturing', use: 'Safety training, process optimization, quality control' },
+        { name: 'Fintech', use: 'Compliance training, product training, customer service' }
+      ]
+    },
+    software: {
+      hero: {
+        badge: 'AI-Powered Development',
+        badgeEmoji: '🤖',
+        title: 'Software & AI That Actually Ships',
+        tagline: 'Code Smart • Build Better • Scale Faster',
+        subtitle: 'Got an idea? Let\'s turn it into a product that wows. AI solutions, web apps, mobile apps, IoT - MVP in 8-12 weeks.',
+        stats: ['13+ years experience', '300+ apps built', '40% faster delivery'],
+        primaryCTA: 'Start Your Project',
+        secondaryCTA: 'Call +91 96005 36354',
+        gradient: 'from-teal-600 via-cyan-600 to-blue-600'
+      },
+      services: [
+        { title: 'AI & Machine Learning', description: 'Custom AI solutions, ML models, intelligent automation, and predictive analytics.' },
+        { title: 'Comprehensive Product Development', description: 'End-to-end product development from ideation to deployment. MVP in 8-12 weeks.' },
+        { title: 'IoT & Embedded Solutions', description: 'Smart device integration, sensor networks, industrial IoT.' },
+        { title: 'Web Applications', description: 'Dynamic, responsive web apps. React, Vue, Angular. Progressive Web Apps.' },
+        { title: 'Mobile Apps', description: 'Native iOS/Android and React Native cross-platform apps.' },
+        { title: 'Legacy Software Modernization', description: 'Upgrade outdated systems. Cloud migration, API modernization.' }
+      ],
+      techStack: [
+        { category: 'AI/ML', techs: 'TensorFlow, PyTorch, OpenAI, LangChain' },
+        { category: 'Frontend', techs: 'React, Vue.js, Angular, Next.js' },
+        { category: 'Backend', techs: 'Node.js, Python, Java, .NET' },
+        { category: 'Mobile', techs: 'React Native, Flutter, Swift, Kotlin' },
+        { category: 'Cloud', techs: 'AWS, Azure, Google Cloud' },
+        { category: 'IoT', techs: 'Arduino, Raspberry Pi, MQTT, AWS IoT' }
+      ],
+      benefits: [
+        'AI-powered development for smarter solutions',
+        '40% faster time-to-market with agile methodology',
+        'Save 50% on development costs vs in-house teams',
+        'Scalable solutions that grow with your business',
+        'Security-first approach with penetration testing',
+        'Post-launch support and continuous updates'
+      ]
+    },
+    uxui: {
+      hero: {
+        badge: 'Design That Converts',
+        badgeEmoji: '🎨',
+        title: 'UX/UI Design That Users Love',
+        tagline: 'Design Smart • Convert Better • Delight Always',
+        subtitle: 'Beautiful, intuitive interfaces that drive engagement and conversions. User-centered design backed by research.',
+        stats: ['300+ designs delivered', 'User-first approach', 'Increased conversions'],
+        primaryCTA: 'Start Your Design Project',
+        secondaryCTA: 'View Portfolio',
+        gradient: 'from-violet-600 via-purple-600 to-fuchsia-600'
+      },
+      services: [
+        { title: 'UX Research & Strategy', description: 'User interviews, personas, journey mapping, and competitive analysis.' },
+        { title: 'UI Design', description: 'Beautiful, on-brand interfaces with modern design systems.' },
+        { title: 'Interaction Design', description: 'Micro-interactions, animations, and delightful user experiences.' },
+        { title: 'Prototyping', description: 'Interactive prototypes for user testing and stakeholder buy-in.' },
+        { title: 'Design Systems', description: 'Scalable component libraries for consistent brand experience.' },
+        { title: 'Usability Testing', description: 'Real user feedback to validate and improve designs.' }
+      ]
+    },
+    creative: {
+      hero: {
+        badge: 'Visual Storytelling',
+        badgeEmoji: '🎬',
+        title: 'Creative Services That Captivate',
+        tagline: 'Create Bold • Tell Stories • Inspire Action',
+        subtitle: '3D animations, explainer videos, motion graphics, and visual content that makes your brand unforgettable.',
+        stats: ['500+ videos created', 'Award-winning team', 'Global clients'],
+        primaryCTA: 'Get Creative Quote',
+        secondaryCTA: 'View Showreel',
+        gradient: 'from-orange-500 via-amber-500 to-yellow-500'
+      },
+      services: [
+        { title: '3D Animation', description: 'Stunning 3D visuals, product renders, and animated sequences.' },
+        { title: 'Explainer Videos', description: 'Engaging videos that simplify complex concepts.' },
+        { title: 'Motion Graphics', description: 'Dynamic animations for marketing and presentations.' },
+        { title: 'Corporate Videos', description: 'Professional videos for training, events, and brand storytelling.' },
+        { title: 'Interactive Presentations', description: 'Engaging presentations that leave lasting impressions.' },
+        { title: 'Infographics', description: 'Data visualization that tells compelling stories.' }
+      ]
+    },
+    digitalMarketing: {
+      hero: {
+        badge: 'Growth Marketing',
+        badgeEmoji: '📈',
+        title: 'Digital Marketing That Delivers ROI',
+        tagline: 'Target Smart • Engage Deep • Grow Fast',
+        subtitle: 'Data-driven marketing strategies that increase visibility, engagement, and conversions.',
+        stats: ['500% average ROI', 'Full-funnel approach', 'Measurable results'],
+        primaryCTA: 'Get Marketing Strategy',
+        secondaryCTA: 'See Case Studies',
+        gradient: 'from-rose-500 via-pink-500 to-fuchsia-500'
+      },
+      services: [
+        { title: 'SEO & Content Marketing', description: 'Rank higher, attract organic traffic, build authority.' },
+        { title: 'Social Media Marketing', description: 'Engaging social presence across all platforms.' },
+        { title: 'PPC & Paid Advertising', description: 'Targeted ads that maximize ROI on Google, Facebook, LinkedIn.' },
+        { title: 'Email Marketing', description: 'Automated campaigns that nurture leads and drive conversions.' },
+        { title: 'Analytics & Reporting', description: 'Data-driven insights to optimize performance.' },
+        { title: 'Brand Strategy', description: 'Positioning, messaging, and visual identity development.' }
+      ]
+    },
+    consulting: {
+      hero: {
+        badge: 'Expert Guidance',
+        badgeEmoji: '💼',
+        title: 'Consulting That Transforms',
+        tagline: 'Strategize Smart • Execute Better • Succeed Always',
+        subtitle: 'Strategic consulting to help you navigate digital transformation, technology decisions, and business growth.',
+        stats: ['13+ years expertise', 'Cross-industry experience', 'Proven frameworks'],
+        primaryCTA: 'Book Consultation',
+        secondaryCTA: 'Learn More',
+        gradient: 'from-slate-600 via-gray-600 to-zinc-600'
+      },
+      services: [
+        { title: 'Digital Transformation', description: 'Roadmap for modernizing your business with technology.' },
+        { title: 'Technology Strategy', description: 'Expert advice on tech stack, architecture, and tooling.' },
+        { title: 'Process Optimization', description: 'Streamline workflows and improve operational efficiency.' },
+        { title: 'Learning Strategy', description: 'Build effective L&D programs that drive performance.' },
+        { title: 'Vendor Selection', description: 'Evaluate and select the right technology partners.' },
+        { title: 'Change Management', description: 'Guide teams through digital adoption and transformation.' }
+      ]
+    },
     global: {
       companyName: 'Lionforce Technologies Pvt Ltd',
       phone: '+91 96005 36354',
