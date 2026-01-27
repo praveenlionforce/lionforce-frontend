@@ -1,145 +1,203 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet';
 import {
-  ArrowRight, CheckCircle, Code, Rocket, Shield, Zap, RefreshCw, Users,
-  Layers, Smartphone, Database, Cloud, Lock, TrendingUp, Wifi, Cpu
+  ArrowRight,
+  Code,
+  Brain,
+  Smartphone,
+  Globe,
+  Cpu,
+  RefreshCw,
+  CheckCircle,
+  Phone,
+  Layers,
+  Shield,
+  Zap
 } from 'lucide-react';
+import { useSiteContent } from '../../hooks/useSiteContent';
 
 function SoftwareDevelopment() {
-  const services = [
-    { title: 'AI & Machine Learning', description: 'Custom AI solutions, ML models, intelligent automation, and predictive analytics for smarter business decisions.', icon: <Cpu className="w-6 h-6" /> },
-    { title: 'Comprehensive Product Development', description: 'End-to-end product development from ideation to deployment. MVP in 8-12 weeks.', icon: <Rocket className="w-6 h-6" /> },
-    { title: 'IoT & Embedded Solutions', description: 'Smart device integration, sensor networks, industrial IoT, and connected product development.', icon: <Wifi className="w-6 h-6" /> },
-    { title: 'Expert Software Design & Engineering', description: 'Clean code, scalable architecture, modern frameworks. React, Node.js, Python, Java.', icon: <Code className="w-6 h-6" /> },
-    { title: 'Rapid MVP Launch', description: 'Quick market validation with Minimum Viable Product. Launch in 6-10 weeks.', icon: <Zap className="w-6 h-6" /> },
-    { title: 'Legacy Software Modernization', description: 'Upgrade outdated systems. Cloud migration, API modernization, UI refresh.', icon: <RefreshCw className="w-6 h-6" /> },
-    { title: 'Web Applications', description: 'Dynamic, responsive web apps. React, Vue, Angular. Progressive Web Apps (PWA).', icon: <Layers className="w-6 h-6" /> },
-    { title: 'Mobile Apps', description: 'Native iOS/Android and React Native cross-platform apps. App Store optimization.', icon: <Smartphone className="w-6 h-6" /> }
-  ];
+  const { content, global } = useSiteContent('software');
+  
+  const hero = content?.hero || {};
+  const services = content?.services || [];
+  const techStack = content?.techStack || [];
+  const benefits = content?.benefits || [];
 
-  const techStack = [
-    { category: 'AI/ML', techs: ['TensorFlow', 'PyTorch', 'OpenAI', 'LangChain'] },
-    { category: 'Frontend', techs: ['React', 'Vue.js', 'Angular', 'Next.js'] },
-    { category: 'Backend', techs: ['Node.js', 'Python', 'Java', '.NET'] },
-    { category: 'Mobile', techs: ['React Native', 'Flutter', 'Swift', 'Kotlin'] },
-    { category: 'Cloud', techs: ['AWS', 'Azure', 'Google Cloud', 'Heroku'] },
-    { category: 'IoT', techs: ['Arduino', 'Raspberry Pi', 'MQTT', 'AWS IoT'] }
-  ];
-
-  const benefits = [
-    'AI-powered development for smarter solutions',
-    '40% faster time-to-market with agile methodology',
-    'Save 50% on development costs vs in-house teams',
-    'Scalable solutions that grow with your business',
-    'Security-first approach with penetration testing',
-    'Post-launch support and continuous updates',
-    'Dedicated project manager for your project',
-    'Code ownership and complete documentation'
-  ];
-
-  const process = [
-    { title: 'Discovery & Planning', description: '1-2 weeks', details: 'Requirements gathering, wireframes, tech stack selection' },
-    { title: 'Design & Prototyping', description: '2-3 weeks', details: 'UI/UX design, interactive prototypes, user testing' },
-    { title: 'Development', description: '8-16 weeks', details: 'Agile sprints, weekly demos, continuous feedback' },
-    { title: 'Testing & QA', description: '2-3 weeks', details: 'Automated testing, manual QA, performance optimization' },
-    { title: 'Deployment & Support', description: 'Ongoing', details: 'Cloud deployment, monitoring, maintenance, updates' }
-  ];
+  const serviceIcons = [Brain, Code, Cpu, Globe, Smartphone, RefreshCw];
 
   return (
     <>
       <Helmet>
-        <title>AI & Custom Software Development - Web, Mobile & IoT Apps | Lionforce</title>
-        <meta name="description" content="AI-powered software development services. Web apps, mobile apps, IoT, ML solutions. 40% faster delivery. 13+ years experience." />
+        <title>Software & AI Development | Custom Apps & ML Solutions | Lionforce</title>
+        <meta name="description" content="Custom software development, AI/ML solutions, web and mobile apps, IoT. MVP in 8-12 weeks. Save 50% on development costs." />
       </Helmet>
 
-      <div className="pt-20 bg-white">
-        {/* Hero */}
-        <section className="relative py-32 bg-gradient-to-br from-teal-600 via-cyan-600 to-blue-600 overflow-hidden">
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute inset-0" style={{backgroundImage: 'radial-gradient(circle at 20% 50%, white 1px, transparent 1px)', backgroundSize: '50px 50px'}}></div>
+      <div className="overflow-hidden bg-white">
+        {/* Hero Section */}
+        <section className={`relative min-h-screen pt-20 bg-gradient-to-br ${hero.gradient || 'from-teal-600 via-cyan-600 to-blue-600'}`}>
+          {/* Abstract shapes */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-20 right-10 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 left-10 w-80 h-80 bg-cyan-300/20 rounded-full blur-3xl"></div>
+            <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-blue-300/10 rounded-full blur-2xl"></div>
           </div>
-          
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-              <div className="inline-block px-4 py-2 bg-white/20 backdrop-blur-md rounded-full text-white text-sm font-semibold mb-6 border border-white/30">
-                🤖 AI-Powered Development
-              </div>
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white leading-tight">
-                Software & AI<br />That Actually Ships
-              </h1>
-              <p className="text-2xl text-white/90 font-semibold mb-4">
-                Code Smart • Build Better • Scale Faster
-              </p>
-              <p className="text-xl text-white/90 mb-8 max-w-3xl leading-relaxed">
-                Got an idea? Let&apos;s turn it into a product that wows. <strong>AI solutions</strong>, web apps, mobile apps, IoT - we build smart, scalable solutions tailored to YOUR workflow. <strong>MVP in 8-12 weeks.</strong> Used by startups and enterprises across 32+ countries.
-              </p>
-              
-              <div className="flex flex-wrap gap-4 mb-8">
-                <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30">
-                  <CheckCircle className="w-5 h-5 text-white" />
-                  <span className="text-white font-semibold">13+ years experience</span>
-                </div>
-                <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30">
-                  <CheckCircle className="w-5 h-5 text-white" />
-                  <span className="text-white font-semibold">300+ apps built</span>
-                </div>
-                <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30">
-                  <CheckCircle className="w-5 h-5 text-white" />
-                  <span className="text-white font-semibold">40% faster delivery</span>
-                </div>
-              </div>
 
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Link to="/contact" className="bg-white text-teal-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 hover:scale-105 inline-flex items-center justify-center shadow-2xl">
-                  Start Your Project
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Link>
-                <a href="tel:+919600536354" className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-teal-600 transition-all duration-300 inline-flex items-center justify-center">
-                  Call +91 96005 36354
-                </a>
-              </div>
-            </motion.div>
+          <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-24">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[80vh]">
+              {/* Left content */}
+              <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full mb-8 border border-white/30">
+                  <span className="text-xl">{hero.badgeEmoji || '🤖'}</span>
+                  <span className="text-sm font-medium text-white">{hero.badge || 'AI-Powered Development'}</span>
+                </div>
+
+                <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6" data-testid="software-title">
+                  {hero.title || 'Software & AI That Actually Ships'}
+                </h1>
+
+                <p className="text-lg text-white/80 font-medium mb-4 tracking-wide">
+                  {hero.tagline || 'Code Smart • Build Better • Scale Faster'}
+                </p>
+
+                <p className="text-xl text-white/90 leading-relaxed mb-8 max-w-lg">
+                  {hero.subtitle || "Got an idea? Let's turn it into a product that wows. AI solutions, web apps, mobile apps, IoT - MVP in 8-12 weeks."}
+                </p>
+
+                {/* Stats pills */}
+                <div className="flex flex-wrap gap-3 mb-10">
+                  {(hero.stats || ['13+ years experience', '300+ apps built', '40% faster delivery']).map((stat, i) => (
+                    <span key={i} className="px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-white text-sm border border-white/20">
+                      {stat}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <Link
+                    to="/contact"
+                    className="group inline-flex items-center justify-center gap-2 bg-white text-teal-600 px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                    data-testid="software-cta-primary"
+                  >
+                    {hero.primaryCTA || 'Start Your Project'}
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                  <a
+                    href={`tel:${(global?.phone || '+91 96005 36354').replace(/\s+/g, '')}`}
+                    className="inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm text-white px-8 py-4 rounded-full font-bold text-lg border border-white/30 hover:bg-white/20 transition-all duration-300"
+                    data-testid="software-cta-secondary"
+                  >
+                    <Phone className="w-5 h-5" />
+                    {hero.secondaryCTA || `Call ${global?.phone || '+91 96005 36354'}`}
+                  </a>
+                </div>
+              </motion.div>
+
+              {/* Right - Floating cards */}
+              <motion.div
+                initial={{ opacity: 0, x: 40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="relative hidden lg:block"
+              >
+                <div className="relative">
+                  {/* Main card */}
+                  <div className="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20 shadow-2xl">
+                    <div className="grid grid-cols-2 gap-4">
+                      {[
+                        { icon: Brain, label: 'AI/ML', value: 'Solutions' },
+                        { icon: Globe, label: 'Web Apps', value: 'React, Vue' },
+                        { icon: Smartphone, label: 'Mobile', value: 'iOS & Android' },
+                        { icon: Cpu, label: 'IoT', value: 'Connected' }
+                      ].map((item, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.4 + i * 0.1 }}
+                          className="bg-white/10 p-4 rounded-xl text-center"
+                        >
+                          <item.icon className="w-8 h-8 text-white mx-auto mb-2" />
+                          <p className="text-white/70 text-xs">{item.label}</p>
+                          <p className="text-white font-bold text-sm">{item.value}</p>
+                        </motion.div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Floating badge */}
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: 0.8 }}
+                    className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-cyan-500 rounded-full flex items-center justify-center text-white">
+                        <Zap className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <div className="font-bold text-gray-900">8-12 Weeks</div>
+                        <div className="text-sm text-gray-500">MVP Delivery</div>
+                      </div>
+                    </div>
+                  </motion.div>
+                </div>
+              </motion.div>
+            </div>
+          </div>
+
+          {/* Wave separator */}
+          <div className="absolute bottom-0 left-0 right-0">
+            <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 120L60 110C120 100 240 80 360 70C480 60 600 60 720 65C840 70 960 80 1080 85C1200 90 1320 90 1380 90L1440 90V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0V120Z" fill="white"/>
+            </svg>
           </div>
         </section>
 
-        {/* Services */}
-        <section className="py-20 bg-gradient-to-b from-white to-gray-50">
+        {/* Services Section */}
+        <section className="py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                <span className="gradient-text">Full-Stack Development Services</span>
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                What We <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-cyan-600">Build</span>
               </h2>
-              <p className="text-xl text-gray-600">From MVP to enterprise-grade applications</p>
-            </div>
+              <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+                From AI-powered solutions to enterprise software - we build products that scale.
+              </p>
+            </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {services.map((service, index) => {
-                const colors = [
-                  'from-teal-500 to-teal-600',
-                  'from-cyan-500 to-cyan-600',
-                  'from-blue-500 to-blue-600',
-                  'from-indigo-500 to-indigo-600',
-                  'from-purple-500 to-purple-600',
-                  'from-pink-500 to-pink-600',
-                  'from-green-500 to-green-600',
-                  'from-emerald-500 to-emerald-600'
-                ];
+                const Icon = serviceIcons[index % serviceIcons.length];
                 return (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: index * 0.05 }}
-                    className="bg-white p-6 rounded-xl border border-gray-200 hover:shadow-xl transition-all"
+                    transition={{ delay: index * 0.1 }}
+                    className="group relative"
                   >
-                    <div className={`w-12 h-12 bg-gradient-to-br ${colors[index]} rounded-lg flex items-center justify-center text-white mb-4`}>
-                      {service.icon}
+                    <div className="absolute inset-0 bg-gradient-to-br from-teal-500/20 to-cyan-500/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div className="relative p-8 bg-white rounded-2xl border border-gray-200 hover:border-teal-300 transition-all hover:shadow-xl h-full">
+                      <div className="w-14 h-14 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-xl flex items-center justify-center text-white mb-6">
+                        <Icon className="w-7 h-7" />
+                      </div>
+                      <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
+                      <p className="text-gray-600">{service.description}</p>
                     </div>
-                    <h3 className="text-lg font-bold mb-2 text-gray-900">{service.title}</h3>
-                    <p className="text-gray-600 text-sm">{service.description}</p>
                   </motion.div>
                 );
               })}
@@ -147,124 +205,148 @@ function SoftwareDevelopment() {
           </div>
         </section>
 
-        {/* Tech Stack */}
-        <section className="py-20 bg-white">
+        {/* Tech Stack Section */}
+        <section className="py-24 bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                <span className="gradient-text">Modern Tech Stack</span>
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              className="text-center mb-16"
+            >
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                Our Tech <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-400 to-cyan-400">Stack</span>
               </h2>
-              <p className="text-xl text-gray-600">Industry-leading technologies for scalable solutions</p>
-            </div>
+              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                We use the latest technologies to build fast, scalable, and secure applications.
+              </p>
+            </motion.div>
 
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-              {techStack.map((stack, index) => (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {techStack.map((tech, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  className="bg-gradient-to-br from-gray-50 to-white p-4 rounded-xl border border-gray-200"
-                >
-                  <h3 className="font-bold text-gray-900 mb-3 text-sm">{stack.category}</h3>
-                  <div className="space-y-2">
-                    {stack.techs.map((tech, idx) => (
-                      <div key={idx} className="text-gray-600 text-xs">{tech}</div>
-                    ))}
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Process */}
-        <section className="py-20 bg-gradient-to-br from-teal-50 to-cyan-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                <span className="gradient-text">Our Agile Process</span>
-              </h2>
-              <p className="text-xl text-gray-600">From concept to launch in 12-20 weeks</p>
-            </div>
-
-            <div className="space-y-6">
-              {process.map((step, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
-                  className="bg-white p-6 rounded-xl border border-teal-200 flex items-center gap-6"
+                  className="p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/10 hover:border-teal-500/50 transition-all"
                 >
-                  <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-teal-500 to-cyan-500 rounded-full flex items-center justify-center text-white font-bold text-xl">
-                    {index + 1}
-                  </div>
-                  <div className="flex-grow">
-                    <h3 className="text-xl font-bold text-gray-900 mb-1">{step.title}</h3>
-                    <p className="text-gray-600 text-sm">{step.details}</p>
-                  </div>
-                  <div className="flex-shrink-0 text-teal-600 font-semibold">
-                    {step.description}
-                  </div>
+                  <h3 className="text-lg font-bold text-teal-400 mb-2">{tech.category}</h3>
+                  <p className="text-gray-300">{tech.techs}</p>
                 </motion.div>
               ))}
             </div>
           </div>
         </section>
 
-        {/* Benefits */}
-        <section className="py-20 bg-white">
+        {/* Benefits Section */}
+        <section className="py-24 bg-gradient-to-br from-gray-50 to-teal-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-16">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                <span className="gradient-text">Why Choose Us?</span>
-              </h2>
-            </div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+              >
+                <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                  Why Choose <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-cyan-600">Lionforce</span>?
+                </h2>
+                <p className="text-xl text-gray-600 mb-8">
+                  We don't just write code - we build products that solve real problems and scale with your business.
+                </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
-              {benefits.map((benefit, index) => (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, x: -20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  className="flex items-start gap-3 p-4 bg-gradient-to-br from-teal-50 to-cyan-50 rounded-lg border border-teal-200"
-                >
-                  <CheckCircle className="w-6 h-6 text-teal-600 flex-shrink-0 mt-1" />
-                  <p className="text-gray-700 font-medium">{benefit}</p>
-                </motion.div>
-              ))}
-            </div>
+                <div className="space-y-4">
+                  {benefits.map((benefit, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, x: -20 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1 }}
+                      className="flex items-start gap-3"
+                    >
+                      <div className="w-6 h-6 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <CheckCircle className="w-4 h-4 text-white" />
+                      </div>
+                      <p className="text-gray-700">{benefit}</p>
+                    </motion.div>
+                  ))}
+                </div>
+              </motion.div>
 
-            <div className="mt-12 text-center">
-              <Link to="/contact" className="inline-flex items-center bg-gradient-to-r from-teal-600 to-cyan-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105">
-                Discuss Your Project
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
+              <motion.div
+                initial={{ opacity: 0, x: 30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                className="relative"
+              >
+                <div className="absolute inset-0 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-3xl transform rotate-3"></div>
+                <div className="relative bg-white p-8 rounded-3xl shadow-2xl">
+                  <div className="grid grid-cols-2 gap-6">
+                    <div className="text-center p-4">
+                      <Zap className="w-10 h-10 text-teal-600 mx-auto mb-3" />
+                      <div className="text-3xl font-bold text-gray-900">40%</div>
+                      <div className="text-sm text-gray-500">Faster Delivery</div>
+                    </div>
+                    <div className="text-center p-4">
+                      <Layers className="w-10 h-10 text-teal-600 mx-auto mb-3" />
+                      <div className="text-3xl font-bold text-gray-900">50%</div>
+                      <div className="text-sm text-gray-500">Cost Savings</div>
+                    </div>
+                    <div className="text-center p-4">
+                      <Shield className="w-10 h-10 text-teal-600 mx-auto mb-3" />
+                      <div className="text-3xl font-bold text-gray-900">100%</div>
+                      <div className="text-sm text-gray-500">Secure Code</div>
+                    </div>
+                    <div className="text-center p-4">
+                      <RefreshCw className="w-10 h-10 text-teal-600 mx-auto mb-3" />
+                      <div className="text-3xl font-bold text-gray-900">24/7</div>
+                      <div className="text-sm text-gray-500">Support</div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
             </div>
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="py-20 bg-gradient-to-r from-teal-600 to-cyan-600">
-          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Ready to Build Something Amazing?
-            </h2>
-            <p className="text-xl text-white/90 mb-8">
-              Let's turn your idea into reality. 300+ successful projects. 13+ years experience.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link to="/contact" className="inline-flex items-center bg-white text-teal-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 hover:scale-105">
-                Get Free Consultation
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
-              <a href="tel:+919600536354" className="inline-flex items-center bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-teal-600 transition-all duration-300">
-                Call +91 96005 36354
-              </a>
-            </div>
+        {/* CTA Section */}
+        <section className={`py-24 bg-gradient-to-r ${hero.gradient || 'from-teal-600 via-cyan-600 to-blue-600'} relative overflow-hidden`}>
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute inset-0" style={{backgroundImage: 'radial-gradient(circle at 30% 50%, white 2px, transparent 2px)', backgroundSize: '60px 60px'}}></div>
+          </div>
+
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+            >
+              <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+                Ready to Build Something Amazing?
+              </h2>
+              <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
+                Let's turn your idea into a product. Start with a free consultation and get a detailed project estimate.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                  to="/contact"
+                  className="inline-flex items-center justify-center gap-2 bg-white text-teal-600 px-10 py-5 rounded-full font-bold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 group"
+                  data-testid="software-final-cta"
+                >
+                  Start Your Project
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+                <a
+                  href={`tel:${(global?.phone || '+91 96005 36354').replace(/\s+/g, '')}`}
+                  className="inline-flex items-center justify-center gap-2 bg-white/10 backdrop-blur-sm text-white px-10 py-5 rounded-full font-bold text-lg border border-white/30 hover:bg-white/20 transition-all duration-300"
+                >
+                  <Phone className="w-5 h-5" />
+                  Call {global?.phone || '+91 96005 36354'}
+                </a>
+              </div>
+            </motion.div>
           </div>
         </section>
       </div>
