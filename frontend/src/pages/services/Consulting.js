@@ -34,11 +34,20 @@ function Consulting() {
 
   const serviceIcons = [Lightbulb, Cpu, GitBranch, GraduationCap, Users, RefreshCw];
 
+  // SEO data from CMS
+  const seo = content?.seo || {};
+
   return (
     <>
       <Helmet>
-        <title>Consulting Services | Digital Transformation | Lionforce</title>
-        <meta name="description" content="Strategic consulting for digital transformation, technology decisions, and business growth. 13+ years of expertise." />
+        <title>{seo.title || 'Consulting Services | Digital Transformation | Lionforce'}</title>
+        <meta name="description" content={seo.description || 'Strategic consulting for digital transformation, technology decisions, and business growth. 13+ years of expertise.'} />
+        <meta name="keywords" content={seo.keywords || 'business consulting, technology consulting, digital transformation, strategy'} />
+        {seo.ogImage && <meta property="og:image" content={seo.ogImage} />}
+        <meta property="og:title" content={seo.title || 'Consulting Services - Lionforce'} />
+        <meta property="og:description" content={seo.description || 'Strategic consulting for digital transformation'} />
+        <meta property="og:type" content="website" />
+        {seo.canonicalUrl && <link rel="canonical" href={seo.canonicalUrl} />}
       </Helmet>
 
       <div className="overflow-hidden bg-white">
