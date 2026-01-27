@@ -279,7 +279,7 @@ function Home() {
                 <div className="text-white/90 text-lg">Years of Experience</div>
               </motion.div>
               <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={statsVisible ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 0.5, delay: 0.2 }} className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
-                <div className="text-5xl font-bold text-white mb-2">100+</div>
+                <div className="text-5xl font-bold text-white mb-2">300+</div>
                 <div className="text-white/90 text-lg">Projects Delivered</div>
               </motion.div>
               <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={statsVisible ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 0.5, delay: 0.4 }} className="bg-white/10 backdrop-blur-sm rounded-xl p-6 border border-white/20">
