@@ -137,31 +137,45 @@ function About() {
               </p>
             </motion.div>
 
-            {/* Flowing cards with alternating layout */}
-            <div className="space-y-16">
+            {/* Modern card layout */}
+            <div className="grid md:grid-cols-3 gap-8">
               {challengeItems.map((challenge, idx) => (
                 <motion.div
                   key={idx}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  className={`flex flex-col ${idx % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} items-center gap-12`}
+                  transition={{ delay: idx * 0.1 }}
+                  className="group relative"
                 >
-                  <div className="lg:w-1/2">
-                    <div className={`inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br ${idx % 2 === 1 ? 'from-green-500 to-teal-500' : 'from-teal-500 to-green-500'} rounded-2xl text-white text-2xl font-bold mb-6`}>0{idx + 1}</div>
-                    <h3 className="text-3xl font-bold mb-4 text-gray-900">{challenge.title}</h3>
-                    <p className="text-gray-600 text-lg leading-relaxed">
+                  <div className={`relative bg-white rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 h-full overflow-hidden`}>
+                    {/* Background gradient accent */}
+                    <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${idx === 0 ? 'from-teal-500/10 to-green-500/10' : idx === 1 ? 'from-green-500/10 to-emerald-500/10' : 'from-emerald-500/10 to-teal-500/10'} rounded-full blur-2xl transform translate-x-10 -translate-y-10 group-hover:scale-150 transition-transform duration-500`}></div>
+                    
+                    {/* Number badge */}
+                    <div className={`inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br ${idx === 0 ? 'from-teal-500 to-green-500' : idx === 1 ? 'from-green-500 to-emerald-500' : 'from-emerald-500 to-teal-500'} rounded-2xl text-white text-xl font-bold mb-6 shadow-lg`}>
+                      0{idx + 1}
+                    </div>
+                    
+                    {/* Image or Icon */}
+                    {challenge.image ? (
+                      <div className="mb-6 rounded-2xl overflow-hidden h-40">
+                        <img src={challenge.image} alt={challenge.title} className="w-full h-full object-cover" />
+                      </div>
+                    ) : (
+                      <div className={`mb-6 w-16 h-16 rounded-2xl bg-gradient-to-br ${idx === 0 ? 'from-teal-100 to-green-100' : idx === 1 ? 'from-green-100 to-emerald-100' : 'from-emerald-100 to-teal-100'} flex items-center justify-center`}>
+                        <span className="text-3xl">{idx === 0 ? '👥' : idx === 1 ? '🚀' : '⚡'}</span>
+                      </div>
+                    )}
+                    
+                    {/* Content */}
+                    <h3 className="text-2xl font-bold mb-3 text-gray-900 group-hover:text-teal-600 transition-colors">{challenge.title}</h3>
+                    <p className="text-gray-600 leading-relaxed">
                       {challenge.description}
                     </p>
-                  </div>
-                  <div className="lg:w-1/2">
-                    <div className={`h-64 bg-gradient-to-br ${idx % 2 === 1 ? 'from-green-100 to-teal-100' : 'from-teal-100 to-green-100'} rounded-3xl flex items-center justify-center overflow-hidden`}>
-                      {challenge.image ? (
-                        <img src={challenge.image} alt={challenge.title} className="w-full h-full object-cover" />
-                      ) : (
-                        <div className="text-6xl">{idx === 0 ? '👥' : idx === 1 ? '🚀' : '⚡'}</div>
-                      )}
-                    </div>
+                    
+                    {/* Bottom accent line */}
+                    <div className={`absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r ${idx === 0 ? 'from-teal-500 to-green-500' : idx === 1 ? 'from-green-500 to-emerald-500' : 'from-emerald-500 to-teal-500'} transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left`}></div>
                   </div>
                 </motion.div>
               ))}
