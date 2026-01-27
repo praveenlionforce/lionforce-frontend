@@ -23,16 +23,16 @@ function ServiceTemplate({
       </Helmet>
       
       <div className="pt-20 bg-white">
-        {/* Hero Section */}
+        {/* Hero Section - Consistent gradient style */}
         <section
-          className={`relative py-32 bg-gradient-to-br ${heroGradient}`}
-          style={heroImage ? {
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.7)), url('${heroImage}')`,
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
-          } : {}}
+          className={`relative py-32 bg-gradient-to-br ${heroGradient} overflow-hidden`}
         >
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Decorative pattern */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute inset-0" style={{backgroundImage: 'radial-gradient(circle at 20% 50%, white 1px, transparent 1px)', backgroundSize: '50px 50px'}}></div>
+          </div>
+          
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -57,7 +57,7 @@ function ServiceTemplate({
                   href="tel:+919600536354"
                   className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-gray-900 transition-all duration-300 inline-flex items-center justify-center"
                 >
-                  Call +91 98840 52675
+                  Call +91 96005 36354
                 </a>
               </div>
             </motion.div>

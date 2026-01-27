@@ -99,7 +99,7 @@ function ELearning() {
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Link>
                 <a href="tel:+919600536354" className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-indigo-600 transition-all duration-300 inline-flex items-center justify-center">
-                  Call +91 98840 52675
+                  Call +91 96005 36354
                 </a>
               </div>
             </motion.div>
@@ -265,7 +265,7 @@ function ELearning() {
                 <ArrowRight className="ml-2 w-5 h-5" />
               </Link>
               <a href="tel:+919600536354" className="inline-flex items-center bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-indigo-600 transition-all duration-300">
-                Call +91 98840 52675
+                Call +91 96005 36354
               </a>
             </div>
           </div>
