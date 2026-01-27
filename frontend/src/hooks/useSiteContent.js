@@ -270,6 +270,13 @@ const defaultContent = {
     ]
   },
   software: {
+    seo: {
+      title: 'Software Development & AI Solutions - Custom Apps & Products',
+      description: 'Custom software development, AI/ML solutions, web & mobile apps, IoT. MVP in 8-12 weeks. 300+ apps built. Expert team with 13+ years experience.',
+      keywords: 'software development, AI solutions, machine learning, web apps, mobile apps, IoT, custom software, MVP development, React, Python',
+      ogImage: '',
+      canonicalUrl: ''
+    },
     hero: {
       badge: 'AI-Powered Development',
       badgeEmoji: '🤖',
