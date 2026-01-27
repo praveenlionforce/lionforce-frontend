@@ -66,6 +66,7 @@ function ELearning() {
       tagline="Think Forward • Learn Alive"
       description="Learning that feels like play, works like magic. We design eLearning that clicks—interactive, scenario-based, and gamified to boost performance and engagement. Whether it's compliance, onboarding, or leadership development, we turn training into a tool your teams love to use."
       heroImage="https://images.unsplash.com/photo-1587037325379-0b8807b41f23?auto=format&fit=crop&w=1920&q=80"
+      heroGradient="from-blue-600 via-indigo-600 to-purple-600"
       features={features}
       subServices={subServices}
       benefits={benefits}
