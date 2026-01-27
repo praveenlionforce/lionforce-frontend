@@ -108,24 +108,23 @@ function CreativeServices() {
               >
                 <div className="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20 shadow-2xl">
                   <div className="grid grid-cols-2 gap-4">
-                    {[
-                      { icon: Clapperboard, label: '3D Animation', value: 'Stunning' },
-                      { icon: Video, label: 'Explainers', value: 'Engaging' },
-                      { icon: Sparkles, label: 'Motion', value: 'Dynamic' },
-                      { icon: Image, label: 'Infographics', value: 'Visual' }
-                    ].map((item, i) => (
-                      <motion.div
-                        key={i}
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.4 + i * 0.1 }}
-                        className="bg-white/10 p-4 rounded-xl text-center"
-                      >
-                        <item.icon className="w-8 h-8 text-white mx-auto mb-2" />
-                        <p className="text-white/70 text-xs">{item.label}</p>
-                        <p className="text-white font-bold text-sm">{item.value}</p>
-                      </motion.div>
-                    ))}
+                    {heroBoxes.map((item, i) => {
+                      const icons = [Clapperboard, Video, Sparkles, Image];
+                      const Icon = icons[i % icons.length];
+                      return (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, y: 20 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.4 + i * 0.1 }}
+                          className="bg-white/10 p-4 rounded-xl text-center"
+                        >
+                          <Icon className="w-8 h-8 text-white mx-auto mb-2" />
+                          <p className="text-white/70 text-xs">{item.label}</p>
+                          <p className="text-white font-bold text-sm">{item.value}</p>
+                        </motion.div>
+                      );
+                    })}
                   </div>
                 </div>
 
@@ -140,8 +139,8 @@ function CreativeServices() {
                       <Play className="w-6 h-6" />
                     </div>
                     <div>
-                      <div className="font-bold text-gray-900">500+</div>
-                      <div className="text-sm text-gray-500">Videos Created</div>
+                      <div className="font-bold text-gray-900">{highlightStat.value}</div>
+                      <div className="text-sm text-gray-500">{highlightStat.label}</div>
                     </div>
                   </div>
                 </motion.div>
