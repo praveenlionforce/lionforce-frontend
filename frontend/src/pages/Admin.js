@@ -33,6 +33,13 @@ function Admin() {
   // Comprehensive default content structure
   const defaultContent = {
     home: {
+      seo: {
+        title: 'Lionforce Technologies - AI-Powered eLearning & Software Development',
+        description: 'Transform your business with custom eLearning solutions, AI-powered software development, and creative services. 13+ years of excellence, 300+ projects delivered globally.',
+        keywords: 'eLearning, software development, AI solutions, custom training, corporate learning, India expansion, EOR, ODC, digital transformation',
+        ogImage: '',
+        canonicalUrl: ''
+      },
       hero: {
         badge: 'Transforming Businesses Since 2012',
         title1: 'Innovate.',
