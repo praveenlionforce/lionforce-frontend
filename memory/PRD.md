@@ -12,6 +12,12 @@ Recreate the existing WordPress website (https://lionforce.net) into a new, mode
 
 ## What's Been Implemented (January 27, 2025)
 
+### ✅ COMPLETED: Admin Panel Scroll/Typing Bug Fix (Latest)
+- Fixed critical usability bug where typing in admin caused screen flicker and cursor reset
+- Implemented memoized TextField and ImageField components with local state management
+- Components now update parent state only on blur, preventing re-renders during typing
+- Custom memo comparison to prevent unnecessary re-renders from inline callbacks
+
 ### ✅ COMPLETED: Full Content Management System (CMS)
 
 **Admin Panel at `/admin` with credentials: admin/lionforce2024**
