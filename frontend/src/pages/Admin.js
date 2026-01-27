@@ -389,7 +389,7 @@ function Admin() {
         stats: ['300+ designs delivered', 'User-first approach', 'Increased conversions'],
         primaryCTA: 'Start Your Design Project',
         secondaryCTA: 'View Portfolio',
-        gradient: 'from-violet-600 via-purple-600 to-fuchsia-600'
+        gradient: 'from-teal-700 via-cyan-600 to-teal-500'
       },
       services: [
         { title: 'UX Research & Strategy', description: 'User interviews, personas, journey mapping, and competitive analysis.' },
@@ -410,7 +410,7 @@ function Admin() {
         stats: ['500+ videos created', 'Award-winning team', 'Global clients'],
         primaryCTA: 'Get Creative Quote',
         secondaryCTA: 'View Showreel',
-        gradient: 'from-rose-400 via-pink-500 to-rose-600'
+        gradient: 'from-cyan-600 via-teal-600 to-emerald-600'
       },
       services: [
         { title: '3D Animation', description: 'Stunning 3D visuals, product renders, and animated sequences.' },
@@ -431,7 +431,7 @@ function Admin() {
         stats: ['500% average ROI', 'Full-funnel approach', 'Measurable results'],
         primaryCTA: 'Get Marketing Strategy',
         secondaryCTA: 'See Case Studies',
-        gradient: 'from-rose-500 via-pink-500 to-fuchsia-500'
+        gradient: 'from-emerald-600 via-green-600 to-teal-600'
       },
       services: [
         { title: 'SEO & Content Marketing', description: 'Rank higher, attract organic traffic, build authority.' },
