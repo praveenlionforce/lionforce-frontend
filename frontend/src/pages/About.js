@@ -1,30 +1,35 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Users, Target, Award, Heart, Rocket, Shield } from 'lucide-react';
+import { Users, Target, Award, Heart, Rocket, Shield, Eye, Handshake, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
 
 function About() {
   const values = [
     {
-      icon: <Heart className="w-8 h-8" />,
-      title: 'Client-First Approach',
-      description: 'Your success is our priority. We build lasting partnerships based on trust and results.'
+      icon: <Handshake className="w-8 h-8" />,
+      title: 'Partnership',
+      description: 'Prioritizing your needs and building lasting relationships based on trust.'
+    },
+    {
+      icon: <Eye className="w-8 h-8" />,
+      title: 'Transparency',
+      description: 'Giving stakeholders complete process visibility at every step.'
     },
     {
       icon: <Rocket className="w-8 h-8" />,
-      title: 'Innovation Driven',
-      description: 'We stay ahead of the curve, leveraging cutting-edge technologies and methodologies.'
+      title: 'Flexibility',
+      description: 'Empowering you to adapt and evolve as your needs change.'
     },
     {
-      icon: <Shield className="w-8 h-8" />,
-      title: 'Quality Assurance',
-      description: 'Excellence is in our DNA. Every project undergoes rigorous quality checks.'
+      icon: <MessageCircle className="w-8 h-8" />,
+      title: 'Sincerity',
+      description: 'Clear, direct communication without jargon or hidden agendas.'
     },
     {
       icon: <Users className="w-8 h-8" />,
-      title: 'Expert Team',
-      description: '100% certified professionals with diverse skills and proven expertise.'
+      title: 'Support',
+      description: 'Nurturing our talent and developing their future skills continuously.'
     }
   ];
 
@@ -32,7 +37,7 @@ function About() {
     <>
       <Helmet>
         <title>About Lionforce - 13+ Years of Excellence | Custom eLearning & Software Development</title>
-        <meta name="description" content="Learn about Lionforce's 13+ year journey in delivering custom eLearning, software development, and India expansion services to 100+ clients across 32+ countries." />
+        <meta name="description" content="Learn about Lionforce's 13+ year journey in delivering custom eLearning, software development, and India expansion services to 300+ clients across 32+ countries." />
       </Helmet>
       
       <div className="pt-20 bg-white">
@@ -44,54 +49,116 @@ function About() {
               animate={{ opacity: 1, y: 0 }}
               className="text-center mb-16"
             >
-              <h1 className="text-5xl md:text-6xl font-bold mb-6">
-                <span className="gradient-text">About Lionforce</span>
+              <p className="text-teal-600 font-semibold text-sm uppercase tracking-wider mb-4">About us</p>
+              <h1 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+                We Believe in Fueling Success with <span className="gradient-text">Creativity & Innovation</span>
               </h1>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Your Partner in Transformative Learning and Software Solutions
-              </p>
             </motion.div>
 
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="max-w-4xl mx-auto text-center"
+              className="max-w-4xl mx-auto"
             >
-              <p className="text-xl text-gray-700 leading-relaxed mb-8 font-medium">
-                We don't just build — we transform. Whether it's immersive eLearning, scalable software, 
-                or helping global companies set up high-performing teams in India, 
-                <span className="text-teal-600 font-bold"> Lionforce delivers results that move the needle.</span>
+              <p className="text-xl text-gray-700 leading-relaxed mb-8 text-center font-medium">
+                At Lionforce, we know that a culture of continuous learning drives success. Our cutting-edge eLearning 
+                and software solutions are designed to elevate your business and fuel its growth.
               </p>
-              <p className="text-lg text-gray-600 leading-relaxed">
-                With <strong className="text-gray-900">13+ years</strong> of proven expertise and 
-                <strong className="text-gray-900"> 300+ successful projects</strong> across 
-                <strong className="text-gray-900"> 32+ countries</strong>, we've earned our reputation 
-                as the partner of choice for businesses ready to innovate, scale, and lead.
-              </p>
+              
+              <div className="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg">
+                <p className="text-gray-700 leading-relaxed mb-6">
+                  Founded in 2013 by a team of industry experts and design enthusiasts, Lionforce is at the forefront of 
+                  custom eLearning solutions and cutting-edge software development. Our mission is to empower companies 
+                  to excel in today&apos;s competitive digital landscape.
+                </p>
+                <p className="text-gray-700 leading-relaxed mb-6">
+                  With a seasoned team of developers, designers, and visionaries, we unite years of experience to deliver 
+                  both innovative learning solutions and specialized engineering services. We are passionate about creating 
+                  exceptional user experiences, ensuring that every interaction—whether for learners or software users—is 
+                  beautifully crafted and engaging.
+                </p>
+                <p className="text-gray-700 leading-relaxed">
+                  At Lionforce, we combine the latest technologies with effective and transparent processes to foster 
+                  continuous growth. By integrating learning and innovation into ongoing workflows, we help businesses 
+                  achieve lasting success and navigate the challenges that often hinder progress.
+                </p>
+              </div>
             </motion.div>
           </div>
         </section>
 
-        {/* Values Section */}
+        {/* Challenges Section */}
         <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
-                Our <span className="gradient-text">Core Values</span>
+                Challenges You&apos;ll <span className="gradient-text">Conquer With Us!</span>
               </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                The principles that guide everything we do
-              </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="bg-gradient-to-br from-teal-50 to-white p-8 rounded-2xl border border-teal-200"
+              >
+                <h3 className="text-xl font-bold mb-4 text-gray-900">Craft Your Dream Team for Unstoppable Success!</h3>
+                <p className="text-gray-600">
+                  We&apos;ll quickly assemble a dynamic team of vetted specialists to accelerate your product journey, 
+                  providing you with complete visibility and flexibility at every turn.
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+                className="bg-gradient-to-br from-green-50 to-white p-8 rounded-2xl border border-green-200"
+              >
+                <h3 className="text-xl font-bold mb-4 text-gray-900">Ignite Your Digital Transformation!</h3>
+                <p className="text-gray-600">
+                  Unlock new possibilities and elevate your business by embracing the power of cutting-edge technology 
+                  with innovative solutions tailored to your needs.
+                </p>
+              </motion.div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+                className="bg-gradient-to-br from-blue-50 to-white p-8 rounded-2xl border border-blue-200"
+              >
+                <h3 className="text-xl font-bold mb-4 text-gray-900">Complete Solution Development, Start to Finish</h3>
+                <p className="text-gray-600">
+                  Experience full-cycle innovation with our comprehensive eLearning and software engineering services. 
+                  From the first prototype to final deployment, scaling, and ongoing support.
+                </p>
+              </motion.div>
+            </div>
+          </div>
+        </section>
+
+        {/* Values Section */}
+        <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                What We <span className="gradient-text">Believe In</span>
+              </h2>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
               {values.map((value, index) => {
                 const colors = [
                   'from-teal-500 to-teal-600',
                   'from-green-500 to-green-600',
                   'from-blue-500 to-blue-600',
-                  'from-purple-500 to-purple-600'
+                  'from-purple-500 to-purple-600',
+                  'from-orange-500 to-orange-600'
                 ];
                 return (
                   <motion.div
@@ -100,7 +167,7 @@ function About() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: index * 0.1 }}
-                    className="bg-gradient-to-br from-gray-50 to-white p-6 rounded-xl border border-gray-200 hover:shadow-lg transition-shadow text-center"
+                    className="bg-white p-6 rounded-xl border border-gray-200 hover:shadow-lg transition-shadow text-center"
                   >
                     <div className={`inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br ${colors[index]} rounded-full text-white mb-4`}>
                       {value.icon}
@@ -115,7 +182,7 @@ function About() {
         </section>
 
         {/* CEO Message Section */}
-        <section className="py-20 bg-gradient-to-br from-teal-50 to-white">
+        <section className="py-20 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
               <motion.div
@@ -123,9 +190,9 @@ function About() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
               >
-                <div className="bg-white p-8 rounded-2xl border border-teal-200 shadow-lg">
-                  <h2 className="text-3xl font-bold mb-4 gradient-text">From our CEO</h2>
-                  <p className="text-gray-700 leading-relaxed mb-6">
+                <div className="bg-gradient-to-br from-teal-50 to-green-50 p-8 rounded-2xl border border-teal-200">
+                  <p className="text-teal-600 font-semibold text-sm uppercase tracking-wider mb-4">From our CEO</p>
+                  <p className="text-gray-700 leading-relaxed mb-6 text-lg">
                     The success of any project is rooted in the strength of its people. At Lionforce, 
                     we prioritize building a team of exceptional professionals who share our vision and values.
                   </p>
@@ -135,11 +202,11 @@ function About() {
                     and innovative designers, all supported by proven processes, are the cornerstones of 
                     the outstanding results we deliver to our clients.
                   </p>
-                  <p className="text-gray-700 leading-relaxed mb-6">
-                    Together, we're not just creating solutions; we're building lasting partnerships.
+                  <p className="text-gray-700 leading-relaxed mb-6 font-medium text-teal-700">
+                    Together, we&apos;re not just creating solutions; we&apos;re building lasting partnerships.
                   </p>
-                  <div className="border-t border-gray-200 pt-4">
-                    <p className="text-gray-900 font-bold">Praveen Kamalan</p>
+                  <div className="border-t border-teal-200 pt-4">
+                    <p className="text-gray-900 font-bold text-lg">Praveen Kamalan</p>
                     <p className="text-gray-600">Founder & CEO</p>
                   </div>
                 </div>
@@ -174,43 +241,49 @@ function About() {
         </section>
 
         {/* Stats Section */}
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-gradient-to-br from-teal-600 to-green-600">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                Based Globally, Serving the World
+              </h2>
+            </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-              <div className="text-center p-6 bg-gradient-to-br from-teal-50 to-white rounded-xl border border-teal-200">
-                <div className="text-5xl font-bold gradient-text mb-2">13+</div>
-                <div className="text-gray-600">Years Experience</div>
+              <div className="text-center p-6 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20">
+                <div className="text-5xl font-bold text-white mb-2">13+</div>
+                <div className="text-white/90">Years Experience</div>
               </div>
-              <div className="text-center p-6 bg-gradient-to-br from-green-50 to-white rounded-xl border border-green-200">
-                <div className="text-5xl font-bold gradient-text mb-2">300+</div>
-                <div className="text-gray-600">Projects Delivered</div>
+              <div className="text-center p-6 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20">
+                <div className="text-5xl font-bold text-white mb-2">300+</div>
+                <div className="text-white/90">Projects Delivered</div>
               </div>
-              <div className="text-center p-6 bg-gradient-to-br from-blue-50 to-white rounded-xl border border-blue-200">
-                <div className="text-5xl font-bold gradient-text mb-2">32+</div>
-                <div className="text-gray-600">Countries</div>
+              <div className="text-center p-6 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20">
+                <div className="text-5xl font-bold text-white mb-2">32+</div>
+                <div className="text-white/90">Countries</div>
               </div>
-              <div className="text-center p-6 bg-gradient-to-br from-purple-50 to-white rounded-xl border border-purple-200">
-                <div className="text-5xl font-bold gradient-text mb-2">100%</div>
-                <div className="text-gray-600">Client Satisfaction</div>
+              <div className="text-center p-6 bg-white/10 backdrop-blur-sm rounded-xl border border-white/20">
+                <div className="text-5xl font-bold text-white mb-2">500K+</div>
+                <div className="text-white/90">People Impacted</div>
               </div>
             </div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 bg-gradient-to-r from-teal-600 to-green-600">
+        <section className="py-20 bg-white">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Ready to Work Together?
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+              Discover the Power of <span className="gradient-text">Expertise</span>
             </h2>
-            <p className="text-xl text-white/90 mb-8">
-              Join hundreds of satisfied clients who have transformed their businesses with Lionforce
+            <p className="text-xl text-gray-600 mb-8">
+              Unlock years of learning and software excellence with Lionforce. Request your free consultation 
+              today and start transforming your vision into reality!
             </p>
             <Link
               to="/contact"
-              className="inline-flex items-center bg-white text-teal-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 hover:scale-105"
+              className="inline-flex items-center bg-gradient-to-r from-teal-600 to-green-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-lg transition-all duration-300 hover:scale-105"
             >
-              Get Started Today
+              Free Consultation
             </Link>
           </div>
         </section>
