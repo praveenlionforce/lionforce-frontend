@@ -356,6 +356,13 @@ const defaultContent = {
     ]
   },
   creative: {
+    seo: {
+      title: 'Creative Services - 3D Animation, Explainer Videos & Motion Graphics',
+      description: '3D animations, explainer videos, motion graphics, and visual content that captivates. 500+ videos created. Award-winning creative team.',
+      keywords: '3D animation, explainer videos, motion graphics, corporate videos, infographics, visual content, video production, animation services',
+      ogImage: '',
+      canonicalUrl: ''
+    },
     hero: {
       badge: 'Visual Storytelling',
       badgeEmoji: '🎬',
