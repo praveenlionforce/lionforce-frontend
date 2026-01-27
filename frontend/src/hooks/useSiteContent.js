@@ -279,7 +279,14 @@ const defaultContent = {
       stats: ['300+ designs delivered', 'User-first approach', 'Increased conversions'],
       primaryCTA: 'Start Your Design Project',
       secondaryCTA: 'View Portfolio',
-      gradient: 'from-[#6ab445] via-[#5a9e3d] to-[#4a8a35]'
+      gradient: 'from-[#6ab445] via-[#5a9e3d] to-[#4a8a35]',
+      heroBoxes: [
+        { label: 'UX Research', value: 'User-First' },
+        { label: 'UI Design', value: 'Beautiful' },
+        { label: 'Prototyping', value: 'Interactive' },
+        { label: 'Design Systems', value: 'Scalable' }
+      ],
+      highlightStat: { value: '300+', label: 'Projects Delivered' }
     },
     services: [
       { title: 'UX Research & Strategy', description: 'User interviews, personas, journey mapping, and competitive analysis.' },
@@ -300,7 +307,14 @@ const defaultContent = {
       stats: ['500+ videos created', 'Award-winning team', 'Global clients'],
       primaryCTA: 'Get Creative Quote',
       secondaryCTA: 'View Showreel',
-      gradient: 'from-[#2d4a5a] via-[#4a6670] to-[#8b7355]'
+      gradient: 'from-[#2d4a5a] via-[#4a6670] to-[#8b7355]',
+      heroBoxes: [
+        { label: '3D Animation', value: 'Stunning' },
+        { label: 'Explainers', value: 'Engaging' },
+        { label: 'Motion', value: 'Dynamic' },
+        { label: 'Infographics', value: 'Visual' }
+      ],
+      highlightStat: { value: '500+', label: 'Videos Created' }
     },
     services: [
       { title: '3D Animation', description: 'Stunning 3D visuals, product renders, and animated sequences.' },
