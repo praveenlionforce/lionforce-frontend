@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { Helmet } from 'react-helmet';
 import {
   ArrowRight,
   BookOpen,
@@ -69,7 +70,7 @@ function Home() {
       title: 'Digital Marketing',
       description: 'Magnetic campaigns powered by smart content, bold design, and data-backed targeting.',
       link: '/services/digital-marketing',
-      tagline: 'Get Seen • Buzz Loud • Grow On'
+      tagline: 'Get Seen • Buzz Loud'
     },
     {
       icon: <Users className="w-12 h-12" />,
@@ -81,23 +82,23 @@ function Home() {
     {
       icon: <Globe className="w-12 h-12" />,
       title: 'EOR Services',
-      description: 'Employer of Record solutions for seamless global hiring and compliance management.',
+      description: 'Expand to India with white-label teams. Full compliance, zero entity setup.',
       link: '/services/eor',
-      tagline: 'Hire Global • Stay Compliant'
+      tagline: 'India Entry Made Easy'
     },
     {
       icon: <Target className="w-12 h-12" />,
       title: 'ODC Setup',
-      description: 'Offshore Development Centers that extend your team capabilities globally.',
+      description: 'Your dedicated India development center. Scale from 5 to 50+ engineers.',
       link: '/services/odc',
-      tagline: 'Scale Fast • Build Strong'
+      tagline: 'Build in India • Scale Fast'
     },
     {
       icon: <Award className="w-12 h-12" />,
       title: 'COE Services',
-      description: 'Center of Excellence for best practices, innovation, and operational excellence.',
+      description: 'India Center of Excellence. Best practices, innovation, operational excellence.',
       link: '/services/coe',
-      tagline: 'Excellence • Innovation • Growth'
+      tagline: 'Excellence in India'
     }
   ];
 
@@ -115,22 +116,22 @@ function Home() {
 
   const testimonials = [
     {
-      quote: "I have great experience working with Praveen and Team Lionforce on multiple projects. They bring great subject matter expertise in LXD and willingness to always walk that extra mile for the customer. Together we could create some very exciting and best in class learning journeys.",
+      quote: "I have great experience working with Praveen and Team Lionforce on multiple projects. They bring great subject matter expertise in LXD and willingness to always walk that extra mile for the customer.",
       author: "Head of Academy",
       company: "Leading Pharmaceutical Company, India"
     },
     {
-      quote: "I hired Lionforce Technology for the development of our online English course. Praveen showed high professionalism and adaptability; his team met the deadlines strictly, providing all materials and contents on time.",
+      quote: "Praveen showed high professionalism and adaptability; his team met the deadlines strictly. Very pleased with the final result.",
       author: "CEO",
       company: "Language Training Company, Spain"
     },
     {
-      quote: "I've worked with Praveen almost two years and have come to favour Lionforce over all of our offshore suppliers. The work is turned around quickly, there is solid consultation and the proof reading is accurate.",
+      quote: "I've worked with Praveen almost two years and have come to favour Lionforce over all offshore suppliers. The work is turned around quickly.",
       author: "General Manager",
       company: "EdTech Company, Australia"
     },
     {
-      quote: "LionForce has provided our companies with graphic, label, logo design and this year they have produced a website with a fully functional Order Entry program that has exceeded our expectations.",
+      quote: "LionForce produced a website with a fully functional Order Entry program that exceeded our expectations.",
       author: "President",
       company: "Leading Fertiliser Company, USA"
     }
@@ -139,315 +140,211 @@ function Home() {
   const benefits = [
     {
       title: '100% Certified Talent',
-      description: 'Unlock Excellence with Our Top-Tier Developers! Experience the difference of working with meticulously vetted professionals.',
+      description: 'Work with meticulously vetted professionals ready to exceed your expectations.',
       icon: <Award className="w-8 h-8" />
     },
     {
       title: 'Team Scalability',
-      description: 'Stay Agile and Adaptable! Effortlessly adjust your development team to align with your evolving roadmap.',
+      description: 'Effortlessly adjust your team to align with your evolving roadmap.',
       icon: <Users className="w-8 h-8" />
     },
     {
       title: 'Save Up to 40%',
-      description: 'Accelerate Your Project Launch—No Delays, Just Results! Say goodbye to lengthy hiring processes.',
+      description: 'Reduce costs significantly while maintaining quality.',
       icon: <Zap className="w-8 h-8" />
     },
     {
       title: 'Start in 5 Days',
-      description: 'Launch your team quickly without the wait! Ditch the lengthy hiring hassles.',
+      description: 'Launch your team quickly. Proven processes ensure speed.',
       icon: <CheckCircle className="w-8 h-8" />
     }
   ];
 
   return (
-    <div className="overflow-hidden">
-      {/* Hero Section */}
-      <section
-        className="relative min-h-screen flex items-center justify-center pt-20"
-        style={{
-          backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.8)), url('https://images.unsplash.com/photo-1568952433726-3896e3881c65?auto=format&fit=crop&w=1920&q=80')`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          backgroundAttachment: 'fixed'
-        }}
-        data-testid="hero-section"
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-              <span className="gradient-text">Empowering Minds,</span>
-              <br />
-              <span className="text-white">Transforming Solutions</span>
-            </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-3xl mx-auto">
-              We're not just innovators; we're game-changers in custom eLearning and software development, 
-              delivering tailored solutions that turbocharge engagement and ignite operational excellence.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/contact"
-                className="bg-gradient-to-r from-yellow-500 to-yellow-600 text-gray-900 px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl hover:shadow-yellow-500/50 transition-all duration-300 hover:scale-105 inline-flex items-center justify-center"
-                data-testid="hero-cta-primary"
-              >
-                Get Started Now
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </Link>
-              <Link
-                to="/about"
-                className="bg-transparent border-2 border-yellow-500 text-yellow-500 px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-500 hover:text-gray-900 transition-all duration-300 inline-flex items-center justify-center"
-                data-testid="hero-cta-secondary"
-              >
-                Learn More
-              </Link>
-            </div>
-          </motion.div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <motion.div
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-          animate={{ y: [0, 10, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-        >
-          <div className="w-6 h-10 border-2 border-yellow-500 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-yellow-500 rounded-full mt-2"></div>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Stats Section */}
-      <section id="stats-section" className="py-20 bg-gray-800" data-testid="stats-section">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={statsVisible ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.5 }}
-            >
-              <div className="text-5xl font-bold gradient-text mb-2">10+</div>
-              <div className="text-gray-400 text-lg">Years of Experience</div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={statsVisible ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.5, delay: 0.2 }}
-            >
-              <div className="text-5xl font-bold gradient-text mb-2">100+</div>
-              <div className="text-gray-400 text-lg">Projects Delivered</div>
-            </motion.div>
-            <motion.div
-              initial={{ opacity: 0, scale: 0.5 }}
-              animate={statsVisible ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.5, delay: 0.4 }}
-            >
-              <div className="text-5xl font-bold gradient-text mb-2">32+</div>
-              <div className="text-gray-400 text-lg">Countries Served</div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section className="py-20 bg-gradient-to-b from-gray-900 to-gray-800" data-testid="services-section">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Our <span className="gradient-text">Game-Changing</span> Solutions
-            </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              Discover the power of our comprehensive services designed to transform your business
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="card-hover"
-              >
-                <Link
-                  to={service.link}
-                  className="block bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700 hover:border-yellow-500 transition-all duration-300"
-                  data-testid={`service-card-${index}`}
-                >
-                  <div className="text-yellow-500 mb-4">{service.icon}</div>
-                  <h3 className="text-2xl font-bold mb-2 text-white">{service.title}</h3>
-                  <p className="text-sm text-yellow-500 mb-3 font-semibold">{service.tagline}</p>
-                  <p className="text-gray-400 mb-4">{service.description}</p>
-                  <div className="flex items-center text-yellow-500 font-semibold">
-                    Learn More
-                    <ArrowRight className="ml-2 w-4 h-4" />
-                  </div>
+    <>
+      <Helmet>
+        <title>Lionforce - Custom eLearning & Software Development | EOR, ODC, COE Services India</title>
+        <meta name="description" content="Transform your business with Lionforce's eLearning, software development, and India expansion services. White-label teams, EOR, ODC setup from $139/month." />
+      </Helmet>
+      
+      <div className="overflow-hidden bg-white">
+        {/* Hero */}
+        <section className="relative min-h-screen flex items-center justify-center pt-20 bg-gradient-to-br from-teal-50 via-white to-green-50">
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1568952433726-3896e3881c65?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-5"></div>
+          
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+            <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+                <span className="gradient-text">Empowering Minds,</span>
+                <br />
+                <span className="text-gray-900">Transforming Solutions</span>
+              </h1>
+              <p className="text-xl md:text-2xl text-gray-700 mb-12 max-w-3xl mx-auto">
+                Game-changers in custom eLearning, software development, and India expansion services.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link to="/contact" className="bg-gradient-to-r from-teal-600 to-green-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl hover:shadow-teal-500/50 transition-all duration-300 hover:scale-105 inline-flex items-center justify-center">
+                  Get Started Now
+                  <ArrowRight className="ml-2 w-5 h-5" />
                 </Link>
+                <Link to="/about" className="bg-white border-2 border-teal-600 text-teal-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-teal-50 transition-all duration-300 inline-flex items-center justify-center shadow-lg">
+                  Learn More
+                </Link>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* Stats */}
+        <section id="stats-section" className="py-20 bg-white border-y border-gray-200">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+              <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={statsVisible ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 0.5 }}>
+                <div className="text-5xl font-bold gradient-text mb-2">13+</div>
+                <div className="text-gray-600 text-lg">Years of Experience</div>
               </motion.div>
-            ))}
+              <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={statsVisible ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 0.5, delay: 0.2 }}>
+                <div className="text-5xl font-bold gradient-text mb-2">100+</div>
+                <div className="text-gray-600 text-lg">Projects Delivered</div>
+              </motion.div>
+              <motion.div initial={{ opacity: 0, scale: 0.5 }} animate={statsVisible ? { opacity: 1, scale: 1 } : {}} transition={{ duration: 0.5, delay: 0.4 }}>
+                <div className="text-5xl font-bold gradient-text mb-2">32+</div>
+                <div className="text-gray-600 text-lg">Countries Served</div>
+              </motion.div>
+            </div>
           </div>
+        </section>
 
-          <div className="text-center mt-12">
-            <Link
-              to="/contact"
-              className="inline-flex items-center bg-gradient-to-r from-yellow-500 to-yellow-600 text-gray-900 px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl hover:shadow-yellow-500/50 transition-all duration-300 hover:scale-105"
-              data-testid="services-cta"
-            >
-              Talk to an Expert
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Link>
-          </div>
-        </div>
-      </section>
+        {/* Services */}
+        <section className="py-20 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                Our <span className="gradient-text">Game-Changing</span> Solutions
+              </h2>
+              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+                Comprehensive services designed to transform your business
+              </p>
+            </div>
 
-      {/* Clients Section */}
-      <section className="py-20 bg-gray-900" data-testid="clients-section">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-bold mb-4">
-              Trusted by <span className="gradient-text">Industry Leaders</span>
-            </h2>
-          </div>
-
-          <div className="relative overflow-hidden">
-            <div className="flex animate-scroll">
-              {[...clients, ...clients].map((client, index) => (
-                <div
-                  key={index}
-                  className="flex-shrink-0 mx-8 grayscale hover:grayscale-0 transition-all duration-300"
-                  data-testid={`client-logo-${index}`}
-                >
-                  <img
-                    src={client.logo}
-                    alt={client.name}
-                    className="h-16 w-auto object-contain"
-                  />
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {services.map((service, index) => (
+                <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.1 }} className="card-hover">
+                  <Link to={service.link} className="block bg-white p-8 rounded-2xl border border-gray-200 hover:border-teal-500 hover:shadow-xl transition-all duration-300">
+                    <div className="text-teal-600 mb-4">{service.icon}</div>
+                    <h3 className="text-2xl font-bold mb-2 text-gray-900">{service.title}</h3>
+                    <p className="text-sm text-teal-600 mb-3 font-semibold">{service.tagline}</p>
+                    <p className="text-gray-600 mb-4">{service.description}</p>
+                    <div className="flex items-center text-teal-600 font-semibold">
+                      Learn More <ArrowRight className="ml-2 w-4 h-4" />
+                    </div>
+                  </Link>
+                </motion.div>
               ))}
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Testimonials Section */}
-      <section className="py-20 bg-gradient-to-b from-gray-800 to-gray-900" data-testid="testimonials-section">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Don't Just Take <span className="gradient-text">Our Word</span>
-            </h2>
-            <p className="text-xl text-gray-400">Witness it first hand, directly from our lovely customers</p>
+        {/* Clients */}
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+                Trusted by <span className="gradient-text">Industry Leaders</span>
+              </h2>
+            </div>
+            <div className="relative overflow-hidden">
+              <div className="flex animate-scroll">
+                {[...clients, ...clients].map((client, index) => (
+                  <div key={index} className="flex-shrink-0 mx-8 grayscale hover:grayscale-0 transition-all duration-300">
+                    <img src={client.logo} alt={client.name} className="h-16 w-auto object-contain" />
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
+        </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {testimonials.map((testimonial, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-gray-800/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700"
-                data-testid={`testimonial-${index}`}
-              >
-                <div className="text-yellow-500 text-5xl mb-4">"</div>
-                <p className="text-gray-300 mb-6 italic">{testimonial.quote}</p>
-                <div className="border-t border-gray-700 pt-4">
-                  <p className="text-white font-semibold">{testimonial.author}</p>
-                  <p className="text-gray-400 text-sm">{testimonial.company}</p>
-                </div>
-              </motion.div>
-            ))}
+        {/* Testimonials */}
+        <section className="py-20 bg-gray-50">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                Client <span className="gradient-text">Success Stories</span>
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              {testimonials.map((testimonial, index) => (
+                <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg">
+                  <div className="text-teal-600 text-5xl mb-4">"</div>
+                  <p className="text-gray-700 mb-6 italic">{testimonial.quote}</p>
+                  <div className="border-t border-gray-200 pt-4">
+                    <p className="text-gray-900 font-semibold">{testimonial.author}</p>
+                    <p className="text-gray-600 text-sm">{testimonial.company}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Why Choose Us Section */}
-      <section className="py-20 bg-gray-900" data-testid="why-choose-section">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Why <span className="gradient-text">Choose Lionforce?</span>
+        {/* Benefits */}
+        <section className="py-20 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                Why <span className="gradient-text">Choose Lionforce?</span>
+              </h2>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {benefits.map((benefit, index) => (
+                <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center p-6">
+                  <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-teal-500 to-green-500 rounded-full text-white mb-4">
+                    {benefit.icon}
+                  </div>
+                  <h3 className="text-xl font-bold mb-2 text-gray-900">{benefit.title}</h3>
+                  <p className="text-gray-600">{benefit.description}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* CTA */}
+        <section className="py-20 bg-gradient-to-r from-teal-600 to-green-600">
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
+              Ready to Transform Your Business?
             </h2>
-            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-              We turn ambitious visions into extraordinary realities that elevate your success
+            <p className="text-xl text-white/90 mb-8">
+              Let's create something extraordinary together
             </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link to="/contact" className="bg-white text-teal-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-all duration-300 hover:scale-105 inline-flex items-center justify-center">
+                Schedule Free Consultation
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Link>
+              <a href="tel:+919884052675" className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-teal-600 transition-all duration-300 inline-flex items-center justify-center">
+                Call +91 98840 52675
+              </a>
+            </div>
           </div>
+        </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {benefits.map((benefit, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="text-center p-6"
-                data-testid={`benefit-${index}`}
-              >
-                <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-yellow-500 to-yellow-600 rounded-full text-gray-900 mb-4">
-                  {benefit.icon}
-                </div>
-                <h3 className="text-xl font-bold mb-2 text-white">{benefit.title}</h3>
-                <p className="text-gray-400">{benefit.description}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Final CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-yellow-500 to-yellow-600" data-testid="final-cta-section">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            Ready to Transform Your Business?
-          </h2>
-          <p className="text-xl text-gray-800 mb-8">
-            Let's create something extraordinary together. Get in touch with our experts today!
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link
-              to="/contact"
-              className="bg-gray-900 text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-800 transition-all duration-300 hover:scale-105 inline-flex items-center justify-center"
-              data-testid="final-cta-contact"
-            >
-              Schedule Free Consultation
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Link>
-            <a
-              href="tel:+919884052675"
-              className="bg-transparent border-2 border-gray-900 text-gray-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-900 hover:text-white transition-all duration-300 inline-flex items-center justify-center"
-              data-testid="final-cta-call"
-            >
-              Call +91 98840 52675
-            </a>
-          </div>
-        </div>
-      </section>
-
-      <style jsx>{`
-        @keyframes scroll {
-          0% {
-            transform: translateX(0);
+        <style jsx>{`
+          @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
           }
-          100% {
-            transform: translateX(-50%);
+          .animate-scroll {
+            animation: scroll 30s linear infinite;
           }
-        }
-
-        .animate-scroll {
-          animation: scroll 30s linear infinite;
-        }
-
-        .animate-scroll:hover {
-          animation-play-state: paused;
-        }
-      `}</style>
-    </div>
+          .animate-scroll:hover {
+            animation-play-state: paused;
+          }
+        `}</style>
+      </div>
+    </>
   );
 }
 
