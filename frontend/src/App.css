@@ -115,7 +115,26 @@ html {
   animation: scaleIn 0.5s ease-out forwards;
 }
 
-/* Marquee Animation for Client Logos */
+/* Marquee Animation for Client Logos - Seamless infinite scroll */
+@keyframes marquee-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-33.333%);
+  }
+}
+
+.animate-marquee-scroll {
+  animation: marquee-scroll 30s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-scroll:hover {
+  animation-play-state: paused;
+}
+
+/* Legacy marquee class (keeping for backwards compatibility) */
 @keyframes marquee {
   0% {
     transform: translateX(0);
