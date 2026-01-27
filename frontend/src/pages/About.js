@@ -3,8 +3,36 @@ import { motion } from 'framer-motion';
 import { Target, Award, ArrowRight, Quote } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet';
+import { useSiteContent } from '../hooks/useSiteContent';
 
 function About() {
+  const { content } = useSiteContent('about');
+  
+  // CMS content with fallbacks
+  const hero = content?.hero || {};
+  const story = content?.story || {};
+  const challenges = content?.challenges || {};
+  const values = content?.values || {};
+  const ceo = content?.ceo || {};
+  const mission = content?.mission || {};
+  const vision = content?.vision || {};
+  const impactStats = content?.impactStats || {};
+
+  const challengeItems = challenges.items || [
+    { title: 'Build Your Dream Team', description: 'We quickly assemble dynamic teams of vetted specialists to accelerate your product journey.' },
+    { title: 'Ignite Digital Transformation', description: 'Unlock new possibilities by embracing cutting-edge technology with innovative solutions.' },
+    { title: 'End-to-End Solutions', description: 'Experience full-cycle innovation from first prototype to final deployment and ongoing support.' }
+  ];
+
+  const valueItems = values.items || ['Partnership', 'Transparency', 'Flexibility', 'Sincerity', 'Support'];
+
+  const impactItems = impactStats.items || [
+    { number: '13+', label: 'Years of Excellence' },
+    { number: '300+', label: 'Projects Delivered' },
+    { number: '32+', label: 'Countries Served' },
+    { number: '500K+', label: 'People Impacted' }
+  ];
+
   return (
     <>
       <Helmet>
