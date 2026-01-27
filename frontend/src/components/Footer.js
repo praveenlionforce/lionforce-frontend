@@ -1,8 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Mail, Phone, MapPin, Linkedin, Twitter, Facebook } from 'lucide-react';
+import { useSiteContent } from '../hooks/useSiteContent';
 
 function Footer() {
+  const { global } = useSiteContent();
+  
+  const footerLogo = global?.footerLogo || 'https://customer-assets.emergentagent.com/job_modern-lionforce/artifacts/tpwlbe6e_footerlogo.png';
+  const companyName = global?.companyName || 'Lionforce Technologies Pvt Ltd';
+  const footerDescription = global?.footer?.description || 'Empowering Minds, Transforming Solutions. Your partner in innovative eLearning and software development.';
+  const socialLinks = global?.socialLinks || {};
+
   return (
     <footer className="bg-gray-900 border-t border-gray-800" data-testid="main-footer">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -10,21 +18,21 @@ function Footer() {
           {/* Company Info */}
           <div>
             <img 
-              src="https://customer-assets.emergentagent.com/job_modern-lionforce/artifacts/tpwlbe6e_footerlogo.png" 
-              alt="Lionforce Technologies Private Limited" 
+              src={footerLogo} 
+              alt={companyName} 
               className="h-10 w-auto mb-4"
             />
             <p className="text-gray-400 text-sm mb-4">
-              Empowering Minds, Transforming Solutions. Your partner in innovative eLearning and software development.
+              {footerDescription}
             </p>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-teal-400 transition-colors" data-testid="footer-linkedin">
+              <a href={socialLinks.linkedin || '#'} className="text-gray-400 hover:text-teal-400 transition-colors" data-testid="footer-linkedin">
                 <Linkedin className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-teal-400 transition-colors" data-testid="footer-twitter">
+              <a href={socialLinks.twitter || '#'} className="text-gray-400 hover:text-teal-400 transition-colors" data-testid="footer-twitter">
                 <Twitter className="w-5 h-5" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-teal-400 transition-colors" data-testid="footer-facebook">
+              <a href={socialLinks.facebook || '#'} className="text-gray-400 hover:text-teal-400 transition-colors" data-testid="footer-facebook">
                 <Facebook className="w-5 h-5" />
               </a>
             </div>
