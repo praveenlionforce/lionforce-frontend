@@ -255,14 +255,14 @@ function Home() {
         </section>
 
         {/* Clients */}
-        <section className="py-20 bg-white">
+        <section className="py-20 bg-gradient-to-br from-gray-50 to-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl md:text-4xl font-bold mb-4">
                 Trusted by <span className="gradient-text">Industry Leaders</span>
               </h2>
             </div>
-            <div className="relative overflow-hidden">
+            <div className="relative overflow-hidden bg-white/50 backdrop-blur-sm py-8 rounded-2xl border border-gray-200">
               <div className="flex animate-scroll">
                 {[...clients, ...clients].map((client, index) => (
                   <div key={index} className="flex-shrink-0 mx-8 grayscale hover:grayscale-0 transition-all duration-300">
