@@ -85,16 +85,16 @@ Password: lionforce2024
 │   ├── server.py              # Full CMS API endpoints
 │   └── uploads/               # Image storage
 ├── frontend/src/
-│   ├── App.js                 # With HelmetProvider
+│   ├── App.js                 # React Router (no HelmetProvider needed)
 │   ├── components/
-│   │   ├── SEO.js             # Custom SEO component (NEW)
+│   │   ├── SEO.js             # Custom SEO component (DOM-based)
 │   │   ├── Navbar.js          # Uses CMS header logo
 │   │   ├── Footer.js          # Uses CMS footer logo
 │   │   └── Layout.js
 │   ├── hooks/
 │   │   └── useSiteContent.js  # CMS content hook with all defaults
 │   └── pages/
-│       ├── Admin.js           # Full CMS with logos, client logos, SEO
+│       ├── Admin.js           # Full CMS with memoized input components
 │       ├── Home.js            # Uses CMS client logos
 │       ├── About.js           
 │       ├── Contact.js         
