@@ -21,6 +21,16 @@ function DigitalMarketing() {
   
   const hero = content?.hero || {};
   const services = content?.services || [];
+  
+  // Hero boxes with defaults
+  const heroBoxes = hero.heroBoxes || [
+    { label: 'SEO', value: 'Organic Growth' },
+    { label: 'Social', value: 'Engagement' },
+    { label: 'PPC', value: 'Targeted' },
+    { label: 'Analytics', value: 'Data-Driven' }
+  ];
+  
+  const highlightStat = hero.highlightStat || { value: '500%', label: 'Average ROI' };
 
   const serviceIcons = [Search, Share2, Target, Mail, BarChart3, Megaphone];
 
