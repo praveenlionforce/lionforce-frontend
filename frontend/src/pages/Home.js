@@ -271,17 +271,35 @@ function Home() {
           </motion.div>
         </section>
 
-        {/* Clients Marquee */}
-        <section className="py-12 bg-white border-y border-gray-100">
-          <div className="max-w-7xl mx-auto px-4 mb-6">
-            <p className="text-center text-sm font-medium text-gray-500 uppercase tracking-wider">{content?.clients?.title || 'Trusted by industry leaders'}</p>
-          </div>
-          <div className="flex items-center justify-center flex-wrap gap-12 px-8 opacity-60 grayscale hover:grayscale-0 hover:opacity-100 transition-all duration-500">
-            {clients.map((client, index) => (
-              <img key={index} src={client.logo} alt={client.name} className="h-10 object-contain" />
-            ))}
-          </div>
-        </section>
+        {/* Clients Marquee - Animated scrolling logos */}
+        {clients.length > 0 && (
+          <section className="py-12 bg-white border-y border-gray-100 overflow-hidden">
+            <div className="max-w-7xl mx-auto px-4 mb-6">
+              <p className="text-center text-sm font-medium text-gray-500 uppercase tracking-wider">{content?.clients?.title || 'Trusted by industry leaders'}</p>
+            </div>
+            <div className="relative">
+              {/* Gradient overlays for smooth fade effect */}
+              <div className="absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none"></div>
+              <div className="absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none"></div>
+              
+              {/* Scrolling container */}
+              <div className="flex animate-marquee hover:pause-animation">
+                {/* First set of logos */}
+                {clients.map((client, index) => (
+                  <div key={`logo-1-${index}`} className="flex-shrink-0 mx-8 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300">
+                    <img src={client.logo} alt={client.name} className="h-12 w-auto object-contain min-w-[100px]" />
+                  </div>
+                ))}
+                {/* Duplicate set for seamless loop */}
+                {clients.map((client, index) => (
+                  <div key={`logo-2-${index}`} className="flex-shrink-0 mx-8 grayscale hover:grayscale-0 opacity-60 hover:opacity-100 transition-all duration-300">
+                    <img src={client.logo} alt={client.name} className="h-12 w-auto object-contain min-w-[100px]" />
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
 
         {/* Services - Bento grid style */}
         <section className="py-24 bg-gradient-to-b from-white to-gray-50">
