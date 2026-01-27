@@ -150,7 +150,7 @@ function CreativeServices() {
               className="text-center mb-16"
             >
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                Creative <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-amber-500">Services</span>
+                Creative <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-pink-500">Services</span>
               </h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
                 From 3D animations to corporate videos - we bring your vision to life.
