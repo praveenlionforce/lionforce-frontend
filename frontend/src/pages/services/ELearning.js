@@ -51,8 +51,8 @@ function ELearning() {
   return (
     <>
       <Helmet>
-        <title>Custom eLearning Solutions - Interactive Training That Converts | Lionforce</title>
-        <meta name="description" content="Transform training with custom eLearning. Gamification, microlearning, scenarios. 300% higher engagement. 13+ years experience. 300+ projects delivered." />
+        <title>AI-Powered eLearning Solutions - Interactive Training That Converts | Lionforce</title>
+        <meta name="description" content="Transform training with AI-powered custom eLearning. Gamification, microlearning, scenarios. 300% higher engagement. 13+ years experience. 300+ projects delivered." />
       </Helmet>
 
       <div className="pt-20 bg-white">
@@ -65,16 +65,16 @@ function ELearning() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
               <div className="inline-block px-4 py-2 bg-white/20 backdrop-blur-md rounded-full text-white text-sm font-semibold mb-6 border border-white/30">
-                🎓 Transform Training into Engagement
+                🎓 AI-Powered Learning Solutions
               </div>
               <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white leading-tight">
-                Custom eLearning That <br />Your Teams Love
+                AI-Powered eLearning<br />Your Teams Will Love
               </h1>
               <p className="text-2xl text-white/90 font-semibold mb-4">
                 Think Forward • Learn Alive • Engage Always
               </p>
               <p className="text-xl text-white/90 mb-8 max-w-3xl leading-relaxed">
-                Stop boring training. Start interactive, gamified, scenario-based learning that actually works. 
+                Stop boring training. Start interactive, <strong>AI-enhanced</strong>, gamified learning that actually works. 
                 <strong> 300% higher completion rates.</strong> Used by pharma, healthcare, fintech, and manufacturing leaders.
               </p>
               
