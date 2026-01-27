@@ -9,26 +9,26 @@ import {
 
 function ELearning() {
   const solutions = [
+    { title: 'AI-Powered Learning Paths', description: 'Intelligent content recommendations powered by AI. Personalized learning journeys that adapt to each learner.' },
     { title: 'Customised eLearning', description: 'Personalized content that fits your unique organizational needs. Aligned with your brand, culture, and learning objectives.' },
     { title: 'Gamified Learning', description: 'Drive engagement through game mechanics, badges, leaderboards, and rewards. 3x higher completion rates.' },
     { title: 'Microlearning', description: 'Bite-sized learning modules (3-7 minutes) for quick, effective knowledge transfer. Perfect for busy professionals.' },
     { title: 'Scenario-based Learning', description: 'Real-world scenarios for practical skill development. Learn by doing, not just reading.' },
+    { title: 'AI Content Generation', description: 'Leverage AI to create assessments, quizzes, and supplementary content faster than ever before.' },
     { title: 'Application Simulation', description: 'Hands-on software training through realistic simulations. Reduce training time by 50%.' },
     { title: 'Blended Learning', description: 'Perfect mix of instructor-led and digital learning experiences. Best of both worlds.' },
     { title: 'Just-in-time Learning (JIT)', description: 'Quick access to relevant learning content when needed. Performance support tools.' },
-    { title: 'Digital Creatives', description: 'Engaging infographics, videos, and animations tailored to your brand.' },
-    { title: 'Translations & Localization', description: 'Content localized for global audiences. 25+ languages supported.' },
-    { title: 'Content Development Strategy', description: 'Strategic planning for comprehensive learning programs. ROI-focused approach.' }
+    { title: 'Translations & Localization', description: 'Content localized for global audiences. 25+ languages supported.' }
   ];
 
   const benefits = [
+    'AI-powered personalization for each learner',
     'Boost completion rates by 300% with gamification',
     'Reduce training time by 50% with microlearning',
     'Save 60% vs traditional training methods',
     'Measure learning effectiveness with built-in analytics',
     'Scale training across global teams instantly',
     'Comply with industry regulations (GMP, GDP, HSE)',
-    'Improve employee performance and retention',
     '24/7 access from any device, anywhere'
   ];
 
