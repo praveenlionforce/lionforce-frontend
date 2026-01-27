@@ -278,6 +278,26 @@ async def get_admin_subscribers(username: str = Depends(verify_admin)):
             sub['timestamp'] = datetime.fromisoformat(sub['timestamp'])
     return sorted(subscribers, key=lambda x: x.get('timestamp', datetime.min), reverse=True)
 
+# Admin - Site Content Management
+@api_router.get("/admin/site-content")
+async def get_site_content(username: str = Depends(verify_admin)):
+    content = await db.site_content.find_one({"type": "main"}, {"_id": 0})
+    if content:
+        return content
+    return {"type": "main", "content": {}}
+
+@api_router.post("/admin/site-content")
+async def save_site_content(data: dict, username: str = Depends(verify_admin)):
+    try:
+        await db.site_content.update_one(
+            {"type": "main"},
+            {"$set": {"type": "main", "content": data.get("content", {}), "updated_at": datetime.now(timezone.utc).isoformat()}},
+            upsert=True
+        )
+        return {"message": "Content saved successfully"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to save content: {str(e)}")
+
 # Include the router in the main app
 app.include_router(api_router)
 
