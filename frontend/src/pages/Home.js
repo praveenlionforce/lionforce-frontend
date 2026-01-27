@@ -206,24 +206,28 @@ function Home() {
                 className="relative hidden lg:block"
               >
                 <div className="grid grid-cols-2 gap-4">
-                  {services.slice(0, 4).map((service, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.3 + index * 0.1 }}
-                      whileHover={{ scale: 1.05, y: -5 }}
-                      className="group"
-                    >
-                      <Link to={service.link}>
-                        <div className={`p-6 rounded-2xl bg-gradient-to-br ${service.color} text-white shadow-lg hover:shadow-2xl transition-all`}>
-                          {service.icon}
-                          <h3 className="font-bold mt-4 mb-1">{service.title}</h3>
-                          <p className="text-white/80 text-sm">{service.description}</p>
-                        </div>
-                      </Link>
-                    </motion.div>
-                  ))}
+                  {heroBoxes.map((box, index) => {
+                    const icons = [BookOpen, Code, Palette, Video];
+                    const Icon = icons[index % icons.length];
+                    return (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ delay: 0.3 + index * 0.1 }}
+                        whileHover={{ scale: 1.05, y: -5 }}
+                        className="group"
+                      >
+                        <Link to={box.link || '/services'}>
+                          <div className={`p-6 rounded-2xl bg-gradient-to-br ${box.color || 'from-teal-500 to-cyan-600'} text-white shadow-lg hover:shadow-2xl transition-all`}>
+                            <Icon className="w-8 h-8" />
+                            <h3 className="font-bold mt-4 mb-1">{box.title}</h3>
+                            <p className="text-white/80 text-sm">{box.description}</p>
+                          </div>
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
                 </div>
                 
                 {/* Floating badge */}
@@ -238,8 +242,8 @@ function Home() {
                       <CheckCircle className="w-6 h-6" />
                     </div>
                     <div>
-                      <div className="font-bold text-gray-900">500K+</div>
-                      <div className="text-sm text-gray-500">People Impacted</div>
+                      <div className="font-bold text-gray-900">{highlightStat.value}</div>
+                      <div className="text-sm text-gray-500">{highlightStat.label}</div>
                     </div>
                   </div>
                 </motion.div>
