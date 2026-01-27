@@ -40,15 +40,15 @@ function Industries() {
 
   return (
     <>
-      <Helmet>
-        <title>{seo.title || 'Industries We Serve | Lionforce - Pharma, EdTech, Banking & More'}</title>
-        <meta name="description" content={seo.description || 'Lionforce serves diverse industries including Pharmaceuticals, Healthcare, Education, Banking, Retail, and Manufacturing with custom eLearning and software solutions.'} />
-        <meta name="keywords" content={seo.keywords || 'pharmaceuticals training, healthcare eLearning, education technology, banking compliance'} />
-        {seo.ogImage && <meta property="og:image" content={seo.ogImage} />}
-        <meta property="og:title" content={seo.title || 'Industries We Serve - Lionforce'} />
-        <meta property="og:description" content={seo.description || 'Transforming businesses across sectors'} />
-        {seo.canonicalUrl && <link rel="canonical" href={seo.canonicalUrl} />}
-      </Helmet>
+      <SEO 
+        title={seo.title || 'Industries We Serve | Lionforce - Pharma, EdTech, Banking & More'}
+        description={seo.description || 'Lionforce serves diverse industries including Pharmaceuticals, Healthcare, Education, Banking, Retail, and Manufacturing with custom eLearning and software solutions.'}
+        keywords={seo.keywords || 'pharmaceuticals training, healthcare eLearning, education technology, banking compliance'}
+        ogImage={seo.ogImage}
+        ogTitle={seo.title || 'Industries We Serve - Lionforce'}
+        ogDescription={seo.description || 'Transforming businesses across sectors'}
+        canonicalUrl={seo.canonicalUrl}
+      />
 
       <div className="pt-20 bg-white overflow-hidden">
         {/* Hero */}
