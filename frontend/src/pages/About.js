@@ -155,8 +155,12 @@ function About() {
                     </p>
                   </div>
                   <div className="lg:w-1/2">
-                    <div className={`h-64 bg-gradient-to-br ${idx % 2 === 1 ? 'from-green-100 to-teal-100' : 'from-teal-100 to-green-100'} rounded-3xl flex items-center justify-center`}>
-                      <div className="text-6xl">{idx === 0 ? '👥' : idx === 1 ? '🚀' : '⚡'}</div>
+                    <div className={`h-64 bg-gradient-to-br ${idx % 2 === 1 ? 'from-green-100 to-teal-100' : 'from-teal-100 to-green-100'} rounded-3xl flex items-center justify-center overflow-hidden`}>
+                      {challenge.image ? (
+                        <img src={challenge.image} alt={challenge.title} className="w-full h-full object-cover" />
+                      ) : (
+                        <div className="text-6xl">{idx === 0 ? '👥' : idx === 1 ? '🚀' : '⚡'}</div>
+                      )}
                     </div>
                   </div>
                 </motion.div>
