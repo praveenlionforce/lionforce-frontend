@@ -5,6 +5,7 @@ import Home from '@/pages/Home';
 import About from '@/pages/About';
 import Contact from '@/pages/Contact';
 import Industries from '@/pages/Industries';
+import Admin from '@/pages/Admin';
 import ELearning from '@/pages/services/ELearning';
 import SoftwareDevelopment from '@/pages/services/SoftwareDevelopment';
 import UXUIDesign from '@/pages/services/UXUIDesign';
@@ -19,21 +20,29 @@ function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      <Layout>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/industries" element={<Industries />} />
-          <Route path="/services/elearning" element={<ELearning />} />
-          <Route path="/services/software-development" element={<SoftwareDevelopment />} />
-          <Route path="/services/ux-ui-design" element={<UXUIDesign />} />
-          <Route path="/services/creative" element={<CreativeServices />} />
-          <Route path="/services/digital-marketing" element={<DigitalMarketing />} />
-          <Route path="/services/consulting" element={<Consulting />} />
-          <Route path="/services/india-expansion" element={<IndiaExpansion />} />
-        </Routes>
-      </Layout>
+      <Routes>
+        {/* Admin route without Layout */}
+        <Route path="/admin" element={<Admin />} />
+        
+        {/* Main site routes with Layout */}
+        <Route path="/*" element={
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/industries" element={<Industries />} />
+              <Route path="/services/elearning" element={<ELearning />} />
+              <Route path="/services/software-development" element={<SoftwareDevelopment />} />
+              <Route path="/services/ux-ui-design" element={<UXUIDesign />} />
+              <Route path="/services/creative" element={<CreativeServices />} />
+              <Route path="/services/digital-marketing" element={<DigitalMarketing />} />
+              <Route path="/services/consulting" element={<Consulting />} />
+              <Route path="/services/india-expansion" element={<IndiaExpansion />} />
+            </Routes>
+          </Layout>
+        } />
+      </Routes>
     </BrowserRouter>
   );
 }
