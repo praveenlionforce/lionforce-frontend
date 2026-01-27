@@ -608,6 +608,7 @@ function Admin() {
     { id: 'home', name: 'Home Page', icon: <Home className="w-4 h-4" />, category: 'main' },
     { id: 'about', name: 'About Page', icon: <Info className="w-4 h-4" />, category: 'main' },
     { id: 'contact', name: 'Contact Page', icon: <Phone className="w-4 h-4" />, category: 'main' },
+    { id: 'industries', name: 'Industries', icon: <Briefcase className="w-4 h-4" />, category: 'main' },
     { id: 'elearning', name: 'eLearning', icon: <FileText className="w-4 h-4" />, category: 'services' },
     { id: 'software', name: 'Software Dev', icon: <FileText className="w-4 h-4" />, category: 'services' },
     { id: 'indiaExpansion', name: 'India Expansion', icon: <Globe className="w-4 h-4" />, category: 'services' },
