@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useLayoutEffect } from 'react';
+import { flushSync } from 'react-dom';
 import { motion } from 'framer-motion';
 import { Helmet } from 'react-helmet-async';
 import {
