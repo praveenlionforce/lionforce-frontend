@@ -43,16 +43,15 @@ function SoftwareDevelopment() {
 
   return (
     <>
-      <Helmet>
-        <title>{seo.title || 'Software & AI Development | Custom Apps & ML Solutions | Lionforce'}</title>
-        <meta name="description" content={seo.description || 'Custom software development, AI/ML solutions, web and mobile apps, IoT. MVP in 8-12 weeks. Save 50% on development costs.'} />
-        <meta name="keywords" content={seo.keywords || 'software development, AI solutions, machine learning, web apps, mobile apps, IoT'} />
-        {seo.ogImage && <meta property="og:image" content={seo.ogImage} />}
-        <meta property="og:title" content={seo.title || 'Software Development - Lionforce'} />
-        <meta property="og:description" content={seo.description || 'Custom software development and AI solutions'} />
-        <meta property="og:type" content="website" />
-        {seo.canonicalUrl && <link rel="canonical" href={seo.canonicalUrl} />}
-      </Helmet>
+      <SEO 
+        title={seo.title || 'Software & AI Development | Custom Apps & ML Solutions | Lionforce'}
+        description={seo.description || 'Custom software development, AI/ML solutions, web and mobile apps, IoT. MVP in 8-12 weeks. Save 50% on development costs.'}
+        keywords={seo.keywords || 'software development, AI solutions, machine learning, web apps, mobile apps, IoT'}
+        ogImage={seo.ogImage}
+        ogTitle={seo.title || 'Software Development - Lionforce'}
+        ogDescription={seo.description || 'Custom software development and AI solutions'}
+        canonicalUrl={seo.canonicalUrl}
+      />
 
       <div className="overflow-hidden bg-white">
         {/* Hero Section */}
