@@ -11,14 +11,21 @@ import {
 // Memoized TextField component - manages local state and only updates parent on blur
 const TextField = memo(({ label, value, onChange, multiline = false, placeholder = '' }) => {
   const [localValue, setLocalValue] = useState(value || '');
-  const inputRef = useRef(null);
+  const isFocusedRef = useRef(false);
   
-  // Sync local value when prop value changes from external source
+  // Only sync from props when NOT focused (external updates only)
   useEffect(() => {
-    setLocalValue(value || '');
+    if (!isFocusedRef.current) {
+      setLocalValue(value || '');
+    }
   }, [value]);
   
+  const handleFocus = useCallback(() => {
+    isFocusedRef.current = true;
+  }, []);
+  
   const handleBlur = useCallback(() => {
+    isFocusedRef.current = false;
     if (localValue !== value) {
       onChange(localValue);
     }
@@ -29,9 +36,9 @@ const TextField = memo(({ label, value, onChange, multiline = false, placeholder
       <label className="block text-sm font-medium text-gray-700 mb-1">{label}</label>
       {multiline ? (
         <textarea
-          ref={inputRef}
           value={localValue}
           onChange={(e) => setLocalValue(e.target.value)}
+          onFocus={handleFocus}
           onBlur={handleBlur}
           placeholder={placeholder}
           rows={3}
@@ -39,10 +46,10 @@ const TextField = memo(({ label, value, onChange, multiline = false, placeholder
         />
       ) : (
         <input
-          ref={inputRef}
           type="text"
           value={localValue}
           onChange={(e) => setLocalValue(e.target.value)}
+          onFocus={handleFocus}
           onBlur={handleBlur}
           placeholder={placeholder}
           className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500 focus:border-transparent"
