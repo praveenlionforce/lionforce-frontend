@@ -133,7 +133,7 @@ function About() {
                 )}
               </h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                From dream teams to digital transformation, we make it happen.
+                {challenges.subtitle || 'From dream teams to digital transformation, we make it happen.'}
               </p>
             </motion.div>
 
