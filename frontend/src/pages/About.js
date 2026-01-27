@@ -93,12 +93,10 @@ function About() {
                   <div className="absolute -top-4 -left-4 w-full h-full bg-gradient-to-br from-teal-500 to-green-500 rounded-3xl transform rotate-3"></div>
                   <div className="relative bg-white p-8 md:p-12 rounded-3xl shadow-2xl">
                     <p className="text-gray-700 text-lg leading-relaxed mb-6">
-                      Founded by industry experts and design enthusiasts, Lionforce stands at the forefront of 
-                      custom eLearning and software development.
+                      {story.paragraph1 || 'Founded by industry experts and design enthusiasts, Lionforce stands at the forefront of custom eLearning and software development.'}
                     </p>
                     <p className="text-gray-600 leading-relaxed">
-                      We unite developers, designers, and visionaries to deliver exceptional experiences-whether 
-                      for learners or software users. Every interaction is beautifully crafted and engaging.
+                      {story.paragraph2 || 'We unite developers, designers, and visionaries to deliver exceptional experiences - whether for learners or software users. Every interaction is beautifully crafted and engaging.'}
                     </p>
                   </div>
                 </div>
