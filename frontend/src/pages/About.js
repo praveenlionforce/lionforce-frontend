@@ -237,10 +237,9 @@ function About() {
                     className="p-6 rounded-2xl bg-gradient-to-br from-teal-50 to-green-50 border-l-4 border-teal-500"
                   >
                     <Target className="w-10 h-10 text-teal-600 mb-4" />
-                    <h3 className="text-xl font-bold mb-2 text-gray-900">Our Mission</h3>
+                    <h3 className="text-xl font-bold mb-2 text-gray-900">{mission.title || 'Our Mission'}</h3>
                     <p className="text-gray-600">
-                      Empower organizations worldwide with innovative learning and software solutions 
-                      that drive measurable outcomes.
+                      {mission.text || 'Empower organizations worldwide with innovative learning and software solutions that drive measurable outcomes.'}
                     </p>
                   </motion.div>
 
@@ -252,10 +251,9 @@ function About() {
                     className="p-6 rounded-2xl bg-gradient-to-br from-green-50 to-teal-50 border-l-4 border-green-500"
                   >
                     <Award className="w-10 h-10 text-green-600 mb-4" />
-                    <h3 className="text-xl font-bold mb-2 text-gray-900">Our Vision</h3>
+                    <h3 className="text-xl font-bold mb-2 text-gray-900">{vision.title || 'Our Vision'}</h3>
                     <p className="text-gray-600">
-                      Be the global leader in AI-powered eLearning and software-and the trusted partner 
-                      for businesses expanding to India.
+                      {vision.text || 'Be the global leader in AI-powered eLearning and software - and the trusted partner for businesses expanding to India.'}
                     </p>
                   </motion.div>
                 </div>
