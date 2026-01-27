@@ -8,17 +8,27 @@ import {
   Palette, Type, Layout, FormInput, Users, Mail, CheckCircle, Link2, Award
 } from 'lucide-react';
 
-// Memoized TextField component - manages local state and only updates parent on blur
+// Memoized TextField component - completely isolated from parent re-renders
 const TextField = memo(({ label, value, onChange, multiline = false, placeholder = '' }) => {
   const [localValue, setLocalValue] = useState(value || '');
   const isFocusedRef = useRef(false);
+  const onChangeRef = useRef(onChange);
+  const valueRef = useRef(value);
   
-  // Only sync from props when NOT focused (external updates only)
+  // Update refs without causing re-renders
+  onChangeRef.current = onChange;
+  valueRef.current = value;
+  
+  // Only sync from props when NOT focused AND value actually changed externally
   useEffect(() => {
-    if (!isFocusedRef.current) {
+    if (!isFocusedRef.current && value !== localValue) {
       setLocalValue(value || '');
     }
-  }, [value]);
+  }, [value]); // eslint-disable-line react-hooks/exhaustive-deps
+  
+  const handleChange = useCallback((e) => {
+    setLocalValue(e.target.value);
+  }, []);
   
   const handleFocus = useCallback(() => {
     isFocusedRef.current = true;
@@ -26,10 +36,11 @@ const TextField = memo(({ label, value, onChange, multiline = false, placeholder
   
   const handleBlur = useCallback(() => {
     isFocusedRef.current = false;
-    if (localValue !== value) {
-      onChange(localValue);
+    // Only update parent if value changed
+    if (localValue !== valueRef.current) {
+      onChangeRef.current(localValue);
     }
-  }, [localValue, value, onChange]);
+  }, [localValue]);
   
   return (
     <div className="mb-3">
@@ -37,7 +48,7 @@ const TextField = memo(({ label, value, onChange, multiline = false, placeholder
       {multiline ? (
         <textarea
           value={localValue}
-          onChange={(e) => setLocalValue(e.target.value)}
+          onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
           placeholder={placeholder}
@@ -48,7 +59,7 @@ const TextField = memo(({ label, value, onChange, multiline = false, placeholder
         <input
           type="text"
           value={localValue}
-          onChange={(e) => setLocalValue(e.target.value)}
+          onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
           placeholder={placeholder}
@@ -57,6 +68,12 @@ const TextField = memo(({ label, value, onChange, multiline = false, placeholder
       )}
     </div>
   );
+}, (prevProps, nextProps) => {
+  // Custom comparison - only re-render if value or label changes
+  return prevProps.value === nextProps.value && 
+         prevProps.label === nextProps.label &&
+         prevProps.multiline === nextProps.multiline &&
+         prevProps.placeholder === nextProps.placeholder;
 });
 TextField.displayName = 'TextField';
 
