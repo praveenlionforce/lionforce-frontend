@@ -1451,6 +1451,16 @@ function Admin() {
                       <a href="/services/india-expansion" target="_blank" rel="noopener noreferrer" className="text-teal-600 hover:underline text-sm flex items-center gap-1"><Eye className="w-4 h-4" />Preview</a>
                     </div>
 
+                    <Section title="SEO Settings" icon={<Globe className="w-4 h-4 text-teal-600" />} sectionKey="india-seo" defaultOpen={false}>
+                      <TextField label="Page Title" value={siteContent.indiaExpansion?.seo?.title} onChange={(v) => updateContent('indiaExpansion.seo.title', v)} />
+                      <TextField label="Meta Description" value={siteContent.indiaExpansion?.seo?.description} onChange={(v) => updateContent('indiaExpansion.seo.description', v)} multiline />
+                      <TextField label="Keywords (comma separated)" value={siteContent.indiaExpansion?.seo?.keywords} onChange={(v) => updateContent('indiaExpansion.seo.keywords', v)} multiline />
+                      <div className="grid grid-cols-2 gap-4">
+                        <ImageField label="OG Image" value={siteContent.indiaExpansion?.seo?.ogImage} onChange={(v) => updateContent('indiaExpansion.seo.ogImage', v)} />
+                        <TextField label="Canonical URL" value={siteContent.indiaExpansion?.seo?.canonicalUrl} onChange={(v) => updateContent('indiaExpansion.seo.canonicalUrl', v)} />
+                      </div>
+                    </Section>
+
                     <Section title="Hero Section" icon={<Layout className="w-4 h-4 text-teal-600" />} sectionKey="india-hero" defaultOpen={true}>
                       <TextField label="Badge" value={siteContent.indiaExpansion?.hero?.badge} onChange={(v) => updateContent('indiaExpansion.hero.badge', v)} />
                       <div className="grid grid-cols-2 gap-4">
@@ -1973,6 +1983,16 @@ function Admin() {
                       <h2 className="text-xl font-bold text-gray-900">Consulting Page</h2>
                       <a href="/services/consulting" target="_blank" rel="noopener noreferrer" className="text-teal-600 hover:underline text-sm flex items-center gap-1"><Eye className="w-4 h-4" />Preview</a>
                     </div>
+
+                    <Section title="SEO Settings" icon={<Globe className="w-4 h-4 text-teal-600" />} sectionKey="consulting-seo" defaultOpen={false}>
+                      <TextField label="Page Title" value={siteContent.consulting?.seo?.title} onChange={(v) => updateContent('consulting.seo.title', v)} />
+                      <TextField label="Meta Description" value={siteContent.consulting?.seo?.description} onChange={(v) => updateContent('consulting.seo.description', v)} multiline />
+                      <TextField label="Keywords (comma separated)" value={siteContent.consulting?.seo?.keywords} onChange={(v) => updateContent('consulting.seo.keywords', v)} multiline />
+                      <div className="grid grid-cols-2 gap-4">
+                        <ImageField label="OG Image" value={siteContent.consulting?.seo?.ogImage} onChange={(v) => updateContent('consulting.seo.ogImage', v)} />
+                        <TextField label="Canonical URL" value={siteContent.consulting?.seo?.canonicalUrl} onChange={(v) => updateContent('consulting.seo.canonicalUrl', v)} />
+                      </div>
+                    </Section>
 
                     <Section title="Hero Section" icon={<Layout className="w-4 h-4 text-teal-600" />} sectionKey="consulting-hero" defaultOpen={true}>
                       <div className="grid grid-cols-2 gap-4">
