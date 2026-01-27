@@ -370,12 +370,14 @@ function Home() {
               </p>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {[
-                { number: '01', title: '100% Certified Talent', desc: 'Meticulously vetted professionals' },
-                { number: '02', title: 'Scale Anytime', desc: 'Grow your team as you grow' },
-                { number: '03', title: 'Save 40%+', desc: 'Premium quality, smart pricing' },
-                { number: '04', title: 'Start in 5 Days', desc: 'Fast launch, proven processes' }
+                { number: '01', title: '100% Certified Talent', desc: 'Experience the difference of working with professionals who are meticulously vetted and ready to exceed your expectations.' },
+                { number: '02', title: 'Team Scalability', desc: 'Effortlessly adjust your development team to align with your evolving roadmap. Stay agile and adaptable.' },
+                { number: '03', title: 'Save up to 40%', desc: 'Accelerate your project launch with premium quality at smart pricing. No delays, just results.' },
+                { number: '04', title: 'Kick off in 5 Days', desc: 'Ditch the lengthy hiring hassles and launch your team quickly. Start your project without the wait.' },
+                { number: '05', title: 'All Tech Under One Roof', desc: 'Our skilled team excels across major tech platforms, ready to tackle any challenge you throw our way.' },
+                { number: '06', title: 'Lionforce Excellence', desc: 'Quality and high standards are in our DNA. We maximize ROI and ensure every project exceeds expectations.' }
               ].map((item, index) => (
                 <motion.div
                   key={index}
@@ -386,10 +388,10 @@ function Home() {
                   className="relative group"
                 >
                   <div className="absolute inset-0 bg-gradient-to-br from-teal-500/20 to-green-500/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                  <div className="relative p-6 rounded-2xl border border-gray-700 hover:border-teal-500/50 transition-colors bg-gray-800/50 backdrop-blur">
-                    <span className="text-5xl font-bold text-gray-700 group-hover:text-teal-500/50 transition-colors">{item.number}</span>
+                  <div className="relative p-6 rounded-2xl border border-gray-700 hover:border-teal-500/50 transition-colors bg-gray-800/50 backdrop-blur h-full">
+                    <span className="text-4xl font-bold text-gray-700 group-hover:text-teal-500/50 transition-colors">{item.number}</span>
                     <h3 className="text-xl font-bold mt-4 mb-2">{item.title}</h3>
-                    <p className="text-gray-400">{item.desc}</p>
+                    <p className="text-gray-400 text-sm">{item.desc}</p>
                   </div>
                 </motion.div>
               ))}
