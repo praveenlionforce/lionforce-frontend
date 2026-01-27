@@ -34,7 +34,7 @@ function About() {
                   <span className="block gradient-text">Through Innovation</span>
                 </h1>
                 <p className="text-xl text-gray-600 leading-relaxed mb-8">
-                  Since 2013, we&apos;ve been transforming how businesses learn, build, and grow. 
+                  Since 2012, we&apos;ve been transforming how businesses learn, build, and grow. 
                   Not just another tech company—we&apos;re your partners in making the impossible possible.
                 </p>
                 <div className="flex items-center gap-8">
