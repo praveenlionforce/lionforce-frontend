@@ -1737,6 +1737,16 @@ function Admin() {
                       <a href="/services/ux-ui-design" target="_blank" rel="noopener noreferrer" className="text-teal-600 hover:underline text-sm flex items-center gap-1"><Eye className="w-4 h-4" />Preview</a>
                     </div>
 
+                    <Section title="SEO Settings" icon={<Globe className="w-4 h-4 text-teal-600" />} sectionKey="uxui-seo" defaultOpen={false}>
+                      <TextField label="Page Title" value={siteContent.uxui?.seo?.title} onChange={(v) => updateContent('uxui.seo.title', v)} />
+                      <TextField label="Meta Description" value={siteContent.uxui?.seo?.description} onChange={(v) => updateContent('uxui.seo.description', v)} multiline />
+                      <TextField label="Keywords (comma separated)" value={siteContent.uxui?.seo?.keywords} onChange={(v) => updateContent('uxui.seo.keywords', v)} multiline />
+                      <div className="grid grid-cols-2 gap-4">
+                        <ImageField label="OG Image" value={siteContent.uxui?.seo?.ogImage} onChange={(v) => updateContent('uxui.seo.ogImage', v)} />
+                        <TextField label="Canonical URL" value={siteContent.uxui?.seo?.canonicalUrl} onChange={(v) => updateContent('uxui.seo.canonicalUrl', v)} />
+                      </div>
+                    </Section>
+
                     <Section title="Hero Section" icon={<Layout className="w-4 h-4 text-teal-600" />} sectionKey="uxui-hero" defaultOpen={true}>
                       <div className="grid grid-cols-2 gap-4">
                         <TextField label="Badge Text" value={siteContent.uxui?.hero?.badge} onChange={(v) => updateContent('uxui.hero.badge', v)} />
