@@ -181,6 +181,13 @@ function Admin() {
       }
     },
     contact: {
+      seo: {
+        title: 'Contact Lionforce Technologies - Get in Touch',
+        description: 'Contact Lionforce for custom eLearning, software development, or India expansion services. Get a free consultation within 24 hours.',
+        keywords: 'contact Lionforce, get quote, free consultation, eLearning quote, software development inquiry',
+        ogImage: '',
+        canonicalUrl: ''
+      },
       hero: {
         title1: 'Let\'s Build',
         title2: 'Something Amazing',
