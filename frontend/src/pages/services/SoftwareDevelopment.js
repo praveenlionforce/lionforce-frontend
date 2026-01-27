@@ -50,8 +50,8 @@ function SoftwareDevelopment() {
   return (
     <>
       <Helmet>
-        <title>Custom Software Development - Web & Mobile Apps | Lionforce</title>
-        <meta name="description" content="Custom software development services. Web apps, mobile apps, APIs. React, Node.js, Python. 40% faster delivery. 13+ years experience." />
+        <title>AI & Custom Software Development - Web, Mobile & IoT Apps | Lionforce</title>
+        <meta name="description" content="AI-powered software development services. Web apps, mobile apps, IoT, ML solutions. 40% faster delivery. 13+ years experience." />
       </Helmet>
 
       <div className="pt-20 bg-white">
@@ -64,16 +64,16 @@ function SoftwareDevelopment() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
               <div className="inline-block px-4 py-2 bg-white/20 backdrop-blur-md rounded-full text-white text-sm font-semibold mb-6 border border-white/30">
-                💻 From Idea to Production-Ready App
+                🤖 AI-Powered Development
               </div>
               <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white leading-tight">
-                Software Development<br />That Actually Ships
+                Software & AI<br />That Actually Ships
               </h1>
               <p className="text-2xl text-white/90 font-semibold mb-4">
                 Code Smart • Build Better • Scale Faster
               </p>
               <p className="text-xl text-white/90 mb-8 max-w-3xl leading-relaxed">
-                Got an idea? Let&apos;s turn it into a product that wows. Web apps, mobile apps, <strong>IoT solutions</strong>, APIs - we build smart, scalable solutions tailored to YOUR workflow. <strong>MVP in 8-12 weeks.</strong> Used by startups and enterprises across 32+ countries.
+                Got an idea? Let&apos;s turn it into a product that wows. <strong>AI solutions</strong>, web apps, mobile apps, IoT - we build smart, scalable solutions tailored to YOUR workflow. <strong>MVP in 8-12 weeks.</strong> Used by startups and enterprises across 32+ countries.
               </p>
               
               <div className="flex flex-wrap gap-4 mb-8">
