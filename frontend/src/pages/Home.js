@@ -169,30 +169,63 @@ function Home() {
       
       <div className="overflow-hidden bg-white">
         {/* Hero */}
-        <section className="relative min-h-screen flex items-center justify-center pt-20 bg-gradient-to-br from-teal-50 via-white to-green-50">
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1568952433726-3896e3881c65?auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-5"></div>
+        <section className="relative min-h-screen flex items-center justify-center pt-20 bg-gradient-to-br from-teal-600 via-green-500 to-teal-700 overflow-hidden">
+          {/* Animated background pattern */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute inset-0" style={{backgroundImage: 'radial-gradient(circle at 20% 50%, white 1px, transparent 1px), radial-gradient(circle at 80% 80%, white 1px, transparent 1px)', backgroundSize: '50px 50px'}}></div>
+          </div>
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
             <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-              <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-                <span className="gradient-text">Empowering Minds,</span>
-                <br />
-                <span className="text-gray-900">Transforming Solutions</span>
+              <div className="inline-block px-4 py-2 bg-white/20 backdrop-blur-md rounded-full text-white text-sm font-semibold mb-6 border border-white/30">
+                🚀 Transforming Businesses Since 2012
+              </div>
+              <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight text-white">
+                <span className="block">Empowering Minds,</span>
+                <span className="block">Transforming Solutions</span>
               </h1>
-              <p className="text-xl md:text-2xl text-gray-700 mb-12 max-w-3xl mx-auto">
-                Game-changers in custom eLearning, software development, and India expansion services.
+              <p className="text-xl md:text-2xl text-white/90 mb-12 max-w-3xl mx-auto leading-relaxed">
+                Game-changers in custom eLearning, software development, and India expansion services. 
+                <span className="block mt-2 font-semibold">From $139/month • Launch in 2-8 weeks</span>
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to="/contact" className="bg-gradient-to-r from-teal-600 to-green-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl hover:shadow-teal-500/50 transition-all duration-300 hover:scale-105 inline-flex items-center justify-center">
+                <Link to="/contact" className="bg-white text-teal-600 px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300 inline-flex items-center justify-center">
                   Get Started Now
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Link>
-                <Link to="/about" className="bg-white border-2 border-teal-600 text-teal-600 px-8 py-4 rounded-full font-bold text-lg hover:bg-teal-50 transition-all duration-300 inline-flex items-center justify-center shadow-lg">
-                  Learn More
+                <Link to="/services/eor" className="bg-transparent border-2 border-white text-white px-8 py-4 rounded-full font-bold text-lg hover:bg-white hover:text-teal-600 transition-all duration-300 inline-flex items-center justify-center backdrop-blur-sm">
+                  Expand to India
                 </Link>
+              </div>
+              
+              {/* Trust badges */}
+              <div className="mt-12 flex flex-wrap justify-center gap-6 text-white/90 text-sm">
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5" />
+                  <span>13+ Years Experience</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5" />
+                  <span>100+ Projects</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <CheckCircle className="w-5 h-5" />
+                  <span>32+ Countries</span>
+                </div>
               </div>
             </motion.div>
           </div>
+
+          {/* Scroll Indicator */}
+          <motion.div
+            className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+            animate={{ y: [0, 10, 0] }}
+            transition={{ repeat: Infinity, duration: 2 }}
+          >
+            <div className="w-6 h-10 border-2 border-white rounded-full flex justify-center">
+              <div className="w-1 h-3 bg-white rounded-full mt-2"></div>
+            </div>
+          </motion.div>
         </section>
 
         {/* Stats */}
