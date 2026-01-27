@@ -227,6 +227,47 @@ function Home() {
           </motion.div>
         </section>
 
+        {/* Rotating Service Categories Banner */}
+        <section className="py-6 bg-white border-y border-gray-200 overflow-hidden">
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="relative">
+              <div className="flex animate-slide gap-12 whitespace-nowrap">
+                <div className="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-teal-50 to-green-50 rounded-full border border-teal-200">
+                  <BookOpen className="w-5 h-5 text-teal-600" />
+                  <span className="font-semibold text-gray-900">Digital Solutions</span>
+                  <span className="text-gray-600 text-sm">eLearning • Software • Design</span>
+                </div>
+                <div className="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-full border border-blue-200">
+                  <Globe className="w-5 h-5 text-blue-600" />
+                  <span className="font-semibold text-gray-900">Global Workforce</span>
+                  <span className="text-gray-600 text-sm">EOR • ODC • COE in India</span>
+                </div>
+                <div className="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded-full border border-purple-200">
+                  <TrendingUp className="w-5 h-5 text-purple-600" />
+                  <span className="font-semibold text-gray-900">Growth Services</span>
+                  <span className="text-gray-600 text-sm">Marketing • Consulting</span>
+                </div>
+                {/* Duplicate for seamless loop */}
+                <div className="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-teal-50 to-green-50 rounded-full border border-teal-200">
+                  <BookOpen className="w-5 h-5 text-teal-600" />
+                  <span className="font-semibold text-gray-900">Digital Solutions</span>
+                  <span className="text-gray-600 text-sm">eLearning • Software • Design</span>
+                </div>
+                <div className="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-full border border-blue-200">
+                  <Globe className="w-5 h-5 text-blue-600" />
+                  <span className="font-semibold text-gray-900">Global Workforce</span>
+                  <span className="text-gray-600 text-sm">EOR • ODC • COE in India</span>
+                </div>
+                <div className="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded-full border border-purple-200">
+                  <TrendingUp className="w-5 h-5 text-purple-600" />
+                  <span className="font-semibold text-gray-900">Growth Services</span>
+                  <span className="text-gray-600 text-sm">Marketing • Consulting</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Stats */}
         <section id="stats-section" className="py-20 bg-gradient-to-r from-teal-600 to-green-600">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
