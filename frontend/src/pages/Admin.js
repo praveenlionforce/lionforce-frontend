@@ -734,7 +734,26 @@ function Admin() {
     setIsAuthenticated(false);
   };
 
+  // Scroll position preservation ref
+  const scrollContainerRef = useRef(null);
+  const scrollPositionRef = useRef(0);
+
+  // Save scroll position before state update
+  const saveScrollPosition = () => {
+    if (scrollContainerRef.current) {
+      scrollPositionRef.current = scrollContainerRef.current.scrollTop;
+    }
+  };
+
+  // Restore scroll position after render
+  useEffect(() => {
+    if (scrollContainerRef.current && scrollPositionRef.current > 0) {
+      scrollContainerRef.current.scrollTop = scrollPositionRef.current;
+    }
+  });
+
   const updateContent = (path, value) => {
+    saveScrollPosition();
     setSiteContent(prev => {
       const keys = path.split('.');
       const newContent = JSON.parse(JSON.stringify(prev));
