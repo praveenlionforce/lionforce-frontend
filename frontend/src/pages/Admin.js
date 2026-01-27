@@ -77,19 +77,28 @@ const TextField = memo(({ label, value, onChange, multiline = false, placeholder
 });
 TextField.displayName = 'TextField';
 
-// Memoized ImageField component
+// Memoized ImageField component - completely isolated from parent re-renders
 const ImageFieldAPI_URL = process.env.REACT_APP_BACKEND_URL;
 
 const ImageField = memo(({ label, value, onChange, onOpenImages }) => {
   const [localValue, setLocalValue] = useState(value || '');
   const isFocusedRef = useRef(false);
+  const onChangeRef = useRef(onChange);
+  const valueRef = useRef(value);
   
-  // Only sync from props when NOT focused
+  // Update refs without causing re-renders
+  onChangeRef.current = onChange;
+  valueRef.current = value;
+  
   useEffect(() => {
-    if (!isFocusedRef.current) {
+    if (!isFocusedRef.current && value !== localValue) {
       setLocalValue(value || '');
     }
-  }, [value]);
+  }, [value]); // eslint-disable-line react-hooks/exhaustive-deps
+  
+  const handleChange = useCallback((e) => {
+    setLocalValue(e.target.value);
+  }, []);
   
   const handleFocus = useCallback(() => {
     isFocusedRef.current = true;
@@ -97,10 +106,10 @@ const ImageField = memo(({ label, value, onChange, onOpenImages }) => {
   
   const handleBlur = useCallback(() => {
     isFocusedRef.current = false;
-    if (localValue !== value) {
-      onChange(localValue);
+    if (localValue !== valueRef.current) {
+      onChangeRef.current(localValue);
     }
-  }, [localValue, value, onChange]);
+  }, [localValue]);
   
   return (
     <div className="mb-3">
@@ -109,7 +118,7 @@ const ImageField = memo(({ label, value, onChange, onOpenImages }) => {
         <input
           type="text"
           value={localValue}
-          onChange={(e) => setLocalValue(e.target.value)}
+          onChange={handleChange}
           onFocus={handleFocus}
           onBlur={handleBlur}
           placeholder="Image URL or select from library"
@@ -130,6 +139,9 @@ const ImageField = memo(({ label, value, onChange, onOpenImages }) => {
       )}
     </div>
   );
+}, (prevProps, nextProps) => {
+  return prevProps.value === nextProps.value && 
+         prevProps.label === nextProps.label;
 });
 ImageField.displayName = 'ImageField';
 
