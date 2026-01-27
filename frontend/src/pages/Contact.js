@@ -101,33 +101,32 @@ function Contact() {
                 transition={{ duration: 0.6 }}
               >
                 <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
-                  Let&apos;s Build<br />
-                  <span className="text-white/80">Something Amazing</span>
+                  {hero.title1 || "Let's Build"}<br />
+                  <span className="text-white/80">{hero.title2 || 'Something Amazing'}</span>
                 </h1>
                 <p className="text-xl text-white/90 mb-8 max-w-lg">
-                  Have a project in mind? We&apos;d love to hear about it. 
-                  Drop us a message and let&apos;s start the conversation.
+                  {hero.subtitle || "Have a project in mind? We'd love to hear about it. Drop us a message and let's start the conversation."}
                 </p>
                 
                 {/* Quick contact options */}
                 <div className="space-y-4">
-                  <a href="tel:+919600536354" className="flex items-center gap-4 text-white hover:translate-x-2 transition-transform group" data-testid="contact-phone">
+                  <a href={`tel:${phoneNumber.replace(/\s+/g, '')}`} className="flex items-center gap-4 text-white hover:translate-x-2 transition-transform group" data-testid="contact-phone">
                     <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
                       <Phone className="w-5 h-5" />
                     </div>
                     <div>
                       <p className="text-white/70 text-sm">Call us directly</p>
-                      <p className="font-semibold">+91 96005 36354</p>
+                      <p className="font-semibold">{phoneNumber}</p>
                     </div>
                   </a>
                   
-                  <a href="mailto:hello@lionforce.net" className="flex items-center gap-4 text-white hover:translate-x-2 transition-transform group" data-testid="contact-email">
+                  <a href={`mailto:${emailAddress}`} className="flex items-center gap-4 text-white hover:translate-x-2 transition-transform group" data-testid="contact-email">
                     <div className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center group-hover:bg-white/30 transition-colors">
                       <Mail className="w-5 h-5" />
                     </div>
                     <div>
                       <p className="text-white/70 text-sm">Email us</p>
-                      <p className="font-semibold">hello@lionforce.net</p>
+                      <p className="font-semibold">{emailAddress}</p>
                     </div>
                   </a>
                 </div>
