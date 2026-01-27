@@ -1288,15 +1288,25 @@ function Admin() {
 
                     <Section title="Client Logos" icon={<Award className="w-4 h-4 text-teal-600" />} sectionKey="home-clients">
                       <TextField label="Section Title" value={siteContent.home?.clients?.title} onChange={(v) => updateContent('home.clients.title', v)} />
-                      <p className="text-sm font-medium text-gray-700 mt-4 mb-2">Client Logos:</p>
+                      <div className="flex items-center justify-between mt-4 mb-2">
+                        <p className="text-sm font-medium text-gray-700">Client Logos (scrolling marquee):</p>
+                        <span className={`text-xs px-2 py-1 rounded-full ${(siteContent.home?.clients?.logos?.length || 0) >= 10 ? 'bg-red-100 text-red-600' : 'bg-teal-100 text-teal-600'}`}>
+                          {siteContent.home?.clients?.logos?.length || 0} / 10 logos
+                        </span>
+                      </div>
+                      <p className="text-xs text-gray-500 mb-3">Logos will scroll right to left on the home page. Add 0-10 logos. Leave empty to hide the section.</p>
                       <ArrayEditor
                         items={siteContent.home?.clients?.logos}
                         path="home.clients.logos"
                         template={{ name: 'Client Name', logo: '' }}
-                        addLabel="Add Client Logo"
+                        addLabel={(siteContent.home?.clients?.logos?.length || 0) >= 10 ? "Maximum 10 logos reached" : "Add Client Logo"}
+                        maxItems={10}
                         renderItem={(item, index) => (
                           <div className="space-y-3">
-                            <TextField label="Client Name" value={item.name} onChange={(v) => updateArrayItem('home.clients.logos', index, 'name', v)} />
+                            <div className="flex items-center gap-2">
+                              <span className="text-xs bg-gray-200 text-gray-600 px-2 py-0.5 rounded">#{index + 1}</span>
+                              <TextField label="Client Name" value={item.name} onChange={(v) => updateArrayItem('home.clients.logos', index, 'name', v)} />
+                            </div>
                             <ImageField label="Logo Image" value={item.logo} onChange={(v) => updateArrayItem('home.clients.logos', index, 'logo', v)} />
                             {item.logo && (
                               <div className="bg-gray-100 p-3 rounded-lg flex items-center justify-center">
