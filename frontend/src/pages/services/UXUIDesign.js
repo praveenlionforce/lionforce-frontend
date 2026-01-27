@@ -21,6 +21,16 @@ function UXUIDesign() {
   
   const hero = content?.hero || {};
   const services = content?.services || [];
+  
+  // Hero boxes with defaults
+  const heroBoxes = hero.heroBoxes || [
+    { label: 'UX Research', value: 'User-First' },
+    { label: 'UI Design', value: 'Beautiful' },
+    { label: 'Prototyping', value: 'Interactive' },
+    { label: 'Design Systems', value: 'Scalable' }
+  ];
+  
+  const highlightStat = hero.highlightStat || { value: '300+', label: 'Projects Delivered' };
 
   const serviceIcons = [Eye, Palette, MousePointer, Layers, PenTool, Users];
 
