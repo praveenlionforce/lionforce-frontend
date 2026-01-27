@@ -149,7 +149,7 @@ function IndiaExpansion() {
                 EOR • ODC • COE - All-in-One Solution
               </p>
               <p className="text-xl text-white/90 mb-8 max-w-3xl leading-relaxed">
-                Launch your India operations in 2-8 weeks. <strong>Co-branding available.</strong> From hiring teams to setting up development centers and innovation hubs - we handle everything. Save 60% on costs while accessing world-class talent.
+                Launch your India operations in 2-8 weeks. <strong>Co-branding available. Easy exits - no lock-in.</strong> From hiring teams to setting up development centers and innovation hubs - we handle everything. Save 60% on costs while accessing world-class talent.
               </p>
               
               <div className="flex flex-wrap gap-4 mb-8">
@@ -164,6 +164,10 @@ function IndiaExpansion() {
                 <div className="flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30">
                   <CheckCircle className="w-5 h-5 text-white" />
                   <span className="text-white font-semibold">Co-branding available</span>
+                </div>
+                <div className="flex items-center gap-2 bg-yellow-400/90 backdrop-blur-sm px-4 py-2 rounded-full border border-yellow-300">
+                  <CheckCircle className="w-5 h-5 text-gray-900" />
+                  <span className="text-gray-900 font-bold">Easy Exits - No Lock-in</span>
                 </div>
               </div>
 
