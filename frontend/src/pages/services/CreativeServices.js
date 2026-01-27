@@ -33,7 +33,7 @@ function CreativeServices() {
 
       <div className="overflow-hidden bg-white">
         {/* Hero Section */}
-        <section className={`relative min-h-screen pt-20 bg-gradient-to-br ${hero.gradient || 'from-rose-400 via-pink-500 to-rose-600'}`}>
+        <section className={`relative min-h-screen pt-20 bg-gradient-to-br ${hero.gradient || 'from-cyan-600 via-teal-600 to-emerald-600'}`}>
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-20 right-10 w-96 h-96 bg-white/10 rounded-full blur-3xl"></div>
             <div className="absolute bottom-20 left-10 w-80 h-80 bg-yellow-300/20 rounded-full blur-3xl"></div>
@@ -74,7 +74,7 @@ function CreativeServices() {
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link
                     to="/contact"
-                    className="group inline-flex items-center justify-center gap-2 bg-white text-rose-600 px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                    className="group inline-flex items-center justify-center gap-2 bg-white text-teal-600 px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105"
                     data-testid="creative-cta-primary"
                   >
                     {hero.primaryCTA || 'Get Creative Quote'}
@@ -126,7 +126,7 @@ function CreativeServices() {
                   className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-gradient-to-br from-rose-400 to-pink-500 rounded-full flex items-center justify-center text-white">
+                    <div className="w-12 h-12 bg-gradient-to-br from-teal-500 to-emerald-500 rounded-full flex items-center justify-center text-white">
                       <Play className="w-6 h-6" />
                     </div>
                     <div>
@@ -150,7 +150,7 @@ function CreativeServices() {
               className="text-center mb-16"
             >
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                Creative <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-400 to-pink-500">Services</span>
+                Creative <span className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-emerald-600">Services</span>
               </h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
                 From 3D animations to corporate videos - we bring your vision to life.
@@ -169,9 +169,9 @@ function CreativeServices() {
                     transition={{ delay: index * 0.1 }}
                     className="group relative"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-br from-rose-400/20 to-pink-500/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                    <div className="relative p-8 bg-white rounded-2xl border border-gray-200 hover:border-rose-300 transition-all hover:shadow-xl h-full">
-                      <div className="w-14 h-14 bg-gradient-to-br from-rose-400 to-pink-500 rounded-xl flex items-center justify-center text-white mb-6">
+                    <div className="absolute inset-0 bg-gradient-to-br from-teal-500/20 to-emerald-500/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    <div className="relative p-8 bg-white rounded-2xl border border-gray-200 hover:border-teal-300 transition-all hover:shadow-xl h-full">
+                      <div className="w-14 h-14 bg-gradient-to-br from-teal-500 to-emerald-500 rounded-xl flex items-center justify-center text-white mb-6">
                         <Icon className="w-7 h-7" />
                       </div>
                       <h3 className="text-xl font-bold text-gray-900 mb-3">{service.title}</h3>
@@ -185,7 +185,7 @@ function CreativeServices() {
         </section>
 
         {/* CTA Section */}
-        <section className={`py-24 bg-gradient-to-r ${hero.gradient || 'from-rose-400 via-pink-500 to-rose-600'} relative overflow-hidden`}>
+        <section className={`py-24 bg-gradient-to-r ${hero.gradient || 'from-cyan-600 via-teal-600 to-emerald-600'} relative overflow-hidden`}>
           <div className="absolute inset-0 opacity-10">
             <div className="absolute inset-0" style={{backgroundImage: 'radial-gradient(circle at 30% 50%, white 2px, transparent 2px)', backgroundSize: '60px 60px'}}></div>
           </div>
@@ -205,7 +205,7 @@ function CreativeServices() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
                   to="/contact"
-                  className="inline-flex items-center justify-center gap-2 bg-white text-rose-600 px-10 py-5 rounded-full font-bold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 group"
+                  className="inline-flex items-center justify-center gap-2 bg-white text-teal-600 px-10 py-5 rounded-full font-bold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 group"
                 >
                   Get Creative Quote
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
