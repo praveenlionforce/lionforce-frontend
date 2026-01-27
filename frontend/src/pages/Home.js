@@ -16,8 +16,11 @@ import {
   Sparkles,
   Play
 } from 'lucide-react';
+import { useSiteContent } from '../hooks/useSiteContent';
 
 function Home() {
+  const { content, loading, global } = useSiteContent('home');
+
   const services = [
     {
       icon: <BookOpen className="w-8 h-8" />,
@@ -72,7 +75,24 @@ function Home() {
     { name: 'Axis', logo: 'https://i0.wp.com/lionforce.net/wp-content/uploads/2025/06/axis-1.png?fit=150%2C70&ssl=1' }
   ];
 
-  const testimonials = [
+  // Use CMS content with fallbacks
+  const hero = content?.hero || {};
+  const stats = content?.stats || {};
+  const whyUs = content?.whyUs || {};
+  const testimonials = content?.testimonials || {};
+  const indiaExpansionCTA = content?.indiaExpansionCTA || {};
+  const finalCTA = content?.finalCTA || {};
+
+  const whyUsItems = whyUs.items || [
+    { number: '01', title: '100% Certified Talent', desc: 'Experience the difference of working with professionals who are meticulously vetted and ready to exceed your expectations.' },
+    { number: '02', title: 'Team Scalability', desc: 'Effortlessly adjust your development team to align with your evolving roadmap. Stay agile and adaptable.' },
+    { number: '03', title: 'Save up to 40%', desc: 'Accelerate your project launch with premium quality at smart pricing. No delays, just results.' },
+    { number: '04', title: 'Kick off in 5 Days', desc: 'Ditch the lengthy hiring hassles and launch your team quickly. Start your project without the wait.' },
+    { number: '05', title: 'All Tech Under One Roof', desc: 'Our skilled team excels across major tech platforms, ready to tackle any challenge you throw our way.' },
+    { number: '06', title: 'Lionforce Excellence', desc: 'Quality and high standards are in our DNA. We maximize ROI and ensure every project exceeds expectations.' }
+  ];
+
+  const testimonialItems = testimonials.items || [
     {
       quote: "They bring great subject matter expertise in LXD and willingness to always walk that extra mile for the customer.",
       author: "Head of Academy",
@@ -115,54 +135,55 @@ function Home() {
               >
                 <div className="inline-flex items-center gap-2 px-4 py-2 bg-white rounded-full shadow-md mb-8 border border-gray-100">
                   <Sparkles className="w-4 h-4 text-teal-600" />
-                  <span className="text-sm font-medium text-gray-700">Transforming Businesses Since 2012</span>
+                  <span className="text-sm font-medium text-gray-700">{hero.badge || 'Transforming Businesses Since 2012'}</span>
                 </div>
                 
                 <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mb-8">
-                  <span className="text-gray-900">Innovate.</span>
+                  <span className="text-gray-900">{hero.title1 || 'Innovate.'}</span>
                   <br />
-                  <span className="text-gray-900">Scale.</span>
+                  <span className="text-gray-900">{hero.title2 || 'Scale.'}</span>
                   <br />
-                  <span className="gradient-text">Transform.</span>
+                  <span className="gradient-text">{hero.title3 || 'Transform.'}</span>
                 </h1>
                 
                 <p className="text-xl text-gray-600 leading-relaxed mb-10 max-w-lg">
-                  Custom eLearning that sticks. Software that scales. 
-                  From concept to launch-we build what others can&apos;t.
+                  {hero.subtitle || "Custom eLearning that sticks. Software that scales. From concept to launch - we build what others can't."}
                 </p>
                 
                 <div className="flex flex-col sm:flex-row gap-4 mb-12">
                   <Link 
-                    to="/contact" 
+                    to={hero.buttonLink || "/contact"} 
                     className="group inline-flex items-center justify-center gap-2 bg-gradient-to-r from-teal-600 to-green-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105"
+                    data-testid="hero-cta-primary"
                   >
-                    Get Started
+                    {hero.buttonText || 'Get Started'}
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </Link>
                   <Link 
-                    to="/about" 
+                    to={hero.secondaryButtonLink || "/about"} 
                     className="inline-flex items-center justify-center gap-2 bg-white text-gray-900 px-8 py-4 rounded-full font-bold text-lg border-2 border-gray-200 hover:border-teal-500 transition-all duration-300"
+                    data-testid="hero-cta-secondary"
                   >
                     <Play className="w-5 h-5" />
-                    Our Story
+                    {hero.secondaryButtonText || 'Our Story'}
                   </Link>
                 </div>
 
                 {/* Stats inline */}
                 <div className="flex items-center gap-8">
                   <div>
-                    <div className="text-3xl font-bold text-gray-900">13+</div>
-                    <div className="text-sm text-gray-500">Years</div>
+                    <div className="text-3xl font-bold text-gray-900">{stats.years || '13+'}</div>
+                    <div className="text-sm text-gray-500">{stats.yearsLabel || 'Years'}</div>
                   </div>
                   <div className="w-px h-10 bg-gray-300"></div>
                   <div>
-                    <div className="text-3xl font-bold text-gray-900">300+</div>
-                    <div className="text-sm text-gray-500">Projects</div>
+                    <div className="text-3xl font-bold text-gray-900">{stats.projects || '300+'}</div>
+                    <div className="text-sm text-gray-500">{stats.projectsLabel || 'Projects'}</div>
                   </div>
                   <div className="w-px h-10 bg-gray-300"></div>
                   <div>
-                    <div className="text-3xl font-bold text-gray-900">32+</div>
-                    <div className="text-sm text-gray-500">Countries</div>
+                    <div className="text-3xl font-bold text-gray-900">{stats.countries || '32+'}</div>
+                    <div className="text-sm text-gray-500">{stats.countriesLabel || 'Countries'}</div>
                   </div>
                 </div>
               </motion.div>
@@ -250,10 +271,17 @@ function Home() {
               className="text-center mb-16"
             >
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                What We <span className="gradient-text">Build</span>
+                {content?.services?.title ? (
+                  <>
+                    {content.services.title.split(' ').slice(0, -1).join(' ')}{' '}
+                    <span className="gradient-text">{content.services.title.split(' ').slice(-1)}</span>
+                  </>
+                ) : (
+                  <>What We <span className="gradient-text">Build</span></>
+                )}
               </h2>
               <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-                From learning experiences to software solutions-we craft digital products that make a difference.
+                {content?.services?.subtitle || 'From learning experiences to software solutions - we craft digital products that make a difference.'}
               </p>
             </motion.div>
 
@@ -266,7 +294,7 @@ function Home() {
                 viewport={{ once: true }}
                 className="lg:col-span-1"
               >
-                <Link to="/services/elearning" className="block h-full">
+                <Link to="/services/elearning" className="block h-full" data-testid="service-elearning">
                   <div className="h-full min-h-[280px] p-8 rounded-3xl bg-gradient-to-br from-indigo-600 via-purple-600 to-indigo-700 text-white relative overflow-hidden group hover:shadow-2xl transition-all">
                     <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
                     <div className="relative z-10">
@@ -290,7 +318,7 @@ function Home() {
                 transition={{ delay: 0.1 }}
                 className="lg:col-span-1"
               >
-                <Link to="/services/software-development" className="block h-full">
+                <Link to="/services/software-development" className="block h-full" data-testid="service-software">
                   <div className="h-full min-h-[280px] p-8 rounded-3xl bg-gradient-to-br from-teal-600 via-cyan-600 to-teal-700 text-white relative overflow-hidden group hover:shadow-2xl transition-all">
                     <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
                     <div className="relative z-10">
@@ -314,14 +342,14 @@ function Home() {
                 transition={{ delay: 0.2 }}
                 className="lg:col-span-1"
               >
-                <Link to="/services/india-expansion" className="block h-full">
+                <Link to="/services/india-expansion" className="block h-full" data-testid="service-india">
                   <div className="h-full min-h-[280px] p-8 rounded-3xl bg-gradient-to-br from-emerald-600 via-green-600 to-emerald-700 text-white relative overflow-hidden group hover:shadow-2xl transition-all">
                     <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
                     <div className="relative z-10">
                       <Globe className="w-10 h-10 mb-4" />
                       <h3 className="text-2xl font-bold mb-3">India Expansion</h3>
                       <p className="text-white/80 text-sm mb-4">
-                        EOR, ODC, COE services-build your India team in weeks.
+                        EOR, ODC, COE services - build your India team in weeks.
                       </p>
                       <div className="inline-flex items-center gap-2 text-white text-sm font-semibold group-hover:gap-3 transition-all">
                         Learn More <ArrowRight className="w-4 h-4" />
@@ -364,21 +392,14 @@ function Home() {
               viewport={{ once: true }}
               className="text-center mb-16"
             >
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">Why Teams Choose Us</h2>
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">{whyUs.title || 'Why Teams Choose Us'}</h2>
               <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-                We don&apos;t just deliver projects-we build partnerships that last.
+                {whyUs.subtitle || "We don't just deliver projects - we build partnerships that last."}
               </p>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                { number: '01', title: '100% Certified Talent', desc: 'Experience the difference of working with professionals who are meticulously vetted and ready to exceed your expectations.' },
-                { number: '02', title: 'Team Scalability', desc: 'Effortlessly adjust your development team to align with your evolving roadmap. Stay agile and adaptable.' },
-                { number: '03', title: 'Save up to 40%', desc: 'Accelerate your project launch with premium quality at smart pricing. No delays, just results.' },
-                { number: '04', title: 'Kick off in 5 Days', desc: 'Ditch the lengthy hiring hassles and launch your team quickly. Start your project without the wait.' },
-                { number: '05', title: 'All Tech Under One Roof', desc: 'Our skilled team excels across major tech platforms, ready to tackle any challenge you throw our way.' },
-                { number: '06', title: 'Lionforce Excellence', desc: 'Quality and high standards are in our DNA. We maximize ROI and ensure every project exceeds expectations.' }
-              ].map((item, index) => (
+              {whyUsItems.map((item, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 30 }}
@@ -409,12 +430,19 @@ function Home() {
               className="text-center mb-16"
             >
               <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                Client <span className="gradient-text">Stories</span>
+                {testimonials.title ? (
+                  <>
+                    {testimonials.title.split(' ').slice(0, -1).join(' ')}{' '}
+                    <span className="gradient-text">{testimonials.title.split(' ').slice(-1)}</span>
+                  </>
+                ) : (
+                  <>Client <span className="gradient-text">Stories</span></>
+                )}
               </h2>
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {testimonials.map((testimonial, index) => (
+              {testimonialItems.map((testimonial, index) => (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
@@ -455,19 +483,19 @@ function Home() {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
               >
-                <p className="text-white/80 font-semibold text-sm uppercase tracking-widest mb-4">🇮🇳 India Expansion</p>
+                <p className="text-white/80 font-semibold text-sm uppercase tracking-widest mb-4">🇮🇳 {indiaExpansionCTA.badge || 'India Expansion'}</p>
                 <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-                  Build Your India Team in Weeks, Not Months
+                  {indiaExpansionCTA.title || 'Build Your India Team in Weeks, Not Months'}
                 </h2>
                 <p className="text-xl text-white/90 mb-8">
-                  EOR, ODC, COE services with full operational support. Co-branding available. 
-                  Save 60% while accessing world-class talent.
+                  {indiaExpansionCTA.subtitle || 'EOR, ODC, COE services with full operational support. Co-branding available. Save 60% while accessing world-class talent.'}
                 </p>
                 <Link
-                  to="/services/india-expansion"
+                  to={indiaExpansionCTA.buttonLink || "/services/india-expansion"}
                   className="inline-flex items-center gap-2 bg-white text-emerald-600 px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 group"
+                  data-testid="india-expansion-cta"
                 >
-                  Explore India Services
+                  {indiaExpansionCTA.buttonText || 'Explore India Services'}
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
               </motion.div>
@@ -503,24 +531,26 @@ function Home() {
               viewport={{ once: true }}
             >
               <h2 className="text-4xl md:text-5xl font-bold mb-6 text-gray-900">
-                Ready to Build Something Amazing?
+                {finalCTA.title || 'Ready to Build Something Amazing?'}
               </h2>
               <p className="text-xl text-gray-600 mb-10 max-w-2xl mx-auto">
-                Let&apos;s turn your vision into reality. Start with a free consultation.
+                {finalCTA.subtitle || "Let's turn your vision into reality. Start with a free consultation."}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
-                  to="/contact"
+                  to={finalCTA.buttonLink || "/contact"}
                   className="inline-flex items-center justify-center gap-2 bg-gradient-to-r from-teal-600 to-green-600 text-white px-10 py-5 rounded-full font-bold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 group"
+                  data-testid="final-cta-btn"
                 >
-                  Start Your Project
+                  {finalCTA.buttonText || 'Start Your Project'}
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <a
-                  href="tel:+919600536354"
+                  href={`tel:${(finalCTA.phone || global?.phone || '+91 96005 36354').replace(/\s+/g, '')}`}
                   className="inline-flex items-center justify-center gap-2 bg-gray-100 text-gray-900 px-10 py-5 rounded-full font-bold text-lg hover:bg-gray-200 transition-all duration-300"
+                  data-testid="phone-cta"
                 >
-                  Call +91 96005 36354
+                  Call {finalCTA.phone || global?.phone || '+91 96005 36354'}
                 </a>
               </div>
             </motion.div>
