@@ -91,7 +91,7 @@ function Consulting() {
 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link
-                    to="/contact"
+                    to="/contact?service=consulting"
                     className="group inline-flex items-center justify-center gap-2 bg-white text-gray-700 px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105"
                     data-testid="consulting-cta-primary"
                   >
@@ -260,7 +260,7 @@ function Consulting() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
-                  to="/contact"
+                  to="/contact?service=consulting"
                   className="inline-flex items-center justify-center gap-2 bg-white text-gray-700 px-10 py-5 rounded-full font-bold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 group"
                 >
                   Book Consultation

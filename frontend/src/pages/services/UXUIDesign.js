@@ -91,7 +91,7 @@ function UXUIDesign() {
 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link
-                    to="/contact"
+                    to="/contact?service=ux-ui"
                     className="group inline-flex items-center justify-center gap-2 bg-white text-[#5a9e3d] px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105"
                     data-testid="uxui-cta-primary"
                   >
@@ -261,7 +261,7 @@ function UXUIDesign() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
-                  to="/contact"
+                  to="/contact?service=ux-ui"
                   className="inline-flex items-center justify-center gap-2 bg-white text-[#5a9e3d] px-10 py-5 rounded-full font-bold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 group"
                 >
                   Start Your Design Project

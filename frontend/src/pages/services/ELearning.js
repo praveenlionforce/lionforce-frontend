@@ -99,7 +99,7 @@ function ELearning() {
 
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Link
-                    to="/contact"
+                    to="/contact?service=elearning"
                     className="group inline-flex items-center justify-center gap-2 bg-white text-[#428697] px-8 py-4 rounded-full font-bold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105"
                     data-testid="elearning-cta-primary"
                   >
@@ -337,7 +337,7 @@ function ELearning() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
-                  to="/contact"
+                  to="/contact?service=elearning"
                   className="inline-flex items-center justify-center gap-2 bg-white text-[#428697] px-10 py-5 rounded-full font-bold text-lg hover:shadow-2xl transition-all duration-300 hover:scale-105 group"
                   data-testid="elearning-final-cta"
                 >
