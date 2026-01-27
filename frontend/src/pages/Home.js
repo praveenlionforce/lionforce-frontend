@@ -241,8 +241,8 @@ function Home() {
                 </div>
                 <div className="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-full border border-blue-200">
                   <Globe className="w-5 h-5 text-blue-600" />
-                  <span className="font-semibold text-gray-900">Global Workforce</span>
-                  <span className="text-gray-600 text-sm">EOR • ODC • COE in India</span>
+                  <span className="font-semibold text-gray-900">India Expansion</span>
+                  <span className="text-gray-600 text-sm">EOR • ODC • COE Setup</span>
                 </div>
                 <div className="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded-full border border-purple-200">
                   <TrendingUp className="w-5 h-5 text-purple-600" />
@@ -257,8 +257,8 @@ function Home() {
                 </div>
                 <div className="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-full border border-blue-200">
                   <Globe className="w-5 h-5 text-blue-600" />
-                  <span className="font-semibold text-gray-900">Global Workforce</span>
-                  <span className="text-gray-600 text-sm">EOR • ODC • COE in India</span>
+                  <span className="font-semibold text-gray-900">India Expansion</span>
+                  <span className="text-gray-600 text-sm">EOR • ODC • COE Setup</span>
                 </div>
                 <div className="flex items-center gap-3 px-6 py-3 bg-gradient-to-r from-purple-50 to-pink-50 rounded-full border border-purple-200">
                   <TrendingUp className="w-5 h-5 text-purple-600" />
