@@ -185,7 +185,7 @@ function CreativeServices() {
         </section>
 
         {/* CTA Section */}
-        <section className={`py-24 bg-gradient-to-r ${hero.gradient || 'from-orange-500 via-amber-500 to-yellow-500'} relative overflow-hidden`}>
+        <section className={`py-24 bg-gradient-to-r ${hero.gradient || 'from-rose-400 via-pink-500 to-rose-600'} relative overflow-hidden`}>
           <div className="absolute inset-0 opacity-10">
             <div className="absolute inset-0" style={{backgroundImage: 'radial-gradient(circle at 30% 50%, white 2px, transparent 2px)', backgroundSize: '60px 60px'}}></div>
           </div>
