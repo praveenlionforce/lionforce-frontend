@@ -1,9 +1,11 @@
-from fastapi import FastAPI, APIRouter, HTTPException
+from fastapi import FastAPI, APIRouter, HTTPException, Depends
+from fastapi.security import HTTPBasic, HTTPBasicCredentials
 from dotenv import load_dotenv
 from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
+import secrets
 from pathlib import Path
 from pydantic import BaseModel, Field, ConfigDict, EmailStr
 from typing import List, Optional
@@ -60,6 +62,61 @@ class Newsletter(BaseModel):
 
 class NewsletterCreate(BaseModel):
     email: EmailStr
+
+# Content Block Model for Admin CMS
+class ContentBlock(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    page: str  # e.g., 'home', 'about', 'services'
+    section: str  # e.g., 'hero', 'services', 'testimonials'
+    title: Optional[str] = None
+    subtitle: Optional[str] = None
+    content: Optional[str] = None
+    image_url: Optional[str] = None
+    button_text: Optional[str] = None
+    button_link: Optional[str] = None
+    order: int = 0
+    is_active: bool = True
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class ContentBlockCreate(BaseModel):
+    page: str
+    section: str
+    title: Optional[str] = None
+    subtitle: Optional[str] = None
+    content: Optional[str] = None
+    image_url: Optional[str] = None
+    button_text: Optional[str] = None
+    button_link: Optional[str] = None
+    order: int = 0
+    is_active: bool = True
+
+class ContentBlockUpdate(BaseModel):
+    title: Optional[str] = None
+    subtitle: Optional[str] = None
+    content: Optional[str] = None
+    image_url: Optional[str] = None
+    button_text: Optional[str] = None
+    button_link: Optional[str] = None
+    order: Optional[int] = None
+    is_active: Optional[bool] = None
+
+# Basic Auth for Admin
+security = HTTPBasic()
+
+# Admin credentials (in production, use environment variables)
+ADMIN_USERNAME = os.environ.get('ADMIN_USERNAME', 'admin')
+ADMIN_PASSWORD = os.environ.get('ADMIN_PASSWORD', 'lionforce2024')
+
+def verify_admin(credentials: HTTPBasicCredentials = Depends(security)):
+    correct_username = secrets.compare_digest(credentials.username, ADMIN_USERNAME)
+    correct_password = secrets.compare_digest(credentials.password, ADMIN_PASSWORD)
+    if not (correct_username and correct_password):
+        raise HTTPException(
+            status_code=401,
+            detail="Invalid credentials",
+            headers={"WWW-Authenticate": "Basic"},
+        )
+    return credentials.username
 
 # Add your routes to the router instead of directly to app
 @api_router.get("/")
@@ -131,6 +188,95 @@ async def subscribe_newsletter(input: NewsletterCreate):
         raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to subscribe: {str(e)}")
+
+# Admin Authentication Endpoint
+@api_router.post("/admin/login")
+async def admin_login(username: str = Depends(verify_admin)):
+    return {"message": "Login successful", "username": username}
+
+# Admin - Content Blocks CRUD
+@api_router.get("/admin/content", response_model=List[ContentBlock])
+async def get_all_content(username: str = Depends(verify_admin)):
+    content_blocks = await db.content_blocks.find({}, {"_id": 0}).to_list(1000)
+    for block in content_blocks:
+        if isinstance(block.get('updated_at'), str):
+            block['updated_at'] = datetime.fromisoformat(block['updated_at'])
+    return content_blocks
+
+@api_router.get("/admin/content/{page}", response_model=List[ContentBlock])
+async def get_page_content(page: str, username: str = Depends(verify_admin)):
+    content_blocks = await db.content_blocks.find({"page": page}, {"_id": 0}).to_list(1000)
+    for block in content_blocks:
+        if isinstance(block.get('updated_at'), str):
+            block['updated_at'] = datetime.fromisoformat(block['updated_at'])
+    return sorted(content_blocks, key=lambda x: x.get('order', 0))
+
+@api_router.post("/admin/content", response_model=ContentBlock)
+async def create_content_block(input: ContentBlockCreate, username: str = Depends(verify_admin)):
+    try:
+        content_dict = input.model_dump()
+        content_obj = ContentBlock(**content_dict)
+        
+        doc = content_obj.model_dump()
+        doc['updated_at'] = doc['updated_at'].isoformat()
+        
+        await db.content_blocks.insert_one(doc)
+        return content_obj
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to create content block: {str(e)}")
+
+@api_router.put("/admin/content/{block_id}", response_model=ContentBlock)
+async def update_content_block(block_id: str, input: ContentBlockUpdate, username: str = Depends(verify_admin)):
+    try:
+        update_data = {k: v for k, v in input.model_dump().items() if v is not None}
+        update_data['updated_at'] = datetime.now(timezone.utc).isoformat()
+        
+        result = await db.content_blocks.update_one(
+            {"id": block_id},
+            {"$set": update_data}
+        )
+        
+        if result.matched_count == 0:
+            raise HTTPException(status_code=404, detail="Content block not found")
+        
+        updated_block = await db.content_blocks.find_one({"id": block_id}, {"_id": 0})
+        if isinstance(updated_block.get('updated_at'), str):
+            updated_block['updated_at'] = datetime.fromisoformat(updated_block['updated_at'])
+        return updated_block
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to update content block: {str(e)}")
+
+@api_router.delete("/admin/content/{block_id}")
+async def delete_content_block(block_id: str, username: str = Depends(verify_admin)):
+    try:
+        result = await db.content_blocks.delete_one({"id": block_id})
+        if result.deleted_count == 0:
+            raise HTTPException(status_code=404, detail="Content block not found")
+        return {"message": "Content block deleted successfully"}
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to delete content block: {str(e)}")
+
+# Admin - Get Contact Form Submissions (already exists as /contacts, but adding admin protected version)
+@api_router.get("/admin/submissions", response_model=List[ContactForm])
+async def get_admin_submissions(username: str = Depends(verify_admin)):
+    contacts = await db.contact_forms.find({}, {"_id": 0}).to_list(1000)
+    for contact in contacts:
+        if isinstance(contact['timestamp'], str):
+            contact['timestamp'] = datetime.fromisoformat(contact['timestamp'])
+    return sorted(contacts, key=lambda x: x.get('timestamp', datetime.min), reverse=True)
+
+# Admin - Get Newsletter Subscribers
+@api_router.get("/admin/subscribers", response_model=List[Newsletter])
+async def get_admin_subscribers(username: str = Depends(verify_admin)):
+    subscribers = await db.newsletter.find({}, {"_id": 0}).to_list(1000)
+    for sub in subscribers:
+        if isinstance(sub['timestamp'], str):
+            sub['timestamp'] = datetime.fromisoformat(sub['timestamp'])
+    return sorted(subscribers, key=lambda x: x.get('timestamp', datetime.min), reverse=True)
 
 # Include the router in the main app
 app.include_router(api_router)
