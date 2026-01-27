@@ -335,7 +335,14 @@ const defaultContent = {
       stats: ['500% average ROI', 'Full-funnel approach', 'Measurable results'],
       primaryCTA: 'Get Marketing Strategy',
       secondaryCTA: 'See Case Studies',
-      gradient: 'from-emerald-600 via-green-600 to-teal-600'
+      gradient: 'from-emerald-600 via-green-600 to-teal-600',
+      heroBoxes: [
+        { label: 'SEO', value: 'Organic Growth' },
+        { label: 'Social', value: 'Engagement' },
+        { label: 'PPC', value: 'Targeted' },
+        { label: 'Analytics', value: 'Data-Driven' }
+      ],
+      highlightStat: { value: '500%', label: 'Average ROI' }
     },
     services: [
       { title: 'SEO & Content Marketing', description: 'Rank higher, attract organic traffic, build authority.' },
@@ -356,7 +363,14 @@ const defaultContent = {
       stats: ['13+ years expertise', 'Cross-industry experience', 'Proven frameworks'],
       primaryCTA: 'Book Consultation',
       secondaryCTA: 'Learn More',
-      gradient: 'from-slate-600 via-gray-600 to-zinc-600'
+      gradient: 'from-slate-600 via-gray-600 to-zinc-600',
+      heroBoxes: [
+        { label: 'Strategy', value: 'Expert' },
+        { label: 'Technology', value: 'Modern' },
+        { label: 'Process', value: 'Optimized' },
+        { label: 'Growth', value: 'Sustainable' }
+      ],
+      highlightStat: { value: '13+', label: 'Years Expertise' }
     },
     services: [
       { title: 'Digital Transformation', description: 'Roadmap for modernizing your business with technology.' },
