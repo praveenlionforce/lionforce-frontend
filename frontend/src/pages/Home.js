@@ -216,7 +216,7 @@ function Home() {
         </section>
 
         {/* Services */}
-        <section className="py-20 bg-gray-50">
+        <section className="py-20 bg-gradient-to-b from-white via-teal-50/30 to-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
@@ -227,15 +227,24 @@ function Home() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {services.map((service, index) => (
-                <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: index * 0.1 }} className="card-hover">
-                  <Link to={service.link} className="block bg-white p-8 rounded-2xl border border-gray-200 hover:border-teal-500 hover:shadow-xl transition-all duration-300">
-                    <div className="text-teal-600 mb-4">{service.icon}</div>
-                    <h3 className="text-2xl font-bold mb-2 text-gray-900">{service.title}</h3>
-                    <p className="text-sm text-teal-600 mb-3 font-semibold">{service.tagline}</p>
-                    <p className="text-gray-600 mb-4">{service.description}</p>
-                    <div className="flex items-center text-teal-600 font-semibold">
+                <motion.div 
+                  key={index} 
+                  initial={{ opacity: 0, y: 20 }} 
+                  whileInView={{ opacity: 1, y: 0 }} 
+                  viewport={{ once: true }} 
+                  transition={{ delay: index * 0.1 }}
+                >
+                  <Link 
+                    to={service.link} 
+                    className="block h-full bg-white p-6 rounded-xl border border-gray-200 hover:border-teal-400 hover:shadow-xl transition-all duration-300 group"
+                  >
+                    <div className="text-teal-600 mb-4 group-hover:scale-110 transition-transform">{service.icon}</div>
+                    <h3 className="text-xl font-bold mb-2 text-gray-900">{service.title}</h3>
+                    <p className="text-xs text-teal-600 mb-3 font-semibold uppercase tracking-wide">{service.tagline}</p>
+                    <p className="text-gray-600 text-sm mb-4 leading-relaxed">{service.description}</p>
+                    <div className="flex items-center text-teal-600 font-semibold text-sm group-hover:translate-x-1 transition-transform">
                       Learn More <ArrowRight className="ml-2 w-4 h-4" />
                     </div>
                   </Link>
