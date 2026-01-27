@@ -25,6 +25,16 @@ function ELearning() {
   const solutions = content?.solutions || [];
   const benefits = content?.benefits || [];
   const industries = content?.industries || [];
+  
+  // Hero boxes with defaults
+  const heroBoxes = hero.heroBoxes || [
+    { label: 'AI-Powered', value: 'Learning' },
+    { label: 'Gamified', value: '3x Engagement' },
+    { label: 'Microlearning', value: '5-min Modules' },
+    { label: 'Analytics', value: 'Real-time' }
+  ];
+  
+  const highlightStat = hero.highlightStat || { value: '500K+', label: 'Learners Trained' };
 
   const solutionIcons = [Brain, BookOpen, Gamepad2, Layers, Target, Sparkles];
 
