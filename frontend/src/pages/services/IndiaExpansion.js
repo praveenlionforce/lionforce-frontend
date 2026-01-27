@@ -132,11 +132,20 @@ function IndiaExpansion() {
     { title: 'Tech Hubs', description: 'Bangalore, Hyderabad, Chennai - world-class cities', icon: <Award className="w-8 h-8" /> }
   ];
 
+  // SEO data from CMS
+  const seo = content?.seo || {};
+
   return (
     <>
       <Helmet>
-        <title>India Expansion Services - EOR, ODC, COE | Lionforce</title>
-        <meta name="description" content="Launch your India team in 2-8 weeks. EOR, ODC, and COE services with co-branding. From $139/month. 60% cost savings." />
+        <title>{seo.title || 'India Expansion Services - EOR, ODC, COE | Lionforce'}</title>
+        <meta name="description" content={seo.description || 'Launch your India team in 2-8 weeks. EOR, ODC, and COE services with co-branding. From $139/month. 60% cost savings.'} />
+        <meta name="keywords" content={seo.keywords || 'India expansion, EOR, employer of record, ODC, offshore development center, COE, hire in India'} />
+        {seo.ogImage && <meta property="og:image" content={seo.ogImage} />}
+        <meta property="og:title" content={seo.title || 'India Expansion - Lionforce'} />
+        <meta property="og:description" content={seo.description || 'Launch your India team in 2-8 weeks'} />
+        <meta property="og:type" content="website" />
+        {seo.canonicalUrl && <link rel="canonical" href={seo.canonicalUrl} />}
       </Helmet>
 
       <div className="pt-20 bg-white">
