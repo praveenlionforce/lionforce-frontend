@@ -25,6 +25,16 @@ function SoftwareDevelopment() {
   const services = content?.services || [];
   const techStack = content?.techStack || [];
   const benefits = content?.benefits || [];
+  
+  // Hero boxes with defaults
+  const heroBoxes = hero.heroBoxes || [
+    { label: 'AI Solutions', value: 'Smart' },
+    { label: 'Web & Mobile', value: 'Full Stack' },
+    { label: 'IoT', value: 'Connected' },
+    { label: 'Cloud', value: 'Scalable' }
+  ];
+  
+  const highlightStat = hero.highlightStat || { value: '300+', label: 'Apps Built' };
 
   const serviceIcons = [Brain, Code, Cpu, Globe, Smartphone, RefreshCw];
 
