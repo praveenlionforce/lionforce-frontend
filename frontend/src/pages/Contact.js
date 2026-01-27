@@ -53,6 +53,30 @@ function Contact() {
     { value: '13+', label: 'Years Experience' }
   ];
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    
+    try {
+      await axios.post(`${API}/contact`, formData);
+      setSuccess(true);
+      setFormData({ name: '', email: '', subject: '', message: '', service: '' });
+      setTimeout(() => setSuccess(false), 5000);
+    } catch (err) {
+      setError('Failed to send message. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const phoneNumber = info.phone || global?.phone || '+91 96005 36354';
+  const emailAddress = info.email || global?.email || 'hello@lionforce.net';
+
   return (
     <>
       <Helmet>
