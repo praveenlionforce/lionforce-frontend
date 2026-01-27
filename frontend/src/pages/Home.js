@@ -424,7 +424,7 @@ function Home() {
               data-testid="final-cta-call"
             >
               Call +91 98840 52675
-            </Link>
+            </a>
           </div>
         </div>
       </section>
