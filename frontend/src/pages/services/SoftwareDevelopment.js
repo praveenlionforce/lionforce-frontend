@@ -64,6 +64,7 @@ function SoftwareDevelopment() {
       tagline="Code Smart • Build Better"
       description="Got an idea? Let's turn it into an app that wows. From dynamic web portals to mobile-first applications, we build smart, scalable, user-friendly solutions tailored to your workflow, goals, and growth plans. We don't just code—we co-create digital experiences that deliver."
       heroImage="https://images.unsplash.com/photo-1672385252168-041b18d5ad37?auto=format&fit=crop&w=1920&q=80"
+      heroGradient="from-teal-600 via-cyan-600 to-blue-600"
       features={features}
       subServices={subServices}
       benefits={benefits}
