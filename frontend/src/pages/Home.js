@@ -82,6 +82,16 @@ function Home() {
   const testimonials = content?.testimonials || {};
   const indiaExpansionCTA = content?.indiaExpansionCTA || {};
   const finalCTA = content?.finalCTA || {};
+  
+  // Hero boxes (4 service cards in hero)
+  const heroBoxes = hero.heroBoxes || [
+    { title: 'AI-Powered eLearning', description: 'Interactive, AI-enhanced learning that clicks.', link: '/services/elearning', color: 'from-indigo-500 to-purple-600' },
+    { title: 'Software & AI', description: 'Smart, AI-driven solutions for growth.', link: '/services/software-development', color: 'from-teal-500 to-cyan-600' },
+    { title: 'UX/UI Design', description: 'Intuitive experiences that convert.', link: '/services/ux-ui-design', color: 'from-violet-500 to-purple-600' },
+    { title: 'Creative Services', description: '3D, animations, visual storytelling.', link: '/services/creative', color: 'from-orange-500 to-amber-500' }
+  ];
+  
+  const highlightStat = hero.highlightStat || { value: '500K+', label: 'People Impacted' };
 
   const whyUsItems = whyUs.items || [
     { number: '01', title: '100% Certified Talent', desc: 'Experience the difference of working with professionals who are meticulously vetted and ready to exceed your expectations.' },
