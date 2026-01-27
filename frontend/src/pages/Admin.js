@@ -1612,12 +1612,17 @@ function Admin() {
                       <TextField label="Company Name" value={siteContent.global?.companyName} onChange={(v) => updateContent('global.companyName', v)} />
                       <div className="grid grid-cols-2 gap-4">
                         <TextField label="Phone Number" value={siteContent.global?.phone} onChange={(v) => updateContent('global.phone', v)} />
-                        <TextField label="Email Address" value={siteContent.global?.email} onChange={(v) => updateContent('global.email', v)} />
+                        <TextField label="Email Address (Display)" value={siteContent.global?.email} onChange={(v) => updateContent('global.email', v)} />
                       </div>
                       <div className="grid grid-cols-2 gap-4">
                         <TextField label="Location" value={siteContent.global?.location} onChange={(v) => updateContent('global.location', v)} />
                         <TextField label="Founded Year" value={siteContent.global?.foundedYear} onChange={(v) => updateContent('global.foundedYear', v)} />
                       </div>
+                    </Section>
+
+                    <Section title="Form Submission Settings" icon={<Mail className="w-4 h-4 text-teal-600" />} sectionKey="global-forms" defaultOpen={true}>
+                      <TextField label="Form Submission Email" value={siteContent.global?.formSubmissionEmail} onChange={(v) => updateContent('global.formSubmissionEmail', v)} placeholder="praveen@lionforce.net" />
+                      <p className="text-xs text-gray-500 mt-1">This is the email address where form submissions will be forwarded from the admin panel.</p>
                     </Section>
 
                     <Section title="Social Links" icon={<Globe className="w-4 h-4 text-teal-600" />} sectionKey="global-social">
