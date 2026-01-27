@@ -466,7 +466,14 @@ function Admin() {
         stats: ['500% average ROI', 'Full-funnel approach', 'Measurable results'],
         primaryCTA: 'Get Marketing Strategy',
         secondaryCTA: 'See Case Studies',
-        gradient: 'from-emerald-600 via-green-600 to-teal-600'
+        gradient: 'from-emerald-600 via-green-600 to-teal-600',
+        heroBoxes: [
+          { label: 'SEO', value: 'Organic Growth' },
+          { label: 'Social', value: 'Engagement' },
+          { label: 'PPC', value: 'Targeted' },
+          { label: 'Analytics', value: 'Data-Driven' }
+        ],
+        highlightStat: { value: '500%', label: 'Average ROI' }
       },
       services: [
         { title: 'SEO & Content Marketing', description: 'Rank higher, attract organic traffic, build authority.' },
