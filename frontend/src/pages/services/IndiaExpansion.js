@@ -354,7 +354,7 @@ function IndiaExpansion() {
               <p className="text-gray-600 text-sm mb-4">
                 {noteBoxDescription}
               </p>
-              <Link to="/contact" className="inline-flex items-center text-emerald-600 font-semibold hover:underline">
+              <Link to="/contact?service=india-expansion" className="inline-flex items-center text-emerald-600 font-semibold hover:underline">
                 {noteBoxCta} <ArrowRight className="ml-1 w-4 h-4" />
               </Link>
             </div>
