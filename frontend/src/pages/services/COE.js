@@ -6,9 +6,10 @@ function COE() {
   return (
     <ServiceTemplate
       title="COE (Center of Excellence)"
-      tagline="Excellence • Innovation • Growth"
-      description="Establish a Center of Excellence to drive innovation, standardize best practices, and accelerate organizational transformation. Our COE services help you build specialized teams focused on continuous improvement and knowledge leadership."
+      tagline="India Center of Excellence • Drive Innovation"
+      description="Establish a Center of Excellence in India to drive innovation, standardize best practices, and accelerate organizational transformation. Our COE services help you build specialized teams focused on continuous improvement and knowledge leadership in India's thriving tech ecosystem."
       heroImage="https://images.pexels.com/photos/8292854/pexels-photo-8292854.jpeg?auto=compress&cs=tinysrgb&w=1920"
+      heroGradient="from-orange-600 via-amber-600 to-yellow-600"
       features={[
         { icon: <Award className="w-8 h-8" />, title: 'Best Practices', description: 'Establish and propagate industry best practices across your organization.' },
         { icon: <Lightbulb className="w-8 h-8" />, title: 'Innovation Hub', description: 'Foster innovation and experimentation with emerging technologies.' },
