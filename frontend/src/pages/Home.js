@@ -275,18 +275,18 @@ function Home() {
         </section>
 
         {/* Testimonials */}
-        <section className="py-20 bg-gray-50">
+        <section className="py-20 bg-gradient-to-br from-teal-50 via-green-50/30 to-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-16">
               <h2 className="text-4xl md:text-5xl font-bold mb-4">
                 Client <span className="gradient-text">Success Stories</span>
               </h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {testimonials.map((testimonial, index) => (
-                <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-white p-8 rounded-2xl border border-gray-200 shadow-lg">
-                  <div className="text-teal-600 text-5xl mb-4">"</div>
-                  <p className="text-gray-700 mb-6 italic">{testimonial.quote}</p>
+                <motion.div key={index} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-white p-8 rounded-xl border-l-4 border-teal-500 shadow-lg hover:shadow-xl transition-shadow">
+                  <div className="text-teal-600 text-5xl mb-4 font-serif">"</div>
+                  <p className="text-gray-700 mb-6 italic leading-relaxed">{testimonial.quote}</p>
                   <div className="border-t border-gray-200 pt-4">
                     <p className="text-gray-900 font-semibold">{testimonial.author}</p>
                     <p className="text-gray-600 text-sm">{testimonial.company}</p>
