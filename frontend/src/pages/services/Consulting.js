@@ -21,6 +21,16 @@ function Consulting() {
   
   const hero = content?.hero || {};
   const services = content?.services || [];
+  
+  // Hero boxes with defaults
+  const heroBoxes = hero.heroBoxes || [
+    { label: 'Strategy', value: 'Expert' },
+    { label: 'Technology', value: 'Modern' },
+    { label: 'Process', value: 'Optimized' },
+    { label: 'Growth', value: 'Sustainable' }
+  ];
+  
+  const highlightStat = hero.highlightStat || { value: '13+', label: 'Years Expertise' };
 
   const serviceIcons = [Lightbulb, Cpu, GitBranch, GraduationCap, Users, RefreshCw];
 
