@@ -120,24 +120,23 @@ function ELearning() {
                   {/* Main card */}
                   <div className="bg-white/10 backdrop-blur-md p-8 rounded-3xl border border-white/20 shadow-2xl">
                     <div className="grid grid-cols-2 gap-4">
-                      {[
-                        { icon: Brain, label: 'AI-Powered', value: 'Learning' },
-                        { icon: Gamepad2, label: 'Gamified', value: '3x Engagement' },
-                        { icon: Zap, label: 'Microlearning', value: '5-min Modules' },
-                        { icon: BarChart3, label: 'Analytics', value: 'Real-time' }
-                      ].map((item, i) => (
-                        <motion.div
-                          key={i}
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{ delay: 0.4 + i * 0.1 }}
-                          className="bg-white/10 p-4 rounded-xl text-center"
-                        >
-                          <item.icon className="w-8 h-8 text-white mx-auto mb-2" />
-                          <p className="text-white/70 text-xs">{item.label}</p>
-                          <p className="text-white font-bold text-sm">{item.value}</p>
-                        </motion.div>
-                      ))}
+                      {heroBoxes.map((item, i) => {
+                        const icons = [Brain, Gamepad2, Zap, BarChart3];
+                        const Icon = icons[i % icons.length];
+                        return (
+                          <motion.div
+                            key={i}
+                            initial={{ opacity: 0, y: 20 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ delay: 0.4 + i * 0.1 }}
+                            className="bg-white/10 p-4 rounded-xl text-center"
+                          >
+                            <Icon className="w-8 h-8 text-white mx-auto mb-2" />
+                            <p className="text-white/70 text-xs">{item.label}</p>
+                            <p className="text-white font-bold text-sm">{item.value}</p>
+                          </motion.div>
+                        );
+                      })}
                     </div>
                   </div>
 
@@ -153,8 +152,8 @@ function ELearning() {
                         <Users className="w-6 h-6" />
                       </div>
                       <div>
-                        <div className="font-bold text-gray-900">500K+</div>
-                        <div className="text-sm text-gray-500">Learners Trained</div>
+                        <div className="font-bold text-gray-900">{highlightStat.value}</div>
+                        <div className="text-sm text-gray-500">{highlightStat.label}</div>
                       </div>
                     </div>
                   </motion.div>
