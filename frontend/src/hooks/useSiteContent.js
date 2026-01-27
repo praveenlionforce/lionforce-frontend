@@ -95,6 +95,13 @@ const defaultContent = {
       subtitle: "Since 2012, we've been transforming how businesses learn, build, and grow. Not just another tech company - we're your partners in making the impossible possible.",
       backgroundImage: ''
     },
+    seo: {
+      title: 'About Lionforce Technologies - Our Story & Mission',
+      description: 'Learn about Lionforce Technologies - 13+ years of transforming businesses through custom eLearning, software development, and creative services. Meet our team and discover our values.',
+      keywords: 'about Lionforce, company history, team, values, mission, eLearning company, software development company, Chennai India',
+      ogImage: '',
+      canonicalUrl: ''
+    },
     stats: {
       years: '13+',
       projects: '300+',
