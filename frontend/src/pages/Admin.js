@@ -1377,6 +1377,16 @@ function Admin() {
                       <a href="/contact" target="_blank" rel="noopener noreferrer" className="text-teal-600 hover:underline text-sm flex items-center gap-1"><Eye className="w-4 h-4" />Preview</a>
                     </div>
 
+                    <Section title="SEO Settings" icon={<Globe className="w-4 h-4 text-teal-600" />} sectionKey="contact-seo" defaultOpen={false}>
+                      <TextField label="Page Title" value={siteContent.contact?.seo?.title} onChange={(v) => updateContent('contact.seo.title', v)} />
+                      <TextField label="Meta Description" value={siteContent.contact?.seo?.description} onChange={(v) => updateContent('contact.seo.description', v)} multiline />
+                      <TextField label="Keywords (comma separated)" value={siteContent.contact?.seo?.keywords} onChange={(v) => updateContent('contact.seo.keywords', v)} multiline />
+                      <div className="grid grid-cols-2 gap-4">
+                        <ImageField label="OG Image" value={siteContent.contact?.seo?.ogImage} onChange={(v) => updateContent('contact.seo.ogImage', v)} />
+                        <TextField label="Canonical URL" value={siteContent.contact?.seo?.canonicalUrl} onChange={(v) => updateContent('contact.seo.canonicalUrl', v)} />
+                      </div>
+                    </Section>
+
                     <Section title="Hero Section" icon={<Layout className="w-4 h-4 text-teal-600" />} sectionKey="contact-hero" defaultOpen={true}>
                       <div className="grid grid-cols-3 gap-4">
                         <TextField label="Title Line 1" value={siteContent.contact?.hero?.title1} onChange={(v) => updateContent('contact.hero.title1', v)} />
