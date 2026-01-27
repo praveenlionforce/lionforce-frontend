@@ -139,22 +139,12 @@ function Contact() {
                 transition={{ duration: 0.6, delay: 0.2 }}
                 className="hidden lg:grid grid-cols-2 gap-4"
               >
-                <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
-                  <div className="text-4xl font-bold text-white mb-2">24h</div>
-                  <p className="text-white/80">Response Time</p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
-                  <div className="text-4xl font-bold text-white mb-2">300+</div>
-                  <p className="text-white/80">Happy Clients</p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
-                  <div className="text-4xl font-bold text-white mb-2">32+</div>
-                  <p className="text-white/80">Countries</p>
-                </div>
-                <div className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
-                  <div className="text-4xl font-bold text-white mb-2">13+</div>
-                  <p className="text-white/80">Years Experience</p>
-                </div>
+                {statsItems.map((stat, index) => (
+                  <div key={index} className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
+                    <div className="text-4xl font-bold text-white mb-2">{stat.value}</div>
+                    <p className="text-white/80">{stat.label}</p>
+                  </div>
+                ))}
               </motion.div>
             </div>
           </div>
