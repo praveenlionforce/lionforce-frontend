@@ -127,10 +127,12 @@ function Industries() {
                     </div>
                     
                     {/* Client logos hint */}
-                    <div className="pt-4 border-t border-gray-100">
-                      <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">Trusted by</p>
-                      <p className="text-sm text-gray-600">{industry.clients.join(' • ')}</p>
-                    </div>
+                    {industry.clients && industry.clients.length > 0 && (
+                      <div className="pt-4 border-t border-gray-100">
+                        <p className="text-xs text-gray-500 uppercase tracking-wider mb-2">Trusted by</p>
+                        <p className="text-sm text-gray-600">{industry.clients.join(' • ')}</p>
+                      </div>
+                    )}
                   </div>
                 </motion.div>
               ))}
