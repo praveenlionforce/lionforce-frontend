@@ -234,13 +234,13 @@ function EOR() {
               ))}
             </div>
 
-            <div className="bg-gradient-to-r from-amber-50 to-orange-50 border-l-4 border-amber-500 p-6 rounded-lg">
+            <div className="bg-gradient-to-r from-emerald-50 to-teal-50 border-l-4 border-emerald-500 p-6 rounded-lg">
               <div className="flex items-start gap-3">
-                <Zap className="w-6 h-6 text-amber-600 flex-shrink-0 mt-1" />
+                <Zap className="w-6 h-6 text-emerald-600 flex-shrink-0 mt-1" />
                 <div>
-                  <h3 className="font-bold text-gray-900 mb-2">Volume Discounts Available</h3>
-                  <p className="text-gray-700 text-sm mb-2"><strong>50+ employees:</strong> Additional $10-$15/employee discount</p>
-                  <p className="text-gray-600 text-xs">💰 Security Deposit: 3 months OPEX held in dedicated client account | ⚡ Setup: 2-8 weeks</p>
+                  <h3 className="font-bold text-gray-900 mb-2">Quick Setup & Launch</h3>
+                  <p className="text-gray-700 text-sm">⚡ <strong>Timeline:</strong> Launch your India team in just 2-8 weeks</p>
+                  <p className="text-gray-600 text-sm mt-2">💼 <strong>Minimum team size:</strong> Start with just 5 employees and scale to 50+</p>
                 </div>
               </div>
             </div>
