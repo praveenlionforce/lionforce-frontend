@@ -480,6 +480,15 @@ const defaultContent = {
       title: 'EOR Pricing Packages',
       subtitle: 'Transparent pricing for Employer of Record services. No hidden fees.',
       note: 'For ODC & COE pricing, please contact us for a customized quote.',
+      priceSuffix: '/emp/mo',
+      label24Month: '24-month contract',
+      label12Month: '{price}/month for 12-month',
+      popularBadge: 'Most Popular',
+      minEmployeesLabel: 'Min {count} employees',
+      ctaButtonText: 'Get Started',
+      noteBoxTitle: 'Need ODC or COE Setup?',
+      noteBoxDescription: 'Our Offshore Development Center (ODC) and Center of Excellence (COE) services are customized based on your specific requirements, team size, and infrastructure needs.',
+      noteBoxCta: 'Request a Custom Quote',
       packages: [
         {
           name: 'Core Setup & Compliance',
