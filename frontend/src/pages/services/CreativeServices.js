@@ -126,7 +126,7 @@ function CreativeServices() {
                   className="absolute -bottom-6 -left-6 bg-white p-4 rounded-2xl shadow-xl"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 bg-gradient-to-br from-orange-500 to-amber-500 rounded-full flex items-center justify-center text-white">
+                    <div className="w-12 h-12 bg-gradient-to-br from-rose-400 to-pink-500 rounded-full flex items-center justify-center text-white">
                       <Play className="w-6 h-6" />
                     </div>
                     <div>
