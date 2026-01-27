@@ -216,7 +216,16 @@ function Admin() {
           'Provide a tailored proposal',
           'Start building together'
         ]
-      }
+      },
+      serviceLinks: [
+        { name: 'eLearning', link: '/services/elearning' },
+        { name: 'Software & AI', link: '/services/software-development' },
+        { name: 'UX/UI Design', link: '/services/ux-ui-design' },
+        { name: 'Creative Services', link: '/services/creative' },
+        { name: 'Digital Marketing', link: '/services/digital-marketing' },
+        { name: 'Consulting', link: '/services/consulting' },
+        { name: 'Expand to India', link: '/services/india-expansion' }
+      ]
     },
     indiaExpansion: {
       hero: {
