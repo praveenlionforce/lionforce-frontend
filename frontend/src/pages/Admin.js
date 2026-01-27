@@ -438,7 +438,14 @@ function Admin() {
         stats: ['500+ videos created', 'Award-winning team', 'Global clients'],
         primaryCTA: 'Get Creative Quote',
         secondaryCTA: 'View Showreel',
-        gradient: 'from-[#2d4a5a] via-[#4a6670] to-[#8b7355]'
+        gradient: 'from-[#2d4a5a] via-[#4a6670] to-[#8b7355]',
+        heroBoxes: [
+          { label: '3D Animation', value: 'Stunning' },
+          { label: 'Explainers', value: 'Engaging' },
+          { label: 'Motion', value: 'Dynamic' },
+          { label: 'Infographics', value: 'Visual' }
+        ],
+        highlightStat: { value: '500+', label: 'Videos Created' }
       },
       services: [
         { title: '3D Animation', description: 'Stunning 3D visuals, product renders, and animated sequences.' },
