@@ -89,11 +89,20 @@ function Contact() {
   const phoneNumber = info.phone || global?.phone || '+91 96005 36354';
   const emailAddress = info.email || global?.email || 'hello@lionforce.net';
 
+  // SEO data from CMS
+  const seo = content?.seo || {};
+
   return (
     <>
       <Helmet>
-        <title>Contact Us | Lionforce - Let&apos;s Build Something Amazing</title>
-        <meta name="description" content="Get in touch with Lionforce. We'd love to hear about your project and discuss how we can help transform your business." />
+        <title>{seo.title || "Contact Us | Lionforce - Let's Build Something Amazing"}</title>
+        <meta name="description" content={seo.description || "Get in touch with Lionforce. We'd love to hear about your project and discuss how we can help transform your business."} />
+        <meta name="keywords" content={seo.keywords || 'contact Lionforce, get quote, free consultation'} />
+        {seo.ogImage && <meta property="og:image" content={seo.ogImage} />}
+        <meta property="og:title" content={seo.title || 'Contact Lionforce'} />
+        <meta property="og:description" content={seo.description || "Get in touch with Lionforce"} />
+        <meta property="og:type" content="website" />
+        {seo.canonicalUrl && <link rel="canonical" href={seo.canonicalUrl} />}
       </Helmet>
 
       <div className="pt-20 bg-white overflow-hidden">
