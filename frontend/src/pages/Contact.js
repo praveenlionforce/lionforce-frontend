@@ -229,27 +229,27 @@ function Contact() {
                   <form onSubmit={handleSubmit} className="space-y-6" data-testid="contact-form">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Your Name *</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">{form.nameLabel || 'Your Name'} *</label>
                         <input
                           type="text"
                           name="name"
                           value={formData.name}
                           onChange={handleChange}
                           required
-                          placeholder="John Doe"
+                          placeholder={form.namePlaceholder || 'John Doe'}
                           className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all bg-gray-50 focus:bg-white"
                           data-testid="contact-name"
                         />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Email Address *</label>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">{form.emailLabel || 'Email Address'} *</label>
                         <input
                           type="email"
                           name="email"
                           value={formData.email}
                           onChange={handleChange}
                           required
-                          placeholder="john@company.com"
+                          placeholder={form.emailPlaceholder || 'john@company.com'}
                           className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all bg-gray-50 focus:bg-white"
                           data-testid="contact-email-input"
                         />
@@ -257,7 +257,7 @@ function Contact() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Service Interested In</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">{form.serviceLabel || 'Service Interested In'}</label>
                       <select
                         name="service"
                         value={formData.service}
@@ -273,27 +273,27 @@ function Contact() {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Subject</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">{form.subjectLabel || 'Subject'}</label>
                       <input
                         type="text"
                         name="subject"
                         value={formData.subject}
                         onChange={handleChange}
-                        placeholder="How can we help?"
+                        placeholder={form.subjectPlaceholder || 'How can we help?'}
                         className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all bg-gray-50 focus:bg-white"
                         data-testid="contact-subject"
                       />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">Your Message *</label>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">{form.messageLabel || 'Your Message'} *</label>
                       <textarea
                         name="message"
                         value={formData.message}
                         onChange={handleChange}
                         required
                         rows={5}
-                        placeholder="Tell us about your project, goals, timeline..."
+                        placeholder={form.messagePlaceholder || 'Tell us about your project, goals, timeline...'}
                         className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all resize-none bg-gray-50 focus:bg-white"
                         data-testid="contact-message"
                       />
@@ -312,7 +312,7 @@ function Contact() {
                         </>
                       ) : (
                         <>
-                          Send Message
+                          {form.submitText || 'Send Message'}
                           <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </>
                       )}
