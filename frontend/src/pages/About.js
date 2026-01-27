@@ -33,11 +33,20 @@ function About() {
     { number: '500K+', label: 'People Impacted' }
   ];
 
+  // SEO data from CMS
+  const seo = content?.seo || {};
+
   return (
     <>
       <Helmet>
-        <title>About Lionforce - 13+ Years of Excellence | Custom eLearning & Software Development</title>
-        <meta name="description" content="Learn about Lionforce's 13+ year journey in delivering custom eLearning, software development, and India expansion services to 300+ clients across 32+ countries." />
+        <title>{seo.title || 'About Lionforce - 13+ Years of Excellence | Custom eLearning & Software Development'}</title>
+        <meta name="description" content={seo.description || "Learn about Lionforce's 13+ year journey in delivering custom eLearning, software development, and India expansion services to 300+ clients across 32+ countries."} />
+        <meta name="keywords" content={seo.keywords || 'about Lionforce, company history, team, values, eLearning company'} />
+        {seo.ogImage && <meta property="og:image" content={seo.ogImage} />}
+        <meta property="og:title" content={seo.title || 'About Lionforce Technologies'} />
+        <meta property="og:description" content={seo.description || "Learn about Lionforce"} />
+        <meta property="og:type" content="website" />
+        {seo.canonicalUrl && <link rel="canonical" href={seo.canonicalUrl} />}
       </Helmet>
       
       <div className="pt-20 bg-white overflow-hidden">
