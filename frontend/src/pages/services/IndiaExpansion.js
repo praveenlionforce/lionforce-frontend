@@ -68,7 +68,7 @@ function IndiaExpansion() {
         'Payroll & benefits administration',
         'Co-branding available',
         'Launch in 2-8 weeks',
-        'Easy exits - no lock-in'
+        'Easy exits'
       ]
     },
     {
