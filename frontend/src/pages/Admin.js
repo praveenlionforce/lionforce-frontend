@@ -1109,6 +1109,16 @@ function Admin() {
                       <a href="/" target="_blank" rel="noopener noreferrer" className="text-teal-600 hover:underline text-sm flex items-center gap-1"><Eye className="w-4 h-4" />Preview</a>
                     </div>
 
+                    <Section title="SEO Settings" icon={<Globe className="w-4 h-4 text-teal-600" />} sectionKey="home-seo" defaultOpen={false}>
+                      <TextField label="Page Title" value={siteContent.home?.seo?.title} onChange={(v) => updateContent('home.seo.title', v)} placeholder="Lionforce - Custom eLearning & Software" />
+                      <TextField label="Meta Description" value={siteContent.home?.seo?.description} onChange={(v) => updateContent('home.seo.description', v)} multiline placeholder="Transform your business with..." />
+                      <TextField label="Keywords (comma separated)" value={siteContent.home?.seo?.keywords} onChange={(v) => updateContent('home.seo.keywords', v)} multiline placeholder="eLearning, software development, AI..." />
+                      <div className="grid grid-cols-2 gap-4">
+                        <ImageField label="OG Image" value={siteContent.home?.seo?.ogImage} onChange={(v) => updateContent('home.seo.ogImage', v)} />
+                        <TextField label="Canonical URL (optional)" value={siteContent.home?.seo?.canonicalUrl} onChange={(v) => updateContent('home.seo.canonicalUrl', v)} placeholder="https://lionforce.net/" />
+                      </div>
+                    </Section>
+
                     <Section title="Hero Section" icon={<Layout className="w-4 h-4 text-teal-600" />} sectionKey="home-hero" defaultOpen={true}>
                       <div className="grid grid-cols-3 gap-4">
                         <TextField label="Badge Text" value={siteContent.home?.hero?.badge} onChange={(v) => updateContent('home.hero.badge', v)} />
