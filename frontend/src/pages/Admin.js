@@ -820,35 +820,12 @@ function Admin() {
     setIsAuthenticated(false);
   };
 
-  // Scroll position preservation ref
-  const scrollContainerRef = useRef(null);
-  const scrollPositionRef = useRef(0);
+  // Handler to open images tab (passed to ImageField components)
+  const handleOpenImages = useCallback(() => {
+    setActiveTab('images');
+  }, []);
 
-  // Save scroll position before state update
-  const saveScrollPosition = () => {
-    if (scrollContainerRef.current) {
-      scrollPositionRef.current = scrollContainerRef.current.scrollTop;
-    }
-  };
-
-  // Restore scroll position after render using useLayoutEffect for synchronous update
-  useLayoutEffect(() => {
-    const container = scrollContainerRef.current;
-    if (container && scrollPositionRef.current > 0) {
-      const scrollTo = scrollPositionRef.current;
-      // Use double RAF to ensure DOM is fully painted
-      requestAnimationFrame(() => {
-        requestAnimationFrame(() => {
-          if (container) {
-            container.scrollTop = scrollTo;
-          }
-        });
-      });
-    }
-  }, [siteContent]);
-
-  const updateContent = (path, value) => {
-    saveScrollPosition();
+  const updateContent = useCallback((path, value) => {
     setSiteContent(prev => {
       const keys = path.split('.');
       const newContent = JSON.parse(JSON.stringify(prev));
@@ -860,10 +837,9 @@ function Admin() {
       current[keys[keys.length - 1]] = value;
       return newContent;
     });
-  };
+  }, []);
 
-  const updateArrayItem = (path, index, field, value) => {
-    saveScrollPosition();
+  const updateArrayItem = useCallback((path, index, field, value) => {
     setSiteContent(prev => {
       const newContent = JSON.parse(JSON.stringify(prev));
       const keys = path.split('.');
@@ -876,10 +852,9 @@ function Admin() {
       }
       return newContent;
     });
-  };
+  }, []);
 
-  const addArrayItem = (path, template) => {
-    saveScrollPosition();
+  const addArrayItem = useCallback((path, template) => {
     setSiteContent(prev => {
       const newContent = JSON.parse(JSON.stringify(prev));
       const keys = path.split('.');
@@ -892,10 +867,9 @@ function Admin() {
       }
       return newContent;
     });
-  };
+  }, []);
 
-  const removeArrayItem = (path, index) => {
-    saveScrollPosition();
+  const removeArrayItem = useCallback((path, index) => {
     setSiteContent(prev => {
       const newContent = JSON.parse(JSON.stringify(prev));
       const keys = path.split('.');
@@ -908,7 +882,7 @@ function Admin() {
       }
       return newContent;
     });
-  };
+  }, []);
 
   const saveContent = async () => {
     setSaveStatus('saving');
