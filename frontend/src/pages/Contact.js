@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, MapPin, Send, ArrowRight, CheckCircle, MessageSquare } from 'lucide-react';
+import { Mail, Phone, MapPin, ArrowRight, CheckCircle } from 'lucide-react';
 import { Helmet } from 'react-helmet';
 import axios from 'axios';
+import { useSiteContent } from '../hooks/useSiteContent';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
 function Contact() {
+  const { content, global } = useSiteContent('contact');
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -19,28 +22,14 @@ function Contact() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
-    
-    try {
-      await axios.post(`${API}/contact`, formData);
-      setSuccess(true);
-      setFormData({ name: '', email: '', subject: '', message: '', service: '' });
-      setTimeout(() => setSuccess(false), 5000);
-    } catch (err) {
-      setError('Failed to send message. Please try again.');
-    } finally {
-      setLoading(false);
-    }
-  };
+  // CMS content with fallbacks
+  const hero = content?.hero || {};
+  const info = content?.info || {};
+  const contactStats = content?.stats || [];
+  const form = content?.form || {};
+  const steps = content?.steps || {};
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  const services = [
+  const services = form.services || [
     'Custom eLearning',
     'Software Development',
     'UX/UI Design',
@@ -48,6 +37,20 @@ function Contact() {
     'Digital Marketing',
     'Consulting',
     'India Expansion (EOR/ODC/COE)'
+  ];
+
+  const stepsItems = steps.items || [
+    'We review your requirements',
+    'Schedule a discovery call',
+    'Provide a tailored proposal',
+    'Start building together'
+  ];
+
+  const statsItems = contactStats.length > 0 ? contactStats : [
+    { value: '24h', label: 'Response Time' },
+    { value: '300+', label: 'Happy Clients' },
+    { value: '32+', label: 'Countries' },
+    { value: '13+', label: 'Years Experience' }
   ];
 
   return (
