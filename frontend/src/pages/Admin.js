@@ -168,6 +168,17 @@ function Admin() {
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef(null);
 
+  // Live Chat states
+  const [liveChats, setLiveChats] = useState([]);
+  const [selectedChat, setSelectedChat] = useState(null);
+  const [chatMessages, setChatMessages] = useState([]);
+  const [agentReply, setAgentReply] = useState('');
+  const [agentOnline, setAgentOnline] = useState(false);
+  const [soundEnabled, setSoundEnabled] = useState(true);
+  const notificationSound = useRef(null);
+  const liveChatPollRef = useRef(null);
+  const prevUnreadCount = useRef(0);
+
   // Comprehensive default content structure
   const defaultContent = {
     home: {
