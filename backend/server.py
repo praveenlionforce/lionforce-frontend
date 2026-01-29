@@ -691,6 +691,177 @@ async def serve_upload(filename: str):
     from fastapi.responses import FileResponse
     return FileResponse(filepath)
 
+# ==================== ANALYTICS ENDPOINTS ====================
+
+# Track page view (public - no auth)
+@api_router.post("/analytics/track")
+async def track_page_view(input: PageViewCreate, request: Request):
+    try:
+        # Get IP address (check for proxy headers first)
+        client_ip = request.headers.get("X-Forwarded-For", "").split(",")[0].strip()
+        if not client_ip:
+            client_ip = request.headers.get("X-Real-IP", request.client.host if request.client else "unknown")
+        
+        # Get geo information using free ip-api.com service
+        geo_data = {"country": None, "country_code": None, "region": None, "city": None}
+        try:
+            async with httpx.AsyncClient() as client:
+                response = await client.get(f"http://ip-api.com/json/{client_ip}?fields=status,country,countryCode,regionName,city", timeout=3.0)
+                if response.status_code == 200:
+                    data = response.json()
+                    if data.get("status") == "success":
+                        geo_data = {
+                            "country": data.get("country"),
+                            "country_code": data.get("countryCode"),
+                            "region": data.get("regionName"),
+                            "city": data.get("city")
+                        }
+        except Exception:
+            pass  # Geo lookup is best-effort
+        
+        # Create page view record
+        page_view = PageView(
+            visitor_id=input.visitor_id,
+            page=input.page,
+            referrer=input.referrer,
+            user_agent=input.user_agent,
+            screen_width=input.screen_width,
+            screen_height=input.screen_height,
+            ip=client_ip,
+            **geo_data
+        )
+        
+        doc = page_view.model_dump()
+        doc['timestamp'] = doc['timestamp'].isoformat()
+        
+        await db.page_views.insert_one(doc)
+        
+        # Update or create visitor record
+        await db.visitors.update_one(
+            {"visitor_id": input.visitor_id},
+            {
+                "$set": {
+                    "visitor_id": input.visitor_id,
+                    "ip": client_ip,
+                    "country": geo_data.get("country"),
+                    "country_code": geo_data.get("country_code"),
+                    "region": geo_data.get("region"),
+                    "city": geo_data.get("city"),
+                    "user_agent": input.user_agent,
+                    "last_seen": datetime.now(timezone.utc).isoformat()
+                },
+                "$setOnInsert": {
+                    "first_seen": datetime.now(timezone.utc).isoformat()
+                }
+            },
+            upsert=True
+        )
+        
+        return {"message": "Page view tracked"}
+    except Exception as e:
+        # Don't fail silently for analytics - just log
+        logger.warning(f"Analytics tracking error: {str(e)}")
+        return {"message": "Tracking recorded"}
+
+# Get analytics stats (admin only)
+@api_router.get("/admin/analytics/stats")
+async def get_analytics_stats(username: str = Depends(verify_admin)):
+    try:
+        now = datetime.now(timezone.utc)
+        today_start = now.replace(hour=0, minute=0, second=0, microsecond=0)
+        week_start = today_start - timedelta(days=now.weekday())
+        month_start = today_start.replace(day=1)
+        
+        # Total counts
+        total_page_views = await db.page_views.count_documents({})
+        total_visitors = await db.visitors.count_documents({})
+        
+        # Today's counts
+        today_views = await db.page_views.count_documents({
+            "timestamp": {"$gte": today_start.isoformat()}
+        })
+        today_visitors = await db.visitors.count_documents({
+            "last_seen": {"$gte": today_start.isoformat()}
+        })
+        
+        # This week's counts
+        week_views = await db.page_views.count_documents({
+            "timestamp": {"$gte": week_start.isoformat()}
+        })
+        week_visitors = await db.visitors.count_documents({
+            "first_seen": {"$gte": week_start.isoformat()}
+        })
+        
+        # This month's counts
+        month_views = await db.page_views.count_documents({
+            "timestamp": {"$gte": month_start.isoformat()}
+        })
+        month_visitors = await db.visitors.count_documents({
+            "first_seen": {"$gte": month_start.isoformat()}
+        })
+        
+        # Country breakdown (top 10)
+        country_pipeline = [
+            {"$match": {"country": {"$ne": None}}},
+            {"$group": {"_id": "$country", "count": {"$sum": 1}}},
+            {"$sort": {"count": -1}},
+            {"$limit": 10}
+        ]
+        countries = await db.visitors.aggregate(country_pipeline).to_list(10)
+        country_data = [{"country": c["_id"], "visitors": c["count"]} for c in countries]
+        
+        # Top pages
+        page_pipeline = [
+            {"$group": {"_id": "$page", "views": {"$sum": 1}}},
+            {"$sort": {"views": -1}},
+            {"$limit": 10}
+        ]
+        top_pages = await db.page_views.aggregate(page_pipeline).to_list(10)
+        page_data = [{"page": p["_id"], "views": p["views"]} for p in top_pages]
+        
+        # Daily views for last 7 days
+        daily_pipeline = [
+            {
+                "$match": {
+                    "timestamp": {"$gte": (today_start - timedelta(days=6)).isoformat()}
+                }
+            },
+            {
+                "$group": {
+                    "_id": {"$substr": ["$timestamp", 0, 10]},  # Group by date string YYYY-MM-DD
+                    "views": {"$sum": 1}
+                }
+            },
+            {"$sort": {"_id": 1}}
+        ]
+        daily_views = await db.page_views.aggregate(daily_pipeline).to_list(7)
+        daily_data = [{"date": d["_id"], "views": d["views"]} for d in daily_views]
+        
+        # Recent visitors (last 20)
+        recent_visitors = await db.visitors.find(
+            {}, 
+            {"_id": 0, "visitor_id": 1, "country": 1, "city": 1, "region": 1, "last_seen": 1, "first_seen": 1}
+        ).sort("last_seen", -1).to_list(20)
+        
+        return {
+            "summary": {
+                "total_page_views": total_page_views,
+                "total_visitors": total_visitors,
+                "today_views": today_views,
+                "today_visitors": today_visitors,
+                "week_views": week_views,
+                "week_new_visitors": week_visitors,
+                "month_views": month_views,
+                "month_new_visitors": month_visitors
+            },
+            "by_country": country_data,
+            "top_pages": page_data,
+            "daily_views": daily_data,
+            "recent_visitors": recent_visitors
+        }
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to get analytics: {str(e)}")
+
 # Include the router in the main app
 app.include_router(api_router)
 
