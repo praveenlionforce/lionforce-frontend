@@ -856,6 +856,24 @@ function Admin() {
     return result;
   };
 
+  // Update consultation status
+  const updateConsultationStatus = async (consultationId, newStatus) => {
+    try {
+      const headers = getAuthHeader();
+      const res = await fetch(`${API_URL}/api/admin/consultations/${consultationId}/status?status=${newStatus}`, {
+        method: 'PUT',
+        headers
+      });
+      if (res.ok) {
+        setConsultations(prev => prev.map(c => 
+          c.id === consultationId ? { ...c, status: newStatus } : c
+        ));
+      }
+    } catch (e) {
+      console.log('Failed to update consultation status:', e);
+    }
+  };
+
   // Live Chat Functions
   const fetchLiveChats = async () => {
     try {
