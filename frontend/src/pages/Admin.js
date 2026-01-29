@@ -9,7 +9,7 @@ import {
   Headphones, Send, Bot, UserCheck, ArrowLeftRight, Volume2, VolumeX, MapPin,
   Calendar, Clock, ExternalLink, BookOpen, Code, Video, TrendingUp,
   Lightbulb, Zap, Shield, Heart, Star, Target, Layers, Database, Cpu, Wifi,
-  Monitor, Smartphone, Cloud, Server, Box
+  Monitor, Smartphone, Cloud, Server, Box, BarChart3, RefreshCw
 } from 'lucide-react';
 
 // Available icons for the icon picker
