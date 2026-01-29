@@ -1338,7 +1338,13 @@ function Admin() {
                 onClick={() => setActiveTab(tab.id)}
                 className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition-all ${activeTab === tab.id ? 'bg-teal-600 text-white shadow-lg' : 'bg-white text-gray-600 hover:bg-gray-50'}`}
               >
-                <tab.icon className="w-4 h-4" />{tab.label}
+                <tab.icon className="w-4 h-4" />
+                {tab.label}
+                {tab.badge > 0 && (
+                  <span className="ml-1 px-2 py-0.5 bg-red-500 text-white text-xs rounded-full animate-pulse">
+                    {tab.badge}
+                  </span>
+                )}
               </button>
             ))}
           </div>
