@@ -2,6 +2,7 @@ import React from 'react';
 import Navbar from './Navbar';
 import Footer from './Footer';
 import FloatingCTA from './FloatingCTA';
+import ChatBot from './ChatBot';
 
 function Layout({ children }) {
   return (
@@ -11,6 +12,7 @@ function Layout({ children }) {
         <main>{children}</main>
         <Footer />
         <FloatingCTA />
+        <ChatBot />
       </div>
     </>
   );
