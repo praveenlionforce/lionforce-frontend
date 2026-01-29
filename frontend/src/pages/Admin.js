@@ -1801,7 +1801,11 @@ function Admin() {
                         renderItem={(item, index) => (
                           <div className="space-y-3">
                             <div className="grid grid-cols-3 gap-3">
-                              <TextField label="Icon Name" value={item.icon} onChange={(v) => updateArrayItem('home.services.items', index, 'icon', v)} placeholder="BookOpen, Code, Globe..." />
+                              <IconPicker 
+                                label="Icon" 
+                                value={item.icon} 
+                                onChange={(v) => updateArrayItem('home.services.items', index, 'icon', v)} 
+                              />
                               <div className="col-span-2">
                                 <TextField label="Title" value={item.title} onChange={(v) => updateArrayItem('home.services.items', index, 'title', v)} />
                               </div>
