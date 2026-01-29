@@ -586,7 +586,8 @@ const deepMerge = (target, source) => {
   for (const key in source) {
     if (source[key] && typeof source[key] === 'object' && !Array.isArray(source[key])) {
       result[key] = deepMerge(target[key] || {}, source[key]);
-    } else if (source[key] !== undefined && source[key] !== null && source[key] !== '') {
+    } else if (source[key] !== undefined && source[key] !== null) {
+      // Accept all values including empty strings from source (database takes priority)
       result[key] = source[key];
     }
   }
