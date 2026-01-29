@@ -1334,10 +1334,12 @@ function Admin() {
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-600 to-green-600 px-4">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-teal-500 to-green-500 rounded-full mb-4">
-              <Lock className="w-8 h-8 text-white" />
-            </div>
-            <h1 className="text-2xl font-bold text-gray-900">Lionforce CMS</h1>
+            <img 
+              src="https://i0.wp.com/lionforce.net/wp-content/uploads/2024/05/cropped-LIONFORCE-LOGO.png?w=200&ssl=1" 
+              alt="Lionforce" 
+              className="h-16 mx-auto mb-4"
+            />
+            <h1 className="text-2xl font-bold text-gray-900">Admin Login</h1>
             <p className="text-gray-600 text-sm mt-2">Content Management System</p>
           </div>
           
@@ -1367,12 +1369,13 @@ function Admin() {
         <header className="bg-white shadow-sm border-b border-gray-200 sticky top-0 z-50">
           <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-teal-500 to-green-500 rounded-lg flex items-center justify-center">
-                <Layout className="w-5 h-5 text-white" />
-              </div>
-              <div>
-                <h1 className="font-bold text-gray-900">Lionforce CMS</h1>
-                <p className="text-xs text-gray-500">Full Content Management</p>
+              <img 
+                src="https://i0.wp.com/lionforce.net/wp-content/uploads/2024/05/cropped-LIONFORCE-LOGO.png?w=150&ssl=1" 
+                alt="Lionforce" 
+                className="h-10"
+              />
+              <div className="hidden sm:block">
+                <h1 className="font-bold text-gray-900 text-sm">CMS Dashboard</h1>
               </div>
             </div>
             <div className="flex items-center gap-4">
@@ -1392,8 +1395,8 @@ function Admin() {
         </header>
 
         <div className="max-w-7xl mx-auto px-4 py-6">
-          {/* Tabs */}
-          <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
+          {/* Tabs - Grid layout for all to be visible */}
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-9 gap-2 mb-6">
             {[
               { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
               { id: 'consultations', label: 'Consultations', icon: Calendar, badge: consultations.filter(c => c.status === 'new').length },
