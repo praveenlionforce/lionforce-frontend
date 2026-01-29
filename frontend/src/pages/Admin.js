@@ -2758,6 +2758,8 @@ function Admin() {
                     <tr>
                       <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Name</th>
                       <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Email</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Company</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Designation</th>
                       <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Message</th>
                       <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Date</th>
                     </tr>
@@ -2767,13 +2769,216 @@ function Admin() {
                       <tr key={idx} className="hover:bg-gray-50">
                         <td className="px-4 py-3 text-sm text-gray-900 font-medium">{lead.name}</td>
                         <td className="px-4 py-3 text-sm text-gray-900">{lead.email}</td>
+                        <td className="px-4 py-3 text-sm text-gray-600">{lead.company || '-'}</td>
+                        <td className="px-4 py-3 text-sm text-gray-600">{lead.designation || '-'}</td>
                         <td className="px-4 py-3 text-sm text-gray-600 max-w-xs truncate">{lead.message || '-'}</td>
                         <td className="px-4 py-3 text-sm text-gray-500">{new Date(lead.timestamp).toLocaleDateString()}</td>
                       </tr>
                     ))}
-                    {chatbotLeads.length === 0 && <tr><td colSpan="4" className="px-4 py-8 text-center text-gray-500">No chatbot leads yet</td></tr>}
+                    {chatbotLeads.length === 0 && <tr><td colSpan="6" className="px-4 py-8 text-center text-gray-500">No chatbot leads yet</td></tr>}
                   </tbody>
                 </table>
+              </div>
+            </div>
+          )}
+
+          {/* Live Chat Tab */}
+          {activeTab === 'live-chat' && (
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              {/* Chat List */}
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <div className="p-4 border-b border-gray-200">
+                  <div className="flex items-center justify-between">
+                    <h2 className="font-bold text-gray-900">Active Chats ({liveChats.length})</h2>
+                    <button
+                      onClick={() => setSoundEnabled(!soundEnabled)}
+                      className={`p-2 rounded-lg transition-colors ${soundEnabled ? 'bg-teal-100 text-teal-700' : 'bg-gray-100 text-gray-500'}`}
+                      title={soundEnabled ? 'Sound on' : 'Sound off'}
+                    >
+                      {soundEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
+                    </button>
+                  </div>
+                  {/* Agent Status Toggle */}
+                  <div className="mt-3 flex items-center gap-3">
+                    <button
+                      onClick={toggleAgentStatus}
+                      className={`flex items-center gap-2 px-4 py-2 rounded-full font-medium text-sm transition-all ${
+                        agentOnline 
+                          ? 'bg-green-500 text-white shadow-lg' 
+                          : 'bg-gray-200 text-gray-600'
+                      }`}
+                    >
+                      <span className={`w-2 h-2 rounded-full ${agentOnline ? 'bg-white animate-pulse' : 'bg-gray-400'}`}></span>
+                      {agentOnline ? 'Online' : 'Offline'}
+                    </button>
+                    <span className="text-xs text-gray-500">
+                      {agentOnline ? 'You can receive live chats' : 'Bot is handling chats'}
+                    </span>
+                  </div>
+                </div>
+                <div className="divide-y divide-gray-100 max-h-[500px] overflow-y-auto">
+                  {liveChats.map(chat => (
+                    <button
+                      key={chat.id}
+                      onClick={() => setSelectedChat(chat)}
+                      className={`w-full p-4 text-left hover:bg-gray-50 transition-colors ${selectedChat?.id === chat.id ? 'bg-teal-50' : ''}`}
+                    >
+                      <div className="flex items-start justify-between">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-2">
+                            <span className="font-medium text-gray-900 truncate">
+                              {chat.visitor_name || 'Anonymous'}
+                            </span>
+                            {chat.unread_count > 0 && (
+                              <span className="px-2 py-0.5 bg-red-500 text-white text-xs rounded-full">
+                                {chat.unread_count}
+                              </span>
+                            )}
+                          </div>
+                          {chat.visitor_email && (
+                            <p className="text-xs text-gray-500 truncate">{chat.visitor_email}</p>
+                          )}
+                          {chat.visitor_company && (
+                            <p className="text-xs text-gray-400 truncate">{chat.visitor_company}</p>
+                          )}
+                          <p className="text-sm text-gray-600 truncate mt-1">{chat.last_message || 'No messages'}</p>
+                        </div>
+                        <div className="flex flex-col items-end gap-1 ml-2">
+                          <span className={`px-2 py-0.5 text-xs rounded-full ${
+                            chat.status === 'agent' ? 'bg-blue-100 text-blue-700' : 'bg-gray-100 text-gray-600'
+                          }`}>
+                            {chat.status === 'agent' ? 'Agent' : 'Bot'}
+                          </span>
+                          <span className="text-xs text-gray-400">
+                            {new Date(chat.updated_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                          </span>
+                        </div>
+                      </div>
+                    </button>
+                  ))}
+                  {liveChats.length === 0 && (
+                    <div className="p-8 text-center text-gray-500">
+                      <Headphones className="w-12 h-12 mx-auto mb-3 text-gray-300" />
+                      <p>No active chats</p>
+                      <p className="text-xs mt-1">New conversations will appear here</p>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {/* Chat Window */}
+              <div className="lg:col-span-2 bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden flex flex-col">
+                {selectedChat ? (
+                  <>
+                    {/* Chat Header */}
+                    <div className="p-4 border-b border-gray-200 bg-gray-50">
+                      <div className="flex items-center justify-between">
+                        <div>
+                          <h3 className="font-semibold text-gray-900">
+                            {selectedChat.visitor_name || 'Anonymous Visitor'}
+                          </h3>
+                          <p className="text-sm text-gray-500">
+                            {selectedChat.visitor_email || 'No email'} 
+                            {selectedChat.visitor_company && ` • ${selectedChat.visitor_company}`}
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          {selectedChat.status === 'bot' ? (
+                            <button
+                              onClick={() => takeoverChat(selectedChat.id)}
+                              className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-medium transition-colors"
+                            >
+                              <UserCheck className="w-4 h-4" />
+                              Take Over
+                            </button>
+                          ) : (
+                            <button
+                              onClick={() => transferToBot(selectedChat.id)}
+                              className="flex items-center gap-1.5 px-3 py-1.5 bg-gray-600 text-white rounded-lg hover:bg-gray-700 text-sm font-medium transition-colors"
+                            >
+                              <ArrowLeftRight className="w-4 h-4" />
+                              Transfer to Bot
+                            </button>
+                          )}
+                          <button
+                            onClick={() => closeChat(selectedChat.id)}
+                            className="p-2 text-gray-500 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                            title="Close chat"
+                          >
+                            <X className="w-4 h-4" />
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Messages */}
+                    <div className="flex-1 overflow-y-auto p-4 space-y-4 min-h-[300px] max-h-[400px] bg-gray-50">
+                      {chatMessages.map((msg, idx) => (
+                        <div key={idx} className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}>
+                          <div className={`max-w-[70%] p-3 rounded-2xl ${
+                            msg.sender === 'user' 
+                              ? 'bg-gradient-to-r from-teal-600 to-green-600 text-white rounded-tr-none'
+                              : msg.sender === 'agent'
+                                ? 'bg-blue-100 text-gray-800 rounded-tl-none'
+                                : 'bg-white text-gray-800 border border-gray-200 rounded-tl-none'
+                          }`}>
+                            <div className="flex items-center gap-2 mb-1">
+                              {msg.sender === 'bot' && <Bot className="w-3 h-3 text-teal-600" />}
+                              {msg.sender === 'agent' && <UserCheck className="w-3 h-3 text-blue-600" />}
+                              <span className="text-xs opacity-75">
+                                {msg.sender === 'user' ? 'Visitor' : msg.sender === 'agent' ? 'You' : 'Alex (Bot)'}
+                              </span>
+                            </div>
+                            <p className="text-sm whitespace-pre-line">{msg.text}</p>
+                            <p className={`text-xs mt-1 ${msg.sender === 'user' ? 'text-white/70' : 'text-gray-400'}`}>
+                              {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                            </p>
+                          </div>
+                        </div>
+                      ))}
+                      {chatMessages.length === 0 && (
+                        <div className="text-center text-gray-500 py-8">
+                          <p>No messages yet</p>
+                        </div>
+                      )}
+                    </div>
+
+                    {/* Reply Input */}
+                    <div className="p-4 border-t border-gray-200">
+                      {selectedChat.status === 'agent' ? (
+                        <div className="flex gap-2">
+                          <input
+                            type="text"
+                            value={agentReply}
+                            onChange={(e) => setAgentReply(e.target.value)}
+                            onKeyPress={(e) => e.key === 'Enter' && sendAgentReply()}
+                            placeholder="Type your reply..."
+                            className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
+                          />
+                          <button
+                            onClick={sendAgentReply}
+                            disabled={!agentReply.trim()}
+                            className="px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                          >
+                            <Send className="w-5 h-5" />
+                          </button>
+                        </div>
+                      ) : (
+                        <div className="text-center py-2 px-4 bg-amber-50 text-amber-700 rounded-lg text-sm">
+                          Click "Take Over" to start replying to this chat
+                        </div>
+                      )}
+                    </div>
+                  </>
+                ) : (
+                  <div className="flex-1 flex items-center justify-center text-gray-500">
+                    <div className="text-center">
+                      <MessageSquare className="w-16 h-16 mx-auto mb-4 text-gray-300" />
+                      <p className="font-medium">Select a chat to view messages</p>
+                      <p className="text-sm mt-1">Click on any conversation from the list</p>
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
           )}
