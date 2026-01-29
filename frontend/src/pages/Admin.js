@@ -159,6 +159,7 @@ function Admin() {
   // Data states
   const [submissions, setSubmissions] = useState([]);
   const [subscribers, setSubscribers] = useState([]);
+  const [chatbotLeads, setChatbotLeads] = useState([]);
   const [siteContent, setSiteContent] = useState({});
   const [images, setImages] = useState([]);
   const [selectedPage, setSelectedPage] = useState('home');
