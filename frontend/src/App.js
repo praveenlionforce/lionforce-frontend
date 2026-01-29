@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import '@/App.css';
 import Home from '@/pages/Home';
 import About from '@/pages/About';
@@ -16,11 +16,19 @@ import Consulting from '@/pages/services/Consulting';
 import IndiaExpansion from '@/pages/services/IndiaExpansion';
 import Layout from '@/components/Layout';
 import ScrollToTop from '@/components/ScrollToTop';
+import useAnalytics from '@/hooks/useAnalytics';
 
-function App() {
+// Analytics tracker component that uses the location hook
+function AnalyticsTracker() {
+  useAnalytics();
+  return null;
+}
+
+function AppRoutes() {
   return (
-    <BrowserRouter>
+    <>
       <ScrollToTop />
+      <AnalyticsTracker />
       <Routes>
         {/* Admin route without Layout */}
         <Route path="/admin" element={<Admin />} />
@@ -45,6 +53,14 @@ function App() {
           </Layout>
         } />
       </Routes>
+    </>
+  );
+}
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppRoutes />
     </BrowserRouter>
   );
 }
