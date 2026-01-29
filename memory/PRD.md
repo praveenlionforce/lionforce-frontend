@@ -13,7 +13,7 @@ Recreate the existing WordPress website (`https://lionforce.net`) into a new, mo
 ```
 /app/
 ├── backend/           # FastAPI backend
-│   ├── server.py      # Main API server
+│   ├── server.py      # Main API server (live chat endpoints added)
 │   ├── Procfile       # Render deployment
 │   └── runtime.txt    # Python version for Render
 ├── frontend/          # React frontend
@@ -21,13 +21,13 @@ Recreate the existing WordPress website (`https://lionforce.net`) into a new, mo
 │   │   └── .htaccess  # Client-side routing
 │   └── src/
 │       ├── components/
-│       │   ├── ChatBot.js      # Lead generation chatbot
+│       │   ├── ChatBot.js      # Enhanced lead gen chatbot (Alex)
 │       │   ├── Footer.js       # Editable social links
 │       │   └── Layout.js       # Main layout wrapper
 │       ├── hooks/
 │       │   └── useSiteContent.js  # CMS content hook
 │       └── pages/
-│           └── Admin.js        # CMS admin panel
+│           └── Admin.js        # CMS admin panel with Live Chat
 └── LIONFORCE_WEBSITE_GUIDE.md  # User documentation
 ```
 
@@ -38,7 +38,10 @@ Recreate the existing WordPress website (`https://lionforce.net`) into a new, mo
 
 ## Key Database Collections
 - `site_content` - All CMS-editable content
-- `chatbot_leads` - Leads from chatbot conversations
+- `chatbot_leads` - Leads from chatbot (name, email, company, designation, message)
+- `chat_sessions` - Live chat sessions
+- `chat_messages` - Chat message history
+- `agent_status` - Agent online/offline status
 - `contact_submissions` - Contact form submissions
 - `subscribers` - Newsletter subscribers
 - `admin_users` - Admin credentials
@@ -54,19 +57,34 @@ Recreate the existing WordPress website (`https://lionforce.net`) into a new, mo
 - Newsletter subscription
 
 ### January 2025 - Session 2
-- **Admin Panel Performance Fix:** Resolved scroll/flicker bug with React.memo optimization
-- **Chatbot Implementation:** Rule-based lead gen chatbot with admin viewer
-- **EOR Pricing CMS:** Made India Expansion pricing fully editable
-- **Contact Form Pre-selection:** Service pre-selection via URL params
-- **Client Marquee Fix:** Seamless infinite loop animation
-- **Social Links Management:** Add/edit/delete/hide social links in CMS
-- **Client Stories/Testimonials:** Editable via CMS
-- **Bug Fixes:** Industries page crash, IN flag emoji, About stats responsive, footer EOR link, site title
+- Admin Panel Performance Fix (React.memo optimization)
+- Basic Chatbot Implementation
+- EOR Pricing CMS
+- Contact Form Pre-selection
+- Client Marquee Fix
+- Social Links Management
+- Client Stories/Testimonials editable
+- Bug Fixes
 
 ### January 2025 - Session 3 (Current)
-- **Verified:** Chatbot Leads Viewer working in Admin panel
-- **Verified:** Footer social links have `target="_blank"` for security
-- **Verified:** EOR link correctly points to `/services/india-expansion`
+**Chatbot Enhancements:**
+- ✅ Renamed bot from "Leo" to "Alex" (American/British friendly)
+- ✅ Added IoT services to Software Development
+- ✅ Added Email/Call quick-action buttons in header
+- ✅ Enhanced lead collection: Name, Email, Company, Designation (optional), Message
+- ✅ Context-aware "Tell me more" - shows specific service details
+- ✅ Service details for all 7 services with tech stacks and methodologies
+
+**Live Agent System (NEW):**
+- ✅ Agent online/offline toggle in Admin panel
+- ✅ View ALL active chat conversations
+- ✅ Real-time message polling (3-second intervals)
+- ✅ Take over conversations from bot
+- ✅ Transfer back to bot after helping
+- ✅ Close conversations
+- ✅ Sound notifications for new messages (toggle on/off)
+- ✅ Unread message count badges
+- ✅ Visitor info display (name, email, company)
 
 ---
 
@@ -96,8 +114,28 @@ Recreate the existing WordPress website (`https://lionforce.net`) into a new, mo
 - **Password:** `Welc0me4$` (production)
 
 ## API Endpoints
+
+### Chatbot & Leads
 - `POST /api/chatbot-lead` - Save chatbot lead
 - `GET /api/admin/chatbot-leads` - Get all chatbot leads
+
+### Live Chat System (NEW)
+- `POST /api/chat/session` - Create/get chat session
+- `POST /api/chat/message` - Send message
+- `GET /api/chat/messages/{session_id}` - Get messages
+- `GET /api/chat/session/{session_id}` - Get session status
+- `PUT /api/chat/session/{session_id}/visitor` - Update visitor info
+- `GET /api/chat/agent-status` - Check if agent online (public)
+- `GET /api/admin/live-chats` - Get all active chats
+- `GET /api/admin/live-chats/{session_id}/messages` - Get chat history
+- `POST /api/admin/live-chats/{session_id}/reply` - Agent reply
+- `POST /api/admin/live-chats/{session_id}/takeover` - Agent takeover
+- `POST /api/admin/live-chats/{session_id}/transfer-to-bot` - Transfer to bot
+- `POST /api/admin/live-chats/{session_id}/close` - Close chat
+- `GET /api/admin/agent-status` - Get agent status
+- `POST /api/admin/agent-status` - Set agent online/offline
+
+### CMS
 - `GET /api/site-content` - Get CMS content
 - `PUT /api/site-content` - Update CMS content
 - `POST /api/contact` - Submit contact form
