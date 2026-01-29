@@ -69,6 +69,20 @@ class Newsletter(BaseModel):
 class NewsletterCreate(BaseModel):
     email: EmailStr
 
+# Chatbot Lead Model
+class ChatbotLead(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    email: str
+    message: Optional[str] = None
+    source: str = "chatbot"
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class ChatbotLeadCreate(BaseModel):
+    name: str
+    email: str
+    message: Optional[str] = None
+
 # Content Block Model for Admin CMS
 class ContentBlock(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
