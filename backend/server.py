@@ -209,6 +209,20 @@ async def subscribe_newsletter(input: NewsletterCreate):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to subscribe: {str(e)}")
 
+@api_router.post("/chatbot-lead", response_model=ChatbotLead)
+async def save_chatbot_lead(input: ChatbotLeadCreate):
+    try:
+        lead_dict = input.model_dump()
+        lead_obj = ChatbotLead(**lead_dict)
+        
+        doc = lead_obj.model_dump()
+        doc['timestamp'] = doc['timestamp'].isoformat()
+        
+        await db.chatbot_leads.insert_one(doc)
+        return lead_obj
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to save lead: {str(e)}")
+
 # Admin Authentication Endpoint
 @api_router.post("/admin/login")
 async def admin_login(username: str = Depends(verify_admin)):
