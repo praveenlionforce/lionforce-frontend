@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, Clock, Globe, CheckCircle, ArrowRight } from 'lucide-react';
+import { Calendar, Clock, Globe, CheckCircle, ArrowRight, ChevronDown } from 'lucide-react';
 import SEO from '../components/SEO';
 import axios from 'axios';
 
@@ -22,16 +22,114 @@ const timezones = [
   { value: 'Australia/Sydney', label: 'AEST - Sydney' },
 ];
 
-const services = [
-  'Custom eLearning',
-  'Software Development',
-  'UX/UI Design',
-  'Creative Services',
-  'Digital Marketing',
-  'Consulting',
-  'India Expansion (EOR/ODC/COE)',
-  'General Inquiry'
-];
+// Hierarchical services with sub-services
+const serviceCategories = {
+  'eLearning': {
+    label: 'Custom eLearning',
+    subServices: [
+      'Custom Course Development',
+      'LMS Implementation & Customization',
+      'Mobile Learning Apps',
+      'Gamified Learning Solutions',
+      'Assessment & Certification Systems',
+      'Instructor-Led Training (ILT/VILT)',
+      'Microlearning Modules',
+      'Video-Based Learning',
+      'Compliance Training',
+      'Onboarding Programs'
+    ]
+  },
+  'Software': {
+    label: 'Software Development',
+    subServices: [
+      'Custom Web Applications',
+      'Mobile App Development (iOS/Android)',
+      'IoT & Smart Device Solutions',
+      'Enterprise Software Solutions',
+      'Cloud & SaaS Products',
+      'API Development & Integration',
+      'AI/ML Integration',
+      'Database Design & Management',
+      'Legacy System Modernization',
+      'DevOps & CI/CD Setup'
+    ]
+  },
+  'Design': {
+    label: 'UX/UI Design',
+    subServices: [
+      'User Research & Testing',
+      'UI/UX Audit',
+      'Wireframing & Prototyping',
+      'Visual Design',
+      'Design Systems',
+      'Responsive Web Design',
+      'Mobile App Design',
+      'Dashboard Design',
+      'Accessibility (WCAG) Compliance',
+      'Brand Identity Design'
+    ]
+  },
+  'Creative': {
+    label: 'Creative Services',
+    subServices: [
+      '3D Visualization & Animation',
+      'Motion Graphics',
+      'Explainer Videos',
+      'Product Demo Videos',
+      'Interactive Media',
+      'AR/VR Experiences',
+      'Infographics',
+      'Presentation Design',
+      'Marketing Collateral',
+      'Brand Videos'
+    ]
+  },
+  'Marketing': {
+    label: 'Digital Marketing',
+    subServices: [
+      'SEO Strategy & Implementation',
+      'Content Marketing',
+      'Social Media Management',
+      'PPC & Paid Advertising',
+      'Email Marketing',
+      'Marketing Automation',
+      'Analytics & Reporting',
+      'Conversion Optimization',
+      'Influencer Marketing',
+      'Brand Strategy'
+    ]
+  },
+  'Consulting': {
+    label: 'Consulting',
+    subServices: [
+      'Digital Transformation',
+      'Technology Strategy',
+      'Process Optimization',
+      'Change Management',
+      'IT Infrastructure Assessment',
+      'Vendor Selection',
+      'Project Management',
+      'Training & Workshops',
+      'Business Analysis',
+      'Quality Assurance'
+    ]
+  },
+  'IndiaExpansion': {
+    label: 'India Expansion (EOR/ODC/COE)',
+    subServices: [
+      'Employer of Record (EOR)',
+      'Offshore Development Center (ODC)',
+      'Center of Excellence (COE)',
+      'Remote Team Setup',
+      'Compliance & Legal Support',
+      'Payroll Management',
+      'Talent Acquisition',
+      'Office Space & Infrastructure',
+      'Co-branded Operations',
+      'HR & Admin Support'
+    ]
+  }
+};
 
 const timeSlots = [
   '09:00 AM', '09:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM',
@@ -45,7 +143,8 @@ function BookConsultation() {
     email: '',
     company: '',
     phone: '',
-    service: '',
+    serviceCategory: '',
+    selectedSubServices: [],
     preferredDate: '',
     preferredTime: '',
     timezone: 'Asia/Kolkata',
@@ -55,18 +154,36 @@ function BookConsultation() {
   const [success, setSuccess] = useState(false);
   const [error, setError] = useState('');
 
-  // Get minimum date (tomorrow)
   const getMinDate = () => {
     const tomorrow = new Date();
     tomorrow.setDate(tomorrow.getDate() + 1);
     return tomorrow.toISOString().split('T')[0];
   };
 
-  // Get maximum date (60 days from now)
   const getMaxDate = () => {
     const maxDate = new Date();
     maxDate.setDate(maxDate.getDate() + 60);
     return maxDate.toISOString().split('T')[0];
+  };
+
+  const handleServiceCategoryChange = (category) => {
+    setFormData({
+      ...formData,
+      serviceCategory: category,
+      selectedSubServices: []
+    });
+  };
+
+  const handleSubServiceToggle = (subService) => {
+    setFormData(prev => {
+      const isSelected = prev.selectedSubServices.includes(subService);
+      return {
+        ...prev,
+        selectedSubServices: isSelected
+          ? prev.selectedSubServices.filter(s => s !== subService)
+          : [...prev.selectedSubServices, subService]
+      };
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -75,11 +192,15 @@ function BookConsultation() {
     setError('');
 
     try {
-      // Format the consultation request
+      const serviceCategoryLabel = serviceCategories[formData.serviceCategory]?.label || formData.serviceCategory;
+      const subServicesText = formData.selectedSubServices.length > 0
+        ? `\nSpecific Services: ${formData.selectedSubServices.join(', ')}`
+        : '';
+
       const consultationData = {
         name: formData.name,
         email: formData.email,
-        subject: `Consultation Request - ${formData.service}`,
+        subject: `Consultation Request - ${serviceCategoryLabel}`,
         message: `
 Consultation Request Details:
 -----------------------------
@@ -87,7 +208,7 @@ Name: ${formData.name}
 Email: ${formData.email}
 Company: ${formData.company || 'Not provided'}
 Phone: ${formData.phone || 'Not provided'}
-Service: ${formData.service}
+Service Category: ${serviceCategoryLabel}${subServicesText}
 Preferred Date: ${formData.preferredDate}
 Preferred Time: ${formData.preferredTime}
 Timezone: ${timezones.find(t => t.value === formData.timezone)?.label || formData.timezone}
@@ -95,7 +216,7 @@ Timezone: ${timezones.find(t => t.value === formData.timezone)?.label || formDat
 Additional Notes:
 ${formData.message || 'None'}
         `.trim(),
-        service: formData.service
+        service: serviceCategoryLabel
       };
 
       await axios.post(`${API}/contact`, consultationData);
@@ -105,7 +226,8 @@ ${formData.message || 'None'}
         email: '',
         company: '',
         phone: '',
-        service: '',
+        serviceCategory: '',
+        selectedSubServices: [],
         preferredDate: '',
         preferredTime: '',
         timezone: 'Asia/Kolkata',
@@ -259,21 +381,64 @@ ${formData.message || 'None'}
                 </div>
               </div>
 
-              {/* Service Selection */}
+              {/* Service Category Selection */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Service Interest *</label>
-                <select
-                  required
-                  value={formData.service}
-                  onChange={(e) => setFormData({ ...formData, service: e.target.value })}
-                  className="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent"
-                >
-                  <option value="">Select a service</option>
-                  {services.map(service => (
-                    <option key={service} value={service}>{service}</option>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Service Category *</label>
+                <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                  {Object.entries(serviceCategories).map(([key, service]) => (
+                    <button
+                      key={key}
+                      type="button"
+                      onClick={() => handleServiceCategoryChange(key)}
+                      className={`p-3 rounded-lg border-2 text-left transition-all ${
+                        formData.serviceCategory === key
+                          ? 'border-teal-500 bg-teal-50 text-teal-700'
+                          : 'border-gray-200 hover:border-teal-300 text-gray-700'
+                      }`}
+                    >
+                      <span className="text-sm font-medium">{service.label}</span>
+                    </button>
                   ))}
-                </select>
+                </div>
               </div>
+
+              {/* Sub-services (shown when category is selected) */}
+              {formData.serviceCategory && (
+                <motion.div
+                  initial={{ opacity: 0, height: 0 }}
+                  animate={{ opacity: 1, height: 'auto' }}
+                  className="bg-gray-50 rounded-xl p-4"
+                >
+                  <label className="block text-sm font-medium text-gray-700 mb-3">
+                    Specific Services (Select all that apply)
+                  </label>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2 max-h-64 overflow-y-auto">
+                    {serviceCategories[formData.serviceCategory].subServices.map((subService) => (
+                      <label
+                        key={subService}
+                        className={`flex items-center gap-2 p-2 rounded-lg cursor-pointer transition-all ${
+                          formData.selectedSubServices.includes(subService)
+                            ? 'bg-teal-100 text-teal-800'
+                            : 'hover:bg-gray-100'
+                        }`}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={formData.selectedSubServices.includes(subService)}
+                          onChange={() => handleSubServiceToggle(subService)}
+                          className="w-4 h-4 text-teal-600 border-gray-300 rounded focus:ring-teal-500"
+                        />
+                        <span className="text-sm">{subService}</span>
+                      </label>
+                    ))}
+                  </div>
+                  {formData.selectedSubServices.length > 0 && (
+                    <p className="mt-3 text-xs text-teal-600">
+                      {formData.selectedSubServices.length} service(s) selected
+                    </p>
+                  )}
+                </motion.div>
+              )}
 
               {/* Date & Time */}
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -342,7 +507,7 @@ ${formData.message || 'None'}
               {/* Submit */}
               <button
                 type="submit"
-                disabled={loading}
+                disabled={loading || !formData.serviceCategory}
                 className="w-full bg-gradient-to-r from-teal-600 to-green-600 text-white py-3 rounded-lg font-semibold hover:shadow-lg hover:shadow-teal-500/30 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
               >
                 {loading ? (
