@@ -85,7 +85,7 @@ function Footer() {
                 </Link>
               </li>
               <li>
-                <Link to="/services/eor" className="text-gray-400 hover:text-teal-400 text-sm transition-colors" data-testid="footer-service-eor">
+                <Link to="/services/india-expansion" className="text-gray-400 hover:text-teal-400 text-sm transition-colors" data-testid="footer-service-eor">
                   EOR Services
                 </Link>
               </li>
