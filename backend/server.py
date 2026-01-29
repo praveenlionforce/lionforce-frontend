@@ -312,6 +312,15 @@ async def get_admin_subscribers(username: str = Depends(verify_admin)):
             sub['timestamp'] = datetime.fromisoformat(sub['timestamp'])
     return sorted(subscribers, key=lambda x: x.get('timestamp', datetime.min), reverse=True)
 
+# Admin - Get Chatbot Leads
+@api_router.get("/admin/chatbot-leads", response_model=List[ChatbotLead])
+async def get_chatbot_leads(username: str = Depends(verify_admin)):
+    leads = await db.chatbot_leads.find({}, {"_id": 0}).to_list(1000)
+    for lead in leads:
+        if isinstance(lead.get('timestamp'), str):
+            lead['timestamp'] = datetime.fromisoformat(lead['timestamp'])
+    return sorted(leads, key=lambda x: x.get('timestamp', datetime.min), reverse=True)
+
 # Public - Site Content (no auth required for reading)
 @api_router.get("/site-content")
 async def get_public_site_content():
