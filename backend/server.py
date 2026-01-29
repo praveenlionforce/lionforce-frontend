@@ -69,6 +69,34 @@ class Newsletter(BaseModel):
 class NewsletterCreate(BaseModel):
     email: EmailStr
 
+# Consultation Request Model
+class ConsultationRequest(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    name: str
+    email: EmailStr
+    company: Optional[str] = None
+    phone: Optional[str] = None
+    service_category: str
+    sub_services: List[str] = []
+    preferred_date: str
+    preferred_time: str
+    timezone: str
+    message: Optional[str] = None
+    status: str = "new"  # new, contacted, scheduled, completed
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class ConsultationRequestCreate(BaseModel):
+    name: str
+    email: EmailStr
+    company: Optional[str] = None
+    phone: Optional[str] = None
+    service_category: str
+    sub_services: List[str] = []
+    preferred_date: str
+    preferred_time: str
+    timezone: str
+    message: Optional[str] = None
+
 # Chatbot Lead Model
 class ChatbotLead(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
