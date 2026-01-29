@@ -1120,6 +1120,14 @@ function Admin() {
     }
   }, [isAuthenticated, activeTab, selectedChat?.id]);
 
+  // Fetch analytics when analytics tab is selected
+  useEffect(() => {
+    if (isAuthenticated && activeTab === 'analytics') {
+      fetchAnalytics();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isAuthenticated, activeTab]);
+
   // Fetch messages when chat is selected
   useEffect(() => {
     if (selectedChat) {
