@@ -141,6 +141,30 @@ class AgentStatus(BaseModel):
     is_online: bool = False
     updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
+# Analytics Models
+class PageView(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    visitor_id: str  # Unique visitor identifier (stored in localStorage)
+    page: str
+    referrer: Optional[str] = None
+    user_agent: Optional[str] = None
+    screen_width: Optional[int] = None
+    screen_height: Optional[int] = None
+    country: Optional[str] = None
+    country_code: Optional[str] = None
+    region: Optional[str] = None
+    city: Optional[str] = None
+    ip: Optional[str] = None
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class PageViewCreate(BaseModel):
+    visitor_id: str
+    page: str
+    referrer: Optional[str] = None
+    user_agent: Optional[str] = None
+    screen_width: Optional[int] = None
+    screen_height: Optional[int] = None
+
 # Content Block Model for Admin CMS
 class ContentBlock(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
