@@ -837,6 +837,29 @@ async def get_analytics_stats(username: str = Depends(verify_admin)):
         daily_views = await db.page_views.aggregate(daily_pipeline).to_list(7)
         daily_data = [{"date": d["_id"], "views": d["views"]} for d in daily_views]
         
+        # Peak traffic hours (group by hour of day)
+        hourly_pipeline = [
+            {
+                "$group": {
+                    "_id": {"$substr": ["$timestamp", 11, 2]},  # Extract hour (HH) from ISO timestamp
+                    "views": {"$sum": 1}
+                }
+            },
+            {"$sort": {"_id": 1}}
+        ]
+        hourly_views = await db.page_views.aggregate(hourly_pipeline).to_list(24)
+        hourly_data = [{"hour": int(h["_id"]), "views": h["views"]} for h in hourly_views]
+        
+        # Traffic by country with page views (not just visitors)
+        country_views_pipeline = [
+            {"$match": {"country": {"$ne": None}}},
+            {"$group": {"_id": "$country", "views": {"$sum": 1}}},
+            {"$sort": {"views": -1}},
+            {"$limit": 10}
+        ]
+        country_views = await db.page_views.aggregate(country_views_pipeline).to_list(10)
+        country_views_data = [{"country": c["_id"], "views": c["views"]} for c in country_views]
+        
         # Recent visitors (last 20)
         recent_visitors = await db.visitors.find(
             {}, 
