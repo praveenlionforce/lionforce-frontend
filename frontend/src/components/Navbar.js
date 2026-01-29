@@ -238,7 +238,7 @@ function Navbar() {
               </Link>
 
               <Link
-                to="/contact"
+                to="/consultation"
                 className="block w-full text-center bg-gradient-to-r from-teal-600 to-green-600 text-white px-6 py-3 rounded-full font-semibold hover:shadow-lg hover:shadow-teal-500/50 transition-all"
                 onClick={() => setIsOpen(false)}
                 data-testid="mobile-nav-cta-button"
