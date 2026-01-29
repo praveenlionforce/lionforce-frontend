@@ -1427,6 +1427,136 @@ function Admin() {
             </div>
           )}
 
+          {/* Consultations Tab */}
+          {activeTab === 'consultations' && (
+            <div className="space-y-6">
+              {/* Stats */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                {[
+                  { label: 'New Requests', value: consultations.filter(c => c.status === 'new').length, color: 'red', status: 'new' },
+                  { label: 'Contacted', value: consultations.filter(c => c.status === 'contacted').length, color: 'yellow', status: 'contacted' },
+                  { label: 'Scheduled', value: consultations.filter(c => c.status === 'scheduled').length, color: 'blue', status: 'scheduled' },
+                  { label: 'Completed', value: consultations.filter(c => c.status === 'completed').length, color: 'green', status: 'completed' }
+                ].map((stat, i) => (
+                  <div key={i} className={`p-4 rounded-xl border-2 ${stat.status === 'new' ? 'bg-red-50 border-red-200' : 'bg-white border-gray-200'}`}>
+                    <p className={`text-3xl font-bold ${stat.status === 'new' ? 'text-red-600' : 'text-gray-900'}`}>{stat.value}</p>
+                    <p className="text-sm text-gray-600">{stat.label}</p>
+                  </div>
+                ))}
+              </div>
+
+              {/* Consultation List */}
+              <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                <div className="p-4 border-b border-gray-200 bg-gradient-to-r from-teal-600 to-green-600">
+                  <h2 className="font-bold text-white flex items-center gap-2">
+                    <Calendar className="w-5 h-5" />
+                    Consultation Requests ({consultations.length})
+                  </h2>
+                  <p className="text-white/80 text-sm mt-1">Manage and follow up on consultation bookings</p>
+                </div>
+
+                {consultations.length === 0 ? (
+                  <div className="p-12 text-center text-gray-500">
+                    <Calendar className="w-16 h-16 mx-auto mb-4 text-gray-300" />
+                    <p className="font-medium">No consultation requests yet</p>
+                    <p className="text-sm mt-1">New bookings will appear here</p>
+                  </div>
+                ) : (
+                  <div className="divide-y divide-gray-100">
+                    {consultations.map((consultation, idx) => (
+                      <div 
+                        key={idx} 
+                        className={`p-4 hover:bg-gray-50 transition-colors ${consultation.status === 'new' ? 'bg-red-50 border-l-4 border-red-500' : ''}`}
+                      >
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center gap-2 flex-wrap">
+                              <h3 className="font-semibold text-gray-900">{consultation.name}</h3>
+                              <span className={`px-2 py-0.5 text-xs rounded-full font-medium ${
+                                consultation.status === 'new' ? 'bg-red-100 text-red-700' :
+                                consultation.status === 'contacted' ? 'bg-yellow-100 text-yellow-700' :
+                                consultation.status === 'scheduled' ? 'bg-blue-100 text-blue-700' :
+                                'bg-green-100 text-green-700'
+                              }`}>
+                                {consultation.status.charAt(0).toUpperCase() + consultation.status.slice(1)}
+                              </span>
+                            </div>
+                            <div className="flex items-center gap-4 mt-1 text-sm text-gray-600">
+                              <a href={`mailto:${consultation.email}`} className="hover:text-teal-600 flex items-center gap-1">
+                                <Mail className="w-3.5 h-3.5" />
+                                {consultation.email}
+                              </a>
+                              {consultation.phone && (
+                                <a href={`tel:${consultation.phone}`} className="hover:text-teal-600 flex items-center gap-1">
+                                  <Phone className="w-3.5 h-3.5" />
+                                  {consultation.phone}
+                                </a>
+                              )}
+                              {consultation.company && (
+                                <span className="flex items-center gap-1">
+                                  <Briefcase className="w-3.5 h-3.5" />
+                                  {consultation.company}
+                                </span>
+                              )}
+                            </div>
+                            <div className="mt-2 p-3 bg-gray-100 rounded-lg">
+                              <div className="flex items-center gap-4 text-sm">
+                                <span className="font-medium text-teal-700">{consultation.service_category}</span>
+                                <span className="flex items-center gap-1 text-gray-600">
+                                  <Calendar className="w-3.5 h-3.5" />
+                                  {consultation.preferred_date}
+                                </span>
+                                <span className="flex items-center gap-1 text-gray-600">
+                                  <Clock className="w-3.5 h-3.5" />
+                                  {consultation.preferred_time}
+                                </span>
+                                <span className="text-gray-500 text-xs">{consultation.timezone}</span>
+                              </div>
+                              {consultation.sub_services && consultation.sub_services.length > 0 && (
+                                <div className="mt-2 flex flex-wrap gap-1">
+                                  {consultation.sub_services.map((service, i) => (
+                                    <span key={i} className="px-2 py-0.5 bg-white text-xs text-gray-600 rounded border">
+                                      {service}
+                                    </span>
+                                  ))}
+                                </div>
+                              )}
+                              {consultation.message && (
+                                <p className="mt-2 text-sm text-gray-600 italic">"{consultation.message}"</p>
+                              )}
+                            </div>
+                            <p className="text-xs text-gray-400 mt-2">
+                              Submitted: {new Date(consultation.timestamp).toLocaleString()}
+                            </p>
+                          </div>
+                          <div className="flex flex-col gap-2">
+                            <select
+                              value={consultation.status}
+                              onChange={(e) => updateConsultationStatus(consultation.id, e.target.value)}
+                              className="px-3 py-1.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-teal-500"
+                            >
+                              <option value="new">New</option>
+                              <option value="contacted">Contacted</option>
+                              <option value="scheduled">Scheduled</option>
+                              <option value="completed">Completed</option>
+                            </select>
+                            <a
+                              href={`mailto:${consultation.email}?subject=Re: Consultation Request - ${consultation.service_category}&body=Hi ${consultation.name},%0D%0A%0D%0AThank you for your consultation request for ${consultation.service_category}.%0D%0A%0D%0A`}
+                              className="px-3 py-1.5 bg-teal-600 text-white rounded-lg text-sm font-medium hover:bg-teal-700 text-center flex items-center gap-1 justify-center"
+                            >
+                              <Mail className="w-3.5 h-3.5" />
+                              Reply
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+
           {/* Edit Pages */}
           {activeTab === 'pages' && (
             <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
