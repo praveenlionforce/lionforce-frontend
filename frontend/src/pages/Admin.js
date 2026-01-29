@@ -1425,9 +1425,10 @@ function Admin() {
 
         <div className="max-w-7xl mx-auto px-4 py-6">
           {/* Tabs - Grid layout for all to be visible */}
-          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-9 gap-2 mb-6">
+          <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-10 gap-2 mb-6">
             {[
               { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+              { id: 'analytics', label: 'Analytics', icon: BarChart3 },
               { id: 'consultations', label: 'Consultations', icon: Calendar, badge: consultations.filter(c => c.status === 'new').length },
               { id: 'pages', label: 'Edit Pages', icon: FileText },
               { id: 'images', label: 'Images', icon: Image },
