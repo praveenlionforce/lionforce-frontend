@@ -6,7 +6,8 @@ import {
   Home, Info, Phone, Globe, Image, Upload, Eye,
   ChevronDown, ChevronRight, Briefcase, GripVertical,
   Palette, Type, Layout, FormInput, Users, Mail, CheckCircle, Link2, Award,
-  Headphones, Send, Bot, UserCheck, ArrowLeftRight, Volume2, VolumeX, MapPin
+  Headphones, Send, Bot, UserCheck, ArrowLeftRight, Volume2, VolumeX, MapPin,
+  Calendar, Clock, ExternalLink
 } from 'lucide-react';
 
 // Memoized TextField component - completely isolated from parent re-renders
