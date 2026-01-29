@@ -406,6 +406,54 @@ function Contact() {
             </div>
           </div>
         </section>
+
+        {/* Offices Section */}
+        {content?.offices && content.offices.filter(o => o.name && o.name.trim()).length > 0 && (
+          <section className="py-16 bg-white">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="text-center mb-12">
+                <h2 className="text-2xl font-bold text-gray-900">Our Offices</h2>
+                <p className="text-gray-600 mt-2">Visit us at any of our locations</p>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {content.offices.filter(o => o.name && o.name.trim()).map((office, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1 }}
+                    className="bg-gray-50 rounded-xl p-6 border border-gray-100 hover:shadow-lg transition-all"
+                  >
+                    <h3 className="font-semibold text-gray-900 mb-3">{office.name}</h3>
+                    {office.address && (
+                      <div className="flex items-start gap-2 mb-2">
+                        <MapPin className="w-4 h-4 text-teal-600 mt-1 flex-shrink-0" />
+                        <p className="text-sm text-gray-600">{office.address}</p>
+                      </div>
+                    )}
+                    {office.phone && (
+                      <div className="flex items-center gap-2 mb-2">
+                        <Phone className="w-4 h-4 text-teal-600 flex-shrink-0" />
+                        <a href={`tel:${office.phone.replace(/\s+/g, '')}`} className="text-sm text-gray-600 hover:text-teal-600">
+                          {office.phone}
+                        </a>
+                      </div>
+                    )}
+                    {office.email && (
+                      <div className="flex items-center gap-2">
+                        <Mail className="w-4 h-4 text-teal-600 flex-shrink-0" />
+                        <a href={`mailto:${office.email}`} className="text-sm text-gray-600 hover:text-teal-600">
+                          {office.email}
+                        </a>
+                      </div>
+                    )}
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </section>
+        )}
       </div>
     </>
   );
