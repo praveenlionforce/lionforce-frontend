@@ -1411,12 +1411,12 @@ function Admin() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-lg font-medium text-sm whitespace-nowrap transition-all ${activeTab === tab.id ? 'bg-teal-600 text-white shadow-lg' : 'bg-white text-gray-600 hover:bg-gray-50'}`}
+                className={`flex flex-col items-center gap-1 px-3 py-2 rounded-lg font-medium text-xs transition-all ${activeTab === tab.id ? 'bg-teal-600 text-white shadow-lg' : 'bg-white text-gray-600 hover:bg-gray-50 border border-gray-200'}`}
               >
-                <tab.icon className="w-4 h-4" />
-                {tab.label}
+                <tab.icon className="w-5 h-5" />
+                <span className="text-center leading-tight">{tab.label}</span>
                 {tab.badge > 0 && (
-                  <span className="ml-1 px-2 py-0.5 bg-red-500 text-white text-xs rounded-full animate-pulse">
+                  <span className="px-1.5 py-0.5 bg-red-500 text-white text-xs rounded-full animate-pulse">
                     {tab.badge}
                   </span>
                 )}
