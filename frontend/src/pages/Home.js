@@ -14,7 +14,30 @@ import {
   Globe,
   Quote,
   Sparkles,
-  Play
+  Play,
+  Briefcase,
+  Lightbulb,
+  Zap,
+  Shield,
+  Heart,
+  Star,
+  Target,
+  Layers,
+  Database,
+  Cpu,
+  Wifi,
+  Monitor,
+  Smartphone,
+  Cloud,
+  Server,
+  Box,
+  Mail,
+  Phone,
+  Calendar,
+  Clock,
+  Settings,
+  Award,
+  MessageSquare
 } from 'lucide-react';
 import { useSiteContent } from '../hooks/useSiteContent';
 
