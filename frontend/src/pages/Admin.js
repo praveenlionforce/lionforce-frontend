@@ -846,6 +846,184 @@ function Admin() {
     return result;
   };
 
+  // Live Chat Functions
+  const fetchLiveChats = async () => {
+    try {
+      const headers = getAuthHeader();
+      const res = await fetch(`${API_URL}/api/admin/live-chats`, { headers });
+      if (res.ok) {
+        const chats = await res.json();
+        
+        // Calculate total unread
+        const totalUnread = chats.reduce((sum, chat) => sum + (chat.unread_count || 0), 0);
+        
+        // Play sound if new unread messages
+        if (soundEnabled && totalUnread > prevUnreadCount.current) {
+          playNotificationSound();
+        }
+        prevUnreadCount.current = totalUnread;
+        
+        setLiveChats(chats);
+      }
+    } catch (e) {
+      console.log('Failed to fetch live chats:', e);
+    }
+  };
+
+  const fetchAgentStatus = async () => {
+    try {
+      const headers = getAuthHeader();
+      const res = await fetch(`${API_URL}/api/admin/agent-status`, { headers });
+      if (res.ok) {
+        const status = await res.json();
+        setAgentOnline(status.is_online);
+      }
+    } catch (e) {
+      console.log('Failed to fetch agent status:', e);
+    }
+  };
+
+  const toggleAgentStatus = async () => {
+    try {
+      const headers = getAuthHeader();
+      const res = await fetch(`${API_URL}/api/admin/agent-status?is_online=${!agentOnline}`, {
+        method: 'POST',
+        headers
+      });
+      if (res.ok) {
+        setAgentOnline(!agentOnline);
+      }
+    } catch (e) {
+      console.log('Failed to toggle agent status:', e);
+    }
+  };
+
+  const fetchChatMessages = async (sessionId) => {
+    try {
+      const headers = getAuthHeader();
+      const res = await fetch(`${API_URL}/api/admin/live-chats/${sessionId}/messages`, { headers });
+      if (res.ok) {
+        setChatMessages(await res.json());
+      }
+    } catch (e) {
+      console.log('Failed to fetch messages:', e);
+    }
+  };
+
+  const sendAgentReply = async () => {
+    if (!agentReply.trim() || !selectedChat) return;
+    try {
+      const headers = getAuthHeader();
+      const res = await fetch(`${API_URL}/api/admin/live-chats/${selectedChat.id}/reply?text=${encodeURIComponent(agentReply)}`, {
+        method: 'POST',
+        headers
+      });
+      if (res.ok) {
+        setAgentReply('');
+        fetchChatMessages(selectedChat.id);
+        fetchLiveChats();
+      }
+    } catch (e) {
+      console.log('Failed to send reply:', e);
+    }
+  };
+
+  const takeoverChat = async (sessionId) => {
+    try {
+      const headers = getAuthHeader();
+      await fetch(`${API_URL}/api/admin/live-chats/${sessionId}/takeover`, {
+        method: 'POST',
+        headers
+      });
+      fetchLiveChats();
+      if (selectedChat?.id === sessionId) {
+        setSelectedChat(prev => ({ ...prev, status: 'agent' }));
+      }
+    } catch (e) {
+      console.log('Failed to takeover:', e);
+    }
+  };
+
+  const transferToBot = async (sessionId) => {
+    try {
+      const headers = getAuthHeader();
+      await fetch(`${API_URL}/api/admin/live-chats/${sessionId}/transfer-to-bot`, {
+        method: 'POST',
+        headers
+      });
+      fetchLiveChats();
+      if (selectedChat?.id === sessionId) {
+        setSelectedChat(prev => ({ ...prev, status: 'bot' }));
+      }
+    } catch (e) {
+      console.log('Failed to transfer:', e);
+    }
+  };
+
+  const closeChat = async (sessionId) => {
+    try {
+      const headers = getAuthHeader();
+      await fetch(`${API_URL}/api/admin/live-chats/${sessionId}/close`, {
+        method: 'POST',
+        headers
+      });
+      fetchLiveChats();
+      if (selectedChat?.id === sessionId) {
+        setSelectedChat(null);
+        setChatMessages([]);
+      }
+    } catch (e) {
+      console.log('Failed to close chat:', e);
+    }
+  };
+
+  const playNotificationSound = () => {
+    try {
+      // Create a simple beep sound
+      const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      oscillator.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      oscillator.frequency.value = 800;
+      oscillator.type = 'sine';
+      gainNode.gain.value = 0.3;
+      
+      oscillator.start();
+      setTimeout(() => oscillator.stop(), 200);
+    } catch (e) {
+      console.log('Sound not supported');
+    }
+  };
+
+  // Poll for live chats when on live-chat tab
+  useEffect(() => {
+    if (isAuthenticated && activeTab === 'live-chat') {
+      fetchLiveChats();
+      fetchAgentStatus();
+      
+      liveChatPollRef.current = setInterval(() => {
+        fetchLiveChats();
+        if (selectedChat) {
+          fetchChatMessages(selectedChat.id);
+        }
+      }, 3000);
+      
+      return () => {
+        if (liveChatPollRef.current) clearInterval(liveChatPollRef.current);
+      };
+    }
+  }, [isAuthenticated, activeTab, selectedChat?.id]);
+
+  // Fetch messages when chat is selected
+  useEffect(() => {
+    if (selectedChat) {
+      fetchChatMessages(selectedChat.id);
+    }
+  }, [selectedChat?.id]);
+
   useEffect(() => {
     const auth = localStorage.getItem('adminAuth');
     if (auth) {
