@@ -252,6 +252,176 @@ async def save_chatbot_lead(input: ChatbotLeadCreate):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to save lead: {str(e)}")
 
+# ==================== LIVE CHAT SYSTEM ====================
+
+# Get or Create Chat Session
+@api_router.post("/chat/session")
+async def get_or_create_session(session_id: Optional[str] = None):
+    try:
+        if session_id:
+            session = await db.chat_sessions.find_one({"id": session_id}, {"_id": 0})
+            if session:
+                return session
+        
+        # Create new session
+        new_session = ChatSession()
+        doc = new_session.model_dump()
+        doc['created_at'] = doc['created_at'].isoformat()
+        doc['updated_at'] = doc['updated_at'].isoformat()
+        await db.chat_sessions.insert_one(doc)
+        return new_session.model_dump()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to create session: {str(e)}")
+
+# Send message (from visitor)
+@api_router.post("/chat/message")
+async def send_chat_message(session_id: str, text: str, sender: str = "user"):
+    try:
+        message = ChatMessage(session_id=session_id, sender=sender, text=text)
+        doc = message.model_dump()
+        doc['timestamp'] = doc['timestamp'].isoformat()
+        await db.chat_messages.insert_one(doc)
+        
+        # Update session
+        await db.chat_sessions.update_one(
+            {"id": session_id},
+            {"$set": {
+                "last_message": text[:100],
+                "updated_at": datetime.now(timezone.utc).isoformat()
+            }, "$inc": {"unread_count": 1 if sender == "user" else 0}}
+        )
+        return message.model_dump()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to send message: {str(e)}")
+
+# Get messages for a session
+@api_router.get("/chat/messages/{session_id}")
+async def get_chat_messages(session_id: str, after: Optional[str] = None):
+    try:
+        query = {"session_id": session_id}
+        if after:
+            query["timestamp"] = {"$gt": after}
+        
+        messages = await db.chat_messages.find(query, {"_id": 0}).sort("timestamp", 1).to_list(500)
+        return messages
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to get messages: {str(e)}")
+
+# Get session status (for visitor to check if agent is handling)
+@api_router.get("/chat/session/{session_id}")
+async def get_session_status(session_id: str):
+    session = await db.chat_sessions.find_one({"id": session_id}, {"_id": 0})
+    if not session:
+        raise HTTPException(status_code=404, detail="Session not found")
+    return session
+
+# Update visitor info in session
+@api_router.put("/chat/session/{session_id}/visitor")
+async def update_visitor_info(session_id: str, name: Optional[str] = None, email: Optional[str] = None, company: Optional[str] = None):
+    try:
+        update_data = {"updated_at": datetime.now(timezone.utc).isoformat()}
+        if name:
+            update_data["visitor_name"] = name
+        if email:
+            update_data["visitor_email"] = email
+        if company:
+            update_data["visitor_company"] = company
+        
+        await db.chat_sessions.update_one({"id": session_id}, {"$set": update_data})
+        return {"message": "Visitor info updated"}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to update visitor: {str(e)}")
+
+# Get agent online status (public)
+@api_router.get("/chat/agent-status")
+async def get_public_agent_status():
+    status = await db.agent_status.find_one({"agent_id": "default"}, {"_id": 0})
+    if status:
+        return {"is_online": status.get("is_online", False)}
+    return {"is_online": False}
+
+# ==================== ADMIN LIVE CHAT ENDPOINTS ====================
+
+# Get all active chat sessions
+@api_router.get("/admin/live-chats")
+async def get_live_chats(username: str = Depends(verify_admin)):
+    sessions = await db.chat_sessions.find({"status": {"$ne": "closed"}}, {"_id": 0}).sort("updated_at", -1).to_list(100)
+    return sessions
+
+# Get chat history for a session
+@api_router.get("/admin/live-chats/{session_id}/messages")
+async def get_admin_chat_messages(session_id: str, username: str = Depends(verify_admin)):
+    messages = await db.chat_messages.find({"session_id": session_id}, {"_id": 0}).sort("timestamp", 1).to_list(500)
+    # Mark as read
+    await db.chat_sessions.update_one({"id": session_id}, {"$set": {"unread_count": 0}})
+    return messages
+
+# Agent sends reply
+@api_router.post("/admin/live-chats/{session_id}/reply")
+async def agent_reply(session_id: str, text: str, username: str = Depends(verify_admin)):
+    try:
+        message = ChatMessage(session_id=session_id, sender="agent", text=text)
+        doc = message.model_dump()
+        doc['timestamp'] = doc['timestamp'].isoformat()
+        await db.chat_messages.insert_one(doc)
+        
+        # Update session
+        await db.chat_sessions.update_one(
+            {"id": session_id},
+            {"$set": {
+                "last_message": f"Agent: {text[:80]}",
+                "updated_at": datetime.now(timezone.utc).isoformat(),
+                "status": "agent"
+            }}
+        )
+        return message.model_dump()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to send reply: {str(e)}")
+
+# Agent takes over conversation
+@api_router.post("/admin/live-chats/{session_id}/takeover")
+async def agent_takeover(session_id: str, username: str = Depends(verify_admin)):
+    await db.chat_sessions.update_one(
+        {"id": session_id},
+        {"$set": {"status": "agent", "agent_id": username, "updated_at": datetime.now(timezone.utc).isoformat()}}
+    )
+    return {"message": "Takeover successful", "status": "agent"}
+
+# Transfer back to bot
+@api_router.post("/admin/live-chats/{session_id}/transfer-to-bot")
+async def transfer_to_bot(session_id: str, username: str = Depends(verify_admin)):
+    await db.chat_sessions.update_one(
+        {"id": session_id},
+        {"$set": {"status": "bot", "agent_id": None, "updated_at": datetime.now(timezone.utc).isoformat()}}
+    )
+    return {"message": "Transferred to bot", "status": "bot"}
+
+# Close conversation
+@api_router.post("/admin/live-chats/{session_id}/close")
+async def close_chat(session_id: str, username: str = Depends(verify_admin)):
+    await db.chat_sessions.update_one(
+        {"id": session_id},
+        {"$set": {"status": "closed", "updated_at": datetime.now(timezone.utc).isoformat()}}
+    )
+    return {"message": "Chat closed"}
+
+# Get/Set agent status
+@api_router.get("/admin/agent-status")
+async def get_agent_status(username: str = Depends(verify_admin)):
+    status = await db.agent_status.find_one({"agent_id": "default"}, {"_id": 0})
+    if status:
+        return status
+    return {"agent_id": "default", "is_online": False}
+
+@api_router.post("/admin/agent-status")
+async def set_agent_status(is_online: bool, username: str = Depends(verify_admin)):
+    await db.agent_status.update_one(
+        {"agent_id": "default"},
+        {"$set": {"agent_id": "default", "is_online": is_online, "updated_at": datetime.now(timezone.utc).isoformat()}},
+        upsert=True
+    )
+    return {"agent_id": "default", "is_online": is_online}
+
 # Admin Authentication Endpoint
 @api_router.post("/admin/login")
 async def admin_login(username: str = Depends(verify_admin)):
