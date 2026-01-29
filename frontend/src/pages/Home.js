@@ -362,36 +362,135 @@ function Home() {
               </p>
             </motion.div>
 
-            {/* Bento Grid - Balanced layout */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {/* Render all 6 services as gradient cards */}
-              {services.map((service, index) => {
-                const IconComponent = iconMap[service.icon] || Globe;
-                return (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.1 }}
-                    className="lg:col-span-1"
-                  >
-                    <Link to={service.link} className="block h-full" data-testid={`service-${index}`}>
-                      <div className={`h-full min-h-[240px] p-8 rounded-3xl bg-gradient-to-br ${service.color || 'from-teal-500 to-cyan-600'} text-white relative overflow-hidden group hover:shadow-2xl hover:scale-[1.02] transition-all`}>
-                        <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
-                        <div className="relative z-10">
-                          <IconComponent className="w-10 h-10 mb-4" />
-                          <h3 className="text-2xl font-bold mb-3">{service.title}</h3>
-                          <p className="text-white/80 text-sm mb-4">{service.description}</p>
-                          <div className="inline-flex items-center gap-2 text-white text-sm font-semibold group-hover:gap-3 transition-all">
-                            Learn More <ArrowRight className="w-4 h-4" />
-                          </div>
-                        </div>
+            {/* Bento Grid - Exact layout from original site */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Row 1: Three large gradient cards */}
+              {/* AI-Powered eLearning - Purple gradient */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0 }}
+              >
+                <Link to="/services/elearning" className="block h-full" data-testid="service-elearning">
+                  <div className="h-full min-h-[320px] p-8 rounded-3xl bg-gradient-to-b from-purple-500 via-purple-600 to-purple-700 text-white relative overflow-hidden group hover:shadow-2xl hover:scale-[1.02] transition-all">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+                    <div className="relative z-10 h-full flex flex-col">
+                      <BookOpen className="w-12 h-12 mb-6" />
+                      <h3 className="text-2xl font-bold mb-3">AI-Powered eLearning</h3>
+                      <p className="text-white/80 text-sm mb-6 flex-grow">
+                        Interactive, AI-enhanced learning that transforms engagement and retention.
+                      </p>
+                      <div className="inline-flex items-center gap-2 text-white text-sm font-semibold group-hover:gap-3 transition-all">
+                        Learn More <ArrowRight className="w-4 h-4" />
                       </div>
-                    </Link>
-                  </motion.div>
-                );
-              })}
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+
+              {/* Software & AI - Teal/Cyan gradient */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+              >
+                <Link to="/services/software-development" className="block h-full" data-testid="service-software">
+                  <div className="h-full min-h-[320px] p-8 rounded-3xl bg-gradient-to-b from-cyan-500 via-teal-600 to-teal-700 text-white relative overflow-hidden group hover:shadow-2xl hover:scale-[1.02] transition-all">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+                    <div className="relative z-10 h-full flex flex-col">
+                      <Code className="w-12 h-12 mb-6" />
+                      <h3 className="text-2xl font-bold mb-3">Software & AI</h3>
+                      <p className="text-white/80 text-sm mb-6 flex-grow">
+                        Smart, AI-driven solutions from web apps to IoT integrations.
+                      </p>
+                      <div className="inline-flex items-center gap-2 text-white text-sm font-semibold group-hover:gap-3 transition-all">
+                        Learn More <ArrowRight className="w-4 h-4" />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+
+              {/* India Expansion - Green gradient */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.2 }}
+              >
+                <Link to="/services/india-expansion" className="block h-full" data-testid="service-india">
+                  <div className="h-full min-h-[320px] p-8 rounded-3xl bg-gradient-to-b from-emerald-400 via-green-500 to-green-600 text-white relative overflow-hidden group hover:shadow-2xl hover:scale-[1.02] transition-all">
+                    <div className="absolute top-0 right-0 w-32 h-32 bg-white/10 rounded-full blur-2xl"></div>
+                    <div className="relative z-10 h-full flex flex-col">
+                      <Globe className="w-12 h-12 mb-6" />
+                      <h3 className="text-2xl font-bold mb-3">India Expansion</h3>
+                      <p className="text-white/80 text-sm mb-6 flex-grow">
+                        EOR, ODC, COE services - build your India team in weeks.
+                      </p>
+                      <div className="inline-flex items-center gap-2 text-white text-sm font-semibold group-hover:gap-3 transition-all">
+                        Learn More <ArrowRight className="w-4 h-4" />
+                      </div>
+                    </div>
+                  </div>
+                </Link>
+              </motion.div>
+
+              {/* Row 2: Three smaller white cards with colored icons */}
+              {/* UX/UI Design - Purple icon */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.3 }}
+              >
+                <Link to="/services/ux-ui-design" className="block h-full" data-testid="service-uxui">
+                  <div className="h-full min-h-[200px] p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-xl hover:border-purple-200 transition-all group">
+                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center text-white mb-4">
+                      <Palette className="w-7 h-7" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-2 text-gray-900 group-hover:text-purple-600 transition-colors">UX/UI Design</h3>
+                    <p className="text-gray-600 text-sm">Intuitive experiences that convert visitors into customers.</p>
+                  </div>
+                </Link>
+              </motion.div>
+
+              {/* Creative Services - Orange icon */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.4 }}
+              >
+                <Link to="/services/creative" className="block h-full" data-testid="service-creative">
+                  <div className="h-full min-h-[200px] p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-xl hover:border-orange-200 transition-all group">
+                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center text-white mb-4">
+                      <Video className="w-7 h-7" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-2 text-gray-900 group-hover:text-orange-600 transition-colors">Creative Services</h3>
+                    <p className="text-gray-600 text-sm">3D, animations, and visual storytelling that captivates.</p>
+                  </div>
+                </Link>
+              </motion.div>
+
+              {/* Digital Marketing - Pink icon */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.5 }}
+              >
+                <Link to="/services/digital-marketing" className="block h-full" data-testid="service-marketing">
+                  <div className="h-full min-h-[200px] p-6 rounded-2xl bg-white border border-gray-100 shadow-sm hover:shadow-xl hover:border-pink-200 transition-all group">
+                    <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-pink-500 to-rose-500 flex items-center justify-center text-white mb-4">
+                      <TrendingUp className="w-7 h-7" />
+                    </div>
+                    <h3 className="text-xl font-bold mb-2 text-gray-900 group-hover:text-pink-600 transition-colors">Digital Marketing</h3>
+                    <p className="text-gray-600 text-sm">Campaigns that get you noticed and drive results.</p>
+                  </div>
+                </Link>
+              </motion.div>
             </div>
           </div>
         </section>
