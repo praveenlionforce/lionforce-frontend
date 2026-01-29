@@ -99,15 +99,12 @@ function Home() {
     }
   ];
 
-  // Icon mapping
+  // Icon mapping - all available icons
   const iconMap = {
-    BookOpen: BookOpen,
-    Code: Code,
-    Palette: Palette,
-    Video: Video,
-    TrendingUp: TrendingUp,
-    Globe: Globe,
-    Users: Users
+    BookOpen, Code, Palette, Video, TrendingUp, Globe, Users, Briefcase,
+    Lightbulb, Zap, Shield, Heart, Star, Target, Layers, Database, Cpu, Wifi,
+    Monitor, Smartphone, Cloud, Server, Box, Mail, Phone, Calendar, Clock,
+    Settings, Award, CheckCircle, MessageSquare
   };
 
   const clients = content?.clients?.logos || [
