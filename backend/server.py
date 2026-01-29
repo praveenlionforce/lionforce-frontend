@@ -884,8 +884,10 @@ async def get_analytics_stats(username: str = Depends(verify_admin)):
                 "month_new_visitors": month_visitors
             },
             "by_country": country_data,
+            "country_views": country_views_data,
             "top_pages": page_data,
             "daily_views": daily_data,
+            "hourly_views": hourly_data,
             "recent_visitors": recent_visitors
         }
     except Exception as e:
