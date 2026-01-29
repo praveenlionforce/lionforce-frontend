@@ -258,15 +258,23 @@ function ChatBot() {
         setLeadStep(5);
         addBotMessage("Perfect! Lastly, briefly describe what you're looking for:");
       } else if (leadStep === 5) {
-        const finalLead = { ...leadInfo, message: userMessage };
-        setLeadInfo(finalLead);
+        const finalLead = { 
+          name: leadInfo.name,
+          email: leadInfo.email,
+          company: leadInfo.company || '',
+          designation: leadInfo.designation || '',
+          message: userMessage 
+        };
         
         try {
-          await fetch(`${API_URL}/api/chatbot-lead`, {
+          const response = await fetch(`${API_URL}/api/chatbot-lead`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(finalLead)
           });
+          if (!response.ok) {
+            console.log('Lead save failed:', await response.text());
+          }
         } catch (e) {
           console.log('Lead save error:', e);
         }
@@ -281,6 +289,7 @@ function ChatBot() {
           }
         }
 
+        setLeadInfo({ name: '', email: '', company: '', designation: '', message: '' });
         setCollectingLead(false);
         setLeadStep(0);
         addBotMessage(botConfig.thankYou, ['Explore services', 'Visit homepage']);
