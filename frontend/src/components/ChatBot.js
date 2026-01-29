@@ -61,6 +61,12 @@ function ChatBot() {
   const [chatMode, setChatMode] = useState('bot'); // 'bot' or 'agent'
   const messagesEndRef = useRef(null);
   const pollIntervalRef = useRef(null);
+  const sessionIdRef = useRef(null);
+
+  // Keep ref in sync with state
+  useEffect(() => {
+    sessionIdRef.current = sessionId;
+  }, [sessionId]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
@@ -70,93 +76,18 @@ function ChatBot() {
     scrollToBottom();
   }, [messages]);
 
-  // Check agent status periodically
-  useEffect(() => {
-    const checkAgentStatus = async () => {
-      try {
-        const res = await fetch(`${API_URL}/api/chat/agent-status`);
-        const data = await res.json();
-        setAgentOnline(data.is_online);
-      } catch (e) {
-        console.log('Agent status check failed');
-      }
-    };
-
-    checkAgentStatus();
-    const interval = setInterval(checkAgentStatus, 10000); // Check every 10 seconds
-    return () => clearInterval(interval);
-  }, []);
-
-  // Initialize session when chat opens
-  useEffect(() => {
-    if (isOpen && !sessionId) {
-      initSession();
-    }
-  }, [isOpen, sessionId]);
-
-  // Poll for new messages when in agent mode
-  useEffect(() => {
-    if (isOpen && sessionId && chatMode === 'agent') {
-      const pollMessages = async () => {
-        try {
-          // Check session status
-          const sessionRes = await fetch(`${API_URL}/api/chat/session/${sessionId}`);
-          const sessionData = await sessionRes.json();
-          
-          if (sessionData.status === 'bot') {
-            setChatMode('bot');
-            addBotMessage("You've been transferred back to Alex. How can I help you?", botConfig.options, 500);
-          } else if (sessionData.status === 'closed') {
-            addBotMessage("This chat has been closed. Feel free to start a new conversation!", botConfig.options, 500);
-            setChatMode('bot');
-          }
-
-          // Get new messages
-          const msgRes = await fetch(`${API_URL}/api/chat/messages/${sessionId}`);
-          const allMessages = await msgRes.json();
-          
-          // Find agent messages we don't have
-          const agentMessages = allMessages.filter(m => m.sender === 'agent');
-          const displayedAgentMsgs = messages.filter(m => m.type === 'agent').length;
-          
-          if (agentMessages.length > displayedAgentMsgs) {
-            const newAgentMsgs = agentMessages.slice(displayedAgentMsgs);
-            newAgentMsgs.forEach(msg => {
-              setMessages(prev => [...prev, { type: 'agent', text: msg.text }]);
-            });
-          }
-        } catch (e) {
-          console.log('Poll error:', e);
-        }
-      };
-
-      pollIntervalRef.current = setInterval(pollMessages, 3000);
-      return () => {
-        if (pollIntervalRef.current) clearInterval(pollIntervalRef.current);
-      };
-    }
-  }, [isOpen, sessionId, chatMode, messages]);
-
-  const initSession = async () => {
+  // Helper functions defined first
+  const sendMessageToServer = useCallback(async (text, sender = 'user') => {
+    const currentSessionId = sessionIdRef.current;
+    if (!currentSessionId) return;
     try {
-      const res = await fetch(`${API_URL}/api/chat/session`, { method: 'POST' });
-      const data = await res.json();
-      setSessionId(data.id);
-    } catch (e) {
-      console.log('Session init error:', e);
-    }
-  };
-
-  const sendMessageToServer = async (text, sender = 'user') => {
-    if (!sessionId) return;
-    try {
-      await fetch(`${API_URL}/api/chat/message?session_id=${sessionId}&text=${encodeURIComponent(text)}&sender=${sender}`, {
+      await fetch(`${API_URL}/api/chat/message?session_id=${currentSessionId}&text=${encodeURIComponent(text)}&sender=${sender}`, {
         method: 'POST'
       });
     } catch (e) {
       console.log('Send message error:', e);
     }
-  };
+  }, []);
 
   const detectService = (text) => {
     const lowerText = text.toLowerCase();
@@ -177,14 +108,87 @@ function ChatBot() {
       setMessages(prev => [...prev, { type: 'bot', text, options }]);
       sendMessageToServer(text, 'bot');
     }, delay);
-  }, [sessionId]);
+  }, [sendMessageToServer]);
+
+  const initSession = useCallback(async () => {
+    try {
+      const res = await fetch(`${API_URL}/api/chat/session`, { method: 'POST' });
+      const data = await res.json();
+      setSessionId(data.id);
+    } catch (e) {
+      console.log('Session init error:', e);
+    }
+  }, []);
+
+  // Check agent status periodically
+  useEffect(() => {
+    const checkAgentStatus = async () => {
+      try {
+        const res = await fetch(`${API_URL}/api/chat/agent-status`);
+        const data = await res.json();
+        setAgentOnline(data.is_online);
+      } catch (e) {
+        console.log('Agent status check failed');
+      }
+    };
+
+    checkAgentStatus();
+    const interval = setInterval(checkAgentStatus, 10000);
+    return () => clearInterval(interval);
+  }, []);
+
+  // Initialize session when chat opens
+  useEffect(() => {
+    if (isOpen && !sessionId) {
+      initSession();
+    }
+  }, [isOpen, sessionId, initSession]);
+
+  // Poll for new messages when in agent mode
+  useEffect(() => {
+    if (isOpen && sessionId && chatMode === 'agent') {
+      const pollMessages = async () => {
+        try {
+          const sessionRes = await fetch(`${API_URL}/api/chat/session/${sessionId}`);
+          const sessionData = await sessionRes.json();
+          
+          if (sessionData.status === 'bot') {
+            setChatMode('bot');
+            addBotMessage("You've been transferred back to Alex. How can I help you?", botConfig.options, 500);
+          } else if (sessionData.status === 'closed') {
+            addBotMessage("This chat has been closed. Feel free to start a new conversation!", botConfig.options, 500);
+            setChatMode('bot');
+          }
+
+          const msgRes = await fetch(`${API_URL}/api/chat/messages/${sessionId}`);
+          const allMessages = await msgRes.json();
+          
+          const agentMessages = allMessages.filter(m => m.sender === 'agent');
+          
+          setMessages(prev => {
+            const displayedAgentMsgs = prev.filter(m => m.type === 'agent').length;
+            if (agentMessages.length > displayedAgentMsgs) {
+              const newAgentMsgs = agentMessages.slice(displayedAgentMsgs);
+              return [...prev, ...newAgentMsgs.map(msg => ({ type: 'agent', text: msg.text }))];
+            }
+            return prev;
+          });
+        } catch (e) {
+          console.log('Poll error:', e);
+        }
+      };
+
+      pollIntervalRef.current = setInterval(pollMessages, 3000);
+      return () => {
+        if (pollIntervalRef.current) clearInterval(pollIntervalRef.current);
+      };
+    }
+  }, [isOpen, sessionId, chatMode, addBotMessage]);
 
   const handleOptionClick = (option) => {
-    // Add user message
     setMessages(prev => [...prev, { type: 'user', text: option }]);
     sendMessageToServer(option, 'user');
 
-    // Handle "Tell me more" - context aware
     if (option.toLowerCase() === 'tell me more') {
       if (lastServiceContext && botConfig.serviceDetails[lastServiceContext]) {
         addBotMessage(
@@ -192,15 +196,11 @@ function ChatBot() {
           ['Get a quote', 'Other services', 'Talk to someone']
         );
       } else {
-        addBotMessage(
-          "What would you like to know more about?",
-          botConfig.options
-        );
+        addBotMessage("What would you like to know more about?", botConfig.options);
       }
       return;
     }
 
-    // Handle "Other services"
     if (option.toLowerCase() === 'other services') {
       addBotMessage("Here are all our services:", botConfig.options);
       setLastServiceContext(null);
@@ -230,13 +230,11 @@ function ChatBot() {
     setMessages(prev => [...prev, { type: 'user', text: userMessage }]);
     sendMessageToServer(userMessage, 'user');
 
-    // If in agent mode, just send to server, don't process locally
     if (chatMode === 'agent') {
       return;
     }
 
     if (collectingLead) {
-      // Lead collection flow
       if (leadStep === 1) {
         setLeadInfo(prev => ({ ...prev, name: userMessage }));
         setLeadStep(2);
@@ -262,7 +260,6 @@ function ChatBot() {
         const finalLead = { ...leadInfo, message: userMessage };
         setLeadInfo(finalLead);
         
-        // Save lead to database
         try {
           await fetch(`${API_URL}/api/chatbot-lead`, {
             method: 'POST',
@@ -273,7 +270,6 @@ function ChatBot() {
           console.log('Lead save error:', e);
         }
 
-        // Update session with visitor info
         if (sessionId) {
           try {
             await fetch(`${API_URL}/api/chat/session/${sessionId}/visitor?name=${encodeURIComponent(finalLead.name)}&email=${encodeURIComponent(finalLead.email)}&company=${encodeURIComponent(finalLead.company || '')}`, {
@@ -289,7 +285,6 @@ function ChatBot() {
         addBotMessage(botConfig.thankYou, ['Explore services', 'Visit homepage']);
       }
     } else {
-      // Regular conversation
       const serviceId = detectService(userMessage);
       
       if (userMessage.toLowerCase().includes('quote') || 
