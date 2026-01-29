@@ -1319,7 +1319,8 @@ function Admin() {
               { id: 'forms', label: 'Form Settings', icon: FormInput },
               { id: 'submissions', label: 'Submissions', icon: MessageSquare },
               { id: 'subscribers', label: 'Subscribers', icon: Newspaper },
-              { id: 'chatbot-leads', label: 'Chatbot Leads', icon: MessageSquare }
+              { id: 'chatbot-leads', label: 'Chatbot Leads', icon: MessageSquare },
+              { id: 'live-chat', label: 'Live Chat', icon: Headphones }
             ].map(tab => (
               <button
                 key={tab.id}
