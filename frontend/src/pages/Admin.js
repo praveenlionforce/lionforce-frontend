@@ -1744,21 +1744,31 @@ function Admin() {
                       </div>
                     </Section>
 
-                    <Section title="Services Section" icon={<Briefcase className="w-4 h-4 text-teal-600" />} sectionKey="home-services">
+                    <Section title="Services Grid" icon={<Briefcase className="w-4 h-4 text-teal-600" />} sectionKey="home-services-grid">
                       <TextField label="Section Title" value={siteContent.home?.services?.title} onChange={(v) => updateContent('home.services.title', v)} />
                       <TextField label="Section Subtitle" value={siteContent.home?.services?.subtitle} onChange={(v) => updateContent('home.services.subtitle', v)} multiline />
-                      <p className="text-sm font-medium text-gray-700 mt-4 mb-2">Featured Services:</p>
+                      <p className="text-sm font-medium text-gray-700 mt-4 mb-2">Service Cards (shown in bento grid):</p>
                       <ArrayEditor
                         items={siteContent.home?.services?.items}
                         path="home.services.items"
-                        template={{ title: 'New Service', description: 'Description here', link: '/services/', color: 'teal' }}
+                        template={{ icon: 'Code', title: 'New Service', description: 'Service description', link: '/services/', color: 'from-teal-500 to-cyan-600' }}
                         addLabel="Add Service"
                         renderItem={(item, index) => (
-                          <div className="grid grid-cols-2 gap-3">
-                            <TextField label="Title" value={item.title} onChange={(v) => updateArrayItem('home.services.items', index, 'title', v)} />
-                            <TextField label="Link" value={item.link} onChange={(v) => updateArrayItem('home.services.items', index, 'link', v)} />
-                            <div className="col-span-2">
-                              <TextField label="Description" value={item.description} onChange={(v) => updateArrayItem('home.services.items', index, 'description', v)} />
+                          <div className="space-y-3">
+                            <div className="grid grid-cols-3 gap-3">
+                              <IconPicker 
+                                label="Icon" 
+                                value={item.icon} 
+                                onChange={(v) => updateArrayItem('home.services.items', index, 'icon', v)} 
+                              />
+                              <div className="col-span-2">
+                                <TextField label="Title" value={item.title} onChange={(v) => updateArrayItem('home.services.items', index, 'title', v)} />
+                              </div>
+                            </div>
+                            <TextField label="Description" value={item.description} onChange={(v) => updateArrayItem('home.services.items', index, 'description', v)} />
+                            <div className="grid grid-cols-2 gap-3">
+                              <TextField label="Link URL" value={item.link} onChange={(v) => updateArrayItem('home.services.items', index, 'link', v)} placeholder="/services/..." />
+                              <TextField label="Gradient Color" value={item.color} onChange={(v) => updateArrayItem('home.services.items', index, 'color', v)} placeholder="from-teal-500 to-cyan-600" />
                             </div>
                           </div>
                         )}
@@ -1782,38 +1792,6 @@ function Admin() {
                             </div>
                             <div className="col-span-4">
                               <TextField label="Description" value={item.desc} onChange={(v) => updateArrayItem('home.whyUs.items', index, 'desc', v)} multiline />
-                            </div>
-                          </div>
-                        )}
-                      />
-                    </Section>
-
-                    <Section title="Services Grid" icon={<Briefcase className="w-4 h-4 text-teal-600" />} sectionKey="home-services">
-                      <TextField label="Section Title" value={siteContent.home?.services?.title} onChange={(v) => updateContent('home.services.title', v)} />
-                      <TextField label="Section Subtitle" value={siteContent.home?.services?.subtitle} onChange={(v) => updateContent('home.services.subtitle', v)} multiline />
-                      <p className="text-sm font-medium text-gray-700 mt-4 mb-2">Service Cards (shown in bento grid):</p>
-                      <p className="text-xs text-gray-500 mb-3">Icons: BookOpen, Code, Palette, Video, TrendingUp, Globe, Users. Colors: from-indigo-500 to-purple-600, from-teal-500 to-cyan-600, etc.</p>
-                      <ArrayEditor
-                        items={siteContent.home?.services?.items}
-                        path="home.services.items"
-                        template={{ icon: 'Code', title: 'New Service', description: 'Service description', link: '/services/', color: 'from-teal-500 to-cyan-600' }}
-                        addLabel="Add Service"
-                        renderItem={(item, index) => (
-                          <div className="space-y-3">
-                            <div className="grid grid-cols-3 gap-3">
-                              <IconPicker 
-                                label="Icon" 
-                                value={item.icon} 
-                                onChange={(v) => updateArrayItem('home.services.items', index, 'icon', v)} 
-                              />
-                              <div className="col-span-2">
-                                <TextField label="Title" value={item.title} onChange={(v) => updateArrayItem('home.services.items', index, 'title', v)} />
-                              </div>
-                            </div>
-                            <TextField label="Description" value={item.description} onChange={(v) => updateArrayItem('home.services.items', index, 'description', v)} />
-                            <div className="grid grid-cols-2 gap-3">
-                              <TextField label="Link URL" value={item.link} onChange={(v) => updateArrayItem('home.services.items', index, 'link', v)} placeholder="/services/..." />
-                              <TextField label="Gradient Color" value={item.color} onChange={(v) => updateArrayItem('home.services.items', index, 'color', v)} placeholder="from-teal-500 to-cyan-600" />
                             </div>
                           </div>
                         )}
