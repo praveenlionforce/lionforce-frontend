@@ -1370,7 +1370,7 @@ function Admin() {
           <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
             <div className="flex items-center gap-3">
               <img 
-                src="https://i0.wp.com/lionforce.net/wp-content/uploads/2024/05/cropped-LIONFORCE-LOGO.png?w=150&ssl=1" 
+                src="https://customer-assets.emergentagent.com/job_modern-lionforce/artifacts/x72sxesb_Lion%20only%20logo.png" 
                 alt="Lionforce" 
                 className="h-10"
               />
