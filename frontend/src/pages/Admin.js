@@ -1622,6 +1622,49 @@ function Admin() {
                       </div>
                     </div>
 
+                    {/* Peak Traffic Hours (IST) */}
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                      <h3 className="font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                        <Clock className="w-5 h-5 text-orange-500" />
+                        Peak Traffic Hours
+                      </h3>
+                      <p className="text-xs text-gray-500 mb-4">Times shown in IST (Indian Standard Time)</p>
+                      <div className="space-y-1">
+                        {analyticsData.hourly_views && analyticsData.hourly_views.length > 0 ? (
+                          // Sort by IST hour and show all hours with traffic
+                          [...analyticsData.hourly_views]
+                            .sort((a, b) => b.views - a.views)
+                            .slice(0, 8)
+                            .map((hour, i) => {
+                              const maxViews = Math.max(...analyticsData.hourly_views.map(h => h.views), 1);
+                              const percentage = (hour.views / maxViews) * 100;
+                              const formatHour = (h) => {
+                                const period = h >= 12 ? 'PM' : 'AM';
+                                const hour12 = h % 12 || 12;
+                                return `${hour12}:00 ${period}`;
+                              };
+                              return (
+                                <div key={i} className="flex items-center gap-3">
+                                  <span className="text-xs text-gray-600 w-20 font-medium">{formatHour(hour.hour)}</span>
+                                  <div className="flex-1 bg-gray-100 rounded-full h-5 overflow-hidden">
+                                    <div 
+                                      className={`h-full rounded-full ${i === 0 ? 'bg-gradient-to-r from-orange-500 to-red-500' : 'bg-gradient-to-r from-amber-400 to-orange-400'}`}
+                                      style={{ width: `${Math.max(percentage, 5)}%` }}
+                                    />
+                                  </div>
+                                  <span className="text-xs font-semibold text-gray-600 w-12 text-right">{hour.views} views</span>
+                                </div>
+                              );
+                            })
+                        ) : (
+                          <p className="text-gray-400 text-sm text-center py-4">No hourly data yet</p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Top Pages & Country Views */}
+                  <div className="grid md:grid-cols-2 gap-6">
                     {/* Top Pages */}
                     <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
                       <h3 className="font-semibold text-gray-900 mb-4">Top Pages</h3>
@@ -1638,6 +1681,36 @@ function Admin() {
                         )}
                       </div>
                     </div>
+
+                    {/* Traffic by Country (Page Views) */}
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                      <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                        <Globe className="w-5 h-5 text-blue-600" />
+                        Traffic by Country
+                      </h3>
+                      <div className="space-y-2">
+                        {analyticsData.country_views && analyticsData.country_views.length > 0 ? (
+                          analyticsData.country_views.map((country, i) => {
+                            const maxViews = Math.max(...analyticsData.country_views.map(c => c.views), 1);
+                            const percentage = (country.views / maxViews) * 100;
+                            return (
+                              <div key={i} className="flex items-center gap-3">
+                                <span className="text-sm text-gray-700 w-28 truncate">{country.country || 'Unknown'}</span>
+                                <div className="flex-1 bg-gray-100 rounded-full h-5 overflow-hidden">
+                                  <div 
+                                    className="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full"
+                                    style={{ width: `${Math.max(percentage, 5)}%` }}
+                                  />
+                                </div>
+                                <span className="text-xs font-semibold text-gray-600 w-16 text-right">{country.views} views</span>
+                              </div>
+                            );
+                          })
+                        ) : (
+                          <p className="text-gray-400 text-sm text-center py-4">No geographic data yet</p>
+                        )}
+                      </div>
+                    </div>
                   </div>
 
                   {/* Geography */}
@@ -1645,8 +1718,8 @@ function Admin() {
                     {/* Visitors by Country */}
                     <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
                       <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                        <Globe className="w-5 h-5 text-teal-600" />
-                        Visitors by Country
+                        <Users className="w-5 h-5 text-teal-600" />
+                        Unique Visitors by Country
                       </h3>
                       <div className="space-y-2">
                         {analyticsData.by_country.length > 0 ? (
@@ -1655,14 +1728,14 @@ function Admin() {
                             const percentage = (country.visitors / maxVisitors) * 100;
                             return (
                               <div key={i} className="flex items-center gap-3">
-                                <span className="text-sm text-gray-700 w-32 truncate">{country.country || 'Unknown'}</span>
+                                <span className="text-sm text-gray-700 w-28 truncate">{country.country || 'Unknown'}</span>
                                 <div className="flex-1 bg-gray-100 rounded-full h-5 overflow-hidden">
                                   <div 
-                                    className="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full"
+                                    className="h-full bg-gradient-to-r from-teal-500 to-green-500 rounded-full"
                                     style={{ width: `${Math.max(percentage, 5)}%` }}
                                   />
                                 </div>
-                                <span className="text-xs font-semibold text-gray-600 w-10 text-right">{country.visitors}</span>
+                                <span className="text-xs font-semibold text-gray-600 w-16 text-right">{country.visitors} visitors</span>
                               </div>
                             );
                           })
@@ -1687,7 +1760,7 @@ function Admin() {
                                   {[visitor.city, visitor.region, visitor.country].filter(Boolean).join(', ') || 'Unknown location'}
                                 </p>
                                 <p className="text-xs text-gray-400">
-                                  {visitor.last_seen ? new Date(visitor.last_seen).toLocaleString() : 'N/A'}
+                                  {visitor.last_seen ? new Date(visitor.last_seen).toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }) : 'N/A'}
                                 </p>
                               </div>
                             </div>
