@@ -1828,6 +1828,58 @@ function Admin() {
                         )}
                       />
                     </Section>
+
+                    <Section title="Office Locations (Up to 4)" icon={<MapPin className="w-4 h-4 text-teal-600" />} sectionKey="contact-offices">
+                      <p className="text-sm text-gray-500 mb-4">Add up to 4 office locations. Leave name empty to hide an office slot.</p>
+                      {[0, 1, 2, 3].map((index) => (
+                        <div key={index} className="mb-6 p-4 bg-gray-50 rounded-lg border border-gray-200">
+                          <h4 className="font-medium text-gray-700 mb-3">Office {index + 1}</h4>
+                          <TextField 
+                            label="Office Name (leave empty to hide)" 
+                            value={siteContent.contact?.offices?.[index]?.name || ''} 
+                            onChange={(v) => {
+                              const offices = [...(siteContent.contact?.offices || [{}, {}, {}, {}])];
+                              offices[index] = { ...offices[index], name: v };
+                              updateContent('contact.offices', offices);
+                            }} 
+                            placeholder="e.g., Chennai HQ, US Office"
+                          />
+                          <TextField 
+                            label="Address" 
+                            value={siteContent.contact?.offices?.[index]?.address || ''} 
+                            onChange={(v) => {
+                              const offices = [...(siteContent.contact?.offices || [{}, {}, {}, {}])];
+                              offices[index] = { ...offices[index], address: v };
+                              updateContent('contact.offices', offices);
+                            }} 
+                            multiline
+                            placeholder="Full address"
+                          />
+                          <div className="grid grid-cols-2 gap-3">
+                            <TextField 
+                              label="Phone" 
+                              value={siteContent.contact?.offices?.[index]?.phone || ''} 
+                              onChange={(v) => {
+                                const offices = [...(siteContent.contact?.offices || [{}, {}, {}, {}])];
+                                offices[index] = { ...offices[index], phone: v };
+                                updateContent('contact.offices', offices);
+                              }} 
+                              placeholder="+91 12345 67890"
+                            />
+                            <TextField 
+                              label="Email" 
+                              value={siteContent.contact?.offices?.[index]?.email || ''} 
+                              onChange={(v) => {
+                                const offices = [...(siteContent.contact?.offices || [{}, {}, {}, {}])];
+                                offices[index] = { ...offices[index], email: v };
+                                updateContent('contact.offices', offices);
+                              }} 
+                              placeholder="office@lionforce.net"
+                            />
+                          </div>
+                        </div>
+                      ))}
+                    </Section>
                   </>
                 )}
 
