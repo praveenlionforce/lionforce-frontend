@@ -144,22 +144,28 @@ function ChatBot() {
     }
   }, [isOpen, sessionId, initSession]);
 
-  // Poll for new messages when in agent mode
+  // Poll for new messages and session status changes
   useEffect(() => {
-    if (isOpen && sessionId && chatMode === 'agent') {
+    if (isOpen && sessionId) {
       const pollMessages = async () => {
         try {
+          // Always check session status to detect agent takeover
           const sessionRes = await fetch(`${API_URL}/api/chat/session/${sessionId}`);
           const sessionData = await sessionRes.json();
           
-          if (sessionData.status === 'bot') {
+          // Handle status changes
+          if (sessionData.status === 'agent' && chatMode !== 'agent') {
+            setChatMode('agent');
+            // Don't add message here, agent will send their own greeting
+          } else if (sessionData.status === 'bot' && chatMode === 'agent') {
             setChatMode('bot');
             addBotMessage("You've been transferred back to Alex. How can I help you?", botConfig.options, 500);
-          } else if (sessionData.status === 'closed') {
+          } else if (sessionData.status === 'closed' && chatMode !== 'bot') {
             addBotMessage("This chat has been closed. Feel free to start a new conversation!", botConfig.options, 500);
             setChatMode('bot');
           }
 
+          // Fetch and display agent messages
           const msgRes = await fetch(`${API_URL}/api/chat/messages/${sessionId}`);
           const allMessages = await msgRes.json();
           
@@ -178,6 +184,8 @@ function ChatBot() {
         }
       };
 
+      // Poll immediately and then every 3 seconds
+      pollMessages();
       pollIntervalRef.current = setInterval(pollMessages, 3000);
       return () => {
         if (pollIntervalRef.current) clearInterval(pollIntervalRef.current);
