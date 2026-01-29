@@ -914,6 +914,23 @@ function Admin() {
     return result;
   };
 
+  // Fetch Analytics Data
+  const fetchAnalytics = async () => {
+    setAnalyticsLoading(true);
+    try {
+      const headers = getAuthHeader();
+      const response = await fetch(`${API_URL}/api/admin/analytics/stats`, { headers });
+      if (response.ok) {
+        const data = await response.json();
+        setAnalyticsData(data);
+      }
+    } catch (err) {
+      console.error('Failed to fetch analytics:', err);
+    } finally {
+      setAnalyticsLoading(false);
+    }
+  };
+
   // Update consultation status
   const updateConsultationStatus = async (consultationId, newStatus) => {
     try {
