@@ -2384,9 +2384,12 @@ function Admin() {
                     </Section>
 
                     <Section title="Social Links" icon={<Globe className="w-4 h-4 text-teal-600" />} sectionKey="global-social">
-                      <TextField label="LinkedIn URL" value={siteContent.global?.socialLinks?.linkedin} onChange={(v) => updateContent('global.socialLinks.linkedin', v)} />
-                      <TextField label="Twitter URL" value={siteContent.global?.socialLinks?.twitter} onChange={(v) => updateContent('global.socialLinks.twitter', v)} />
-                      <TextField label="Facebook URL" value={siteContent.global?.socialLinks?.facebook} onChange={(v) => updateContent('global.socialLinks.facebook', v)} />
+                      <p className="text-xs text-gray-500 mb-3">Add your social media URLs below. Leave blank to hide a platform.</p>
+                      <TextField label="LinkedIn URL" value={siteContent.global?.socialLinks?.linkedin} onChange={(v) => updateContent('global.socialLinks.linkedin', v)} placeholder="https://linkedin.com/company/yourcompany" />
+                      <TextField label="Twitter/X URL" value={siteContent.global?.socialLinks?.twitter} onChange={(v) => updateContent('global.socialLinks.twitter', v)} placeholder="https://twitter.com/yourcompany" />
+                      <TextField label="Facebook URL" value={siteContent.global?.socialLinks?.facebook} onChange={(v) => updateContent('global.socialLinks.facebook', v)} placeholder="https://facebook.com/yourcompany" />
+                      <TextField label="Instagram URL" value={siteContent.global?.socialLinks?.instagram} onChange={(v) => updateContent('global.socialLinks.instagram', v)} placeholder="https://instagram.com/yourcompany" />
+                      <TextField label="YouTube URL" value={siteContent.global?.socialLinks?.youtube} onChange={(v) => updateContent('global.socialLinks.youtube', v)} placeholder="https://youtube.com/@yourcompany" />
                     </Section>
 
                     <Section title="Footer" icon={<Layout className="w-4 h-4 text-teal-600" />} sectionKey="global-footer">
