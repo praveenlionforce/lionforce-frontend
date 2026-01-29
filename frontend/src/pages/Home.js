@@ -21,50 +21,71 @@ import { useSiteContent } from '../hooks/useSiteContent';
 function Home() {
   const { content, loading, global } = useSiteContent('home');
 
-  const services = [
+  // Use CMS content with fallbacks
+  const hero = content?.hero || {};
+  const stats = content?.stats || {};
+  const whyUs = content?.whyUs || {};
+  const testimonials = content?.testimonials || {};
+  const indiaExpansionCTA = content?.indiaExpansionCTA || {};
+  const finalCTA = content?.finalCTA || {};
+  const servicesSection = content?.services || {};
+  
+  // Services from CMS or defaults
+  const services = servicesSection.items || [
     {
-      icon: <BookOpen className="w-8 h-8" />,
+      icon: 'BookOpen',
       title: 'AI-Powered eLearning',
       description: 'Interactive, AI-enhanced learning that clicks.',
       link: '/services/elearning',
       color: 'from-indigo-500 to-purple-600'
     },
     {
-      icon: <Code className="w-8 h-8" />,
+      icon: 'Code',
       title: 'Software & AI',
       description: 'Smart, AI-driven solutions for growth.',
       link: '/services/software-development',
       color: 'from-teal-500 to-cyan-600'
     },
     {
-      icon: <Palette className="w-8 h-8" />,
+      icon: 'Palette',
       title: 'UX/UI Design',
       description: 'Intuitive experiences that convert.',
       link: '/services/ux-ui-design',
       color: 'from-violet-500 to-purple-600'
     },
     {
-      icon: <Video className="w-8 h-8" />,
+      icon: 'Video',
       title: 'Creative Services',
       description: '3D, animations, visual storytelling.',
       link: '/services/creative',
       color: 'from-orange-500 to-amber-500'
     },
     {
-      icon: <TrendingUp className="w-8 h-8" />,
+      icon: 'TrendingUp',
       title: 'Digital Marketing',
       description: 'Campaigns that get you noticed.',
       link: '/services/digital-marketing',
       color: 'from-rose-500 to-pink-600'
     },
     {
-      icon: <Globe className="w-8 h-8" />,
+      icon: 'Globe',
       title: 'India Expansion',
       description: 'EOR, ODC, COE-your India team.',
       link: '/services/india-expansion',
       color: 'from-emerald-500 to-green-600'
     }
   ];
+
+  // Icon mapping
+  const iconMap = {
+    BookOpen: BookOpen,
+    Code: Code,
+    Palette: Palette,
+    Video: Video,
+    TrendingUp: TrendingUp,
+    Globe: Globe,
+    Users: Users
+  };
 
   const clients = content?.clients?.logos || [
     { name: 'Glenmark', logo: 'https://i0.wp.com/lionforce.net/wp-content/uploads/2024/05/glenmark-1.png?fit=135%2C75&ssl=1' },
@@ -74,14 +95,6 @@ function Home() {
     { name: 'Sun Pharma', logo: 'https://i0.wp.com/lionforce.net/wp-content/uploads/2024/05/sun-pharma.png?fit=135%2C75&ssl=1' },
     { name: 'Axis', logo: 'https://i0.wp.com/lionforce.net/wp-content/uploads/2025/06/axis-1.png?fit=150%2C70&ssl=1' }
   ];
-
-  // Use CMS content with fallbacks
-  const hero = content?.hero || {};
-  const stats = content?.stats || {};
-  const whyUs = content?.whyUs || {};
-  const testimonials = content?.testimonials || {};
-  const indiaExpansionCTA = content?.indiaExpansionCTA || {};
-  const finalCTA = content?.finalCTA || {};
   
   // Hero boxes (4 service cards in hero)
   const heroBoxes = hero.heroBoxes || [
@@ -118,6 +131,14 @@ function Home() {
       author: "General Manager",
       company: "EdTech Company, Australia"
     }
+  ];
+
+  // India expansion CTA stats
+  const indiaStats = indiaExpansionCTA.stats || [
+    { label: 'Launch Time', value: '2-8 weeks' },
+    { label: 'Cost Savings', value: 'Up to 60%' },
+    { label: 'Team Types', value: 'EOR • ODC • COE' },
+    { label: 'Support', value: '24/7 Ops' }
   ];
 
   // SEO data from CMS
