@@ -837,7 +837,7 @@ async def get_analytics_stats(username: str = Depends(verify_admin)):
         daily_views = await db.page_views.aggregate(daily_pipeline).to_list(7)
         daily_data = [{"date": d["_id"], "views": d["views"]} for d in daily_views]
         
-        # Peak traffic hours (group by hour of day)
+        # Peak traffic hours (group by hour of day) - Convert to IST (UTC+5:30)
         hourly_pipeline = [
             {
                 "$group": {
@@ -848,7 +848,13 @@ async def get_analytics_stats(username: str = Depends(verify_admin)):
             {"$sort": {"_id": 1}}
         ]
         hourly_views = await db.page_views.aggregate(hourly_pipeline).to_list(24)
-        hourly_data = [{"hour": int(h["_id"]), "views": h["views"]} for h in hourly_views]
+        # Convert UTC hours to IST (UTC+5:30)
+        hourly_data = []
+        for h in hourly_views:
+            utc_hour = int(h["_id"])
+            # IST = UTC + 5:30, so add 5 hours and handle the 30 min by rounding
+            ist_hour = (utc_hour + 5) % 24  # Add 5 hours (ignoring 30 min for hourly grouping)
+            hourly_data.append({"hour": ist_hour, "views": h["views"], "utc_hour": utc_hour})
         
         # Traffic by country with page views (not just visitors)
         country_views_pipeline = [
