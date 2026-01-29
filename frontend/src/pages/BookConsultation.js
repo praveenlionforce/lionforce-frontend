@@ -193,33 +193,21 @@ function BookConsultation() {
 
     try {
       const serviceCategoryLabel = serviceCategories[formData.serviceCategory]?.label || formData.serviceCategory;
-      const subServicesText = formData.selectedSubServices.length > 0
-        ? `\nSpecific Services: ${formData.selectedSubServices.join(', ')}`
-        : '';
 
       const consultationData = {
         name: formData.name,
         email: formData.email,
-        subject: `Consultation Request - ${serviceCategoryLabel}`,
-        message: `
-Consultation Request Details:
------------------------------
-Name: ${formData.name}
-Email: ${formData.email}
-Company: ${formData.company || 'Not provided'}
-Phone: ${formData.phone || 'Not provided'}
-Service Category: ${serviceCategoryLabel}${subServicesText}
-Preferred Date: ${formData.preferredDate}
-Preferred Time: ${formData.preferredTime}
-Timezone: ${timezones.find(t => t.value === formData.timezone)?.label || formData.timezone}
-
-Additional Notes:
-${formData.message || 'None'}
-        `.trim(),
-        service: serviceCategoryLabel
+        company: formData.company || null,
+        phone: formData.phone || null,
+        service_category: serviceCategoryLabel,
+        sub_services: formData.selectedSubServices,
+        preferred_date: formData.preferredDate,
+        preferred_time: formData.preferredTime,
+        timezone: formData.timezone,
+        message: formData.message || null
       };
 
-      await axios.post(`${API}/contact`, consultationData);
+      await axios.post(`${API}/consultation`, consultationData);
       setSuccess(true);
       setFormData({
         name: '',
