@@ -72,20 +72,20 @@ function About() {
                 <p className="text-xl text-gray-600 leading-relaxed mb-8">
                   {hero.subtitle || "Since 2012, we've been transforming how businesses learn, build, and grow. Not just another tech company - we're your partners in making the impossible possible."}
                 </p>
-                <div className="flex items-center gap-8">
-                  <div>
-                    <div className="text-4xl font-bold gradient-text">{content?.stats?.years || '13+'}</div>
-                    <div className="text-gray-500 text-sm">Years</div>
+                <div className="flex flex-wrap items-center gap-4 sm:gap-8">
+                  <div className="min-w-[60px]">
+                    <div className="text-3xl sm:text-4xl font-bold gradient-text">{content?.stats?.years || '13+'}</div>
+                    <div className="text-gray-500 text-xs sm:text-sm">Years</div>
                   </div>
-                  <div className="w-px h-12 bg-gray-300"></div>
-                  <div>
-                    <div className="text-4xl font-bold gradient-text">{content?.stats?.projects || '300+'}</div>
-                    <div className="text-gray-500 text-sm">Projects</div>
+                  <div className="w-px h-10 sm:h-12 bg-gray-300 hidden sm:block"></div>
+                  <div className="min-w-[60px]">
+                    <div className="text-3xl sm:text-4xl font-bold gradient-text">{content?.stats?.projects || '300+'}</div>
+                    <div className="text-gray-500 text-xs sm:text-sm">Projects</div>
                   </div>
-                  <div className="w-px h-12 bg-gray-300"></div>
-                  <div>
-                    <div className="text-4xl font-bold gradient-text">{content?.stats?.countries || '32+'}</div>
-                    <div className="text-gray-500 text-sm">Countries</div>
+                  <div className="w-px h-10 sm:h-12 bg-gray-300 hidden sm:block"></div>
+                  <div className="min-w-[60px]">
+                    <div className="text-3xl sm:text-4xl font-bold gradient-text">{content?.stats?.countries || '32+'}</div>
+                    <div className="text-gray-500 text-xs sm:text-sm">Countries</div>
                   </div>
                 </div>
               </motion.div>
