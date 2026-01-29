@@ -403,6 +403,12 @@ function Admin() {
         { name: 'Digital Marketing', link: '/services/digital-marketing' },
         { name: 'Consulting', link: '/services/consulting' },
         { name: 'Expand to India', link: '/services/india-expansion' }
+      ],
+      offices: [
+        { name: '', address: '', phone: '', email: '' },
+        { name: '', address: '', phone: '', email: '' },
+        { name: '', address: '', phone: '', email: '' },
+        { name: '', address: '', phone: '', email: '' }
       ]
     },
     indiaExpansion: {
