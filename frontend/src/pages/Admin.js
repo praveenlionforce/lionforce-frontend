@@ -815,12 +815,13 @@ function Admin() {
     const headers = { 'Authorization': `Basic ${authToken}` };
     
     try {
-      const [subResponse, newsResponse, contentResponse, imagesResponse, leadsResponse] = await Promise.all([
+      const [subResponse, newsResponse, contentResponse, imagesResponse, leadsResponse, consultResponse] = await Promise.all([
         fetch(`${API_URL}/api/admin/submissions`, { headers }),
         fetch(`${API_URL}/api/admin/subscribers`, { headers }),
         fetch(`${API_URL}/api/admin/site-content`, { headers }),
         fetch(`${API_URL}/api/admin/images`, { headers }),
-        fetch(`${API_URL}/api/admin/chatbot-leads`, { headers })
+        fetch(`${API_URL}/api/admin/chatbot-leads`, { headers }),
+        fetch(`${API_URL}/api/admin/consultations`, { headers })
       ]);
       
       if (subResponse.ok) setSubmissions(await subResponse.json());
@@ -834,6 +835,7 @@ function Admin() {
       }
       if (imagesResponse.ok) setImages(await imagesResponse.json());
       if (leadsResponse.ok) setChatbotLeads(await leadsResponse.json());
+      if (consultResponse.ok) setConsultations(await consultResponse.json());
     } catch (err) {
       console.error('Failed to fetch data:', err);
       setSiteContent(defaultContent);
