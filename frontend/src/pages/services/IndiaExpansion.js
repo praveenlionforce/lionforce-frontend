@@ -169,8 +169,9 @@ function IndiaExpansion() {
           
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-              <div className="inline-block px-4 py-2 bg-white/20 backdrop-blur-md rounded-full text-white text-sm font-semibold mb-6 border border-white/30">
-                🇮🇳 Your Complete India Expansion Partner
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-white/20 backdrop-blur-md rounded-full text-white text-sm font-semibold mb-6 border border-white/30">
+                <img src="https://flagcdn.com/24x18/in.png" alt="India" className="w-6 h-4 rounded-sm" />
+                Your Complete India Expansion Partner
               </div>
               <h1 className="text-5xl md:text-7xl font-bold mb-6 text-white leading-tight">
                 Expand to India<br />With Confidence
