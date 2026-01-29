@@ -39,7 +39,7 @@ const timeSlots = [
   '03:00 PM', '03:30 PM', '04:00 PM', '04:30 PM', '05:00 PM', '05:30 PM'
 ];
 
-function Consultation() {
+function BookConsultation() {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
