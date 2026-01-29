@@ -477,7 +477,7 @@ function Home() {
               </h2>
             </motion.div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {testimonialItems.map((testimonial, index) => (
                 <motion.div
                   key={index}
@@ -488,7 +488,7 @@ function Home() {
                   className="relative"
                 >
                   <Quote className="absolute -top-4 -left-2 w-12 h-12 text-teal-100" />
-                  <div className="relative bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl border border-gray-100">
+                  <div className="relative bg-gradient-to-br from-gray-50 to-white p-8 rounded-2xl border border-gray-100 h-full">
                     <p className="text-gray-700 leading-relaxed mb-6 text-lg">
                       &ldquo;{testimonial.quote}&rdquo;
                     </p>
