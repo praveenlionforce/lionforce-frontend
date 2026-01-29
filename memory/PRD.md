@@ -3,84 +3,69 @@
 ## Original Problem Statement
 Recreate the existing WordPress website (`https://lionforce.net`) into a new, modern, and minimalistic web application with a comprehensive Admin Panel (CMS) for content management.
 
-## Current Architecture
-```
-/app/
-├── backend/           # FastAPI backend
-│   └── server.py      # Live chat, leads, CMS endpoints
-├── frontend/
-│   └── src/
-│       ├── components/
-│       │   ├── ChatBot.js      # Alex - Lead gen chatbot
-│       │   ├── Footer.js       # Editable social links
-│       │   └── Layout.js       # No FloatingCTA (removed)
-│       ├── pages/
-│       │   ├── Admin.js        # Full CMS for all Home page blocks
-│       │   ├── BookConsultation.js  # Consultation with sub-services
-│       │   ├── Home.js         # All blocks now CMS editable
-│       │   └── Contact.js      # 4 office slots
-│       └── hooks/
-│           └── useSiteContent.js
-```
-
 ## Deployment
 - **Frontend:** Bluehost
 - **Backend:** Render.com  
 - **Database:** MongoDB Atlas
+- **Admin:** `/admin` (Username: admin, Password: Welc0me4$)
 
 ---
 
 ## ✅ Completed Features (January 2025 - Session 3)
 
-### Chatbot (Alex)
+### Chatbot (Alex) & Live Agent
 - ✅ Renamed to "Alex" (American/British friendly)
-- ✅ IoT services added
-- ✅ Email/Call buttons in header
+- ✅ IoT services added to Software Development
+- ✅ Email/Call buttons in chatbot header
 - ✅ "Optional" prompts for Company/Designation
 - ✅ Fixed lead saving to database
 - ✅ Live Agent system with online/offline toggle
+- ✅ **FIXED: Agent messages now sync to visitors in real-time** (polling even in bot mode)
 
 ### Consultation Page (`/consultation`)
 - ✅ **7 Service Categories** as buttons
-- ✅ **Sub-services as checkboxes** (multiple selection)
-  - eLearning: 10 sub-services
-  - Software: 10 sub-services
-  - Design: 10 sub-services
-  - Creative: 10 sub-services
-  - Marketing: 10 sub-services
-  - Consulting: 10 sub-services
-  - India Expansion: 10 sub-services
+- ✅ **Sub-services as checkboxes** (multiple selection per category)
 - ✅ Date, Time, Timezone selectors
+- ✅ Submissions stored in separate collection
+
+### Admin Panel - Consultations Tab (NEW)
+- ✅ **Prominent "Consultations" tab** with badge showing new requests
+- ✅ **Status cards**: New, Contacted, Scheduled, Completed
+- ✅ **Full consultation details**: Name, email, phone, company, service, sub-services, date/time/timezone
+- ✅ **Status dropdown** to update each consultation
+- ✅ **Quick "Reply" button** opens email client with pre-filled template
 
 ### Home Page CMS (All Blocks Editable)
-- ✅ **SEO Settings** - Title, description, keywords
-- ✅ **Hero Section** - Badge, titles, subtitle, buttons, background
-- ✅ **Hero Service Cards (4 boxes)** - Title, description, link, color
-- ✅ **Stats** - Years, Projects, Countries with labels
-- ✅ **Services Grid** - Title, subtitle, all 6 service cards (icon, title, description, link, color)
-- ✅ **Why Teams Choose Us** - Title, subtitle, 6 items (number, title, description)
-- ✅ **Testimonials** - Title, testimonial items (quote, author, company)
-- ✅ **Client Logos** - Title, up to 10 logos with images
-- ✅ **India Expansion CTA** - Badge, title, subtitle, button, 4 stats cards
-- ✅ **Final CTA** - Title, subtitle, button, phone number
+- ✅ SEO Settings
+- ✅ Hero Section (badge, titles, subtitle, buttons, background)
+- ✅ Hero Service Cards (4 boxes)
+- ✅ Stats (years, projects, countries)
+- ✅ **Services Grid with ICON PICKER** - Visual grid of 30+ icons
+- ✅ Why Teams Choose Us
+- ✅ Testimonials
+- ✅ Client Logos
+- ✅ India Expansion CTA with 4 stats cards
+- ✅ Final CTA
 
-### Contact Page CMS
-- ✅ **4 Office Slots** - Name, Address, Phone, Email (only visible if name filled)
+### Icon Picker (NEW)
+- ✅ Visual grid of 30+ icons
+- ✅ Click to select, shows preview
+- ✅ Available icons: BookOpen, Code, Palette, Video, TrendingUp, Globe, Users, Briefcase, Lightbulb, Zap, Shield, Heart, Star, Target, Layers, Database, Cpu, Wifi, Monitor, Smartphone, Cloud, Server, Box, Mail, Phone, Calendar, Clock, Settings, Award, CheckCircle, MessageSquare
 
-### Removed
-- ✅ **FloatingCTA removed** - Email/Call now in chatbot header
+### Other Fixes
+- ✅ **FloatingCTA removed** (was hidden behind chatbot)
+- ✅ **Favicon/Title** updated to "Lionforce"
+- ✅ **Mobile responsive** fix for About page stats section
 
 ---
 
 ## 🟠 P1 - High Priority
-1. Fix Local Image Serving
-2. Mobile responsive fix - About page stats
-3. Favicon/Title update to "Lionforce"
+1. **Email notifications** for consultation requests (via Resend API - user chose not to use SMTP)
+2. **Fix Local Image Serving** - Decommission WordPress dependency
 
 ## 🟡 P2 - Medium Priority  
-1. Make Emojis editable via CMS
-2. Make Icons editable via CMS (icon picker)
-3. Service pages CMS (eLearning, Software, etc.)
+1. Make service pages CMS editable (eLearning, Software, etc.)
+2. Make Emojis editable via CMS
 
 ## ⚪ P3 - Future/Backlog
 1. Domain migration (`lionforce.in` → `lionforce.net`)
@@ -89,13 +74,17 @@ Recreate the existing WordPress website (`https://lionforce.net`) into a new, mo
 
 ---
 
-## Admin Credentials
-- **URL:** `/admin`
-- **Username:** `admin`
-- **Password:** `Welc0me4$`
-
 ## Key Routes
 - `/` - Home page (fully CMS editable)
 - `/consultation` - Book consultation with sub-services
-- `/contact` - Contact page with offices
+- `/contact` - Contact page with 4 office slots
 - `/admin` - CMS Admin panel
+
+## Database Collections
+- `site_content` - CMS content
+- `consultation_requests` - Consultation bookings (NEW)
+- `chatbot_leads` - Chatbot lead submissions
+- `chat_sessions` - Live chat sessions
+- `chat_messages` - Chat message history
+- `contact_submissions` - Contact form submissions
+- `newsletter` - Newsletter subscribers
