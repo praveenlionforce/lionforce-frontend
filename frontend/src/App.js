@@ -6,6 +6,7 @@ import About from '@/pages/About';
 import Contact from '@/pages/Contact';
 import Industries from '@/pages/Industries';
 import Admin from '@/pages/Admin';
+import BookConsultation from '@/pages/BookConsultation';
 import ELearning from '@/pages/services/ELearning';
 import SoftwareDevelopment from '@/pages/services/SoftwareDevelopment';
 import UXUIDesign from '@/pages/services/UXUIDesign';
@@ -31,6 +32,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/consultation" element={<BookConsultation />} />
               <Route path="/industries" element={<Industries />} />
               <Route path="/services/elearning" element={<ELearning />} />
               <Route path="/services/software-development" element={<SoftwareDevelopment />} />
