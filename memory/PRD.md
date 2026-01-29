@@ -3,87 +3,84 @@
 ## Original Problem Statement
 Recreate the existing WordPress website (`https://lionforce.net`) into a new, modern, and minimalistic web application with a comprehensive Admin Panel (CMS) for content management.
 
-## Core Requirements
-- **Multi-page website** with all existing services and marketing language
-- **Light theme** with brand colors (`#428697`, `#6ab445`, gold/yellow accent)
-- **SEO-compatible** structure
-- **Full CMS** to edit content, blocks, images, icons, and forms
-
 ## Current Architecture
 ```
 /app/
 ├── backend/           # FastAPI backend
-│   ├── server.py      # Main API server (live chat endpoints)
-│   ├── Procfile       # Render deployment
-│   └── runtime.txt    # Python version
+│   └── server.py      # Live chat, leads, CMS endpoints
 ├── frontend/
 │   └── src/
 │       ├── components/
 │       │   ├── ChatBot.js      # Alex - Lead gen chatbot
 │       │   ├── Footer.js       # Editable social links
-│       │   └── Layout.js
+│       │   └── Layout.js       # No FloatingCTA (removed)
 │       ├── pages/
-│       │   ├── Admin.js        # CMS with Live Chat
-│       │   ├── BookConsultation.js  # NEW: Calendar booking page
-│       │   └── Contact.js      # Updated with offices
+│       │   ├── Admin.js        # Full CMS for all Home page blocks
+│       │   ├── BookConsultation.js  # Consultation with sub-services
+│       │   ├── Home.js         # All blocks now CMS editable
+│       │   └── Contact.js      # 4 office slots
 │       └── hooks/
 │           └── useSiteContent.js
-└── LIONFORCE_WEBSITE_GUIDE.md
 ```
 
-## Deployment Configuration
-- **Frontend:** Bluehost (static React build)
-- **Backend:** Render.com (FastAPI)
+## Deployment
+- **Frontend:** Bluehost
+- **Backend:** Render.com  
 - **Database:** MongoDB Atlas
 
 ---
 
 ## ✅ Completed Features (January 2025 - Session 3)
 
-### Chatbot Enhancements
-- ✅ Renamed bot to "Alex" (American/British friendly)
-- ✅ Added IoT services to Software Development
-- ✅ Email/Call quick-action buttons in chatbot header
-- ✅ **Fixed lead collection** - Now properly saves to database
-- ✅ **"Optional" prompts** for Company and Designation fields
-- ✅ Context-aware "Tell me more" - shows specific service details
-- ✅ Visitor name/company shows in Live Chat instead of "Anonymous"
+### Chatbot (Alex)
+- ✅ Renamed to "Alex" (American/British friendly)
+- ✅ IoT services added
+- ✅ Email/Call buttons in header
+- ✅ "Optional" prompts for Company/Designation
+- ✅ Fixed lead saving to database
+- ✅ Live Agent system with online/offline toggle
 
-### Live Agent System
-- ✅ Agent online/offline toggle
-- ✅ View ALL active conversations in real-time
-- ✅ Take over chats from bot / transfer back to bot
-- ✅ Sound notifications (toggle on/off)
-- ✅ Unread message count badges
-- ✅ Visitor info display (name, email, company)
+### Consultation Page (`/consultation`)
+- ✅ **7 Service Categories** as buttons
+- ✅ **Sub-services as checkboxes** (multiple selection)
+  - eLearning: 10 sub-services
+  - Software: 10 sub-services
+  - Design: 10 sub-services
+  - Creative: 10 sub-services
+  - Marketing: 10 sub-services
+  - Consulting: 10 sub-services
+  - India Expansion: 10 sub-services
+- ✅ Date, Time, Timezone selectors
 
-### New Consultation Booking Page (`/consultation`)
-- ✅ Full Name, Email (required)
-- ✅ Company, Phone (optional)
-- ✅ Service Interest dropdown
-- ✅ Date picker, Time slots, **Timezone selector**
-- ✅ "Get Free Consultation" now links to `/consultation`
-- ✅ "Contact" button links to `/contact`
+### Home Page CMS (All Blocks Editable)
+- ✅ **SEO Settings** - Title, description, keywords
+- ✅ **Hero Section** - Badge, titles, subtitle, buttons, background
+- ✅ **Hero Service Cards (4 boxes)** - Title, description, link, color
+- ✅ **Stats** - Years, Projects, Countries with labels
+- ✅ **Services Grid** - Title, subtitle, all 6 service cards (icon, title, description, link, color)
+- ✅ **Why Teams Choose Us** - Title, subtitle, 6 items (number, title, description)
+- ✅ **Testimonials** - Title, testimonial items (quote, author, company)
+- ✅ **Client Logos** - Title, up to 10 logos with images
+- ✅ **India Expansion CTA** - Badge, title, subtitle, button, 4 stats cards
+- ✅ **Final CTA** - Title, subtitle, button, phone number
 
-### Office Locations CMS
-- ✅ 4 office slots in Contact page CMS
-- ✅ Each slot: Name, Address, Phone, Email
-- ✅ **Only visible on page if name is filled**
-- ✅ Editable from Admin → Edit Pages → Contact
+### Contact Page CMS
+- ✅ **4 Office Slots** - Name, Address, Phone, Email (only visible if name filled)
+
+### Removed
+- ✅ **FloatingCTA removed** - Email/Call now in chatbot header
 
 ---
 
-## 🔴 P0 - Critical (None)
-
 ## 🟠 P1 - High Priority
-1. **Fix Local Image Serving** - Decommission WordPress dependency
-2. **Mobile Responsive Fix** - About page stats section
-3. **Favicon/Title Update** - Change to "Lionforce"
+1. Fix Local Image Serving
+2. Mobile responsive fix - About page stats
+3. Favicon/Title update to "Lionforce"
 
-## 🟡 P2 - Medium Priority
+## 🟡 P2 - Medium Priority  
 1. Make Emojis editable via CMS
-2. Make Icons editable via CMS
-3. Form element labels/placeholders editable
+2. Make Icons editable via CMS (icon picker)
+3. Service pages CMS (eLearning, Software, etc.)
 
 ## ⚪ P3 - Future/Backlog
 1. Domain migration (`lionforce.in` → `lionforce.net`)
@@ -92,24 +89,13 @@ Recreate the existing WordPress website (`https://lionforce.net`) into a new, mo
 
 ---
 
-## Key Explanation: Chatbot Leads vs Live Chat
-
-| Feature | Chatbot Leads | Live Chat |
-|---------|---------------|-----------|
-| **What it is** | Completed contact submissions | Real-time conversation history |
-| **When populated** | After user completes lead flow (name, email, message) | Every time someone opens chatbot |
-| **Purpose** | Follow-up sales leads | Real-time support & chat takeover |
-| **Admin Tab** | "Chatbot Leads" | "Live Chat" |
-
----
-
 ## Admin Credentials
 - **URL:** `/admin`
 - **Username:** `admin`
-- **Password:** `Welc0me4$` (production)
+- **Password:** `Welc0me4$`
 
 ## Key Routes
-- `/` - Home page
-- `/consultation` - **NEW** Book a free consultation
-- `/contact` - Contact page with office locations
+- `/` - Home page (fully CMS editable)
+- `/consultation` - Book consultation with sub-services
+- `/contact` - Contact page with offices
 - `/admin` - CMS Admin panel
