@@ -11,7 +11,18 @@ Recreate the existing WordPress website (`https://lionforce.net`) into a new, mo
 
 ---
 
-## ✅ Completed Features (January 2025 - Session 3)
+## ✅ Completed Features (January 2025)
+
+### Visitor Analytics Dashboard (NEW - Session 4)
+- ✅ **Analytics Tab** in Admin Panel with summary stats
+- ✅ **Visitor Tracking** - Page views, unique visitors, geographic data
+- ✅ **Daily/Weekly/Monthly stats** with visual bar charts
+- ✅ **Top Pages** breakdown showing most viewed pages
+- ✅ **Visitors by Country** with geographic breakdown
+- ✅ **Recent Visitors** list with location and timestamps
+- ✅ **Microsoft Clarity** integration guide for heatmaps
+- ✅ **Auto-tracking** on all public pages (excludes /admin)
+- ✅ Uses free ip-api.com for GeoIP lookup
 
 ### Chatbot (Alex) & Live Agent
 - ✅ Renamed to "Alex" (American/British friendly)
@@ -20,47 +31,40 @@ Recreate the existing WordPress website (`https://lionforce.net`) into a new, mo
 - ✅ "Optional" prompts for Company/Designation
 - ✅ Fixed lead saving to database
 - ✅ Live Agent system with online/offline toggle
-- ✅ **FIXED: Agent messages now sync to visitors in real-time** (polling even in bot mode)
+- ✅ Agent messages now sync to visitors in real-time
 
 ### Consultation Page (`/consultation`)
-- ✅ **7 Service Categories** as buttons
-- ✅ **Sub-services as checkboxes** (multiple selection per category)
+- ✅ 7 Service Categories as buttons
+- ✅ Sub-services as checkboxes (multiple selection)
 - ✅ Date, Time, Timezone selectors
 - ✅ Submissions stored in separate collection
 
-### Admin Panel - Consultations Tab (NEW)
-- ✅ **Prominent "Consultations" tab** with badge showing new requests
-- ✅ **Status cards**: New, Contacted, Scheduled, Completed
-- ✅ **Full consultation details**: Name, email, phone, company, service, sub-services, date/time/timezone
-- ✅ **Status dropdown** to update each consultation
-- ✅ **Quick "Reply" button** opens email client with pre-filled template
+### Admin Panel - Consultations Tab
+- ✅ Prominent "Consultations" tab with badge
+- ✅ Status cards: New, Contacted, Scheduled, Completed
+- ✅ Full consultation details with status dropdown
+- ✅ Quick "Reply" button opens email client
 
 ### Home Page CMS (All Blocks Editable)
-- ✅ SEO Settings
-- ✅ Hero Section (badge, titles, subtitle, buttons, background)
-- ✅ Hero Service Cards (4 boxes)
-- ✅ Stats (years, projects, countries)
-- ✅ **Services Grid with ICON PICKER** - Visual grid of 30+ icons
-- ✅ Why Teams Choose Us
-- ✅ Testimonials
-- ✅ Client Logos
-- ✅ India Expansion CTA with 4 stats cards
-- ✅ Final CTA
+- ✅ SEO Settings, Hero Section, Hero Service Cards
+- ✅ Stats, Services Grid with ICON PICKER
+- ✅ Why Teams Choose Us, Testimonials, Client Logos
+- ✅ India Expansion CTA, Final CTA
 
-### Icon Picker (NEW)
-- ✅ Visual grid of 30+ icons
-- ✅ Click to select, shows preview
-- ✅ Available icons: BookOpen, Code, Palette, Video, TrendingUp, Globe, Users, Briefcase, Lightbulb, Zap, Shield, Heart, Star, Target, Layers, Database, Cpu, Wifi, Monitor, Smartphone, Cloud, Server, Box, Mail, Phone, Calendar, Clock, Settings, Award, CheckCircle, MessageSquare
+### Icon Picker
+- ✅ Visual grid of 30+ icons with click to select
 
 ### Other Fixes
-- ✅ **FloatingCTA removed** (was hidden behind chatbot)
-- ✅ **Favicon/Title** updated to "Lionforce"
-- ✅ **Mobile responsive** fix for About page stats section
+- ✅ FloatingCTA removed, Favicon/Title updated
+- ✅ Mobile responsive fix for About page stats
 
 ---
 
+## 🔴 P0 - Critical
+1. **Microsoft Clarity Setup** - User needs to add tracking script to `index.html`
+
 ## 🟠 P1 - High Priority
-1. **Email notifications** for consultation requests (via Resend API - user chose not to use SMTP)
+1. **Fix Footer Social Links** - Verify links render correctly with DB data
 2. **Fix Local Image Serving** - Decommission WordPress dependency
 
 ## 🟡 P2 - Medium Priority  
@@ -70,7 +74,7 @@ Recreate the existing WordPress website (`https://lionforce.net`) into a new, mo
 ## ⚪ P3 - Future/Backlog
 1. Domain migration (`lionforce.in` → `lionforce.net`)
 2. Marketing landing pages
-3. Admin.js refactoring
+3. Admin.js refactoring (file is 3800+ lines)
 
 ---
 
@@ -78,13 +82,44 @@ Recreate the existing WordPress website (`https://lionforce.net`) into a new, mo
 - `/` - Home page (fully CMS editable)
 - `/consultation` - Book consultation with sub-services
 - `/contact` - Contact page with 4 office slots
-- `/admin` - CMS Admin panel
+- `/admin` - CMS Admin panel (10 tabs)
 
 ## Database Collections
 - `site_content` - CMS content
-- `consultation_requests` - Consultation bookings (NEW)
+- `consultation_requests` - Consultation bookings
 - `chatbot_leads` - Chatbot lead submissions
 - `chat_sessions` - Live chat sessions
 - `chat_messages` - Chat message history
 - `contact_submissions` - Contact form submissions
 - `newsletter` - Newsletter subscribers
+- `page_views` - Analytics page views (NEW)
+- `visitors` - Unique visitor records (NEW)
+
+## Key API Endpoints
+- `POST /api/analytics/track` - Track page view (public)
+- `GET /api/admin/analytics/stats` - Get analytics data (admin)
+- `POST /api/consultations` - Submit consultation
+- `GET/PUT /api/admin/consultations` - Manage consultations
+- `POST /api/chatbot-lead` - Save chatbot lead
+- `GET/POST /api/admin/site-content` - Manage CMS content
+
+## Architecture
+```
+/app/
+├── backend/
+│   └── server.py           # FastAPI backend with analytics endpoints
+├── frontend/
+│   └── src/
+│       ├── App.js          # Main app with AnalyticsTracker
+│       ├── hooks/
+│       │   └── useAnalytics.js  # Analytics tracking hook (NEW)
+│       ├── components/
+│       │   ├── ChatBot.js      # Live agent chatbot
+│       │   └── Layout.js       # Main layout
+│       └── pages/
+│           ├── Admin.js        # CMS with 10 tabs including Analytics
+│           ├── Home.js         # Fully CMS-driven
+│           └── BookConsultation.js
+└── memory/
+    └── PRD.md
+```
