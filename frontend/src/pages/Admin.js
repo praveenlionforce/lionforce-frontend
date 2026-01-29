@@ -1323,6 +1323,7 @@ function Admin() {
           <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
             {[
               { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+              { id: 'consultations', label: 'Consultations', icon: Calendar, badge: consultations.filter(c => c.status === 'new').length },
               { id: 'pages', label: 'Edit Pages', icon: FileText },
               { id: 'images', label: 'Images', icon: Image },
               { id: 'forms', label: 'Form Settings', icon: FormInput },
