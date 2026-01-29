@@ -1335,7 +1335,7 @@ function Admin() {
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
           <div className="text-center mb-8">
             <img 
-              src="https://i0.wp.com/lionforce.net/wp-content/uploads/2024/05/cropped-LIONFORCE-LOGO.png?w=200&ssl=1" 
+              src="https://customer-assets.emergentagent.com/job_modern-lionforce/artifacts/x72sxesb_Lion%20only%20logo.png" 
               alt="Lionforce" 
               className="h-16 mx-auto mb-4"
             />
