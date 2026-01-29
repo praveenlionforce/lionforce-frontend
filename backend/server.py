@@ -266,6 +266,38 @@ async def subscribe_newsletter(input: NewsletterCreate):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Failed to subscribe: {str(e)}")
 
+# Consultation Request Endpoints
+@api_router.post("/consultation", response_model=ConsultationRequest)
+async def submit_consultation(input: ConsultationRequestCreate):
+    try:
+        consultation_dict = input.model_dump()
+        consultation_obj = ConsultationRequest(**consultation_dict)
+        
+        doc = consultation_obj.model_dump()
+        doc['timestamp'] = doc['timestamp'].isoformat()
+        
+        await db.consultation_requests.insert_one(doc)
+        return consultation_obj
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Failed to submit consultation: {str(e)}")
+
+@api_router.get("/admin/consultations")
+async def get_consultations(username: str = Depends(verify_admin)):
+    consultations = await db.consultation_requests.find({}, {"_id": 0}).sort("timestamp", -1).to_list(1000)
+    return consultations
+
+@api_router.put("/admin/consultations/{consultation_id}/status")
+async def update_consultation_status(consultation_id: str, status: str, username: str = Depends(verify_admin)):
+    valid_statuses = ["new", "contacted", "scheduled", "completed"]
+    if status not in valid_statuses:
+        raise HTTPException(status_code=400, detail=f"Invalid status. Must be one of: {valid_statuses}")
+    
+    await db.consultation_requests.update_one(
+        {"id": consultation_id},
+        {"$set": {"status": status}}
+    )
+    return {"message": "Status updated", "status": status}
+
 @api_router.post("/chatbot-lead", response_model=ChatbotLead)
 async def save_chatbot_lead(input: ChatbotLeadCreate):
     try:
