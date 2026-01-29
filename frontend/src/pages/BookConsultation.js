@@ -386,4 +386,4 @@ ${formData.message || 'None'}
   );
 }
 
-export default Consultation;
+export default BookConsultation;
