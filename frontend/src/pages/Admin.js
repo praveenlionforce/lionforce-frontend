@@ -7,8 +7,18 @@ import {
   ChevronDown, ChevronRight, Briefcase, GripVertical,
   Palette, Type, Layout, FormInput, Users, Mail, CheckCircle, Link2, Award,
   Headphones, Send, Bot, UserCheck, ArrowLeftRight, Volume2, VolumeX, MapPin,
-  Calendar, Clock, ExternalLink
+  Calendar, Clock, ExternalLink, BookOpen, Code, Video, TrendingUp,
+  Lightbulb, Zap, Shield, Heart, Star, Target, Layers, Database, Cpu, Wifi,
+  Monitor, Smartphone, Cloud, Server, Box
 } from 'lucide-react';
+
+// Available icons for the icon picker
+const availableIcons = {
+  BookOpen, Code, Palette, Video, TrendingUp, Globe, Users, Briefcase,
+  Lightbulb, Zap, Shield, Heart, Star, Target, Layers, Database, Cpu, Wifi,
+  Monitor, Smartphone, Cloud, Server, Box, Mail, Phone, Calendar, Clock,
+  Settings, Award, CheckCircle, MessageSquare
+};
 
 // Memoized TextField component - completely isolated from parent re-renders
 const TextField = memo(({ label, value, onChange, multiline = false, placeholder = '' }) => {
