@@ -323,7 +323,7 @@ function About() {
               <p className="text-white/80 text-lg">{impactStats.subtitle || 'Our impact in numbers'}</p>
             </motion.div>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-center">
               {impactItems.map((stat, index) => (
                 <motion.div
                   key={index}
@@ -332,8 +332,8 @@ function About() {
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1 }}
                 >
-                  <div className="text-5xl md:text-7xl font-bold text-white mb-2">{stat.number}</div>
-                  <div className="text-white/80 text-sm md:text-base">{stat.label}</div>
+                  <div className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-white mb-2">{stat.number}</div>
+                  <div className="text-white/80 text-xs sm:text-sm md:text-base">{stat.label}</div>
                 </motion.div>
               ))}
             </div>
