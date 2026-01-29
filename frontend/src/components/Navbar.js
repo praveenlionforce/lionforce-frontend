@@ -153,7 +153,7 @@ function Navbar() {
             </Link>
 
             <Link
-              to="/contact"
+              to="/consultation"
               className="bg-gradient-to-r from-teal-600 to-green-600 text-white px-6 py-2.5 rounded-full font-semibold text-sm hover:shadow-lg hover:shadow-teal-500/50 transition-all duration-300 hover:scale-105"
               data-testid="nav-cta-button"
             >
