@@ -1545,14 +1545,16 @@ function Admin() {
                     const total = analyticsData.summary.total_visitors;
                     const monthViews = analyticsData.summary.month_views;
                     
-                    // Check milestones
+                    // Check milestones - adjusted for early growth
                     if (total >= 1000) milestones.push({ icon: '🎉', text: 'Amazing! You\'ve reached 1,000+ total visitors!', color: 'from-yellow-400 to-orange-500' });
                     else if (total >= 500) milestones.push({ icon: '🚀', text: 'Fantastic! 500+ visitors and growing!', color: 'from-purple-400 to-pink-500' });
-                    else if (total >= 100) milestones.push({ icon: '⭐', text: 'Great start! You\'ve hit 100+ visitors!', color: 'from-teal-400 to-green-500' });
-                    else if (total >= 50) milestones.push({ icon: '🌱', text: 'Growing! 50+ visitors on your site!', color: 'from-green-400 to-teal-500' });
+                    else if (total >= 100) milestones.push({ icon: '⭐', text: 'Great progress! You\'ve hit 100+ visitors!', color: 'from-teal-400 to-green-500' });
+                    else if (total >= 25) milestones.push({ icon: '🌱', text: 'Growing! 25+ visitors on your site!', color: 'from-green-400 to-teal-500' });
+                    else if (total >= 5) milestones.push({ icon: '🎯', text: `You're live! ${total} visitors so far - keep sharing!`, color: 'from-blue-400 to-teal-500' });
                     
                     if (monthViews >= 500) milestones.push({ icon: '🔥', text: `Hot month! ${monthViews} page views this month!`, color: 'from-red-400 to-orange-500' });
                     else if (monthViews >= 100) milestones.push({ icon: '📈', text: `Trending up! ${monthViews} views this month!`, color: 'from-blue-400 to-indigo-500' });
+                    else if (monthViews >= 10) milestones.push({ icon: '👀', text: `${monthViews} page views this month - momentum building!`, color: 'from-indigo-400 to-purple-500' });
                     
                     return milestones.length > 0 && (
                       <div className="space-y-2">
