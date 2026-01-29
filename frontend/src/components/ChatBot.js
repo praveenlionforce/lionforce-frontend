@@ -243,12 +243,13 @@ function ChatBot() {
         if (userMessage.includes('@')) {
           setLeadInfo(prev => ({ ...prev, email: userMessage }));
           setLeadStep(3);
-          addBotMessage("Great! Which company are you with?");
+          addBotMessage("Great! Which company are you with? (Optional - type 'skip' to skip)");
         } else {
           addBotMessage("That doesn't look like a valid email. Could you please enter your email address?");
         }
       } else if (leadStep === 3) {
-        setLeadInfo(prev => ({ ...prev, company: userMessage }));
+        const company = userMessage.toLowerCase() === 'skip' ? '' : userMessage;
+        setLeadInfo(prev => ({ ...prev, company }));
         setLeadStep(4);
         addBotMessage("And what's your role/designation? (Optional - type 'skip' to skip)");
       } else if (leadStep === 4) {
