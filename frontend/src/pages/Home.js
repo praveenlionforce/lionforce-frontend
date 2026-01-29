@@ -566,12 +566,7 @@ function Home() {
                 viewport={{ once: true }}
                 className="grid grid-cols-2 gap-4"
               >
-                {[
-                  { label: 'Launch Time', value: '2-8 weeks' },
-                  { label: 'Cost Savings', value: 'Up to 60%' },
-                  { label: 'Team Types', value: 'EOR • ODC • COE' },
-                  { label: 'Support', value: '24/7 Ops' }
-                ].map((stat, index) => (
+                {indiaStats.map((stat, index) => (
                   <div key={index} className="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
                     <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
                     <div className="text-white/70 text-sm">{stat.label}</div>
