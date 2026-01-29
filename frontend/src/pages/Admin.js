@@ -1539,6 +1539,33 @@ function Admin() {
                 </div>
               ) : analyticsData ? (
                 <>
+                  {/* Milestone Celebrations */}
+                  {(() => {
+                    const milestones = [];
+                    const total = analyticsData.summary.total_visitors;
+                    const monthViews = analyticsData.summary.month_views;
+                    
+                    // Check milestones
+                    if (total >= 1000) milestones.push({ icon: '🎉', text: 'Amazing! You\'ve reached 1,000+ total visitors!', color: 'from-yellow-400 to-orange-500' });
+                    else if (total >= 500) milestones.push({ icon: '🚀', text: 'Fantastic! 500+ visitors and growing!', color: 'from-purple-400 to-pink-500' });
+                    else if (total >= 100) milestones.push({ icon: '⭐', text: 'Great start! You\'ve hit 100+ visitors!', color: 'from-teal-400 to-green-500' });
+                    else if (total >= 50) milestones.push({ icon: '🌱', text: 'Growing! 50+ visitors on your site!', color: 'from-green-400 to-teal-500' });
+                    
+                    if (monthViews >= 500) milestones.push({ icon: '🔥', text: `Hot month! ${monthViews} page views this month!`, color: 'from-red-400 to-orange-500' });
+                    else if (monthViews >= 100) milestones.push({ icon: '📈', text: `Trending up! ${monthViews} views this month!`, color: 'from-blue-400 to-indigo-500' });
+                    
+                    return milestones.length > 0 && (
+                      <div className="space-y-2">
+                        {milestones.map((m, i) => (
+                          <div key={i} className={`bg-gradient-to-r ${m.color} p-4 rounded-xl text-white flex items-center gap-3`}>
+                            <span className="text-2xl">{m.icon}</span>
+                            <span className="font-medium">{m.text}</span>
+                          </div>
+                        ))}
+                      </div>
+                    );
+                  })()}
+
                   {/* Summary Stats */}
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
