@@ -1658,7 +1658,24 @@ function Admin() {
                       <TextField label="Badge" value={siteContent.home?.indiaExpansionCTA?.badge} onChange={(v) => updateContent('home.indiaExpansionCTA.badge', v)} />
                       <TextField label="Title" value={siteContent.home?.indiaExpansionCTA?.title} onChange={(v) => updateContent('home.indiaExpansionCTA.title', v)} />
                       <TextField label="Subtitle" value={siteContent.home?.indiaExpansionCTA?.subtitle} onChange={(v) => updateContent('home.indiaExpansionCTA.subtitle', v)} multiline />
-                      <TextField label="Button Text" value={siteContent.home?.indiaExpansionCTA?.buttonText} onChange={(v) => updateContent('home.indiaExpansionCTA.buttonText', v)} />
+                      <div className="grid grid-cols-2 gap-4">
+                        <TextField label="Button Text" value={siteContent.home?.indiaExpansionCTA?.buttonText} onChange={(v) => updateContent('home.indiaExpansionCTA.buttonText', v)} />
+                        <TextField label="Button Link" value={siteContent.home?.indiaExpansionCTA?.buttonLink} onChange={(v) => updateContent('home.indiaExpansionCTA.buttonLink', v)} placeholder="/services/india-expansion" />
+                      </div>
+                      <p className="text-sm font-medium text-gray-700 mt-4 mb-2">Stats Cards (4 stats shown):</p>
+                      <ArrayEditor
+                        items={siteContent.home?.indiaExpansionCTA?.stats}
+                        path="home.indiaExpansionCTA.stats"
+                        template={{ label: 'Label', value: 'Value' }}
+                        addLabel="Add Stat"
+                        maxItems={4}
+                        renderItem={(item, index) => (
+                          <div className="grid grid-cols-2 gap-3">
+                            <TextField label="Value" value={item.value} onChange={(v) => updateArrayItem('home.indiaExpansionCTA.stats', index, 'value', v)} placeholder="Up to 60%" />
+                            <TextField label="Label" value={item.label} onChange={(v) => updateArrayItem('home.indiaExpansionCTA.stats', index, 'label', v)} placeholder="Cost Savings" />
+                          </div>
+                        )}
+                      />
                     </Section>
 
                     <Section title="Final CTA" icon={<Phone className="w-4 h-4 text-teal-600" />} sectionKey="home-cta">
