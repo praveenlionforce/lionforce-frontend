@@ -74,6 +74,8 @@ class ChatbotLead(BaseModel):
     id: str = Field(default_factory=lambda: str(uuid.uuid4()))
     name: str
     email: str
+    company: Optional[str] = None
+    designation: Optional[str] = None
     message: Optional[str] = None
     source: str = "chatbot"
     timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
@@ -81,7 +83,34 @@ class ChatbotLead(BaseModel):
 class ChatbotLeadCreate(BaseModel):
     name: str
     email: str
+    company: Optional[str] = None
+    designation: Optional[str] = None
     message: Optional[str] = None
+
+# Live Chat Models
+class ChatMessage(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    session_id: str
+    sender: str  # 'user', 'bot', 'agent'
+    text: str
+    timestamp: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+
+class ChatSession(BaseModel):
+    id: str = Field(default_factory=lambda: str(uuid.uuid4()))
+    visitor_name: Optional[str] = None
+    visitor_email: Optional[str] = None
+    visitor_company: Optional[str] = None
+    status: str = "bot"  # 'bot', 'agent', 'closed'
+    agent_id: Optional[str] = None
+    created_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
+    last_message: Optional[str] = None
+    unread_count: int = 0
+
+class AgentStatus(BaseModel):
+    agent_id: str = "default"
+    is_online: bool = False
+    updated_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
 
 # Content Block Model for Admin CMS
 class ContentBlock(BaseModel):
