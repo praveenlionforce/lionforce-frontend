@@ -235,6 +235,10 @@ function Admin() {
   const liveChatPollRef = useRef(null);
   const prevUnreadCount = useRef(0);
 
+  // Analytics states
+  const [analyticsData, setAnalyticsData] = useState(null);
+  const [analyticsLoading, setAnalyticsLoading] = useState(false);
+
   // Comprehensive default content structure
   const defaultContent = {
     home: {
