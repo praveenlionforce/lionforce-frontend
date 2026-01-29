@@ -364,52 +364,29 @@ function Home() {
 
             {/* Bento Grid - Balanced layout */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {/* Render all 6 services dynamically */}
+              {/* Render all 6 services as gradient cards */}
               {services.map((service, index) => {
                 const IconComponent = iconMap[service.icon] || Globe;
-                // First 3 are featured (large gradient cards)
-                if (index < 3) {
-                  return (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: index * 0.1 }}
-                      className="lg:col-span-1"
-                    >
-                      <Link to={service.link} className="block h-full" data-testid={`service-${index}`}>
-                        <div className={`h-full min-h-[280px] p-8 rounded-3xl bg-gradient-to-br ${service.color || 'from-teal-500 to-cyan-600'} text-white relative overflow-hidden group hover:shadow-2xl transition-all`}>
-                          <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
-                          <div className="relative z-10">
-                            <IconComponent className="w-10 h-10 mb-4" />
-                            <h3 className="text-2xl font-bold mb-3">{service.title}</h3>
-                            <p className="text-white/80 text-sm mb-4">{service.description}</p>
-                            <div className="inline-flex items-center gap-2 text-white text-sm font-semibold group-hover:gap-3 transition-all">
-                              Learn More <ArrowRight className="w-4 h-4" />
-                            </div>
-                          </div>
-                        </div>
-                      </Link>
-                    </motion.div>
-                  );
-                }
-                // Remaining services as smaller cards
                 return (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ delay: 0.3 + (index - 3) * 0.1 }}
+                    transition={{ delay: index * 0.1 }}
+                    className="lg:col-span-1"
                   >
                     <Link to={service.link} className="block h-full" data-testid={`service-${index}`}>
-                      <div className="h-full p-6 rounded-2xl bg-white border border-gray-200 hover:border-transparent hover:shadow-xl transition-all group">
-                        <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${service.color || 'from-gray-500 to-gray-600'} flex items-center justify-center text-white mb-4`}>
-                          <IconComponent className="w-8 h-8" />
+                      <div className={`h-full min-h-[240px] p-8 rounded-3xl bg-gradient-to-br ${service.color || 'from-teal-500 to-cyan-600'} text-white relative overflow-hidden group hover:shadow-2xl hover:scale-[1.02] transition-all`}>
+                        <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full blur-3xl"></div>
+                        <div className="relative z-10">
+                          <IconComponent className="w-10 h-10 mb-4" />
+                          <h3 className="text-2xl font-bold mb-3">{service.title}</h3>
+                          <p className="text-white/80 text-sm mb-4">{service.description}</p>
+                          <div className="inline-flex items-center gap-2 text-white text-sm font-semibold group-hover:gap-3 transition-all">
+                            Learn More <ArrowRight className="w-4 h-4" />
+                          </div>
                         </div>
-                        <h3 className="text-xl font-bold mb-2 text-gray-900 group-hover:text-teal-600 transition-colors">{service.title}</h3>
-                        <p className="text-gray-600">{service.description}</p>
                       </div>
                     </Link>
                   </motion.div>
