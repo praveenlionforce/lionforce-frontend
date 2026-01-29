@@ -1683,8 +1683,9 @@ function Admin() {
                       <TextField label="Subtitle" value={siteContent.home?.finalCTA?.subtitle} onChange={(v) => updateContent('home.finalCTA.subtitle', v)} multiline />
                       <div className="grid grid-cols-2 gap-4">
                         <TextField label="Button Text" value={siteContent.home?.finalCTA?.buttonText} onChange={(v) => updateContent('home.finalCTA.buttonText', v)} />
-                        <TextField label="Phone Number" value={siteContent.home?.finalCTA?.phone} onChange={(v) => updateContent('home.finalCTA.phone', v)} />
+                        <TextField label="Button Link" value={siteContent.home?.finalCTA?.buttonLink} onChange={(v) => updateContent('home.finalCTA.buttonLink', v)} placeholder="/contact" />
                       </div>
+                      <TextField label="Phone Number" value={siteContent.home?.finalCTA?.phone} onChange={(v) => updateContent('home.finalCTA.phone', v)} />
                     </Section>
                   </>
                 )}
