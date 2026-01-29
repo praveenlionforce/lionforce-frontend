@@ -1514,6 +1514,189 @@ function Admin() {
             </div>
           )}
 
+          {/* Analytics Tab */}
+          {activeTab === 'analytics' && (
+            <div className="space-y-6">
+              {/* Header with Refresh */}
+              <div className="flex items-center justify-between">
+                <div>
+                  <h1 className="text-2xl font-bold text-gray-900">Visitor Analytics</h1>
+                  <p className="text-gray-600 text-sm mt-1">Track your website traffic and visitor geography</p>
+                </div>
+                <button 
+                  onClick={fetchAnalytics}
+                  disabled={analyticsLoading}
+                  className="flex items-center gap-2 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors disabled:opacity-50"
+                >
+                  <RefreshCw className={`w-4 h-4 ${analyticsLoading ? 'animate-spin' : ''}`} />
+                  Refresh
+                </button>
+              </div>
+
+              {analyticsLoading && !analyticsData ? (
+                <div className="flex items-center justify-center py-20">
+                  <RefreshCw className="w-8 h-8 animate-spin text-teal-600" />
+                </div>
+              ) : analyticsData ? (
+                <>
+                  {/* Summary Stats */}
+                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+                      <p className="text-sm text-gray-500">Today's Views</p>
+                      <p className="text-3xl font-bold text-teal-600">{analyticsData.summary.today_views}</p>
+                      <p className="text-xs text-gray-400 mt-1">{analyticsData.summary.today_visitors} unique visitors</p>
+                    </div>
+                    <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+                      <p className="text-sm text-gray-500">This Week</p>
+                      <p className="text-3xl font-bold text-blue-600">{analyticsData.summary.week_views}</p>
+                      <p className="text-xs text-gray-400 mt-1">{analyticsData.summary.week_new_visitors} new visitors</p>
+                    </div>
+                    <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+                      <p className="text-sm text-gray-500">This Month</p>
+                      <p className="text-3xl font-bold text-purple-600">{analyticsData.summary.month_views}</p>
+                      <p className="text-xs text-gray-400 mt-1">{analyticsData.summary.month_new_visitors} new visitors</p>
+                    </div>
+                    <div className="bg-white p-5 rounded-xl shadow-sm border border-gray-200">
+                      <p className="text-sm text-gray-500">All Time</p>
+                      <p className="text-3xl font-bold text-gray-900">{analyticsData.summary.total_page_views}</p>
+                      <p className="text-xs text-gray-400 mt-1">{analyticsData.summary.total_visitors} total visitors</p>
+                    </div>
+                  </div>
+
+                  {/* Charts Row */}
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {/* Daily Views Chart (Simple Bar) */}
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                      <h3 className="font-semibold text-gray-900 mb-4">Last 7 Days</h3>
+                      <div className="space-y-2">
+                        {analyticsData.daily_views.length > 0 ? (
+                          analyticsData.daily_views.map((day, i) => {
+                            const maxViews = Math.max(...analyticsData.daily_views.map(d => d.views), 1);
+                            const percentage = (day.views / maxViews) * 100;
+                            return (
+                              <div key={i} className="flex items-center gap-3">
+                                <span className="text-xs text-gray-500 w-20">{new Date(day.date).toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' })}</span>
+                                <div className="flex-1 bg-gray-100 rounded-full h-6 overflow-hidden">
+                                  <div 
+                                    className="h-full bg-gradient-to-r from-teal-500 to-green-500 rounded-full flex items-center justify-end pr-2"
+                                    style={{ width: `${Math.max(percentage, 10)}%` }}
+                                  >
+                                    <span className="text-xs text-white font-medium">{day.views}</span>
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })
+                        ) : (
+                          <p className="text-gray-400 text-sm text-center py-4">No data yet</p>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Top Pages */}
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                      <h3 className="font-semibold text-gray-900 mb-4">Top Pages</h3>
+                      <div className="space-y-2">
+                        {analyticsData.top_pages.length > 0 ? (
+                          analyticsData.top_pages.slice(0, 8).map((page, i) => (
+                            <div key={i} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
+                              <span className="text-sm text-gray-700 truncate flex-1">{page.page === '/' ? 'Home' : page.page}</span>
+                              <span className="text-sm font-semibold text-teal-600 ml-4">{page.views} views</span>
+                            </div>
+                          ))
+                        ) : (
+                          <p className="text-gray-400 text-sm text-center py-4">No data yet</p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Geography */}
+                  <div className="grid md:grid-cols-2 gap-6">
+                    {/* Visitors by Country */}
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                      <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                        <Globe className="w-5 h-5 text-teal-600" />
+                        Visitors by Country
+                      </h3>
+                      <div className="space-y-2">
+                        {analyticsData.by_country.length > 0 ? (
+                          analyticsData.by_country.map((country, i) => {
+                            const maxVisitors = Math.max(...analyticsData.by_country.map(c => c.visitors), 1);
+                            const percentage = (country.visitors / maxVisitors) * 100;
+                            return (
+                              <div key={i} className="flex items-center gap-3">
+                                <span className="text-sm text-gray-700 w-32 truncate">{country.country || 'Unknown'}</span>
+                                <div className="flex-1 bg-gray-100 rounded-full h-5 overflow-hidden">
+                                  <div 
+                                    className="h-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full"
+                                    style={{ width: `${Math.max(percentage, 5)}%` }}
+                                  />
+                                </div>
+                                <span className="text-xs font-semibold text-gray-600 w-10 text-right">{country.visitors}</span>
+                              </div>
+                            );
+                          })
+                        ) : (
+                          <p className="text-gray-400 text-sm text-center py-4">No geographic data yet</p>
+                        )}
+                      </div>
+                    </div>
+
+                    {/* Recent Visitors */}
+                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
+                      <h3 className="font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                        <Users className="w-5 h-5 text-teal-600" />
+                        Recent Visitors
+                      </h3>
+                      <div className="space-y-2 max-h-64 overflow-y-auto">
+                        {analyticsData.recent_visitors.length > 0 ? (
+                          analyticsData.recent_visitors.map((visitor, i) => (
+                            <div key={i} className="flex items-center justify-between py-2 border-b border-gray-100 last:border-0">
+                              <div className="flex-1 min-w-0">
+                                <p className="text-sm text-gray-700 truncate">
+                                  {[visitor.city, visitor.region, visitor.country].filter(Boolean).join(', ') || 'Unknown location'}
+                                </p>
+                                <p className="text-xs text-gray-400">
+                                  {visitor.last_seen ? new Date(visitor.last_seen).toLocaleString() : 'N/A'}
+                                </p>
+                              </div>
+                            </div>
+                          ))
+                        ) : (
+                          <p className="text-gray-400 text-sm text-center py-4">No visitors yet</p>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Microsoft Clarity Integration Note */}
+                  <div className="bg-gradient-to-r from-blue-50 to-indigo-50 p-6 rounded-xl border border-blue-200">
+                    <h3 className="font-semibold text-gray-900 mb-2 flex items-center gap-2">
+                      <Target className="w-5 h-5 text-blue-600" />
+                      Heatmaps with Microsoft Clarity
+                    </h3>
+                    <p className="text-gray-600 text-sm mb-3">
+                      For advanced heatmaps, session recordings, and behavioral analytics, integrate Microsoft Clarity (free):
+                    </p>
+                    <ol className="text-sm text-gray-700 space-y-1 list-decimal list-inside">
+                      <li>Sign up at <a href="https://clarity.microsoft.com" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">clarity.microsoft.com</a></li>
+                      <li>Create a new project for your website</li>
+                      <li>Copy the tracking script provided</li>
+                      <li>Add it to your website's <code className="bg-white px-1 rounded">&lt;head&gt;</code> section</li>
+                    </ol>
+                  </div>
+                </>
+              ) : (
+                <div className="bg-white p-12 rounded-xl shadow-sm border border-gray-200 text-center">
+                  <BarChart3 className="w-16 h-16 mx-auto mb-4 text-gray-300" />
+                  <p className="text-gray-500">No analytics data available yet</p>
+                  <p className="text-sm text-gray-400 mt-1">Data will appear as visitors browse your site</p>
+                </div>
+              )}
+            </div>
+          )}
+
           {/* Consultations Tab */}
           {activeTab === 'consultations' && (
             <div className="space-y-6">
