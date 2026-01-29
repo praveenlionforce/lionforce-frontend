@@ -417,7 +417,9 @@ function Home() {
               </motion.div>
 
               {/* Other service cards - excluding India Expansion (already featured above) */}
-              {services.slice(2, 5).map((service, index) => (
+              {services.slice(2, 5).map((service, index) => {
+                const IconComponent = iconMap[service.icon] || Globe;
+                return (
                 <motion.div
                   key={index}
                   initial={{ opacity: 0, y: 20 }}
@@ -428,14 +430,15 @@ function Home() {
                   <Link to={service.link} className="block h-full">
                     <div className="h-full p-6 rounded-2xl bg-white border border-gray-200 hover:border-transparent hover:shadow-xl transition-all group">
                       <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${service.color} flex items-center justify-center text-white mb-4`}>
-                        {service.icon}
+                        <IconComponent className="w-8 h-8" />
                       </div>
                       <h3 className="text-xl font-bold mb-2 text-gray-900 group-hover:text-teal-600 transition-colors">{service.title}</h3>
                       <p className="text-gray-600">{service.description}</p>
                     </div>
                   </Link>
                 </motion.div>
-              ))}
+                );
+              })}
             </div>
           </div>
         </section>
