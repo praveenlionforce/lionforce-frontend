@@ -2553,6 +2553,39 @@ function Admin() {
               </div>
             </div>
           )}
+
+          {/* Chatbot Leads Tab */}
+          {activeTab === 'chatbot-leads' && (
+            <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+              <div className="p-4 border-b border-gray-200">
+                <h2 className="font-bold text-gray-900">Chatbot Leads ({chatbotLeads.length})</h2>
+                <p className="text-sm text-gray-500 mt-1">Leads captured through the chatbot</p>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead className="bg-gray-50">
+                    <tr>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Name</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Email</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Message</th>
+                      <th className="px-4 py-3 text-left text-xs font-semibold text-gray-600 uppercase">Date</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-gray-200">
+                    {chatbotLeads.map((lead, idx) => (
+                      <tr key={idx} className="hover:bg-gray-50">
+                        <td className="px-4 py-3 text-sm text-gray-900 font-medium">{lead.name}</td>
+                        <td className="px-4 py-3 text-sm text-gray-900">{lead.email}</td>
+                        <td className="px-4 py-3 text-sm text-gray-600 max-w-xs truncate">{lead.message || '-'}</td>
+                        <td className="px-4 py-3 text-sm text-gray-500">{new Date(lead.timestamp).toLocaleDateString()}</td>
+                      </tr>
+                    ))}
+                    {chatbotLeads.length === 0 && <tr><td colSpan="4" className="px-4 py-8 text-center text-gray-500">No chatbot leads yet</td></tr>}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          )}
         </div>
       </div>
   );
